@@ -1,0 +1,25 @@
+# dependencies
+node_modules/
+
+# Next.js / build output
+.next/
+out/
+build/
+
+# Playwright output
+test-results/
+playwright-report/
+playwright/.cache/
+/screenshots/
+
+# env (API keys live here, never commit)
+.env*
+!.env.example
+
+# misc
+.DS_Store
+Thumbs.db
+*.log
+.vercel
+*.tsbuildinfo
+next-env.d.ts

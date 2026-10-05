@@ -1,0 +1,11 @@
+{
+  "name": "samuel-portfolio",
+  "private": true,
+  "packageManager": "pnpm@12.9.1",
+  "scripts": {
+    "shoot": "node scripts/shoot.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0"
+  }
+}
