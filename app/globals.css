@@ -1,3 +1,240 @@
 @import "tailwindcss";
+@import "../styles/tokens.css";
 
-/* Design tokens (styles/tokens.css) are imported here in the token step. */
+/* Dark mode follows data-theme on <html> (set before paint by the inline script). */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-raised: var(--raised);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-ink-hover: var(--ink-hover);
+  --color-ink-pressed: var(--ink-pressed);
+  --color-ink-soft: var(--ink-soft);
+  --color-on-ink: var(--on-ink);
+  --color-stamp: var(--stamp);
+  --color-danger: var(--danger);
+
+  --font-sans: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius);
+  --radius-lg: var(--radius-lg);
+
+  --ease-standard: var(--ease-standard);
+  --ease-enter: var(--ease-enter);
+  --ease-exit: var(--ease-exit);
+  --ease-emphasized: var(--ease-emphasized);
+}
+
+/* Type scale. One family carries everything; weight and size do the work. */
+@theme {
+  --text-meta: 0.75rem;
+  --text-meta--line-height: 1.45;
+  --text-meta--letter-spacing: 0.01em;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.45;
+  --text-base: 1.0625rem;
+  --text-base--line-height: 1.6;
+  --text-lead: 1.25rem;
+  --text-lead--line-height: 1.5;
+  --text-title: 1.375rem;
+  --text-title--line-height: 1.3;
+  --text-title--letter-spacing: -0.01em;
+  --text-h2: clamp(1.625rem, 1.2rem + 1.4vw, 2.25rem);
+  --text-h2--line-height: 1.15;
+  --text-h2--letter-spacing: -0.02em;
+  --text-display: clamp(2.25rem, 1.1rem + 4.4vw, 4.25rem);
+  --text-display--line-height: 1.04;
+  --text-display--letter-spacing: -0.035em;
+
+  --breakpoint-lg: 64rem;
+}
+
+@layer base {
+  html {
+    background: var(--paper);
+    color: var(--fg);
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply font-sans text-base antialiased;
+    background: var(--paper);
+    font-feature-settings: "ss01", "cv11";
+  }
+  ::selection {
+    background: var(--ink);
+    color: var(--on-ink);
+  }
+  /* One focus treatment everywhere: an ink ring with breathing room. */
+  :focus-visible {
+    outline: 2px solid var(--ink-ring);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  a {
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+}
+
+/* Reduced motion: spatial motion becomes a crossfade or an instant change. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Intro countdown (pure CSS, transform-only, zero JS) ---------- */
+.intro {
+  display: none;
+}
+:root[data-intro="play"] {
+  overflow: hidden;
+}
+:root[data-intro="play"] .intro {
+  display: flex;
+  contain: strict;
+  will-change: transform;
+  animation: intro-out var(--dur-scene) var(--ease-emphasized) 1500ms forwards;
+}
+/* Each number is shown only while its own animation runs (delay and duration
+   are set inline per number). Opacity only: composited, no layout. */
+.intro-step {
+  opacity: 0;
+}
+:root[data-intro="play"] .intro-step {
+  animation-name: intro-step;
+  animation-timing-function: linear;
+}
+:root[data-intro="play"] .intro-step-last {
+  animation-fill-mode: forwards;
+}
+@keyframes intro-step {
+  from,
+  to {
+    opacity: 1;
+  }
+}
+:root[data-intro="play"] .intro-line {
+  /* ease-out-quad: the same curve the numbers follow, so line and count agree. */
+  animation: intro-line 1300ms cubic-bezier(0.5, 1, 0.89, 1) 150ms both;
+}
+.intro-line {
+  transform-origin: left;
+}
+@keyframes intro-line {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes intro-out {
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+/* ---------- Reading progress (scroll-driven, zero JS) ---------- */
+.reading-progress {
+  display: none;
+}
+@supports (animation-timeline: scroll()) {
+  .reading-progress {
+    display: block;
+    transform-origin: left;
+    animation: reading-progress linear both;
+    animation-timeline: scroll(root);
+  }
+}
+@keyframes reading-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* ---------- View transitions ---------- */
+
+/* Shared element: work cover → case study hero. */
+::view-transition-group(.morph) {
+  animation-duration: var(--dur-scene);
+  animation-timing-function: var(--ease-emphasized);
+}
+::view-transition-image-pair(.morph) {
+  animation-name: via-blur;
+}
+@keyframes via-blur {
+  35% {
+    filter: blur(2px);
+  }
+}
+
+/* Directional page change: forward slides left, back slides right. */
+::view-transition-old(.nav-forward) {
+  --slide: -24px;
+  animation:
+    var(--dur-quick) var(--ease-exit) both vt-fade reverse,
+    var(--dur-deliberate) var(--ease-standard) both vt-slide reverse;
+}
+::view-transition-new(.nav-forward) {
+  --slide: 24px;
+  animation:
+    var(--dur-base) var(--ease-enter) var(--dur-quick) both vt-fade,
+    var(--dur-deliberate) var(--ease-standard) both vt-slide;
+}
+::view-transition-old(.nav-back) {
+  --slide: 24px;
+  animation:
+    var(--dur-quick) var(--ease-exit) both vt-fade reverse,
+    var(--dur-deliberate) var(--ease-standard) both vt-slide reverse;
+}
+::view-transition-new(.nav-back) {
+  --slide: -24px;
+  animation:
+    var(--dur-base) var(--ease-enter) var(--dur-quick) both vt-fade,
+    var(--dur-deliberate) var(--ease-standard) both vt-slide;
+}
+@keyframes vt-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes vt-slide {
+  from {
+    transform: translateX(var(--slide));
+  }
+}
+
+/* Theme switch: a quick crossfade of the whole page. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--dur-base);
+  animation-timing-function: var(--ease-standard);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*) {
+    animation: none !important;
+  }
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: var(--dur-quick) linear both vt-fade !important;
+  }
+  ::view-transition-old(*) {
+    animation-direction: reverse !important;
+  }
+}

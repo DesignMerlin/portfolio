@@ -1,0 +1,113 @@
+/*
+ * Design tokens: "Blue ink".
+ * Paper, hairlines and blue ink, the materials of the forms and documents
+ * Samuel designs for. Ink is used sparingly: it always means "actionable".
+ *
+ * Primitives come from Samuel's Figma token export (brand 🟦 + cool grays).
+ * Components use only the semantic tokens below, never primitives directly.
+ */
+
+:root {
+  /* Primitives: blue (brand) */
+  --blue-50: #e3effc;
+  --blue-75: #c6ddf7;
+  --blue-100: #b6d8ff;
+  --blue-200: #80bbff;
+  --blue-300: #3d89df;
+  --blue-400: #1671d9;
+  --blue-500: #0d5eba;
+  --blue-600: #034592;
+  --blue-700: #04326b;
+  --blue-800: #012657;
+  --blue-900: #001633;
+
+  /* Primitives: cool gray */
+  --gray-50: #f9fafb;
+  --gray-75: #f7f9fc;
+  --gray-100: #f0f2f5;
+  --gray-200: #e4e7ec;
+  --gray-300: #d0d5dd;
+  --gray-400: #98a2b3;
+  --gray-500: #667185;
+  --gray-600: #475367;
+  --gray-700: #344054;
+  --gray-800: #1d2739;
+  --gray-900: #101928;
+
+  /* Primitives: status */
+  --green-600: #04802e;
+  --green-200: #5fc381;
+  --red-500: #cb1a14;
+  --red-200: #e26e6a;
+
+  /* Semantic: light (default) */
+  --paper: var(--gray-50);
+  --raised: #ffffff;
+  --fg: var(--gray-900);
+  --muted: var(--gray-600);
+  --faint: var(--gray-500);
+  --line: var(--gray-200);
+  --line-strong: var(--gray-300);
+  --ink: var(--blue-500);
+  --ink-hover: var(--blue-600);
+  --ink-pressed: var(--blue-700);
+  --ink-soft: var(--blue-50);
+  --ink-ring: var(--blue-600);
+  --on-ink: #ffffff;
+  --neutral: var(--gray-600);
+  --neutral-hover: var(--gray-700);
+  --neutral-pressed: var(--gray-800);
+  --stamp: var(--green-600);
+  --danger: var(--red-500);
+  --disabled-bg: var(--gray-200);
+  --disabled-fg: var(--gray-400);
+  --cover-a: var(--blue-50);
+  --cover-b: var(--blue-75);
+  --shadow-float: 0 1px 2px rgb(16 25 40 / 0.06), 0 12px 32px -8px rgb(16 25 40 / 0.16);
+
+  color-scheme: light;
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius: 8px;
+  --radius-lg: 14px;
+
+  /* Motion: CSS mirror of lib/motion.ts. Keep the two in sync. */
+  --dur-instant: 100ms;
+  --dur-quick: 180ms;
+  --dur-base: 280ms;
+  --dur-deliberate: 450ms;
+  --dur-scene: 700ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-enter: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --ease-emphasized: cubic-bezier(0.3, 0, 0, 1);
+}
+
+/* Dark: deep navy-gray paper, not near-black. Ink lightens to stay AA. */
+:root[data-theme="dark"] {
+  --paper: var(--gray-900);
+  --raised: var(--gray-800);
+  --fg: var(--gray-100);
+  --muted: var(--gray-400);
+  --faint: #8794aa;
+  --line: var(--gray-700);
+  --line-strong: #4a5a73;
+  --ink: var(--blue-200);
+  --ink-hover: var(--blue-100);
+  --ink-pressed: var(--blue-75);
+  --ink-soft: rgb(128 187 255 / 0.12);
+  --ink-ring: var(--blue-200);
+  --on-ink: #ffffff;
+  --neutral: var(--gray-600);
+  --neutral-hover: var(--gray-500);
+  --neutral-pressed: var(--gray-700);
+  --stamp: var(--green-200);
+  --danger: var(--red-200);
+  --disabled-bg: var(--gray-700);
+  --disabled-fg: var(--gray-500);
+  --cover-a: #16233a;
+  --cover-b: #1b2d4a;
+  --shadow-float: 0 1px 2px rgb(0 0 0 / 0.3), 0 16px 40px -8px rgb(0 0 0 / 0.5);
+  color-scheme: dark;
+}
