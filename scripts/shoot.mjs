@@ -16,7 +16,11 @@ const targets = [
   // Desktop: Chromium at a common laptop width
   { label: "desktop", engine: chromium, options: { viewport: { width: 1440, height: 900 } } },
   // Mobile: Safari's engine with iPhone size, touch, and pixel density
-  { label: "mobile", engine: webkit, options: { ...devices["iPhone 13 Mini"], viewport: { width: 375, height: 812 } } },
+  {
+    label: "mobile",
+    engine: webkit,
+    options: { ...devices["iPhone 13 Mini"], viewport: { width: 375, height: 812 } },
+  },
 ];
 
 for (const { label, engine, options } of targets) {

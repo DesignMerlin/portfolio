@@ -1,0 +1,14 @@
+# Generated / installed
+.next/
+out/
+build/
+node_modules/
+pnpm-lock.yaml
+next-env.d.ts
+screenshots/
+test-results/
+playwright-report/
+
+# Hand-written docs and content: never reformat
+*.md
+content/

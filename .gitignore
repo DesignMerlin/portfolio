@@ -1,12 +1,15 @@
 # dependencies
 node_modules/
+/.pnp
+.pnp.*
 
 # Next.js / build output
 .next/
 out/
 build/
 
-# Playwright output
+# testing
+/coverage
 test-results/
 playwright-report/
 playwright/.cache/
@@ -19,6 +22,7 @@ playwright/.cache/
 # misc
 .DS_Store
 Thumbs.db
+*.pem
 *.log
 .vercel
 *.tsbuildinfo
