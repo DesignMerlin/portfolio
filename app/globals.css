@@ -1,0 +1,475 @@
+@import "tailwindcss";
+@import "../styles/tokens.css";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+/* Tailwind v4's hover: variant is already gated behind (hover: hover), so taps never stick. */
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-signal: var(--signal);
+  --color-danger: var(--danger);
+
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), var(--font-geist), ui-sans-serif, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+
+  /* Type scale (1.25 minor third-ish, display is fluid) */
+  --text-micro: 0.75rem;
+  --text-micro--line-height: 1rem;
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.35rem;
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.65;
+  --text-lead: 1.25rem;
+  --text-lead--line-height: 1.55;
+  --text-h3: 1.5rem;
+  --text-h3--line-height: 1.25;
+  --text-h2: clamp(1.875rem, 1.4rem + 1.6vw, 2.75rem);
+  --text-h2--line-height: 1.08;
+  --text-h1: clamp(2.5rem, 1.6rem + 3.6vw, 5rem);
+  --text-h1--line-height: 1;
+  --text-display: clamp(2.5rem, 1.1rem + 4.2vw, 5.25rem);
+  --text-display--line-height: 0.96;
+
+  --radius-s: var(--radius-s);
+  --radius-m: var(--radius-m);
+  --radius-l: var(--radius-l);
+
+  --ease-standard: var(--ease-standard);
+  --ease-enter: var(--ease-enter);
+  --ease-exit: var(--ease-exit);
+  --ease-emphasized: var(--ease-emphasized);
+
+  --shadow-raised: var(--shadow-raised);
+  --shadow-float: var(--shadow-float);
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.65;
+    /* Theme switch crossfades colour, never layout */
+    transition:
+      background-color var(--dur-base) ease,
+      color var(--dur-base) ease;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  button,
+  a,
+  [role="button"],
+  [role="tab"],
+  [role="option"] {
+    touch-action: manipulation;
+  }
+
+  button,
+  [role="button"],
+  [role="tab"] {
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: 16px; /* stops iOS zooming into the field */
+  }
+
+  /* Geist carries body text; Bricolage carries headings and display numbers */
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+
+  /* Press feedback for anything pressable */
+  .pressable {
+    transition: transform var(--dur-quick) var(--ease-enter);
+  }
+  .pressable:active:not(:disabled) {
+    transform: scale(0.97);
+  }
+
+  .prose-case {
+    max-width: 68ch;
+  }
+  .prose-case > p,
+  .prose-case > ul,
+  .prose-case > ol {
+    color: var(--ink-2);
+    margin-block: 1.1em;
+  }
+  .prose-case > p strong,
+  .prose-case li strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .prose-case > ul {
+    list-style: disc;
+    padding-left: 1.25em;
+  }
+  .prose-case > ol {
+    list-style: decimal;
+    padding-left: 1.25em;
+  }
+  .prose-case li + li {
+    margin-top: 0.4em;
+  }
+  .prose-case > h3 {
+    font-size: var(--text-h3);
+    line-height: 1.25;
+    font-weight: 600;
+    margin-top: 2.2em;
+  }
+  .prose-case a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* One side of a flipping card. Safari still needs the prefixed property. */
+  .card-face {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+}
+
+/* Smooth expand/collapse without measuring height in JS */
+.collapse-grid {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--dur-base) var(--ease-standard);
+}
+.collapse-grid[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+.collapse-grid > * {
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Rows entering a tree or list fade in from just above, no JS needed */
+.ia-row {
+  transition:
+    opacity var(--dur-quick) var(--ease-enter),
+    transform var(--dur-quick) var(--ease-enter);
+}
+@starting-style {
+  .ia-row {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+/* Agent prototype: streamed words settle in, the active step shimmers (not a spinner) */
+.agent-token {
+  transition: opacity 220ms ease;
+}
+@starting-style {
+  .agent-token {
+    opacity: 0;
+  }
+}
+.agent-shimmer {
+  background: linear-gradient(90deg, var(--ink-3) 0%, var(--ink) 45%, var(--ink-3) 90%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 1.4s linear infinite;
+}
+@keyframes shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -120% 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .agent-shimmer {
+    animation: none;
+    color: var(--ink);
+    background: none;
+  }
+  .ia-row {
+    transition: none;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Command menu. Keyboard: no animation (it's opened many times a day).
+   Pointer: a quick fade + scale. Touch: a bottom sheet rising from the edge.
+------------------------------------------------------------------- */
+.cmd-menu {
+  margin: 12vh auto auto;
+  width: min(560px, calc(100vw - 32px));
+  max-height: none;
+  border-radius: var(--radius-l);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow-float);
+  padding: 0;
+  overflow: hidden;
+}
+.cmd-menu::backdrop {
+  background: rgb(10 11 14 / 0.35);
+}
+.cmd-menu[open][data-via="pointer"] {
+  transition:
+    opacity 150ms var(--ease-enter),
+    transform 150ms var(--ease-enter);
+}
+@starting-style {
+  .cmd-menu[open][data-via="pointer"] {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+}
+@media (pointer: coarse) {
+  .cmd-menu[data-via="sheet"] {
+    margin: auto 0 0;
+    width: 100vw;
+    max-width: 100vw;
+    border-radius: var(--radius-l) var(--radius-l) 0 0;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .cmd-menu[open][data-via="sheet"] {
+    transition: transform var(--dur-base) var(--ease-emphasized);
+  }
+  @starting-style {
+    .cmd-menu[open][data-via="sheet"] {
+      transform: translateY(100%);
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cmd-menu[open][data-via] {
+    transition: opacity 150ms ease;
+    transform: none;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Intro (0 → 100%). Server-rendered so it covers the page before JS.
+   An inline script marks html[data-intro="skip"] for returning visitors.
+------------------------------------------------------------------- */
+html[data-intro="skip"] .intro {
+  display: none;
+}
+
+/* Hero entrance, released when the curtain lifts (data-intro: play → done) */
+.hero-mask {
+  display: inline-block;
+  overflow: clip;
+  overflow-clip-margin: 0.12em;
+  vertical-align: top;
+  padding-bottom: 0.06em;
+}
+.hero-word {
+  display: inline-block;
+  transition:
+    transform var(--dur-scene) var(--ease-emphasized),
+    opacity var(--dur-deliberate) var(--ease-enter);
+  transition-delay: calc(160ms + var(--i) * 45ms);
+}
+.hero-fade {
+  transition: opacity var(--dur-deliberate) var(--ease-enter);
+  transition-delay: 700ms;
+}
+html[data-intro="play"] .hero-word {
+  transform: translateY(105%);
+  opacity: 0;
+}
+html[data-intro="play"] .hero-fade {
+  opacity: 0;
+}
+.hero-photo {
+  transition:
+    transform var(--dur-scene) var(--ease-emphasized),
+    opacity var(--dur-deliberate) var(--ease-enter);
+  transition-delay: 260ms;
+}
+html[data-intro="play"] .hero-photo {
+  transform: translateY(24px) scale(0.94);
+  opacity: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-intro="play"] .hero-word,
+  html[data-intro="play"] .hero-photo {
+    transform: none;
+  }
+  .hero-photo {
+    transition: opacity var(--dur-base) ease;
+    transition-delay: 0ms;
+  }
+  .hero-word {
+    transition: opacity var(--dur-base) ease;
+    transition-delay: 0ms;
+  }
+  .hero-fade {
+    transition-delay: 0ms;
+  }
+}
+
+/* ------------------------------------------------------------------
+   View transitions (React <ViewTransition> + browser API)
+------------------------------------------------------------------- */
+::view-transition {
+  pointer-events: none;
+}
+
+/* Shared element: case study cover morphs from list preview to hero */
+::view-transition-group(.morph) {
+  animation-duration: var(--dur-deliberate);
+  animation-timing-function: var(--ease-standard);
+}
+::view-transition-image-pair(.morph) {
+  animation-name: via-blur;
+}
+@keyframes via-blur {
+  30% {
+    filter: blur(3px);
+  }
+}
+
+/* Directional page slides: forward goes left, back goes right */
+::view-transition-old(.nav-forward) {
+  --slide-offset: -48px;
+  animation:
+    150ms var(--ease-exit) both vt-fade reverse,
+    var(--dur-deliberate) var(--ease-standard) both vt-slide reverse;
+}
+::view-transition-new(.nav-forward) {
+  --slide-offset: 48px;
+  animation:
+    210ms var(--ease-enter) 150ms both vt-fade,
+    var(--dur-deliberate) var(--ease-standard) both vt-slide;
+}
+::view-transition-old(.nav-back) {
+  --slide-offset: 48px;
+  animation:
+    150ms var(--ease-exit) both vt-fade reverse,
+    var(--dur-deliberate) var(--ease-standard) both vt-slide reverse;
+}
+::view-transition-new(.nav-back) {
+  --slide-offset: -48px;
+  animation:
+    210ms var(--ease-enter) 150ms both vt-fade,
+    var(--dur-deliberate) var(--ease-standard) both vt-slide;
+}
+@keyframes vt-fade {
+  from {
+    opacity: 0;
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+@keyframes vt-slide {
+  from {
+    translate: var(--slide-offset) 0;
+  }
+  to {
+    translate: 0 0;
+  }
+}
+
+/* Header is the spatial anchor: it never moves during a page change */
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+::view-transition-old(site-header) {
+  display: none;
+}
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+html.theme-swap,
+html.theme-swap * {
+  transition: none !important;
+}
+
+/* Theme switch: a plain crossfade of the whole page */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--dur-base);
+  animation-timing-function: ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Keep crossfades, drop spatial movement */
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+  }
+  ::view-transition-old(.nav-forward),
+  ::view-transition-old(.nav-back) {
+    animation: 150ms ease both vt-fade reverse;
+  }
+  ::view-transition-new(.nav-forward),
+  ::view-transition-new(.nav-back) {
+    animation: 200ms ease both vt-fade;
+  }
+  .pressable:active:not(:disabled) {
+    transform: none;
+  }
+  .collapse-grid {
+    transition: none;
+  }
+}

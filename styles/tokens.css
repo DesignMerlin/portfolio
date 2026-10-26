@@ -1,0 +1,63 @@
+/*
+  Design tokens. One source for light and dark.
+  Colors: paper (page), surface (raised), ink (text), ink-2 (secondary text),
+  line (hairlines), accent (interactive), signal (live/available).
+  Motion values mirror /lib/motion.ts so CSS and Motion speak the same language.
+*/
+
+:root {
+  color-scheme: light;
+
+  --paper: #f2f3f5;
+  --surface: #ffffff;
+  --sunken: #e8eaee;
+  --ink: #111318;
+  --ink-2: #565b66;
+  --ink-3: #8a8f99;
+  --line: rgb(17 19 24 / 0.1);
+  --line-strong: rgb(17 19 24 / 0.18);
+  --accent: #4b37d6;
+  --accent-ink: #ffffff;
+  --accent-soft: #e8e5fd;
+  --signal: #1a7f52;
+  --danger: #b4232f;
+  --shadow-raised: 0 1px 2px rgb(17 19 24 / 0.06), 0 8px 24px -12px rgb(17 19 24 / 0.18);
+  --shadow-float: 0 2px 6px rgb(17 19 24 / 0.06), 0 24px 64px -24px rgb(17 19 24 / 0.35);
+
+  /* Motion: durations */
+  --dur-instant: 100ms;
+  --dur-quick: 180ms;
+  --dur-base: 280ms;
+  --dur-deliberate: 450ms;
+  --dur-scene: 700ms;
+
+  /* Motion: easings */
+  --ease-standard: cubic-bezier(0.77, 0, 0.175, 1); /* on-screen movement */
+  --ease-enter: cubic-bezier(0.23, 1, 0.32, 1); /* things arriving, responses to input */
+  --ease-exit: cubic-bezier(0.23, 1, 0.32, 1); /* paired with shorter durations */
+  --ease-emphasized: cubic-bezier(0.32, 0.72, 0, 1); /* sheets, curtains, big reveals */
+
+  --radius-s: 8px;
+  --radius-m: 14px;
+  --radius-l: 22px;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --paper: #0f1115;
+  --surface: #171a20;
+  --sunken: #0a0b0e;
+  --ink: #eceef1;
+  --ink-2: #a0a5b0;
+  --ink-3: #6f7480;
+  --line: rgb(236 238 241 / 0.1);
+  --line-strong: rgb(236 238 241 / 0.18);
+  --accent: #a99cff;
+  --accent-ink: #14112b;
+  --accent-soft: #221d45;
+  --signal: #4cc38a;
+  --danger: #ff7a85;
+  --shadow-raised: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -12px rgb(0 0 0 / 0.6);
+  --shadow-float: 0 2px 6px rgb(0 0 0 / 0.4), 0 24px 64px -24px rgb(0 0 0 / 0.8);
+}

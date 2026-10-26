@@ -26,9 +26,14 @@ Never publish a testimonial you didn't actually receive.
 
 # Hero
 
-## Statement (pick one — Antonio-style split hero, big type on the right)
+## Statement
 
-**Option A (recommended):**
+**Live on the site (Samuel, 2026-10-26):**
+Designing products people trust, for 3+ years. Work that has generated revenue and helped companies raise pre-seed funding.
+
+**Earlier options (not in use):**
+
+**Option A:**
 Designing AI products that people trust, and building them myself. Lead designer behind an AI-powered immigration platform, now shaping how legal tech feels at Voxdeed.
 
 **Option B:**

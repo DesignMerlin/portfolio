@@ -1,0 +1,290 @@
+---
+{
+  "title": "Immigify",
+  "slug": "immigify",
+  "summary": "AI agent interfaces, a consultant CRM and a design system for an immigration platform, designed as its first product designer.",
+  "role": "Founding product designer",
+  "company": "Immigify Inc. (Texas, USA)",
+  "timeline": "Apr 2025 to Sep 2026",
+  "year": "2025–26",
+  "domain": "AI, immigration tech",
+  "platform": "Web and mobile, multi-tenant SaaS",
+  "team": "Engineering and AI teams",
+  "tldr": [
+    "Immigration casework is high-stakes and document-heavy, and consultants were running it from spreadsheets and inboxes.",
+    "I designed task-focused case tools and conversational AI agents that show their work, so consultants can trust and act on them.",
+    "As the first product designer I owned every surface, and built the design system from zero: 100+ tokens and a shared component library."
+  ],
+  "outcomes": [
+    { "value": "100+", "label": "design tokens in a system built from scratch" },
+    { "value": "4", "label": "surfaces owned end to end: website, AI agents, consultant CRM, SaaS dashboards" },
+    { "value": "$1M", "label": "pre-seed round raised by the company during my tenure" }
+  ],
+  "cover": null,
+  "coverAlt": "Placeholder for Immigify product screens",
+  "tint": "#3157d5",
+  "featured": true,
+  "order": 3,
+  "draft": true
+}
+---
+
+{/* NDA: client UI is recreated as placeholders. TODO: Samuel to confirm what can be shown publicly before replacing placeholders with real screens. */}
+{/* TODO: Samuel to confirm the research methods, personas, findings and test notes below. The role, scope, tokens and funding come from profile.md. */}
+
+<Section id="context" title="Context">
+
+Immigify is an AI-powered immigration platform. I joined as its first product designer in April 2025 and owned everything a user could touch: the marketing website, the AI agent interfaces, the consultant CRM, and the multi-tenant SaaS dashboards on web and mobile. During my time there, the company raised a $1M pre-seed round.
+
+The people at the centre of it are immigration consultants. They handle a high volume of cases where a missing document or a missed date has real consequences for someone's life. The product had to make that work calmer, not just faster.
+
+</Section>
+
+<Section id="problem" title="Problem">
+
+Consultants were carrying the complexity of immigration compliance in their heads, with spreadsheets and inboxes as the backup. Every case moves through intake, document collection, preparation, filing and follow-up, and each stage has its own checklist and deadlines.
+
+Two problems sat on top of each other:
+
+- **The next action was hard to see.** Status fields said where a case was, not what needed doing next, or by whom.
+- **AI help had to be trustworthy enough to act on.** In a legal context, an answer a consultant can't verify is worse than no answer.
+
+<HMW>How might we turn complex compliance workflows into task-focused tools, with an AI agent consultants can trust enough to act on?</HMW>
+
+</Section>
+
+<Section id="research" title="Research and findings">
+
+I ran user research, usability testing and design reviews throughout, working closely with the engineering and AI teams.
+
+<Methods
+  items={[
+    { name: "Consultant interviews", detail: "How consultants plan their day, track cases, and decide what to do next." },
+    { name: "Workflow shadowing", detail: "Watching real case preparation, from intake to filing, to map every hand-off." },
+    { name: "Agent transcript reviews", detail: "Reading conversations with early AI agent builds alongside the AI team, to find where trust broke." },
+    { name: "Usability tests", detail: "Task-based testing of Figma prototypes before each major release." },
+  ]}
+/>
+
+<Findings
+  items={[
+    {
+      theme: "Next action",
+      insight: "Consultants think in next actions, not statuses.",
+      evidence: [
+        "Daily planning started with 'what's blocking which case?'",
+        "Status columns were updated late, or not at all.",
+        "Waiting on a client and waiting on an employer felt like different jobs.",
+      ],
+      implication: "A Today view and a pipeline grouped by the next action and who owns it.",
+    },
+    {
+      theme: "AI trust",
+      insight: "An answer without sources doesn't get used.",
+      evidence: [
+        "Consultants re-checked agent answers by hand when they couldn't see where they came from.",
+        "Confident wrong answers did more damage than slow right ones.",
+      ],
+      implication: "The agent shows its working steps while it thinks, and cites the case file and checklist it used.",
+    },
+    {
+      theme: "Onboarding",
+      insight: "Clients drop off in long, legal-sounding forms.",
+      evidence: ["Intake forms asked for everything up front.", "Clients didn't know why a document was needed."],
+      implication: "Conversational intake through the agent, one question at a time, with a reason for every request.",
+    },
+    {
+      theme: "Scale",
+      insight: "Every firm works slightly differently.",
+      evidence: ["Firms used their own checklists, templates and roles.", "One rigid workflow wouldn't fit everyone."],
+      implication: "A multi-tenant model with firm-level templates, roles and a design system flexible enough to carry it.",
+    },
+  ]}
+/>
+
+</Section>
+
+<Section id="personas" title="Who we designed for">
+
+<Personas
+  tint="#3157d5"
+  personas={[
+    {
+      name: "Grace Mensah",
+      archetype: "Immigration consultant with a full caseload",
+      context: "Manages many active cases at once across several visa types. Her day is a constant triage of documents, deadlines and client questions.",
+      goals: ["Know what to do next on every case", "Never miss a deadline", "Spend time on judgement, not admin"],
+      frustrations: ["Chasing documents by email", "Statuses that don't say what's blocking", "AI answers she has to re-check"],
+      needs: ["A next-action view", "Checklists that fill themselves", "An assistant that shows its sources"],
+    },
+    {
+      name: "Adaeze Okafor",
+      archetype: "Applicant going through a work visa",
+      context: "Highly motivated, a little anxious, and not an immigration expert. Wants to do everything right and know where things stand.",
+      goals: ["Understand what's needed and why", "Upload documents once", "Know her status at a glance"],
+      frustrations: ["Long forms full of legal terms", "Silence between updates"],
+      needs: ["One clear checklist", "Plain-language reasons", "Proactive updates"],
+    },
+    {
+      name: "Daniel Reyes",
+      archetype: "Firm administrator",
+      context: "Sets up the firm's workspace, roles and templates, and needs to see workload across the team.",
+      goals: ["Configure the firm's own workflow", "Balance the team's caseload"],
+      frustrations: ["Tools that force one way of working"],
+      needs: ["Firm-level templates and roles", "Team overview"],
+    },
+  ]}
+/>
+
+</Section>
+
+<Section id="stories" title="User stories">
+
+<UserStories
+  stories={[
+    { persona: "Consultant", want: "to see every case that's blocked, and on whom", so: "I can start my day on what matters", priority: "Must" },
+    { persona: "Consultant", want: "to ask the assistant what's missing from a file", so: "I don't have to compare checklists by hand", priority: "Must" },
+    { persona: "Consultant", want: "to see the sources behind every agent answer", so: "I can trust it and act on it", priority: "Must" },
+    { persona: "Applicant", want: "one checklist that explains why each document is needed", so: "I can get it right the first time", priority: "Must" },
+    { persona: "Consultant", want: "to have the assistant draft client reminders", so: "chasing documents takes seconds, not minutes", priority: "Should" },
+    { persona: "Applicant", want: "to answer intake questions in a conversation", so: "it feels manageable instead of a wall of forms", priority: "Should" },
+    { persona: "Administrator", want: "to set up the firm's own checklists and roles", so: "the product fits how we already work", priority: "Should" },
+    { persona: "Administrator", want: "to see caseload across the team", so: "I can rebalance work before deadlines slip", priority: "Could" },
+  ]}
+/>
+
+</Section>
+
+<Section id="journey" title="User journey">
+
+<JourneyMap
+  persona="Grace, preparing a work visa case"
+  stages={[
+    { name: "Intake", doing: "Collects the client's background and goals.", thinking: "Let's get the basics right first.", feeling: 1, pain: "Long forms, retyped into the system.", opportunity: "Conversational intake that fills the case for her." },
+    { name: "Collect documents", doing: "Requests and chases documents by email.", thinking: "Which ones are still missing?", feeling: -2, pain: "Tracking documents across inboxes.", opportunity: "A live checklist and one-tap reminders." },
+    { name: "Prepare", doing: "Checks everything against requirements.", thinking: "I can't afford to miss anything.", feeling: -1, pain: "Manual comparison against checklists.", opportunity: "The agent finds the gaps and shows its sources." },
+    { name: "File", doing: "Submits the petition.", thinking: "Done, for now.", feeling: 1, pain: "Last-minute surprises.", opportunity: "A pre-filing review of anything missing." },
+    { name: "Track", doing: "Watches for updates and requests.", thinking: "Did anything change on any of my cases?", feeling: -1, pain: "Updates spread across portals and email.", opportunity: "A Today view of what changed and what's next." },
+    { name: "Close", doing: "Shares the outcome with the client.", thinking: "That's why I do this.", feeling: 2, pain: "None at this point.", opportunity: "Capture the template for the next similar case." },
+  ]}
+/>
+
+</Section>
+
+<Section id="ia" title="Information architecture">
+
+<IATree
+  tree={[
+    { label: "Consultant workspace", children: [
+      { label: "Today", note: "what changed and what's next" },
+      { label: "Cases", children: [
+        { label: "Pipeline", note: "grouped by next action" },
+        { label: "Case detail", children: [{ label: "Overview" }, { label: "Documents checklist" }, { label: "Timeline" }, { label: "Messages" }, { label: "Assistant" }] },
+      ] },
+      { label: "Clients" },
+      { label: "Assistant", note: "across all cases" },
+      { label: "Templates" },
+    ] },
+    { label: "Applicant portal", children: [{ label: "Conversational intake" }, { label: "Checklist and uploads" }, { label: "Messages" }, { label: "Status" }] },
+    { label: "Firm admin", children: [{ label: "Team and roles" }, { label: "Checklists and templates" }, { label: "Workload" }, { label: "Billing" }] },
+    { label: "Website", children: [{ label: "Home" }, { label: "For consultants" }, { label: "For applicants" }, { label: "Pricing" }] },
+  ]}
+/>
+
+</Section>
+
+<Section id="decisions" title="Key decisions">
+
+<DecisionLog
+  items={[
+    {
+      title: "Group cases by next action, not by status",
+      context: "The first CRM concept mirrored the legal process: one column per stage.",
+      chose: "A pipeline grouped by the next action and who owns it (us, the client, the employer), with stage shown as a secondary label.",
+      rejected: [
+        { option: "One column per legal stage", why: "Accurate, but it answered 'where is this case?' when consultants were asking 'what do I do next?'" },
+        { option: "A single sortable table", why: "Powerful for admins, overwhelming as a daily starting point." },
+      ],
+    },
+    {
+      title: "The agent shows its working",
+      context: "Early agent builds answered confidently, and consultants re-checked everything anyway.",
+      chose: "Thinking appears as the actual steps the agent takes, answers cite the case file and checklist, and structured results arrive as cards the consultant can act on.",
+      rejected: [
+        { option: "A spinner, then the answer", why: "Gives no reason to trust what arrives, and no way to stop a wrong path early." },
+        { option: "Hiding the agent behind buttons", why: "Safer-feeling, but loses the flexibility that makes an assistant useful for messy, case-specific questions." },
+      ],
+    },
+    {
+      title: "Design system before the second product",
+      context: "As the only designer across four surfaces, consistency couldn't depend on me reviewing every screen.",
+      chose: "100+ tokens and a shared component library with accessibility standards, documented for engineering, before the CRM and dashboards scaled.",
+      rejected: [
+        { option: "Design each product separately and unify later", why: "Faster for a month, then every new screen gets harder and the products drift apart." },
+      ],
+    },
+  ]}
+/>
+
+</Section>
+
+<Section id="prototype" title="Prototype: the case assistant">
+
+A pattern study of the consultant's AI assistant, rebuilt in code with a sample client. Ask a question, watch the working steps, stop it mid-answer, and open the result card.
+
+<Prototype
+  name="immigify-agent"
+  title="Immigify, case assistant"
+  caption="Why it moves like this: thinking is shown as the steps the agent is actually taking, with the active step shimmering, so waiting turns into watching work happen. Words stream into a fixed-width column so lines never jump. Stop keeps the partial answer instead of throwing it away. Results start as a small chip and grow into a card in place, so the answer stays readable until you ask for more. This is a sample case, not legal advice."
+/>
+
+<Figure kind="dashboard" tint="#3157d5" caption="Placeholder: consultant pipeline grouped by next action. Real screens to follow once NDA scope is confirmed." />
+
+</Section>
+
+<Section id="testing" title="Usability testing">
+
+{/* TODO: Samuel to replace with the real test notes from Immigify. */}
+
+<TestingRounds
+  rounds={[
+    {
+      name: "CRM pipeline",
+      method: "Task-based tests on Figma prototypes with consultants.",
+      who: "Practising immigration consultants.",
+      tasks: ["Find every case waiting on the client.", "Work out what to do first today."],
+      issues: [
+        { issue: "Stage columns made people scan every card to find blockers.", severity: "High", change: "Regrouped the pipeline by next action and owner." },
+        { issue: "Client and employer waits looked the same.", severity: "Medium", change: "Added the owner as the group label, with distinct icons." },
+      ],
+    },
+    {
+      name: "AI assistant",
+      method: "Prototype sessions reviewing agent answers with consultants, alongside the AI team.",
+      who: "Consultants, plus internal case specialists.",
+      tasks: ["Ask what's missing from a case.", "Draft a reminder to a client."],
+      issues: [
+        { issue: "Consultants didn't trust answers without sources.", severity: "High", change: "Added visible working steps and source chips on every answer." },
+        { issue: "Long answers buried the actionable part.", severity: "Medium", change: "Structured results moved into expandable cards." },
+      ],
+    },
+  ]}
+/>
+
+</Section>
+
+<Section id="outcome" title="Outcome">
+
+I delivered the website, the AI agent interfaces, the consultant CRM and the multi-tenant SaaS dashboards across web and mobile, with annotated specs and Figma prototypes for every release. The design system, 100+ tokens and a reusable component library, meant a small team could ship across four surfaces without the product falling apart. The company raised a $1M pre-seed round during my tenure.
+
+{/* TODO: Samuel to add any task-completion or onboarding numbers he can share publicly. */}
+
+</Section>
+
+<Section id="reflection" title="Reflection">
+
+I've learned that **when you're the only designer, the design system is your team.** Building the tokens and shared components early meant every new screen got easier, not harder.
+
+And on AI: trust is designed, not assumed. The agent became useful the moment it started showing its working. That's now the first question I ask of any AI interface: can the person see why?
+
+</Section>

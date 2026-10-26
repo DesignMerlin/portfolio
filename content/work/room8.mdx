@@ -1,0 +1,327 @@
+---
+{
+  "title": "Room8",
+  "slug": "room8",
+  "summary": "Finding the right roommate, not just the right room, with compatibility built into every listing.",
+  "role": "Product designer (UI/UX)",
+  "company": "Room8",
+  "timeline": "To confirm",
+  "year": "",
+  "domain": "Proptech, mobile",
+  "platform": "iOS and Android",
+  "tldr": [
+    "In Lagos, finding a flatmate means WhatsApp groups, agents and hoping for the best.",
+    "Room8 pairs listing search with a compatibility match, so people choose who they live with, not only where.",
+    "I designed it end to end: research, flows, information architecture and high-fidelity UI."
+  ],
+  "outcomes": [],
+  "cover": "/work/room8.png",
+  "coverAlt": "Room8 app screens: a home feed of Lagos room listings with prices and roommate counts, and an onboarding screen reading Find your perfect roommate.",
+  "tint": "#2f9e5b",
+  "featured": true,
+  "order": 1,
+  "draft": true
+}
+---
+
+{/* TODO: Samuel to confirm year, timeline, whether this was a client or self-initiated project, and every research detail below. Nothing here is a measured result. */}
+
+<Section id="context" title="Context">
+
+Rent in Lagos is often paid a year or more up front, so sharing a flat is how a lot of young professionals, students and corps members make the city work. But the way people find a flatmate hasn't changed: a post in a WhatsApp group, a friend of a friend, or an agent who charges an inspection fee to show you a room that doesn't match the photos.
+
+Room8 started from a simple observation: **the flat matters, but the flatmate decides whether you stay.** Every listing app helps you find a room. Almost none help you find out who you'll be living with.
+
+</Section>
+
+<Section id="problem" title="Problem">
+
+People looking for a shared room are making two decisions at once, where to live and who to live with, but the tools available only support the first. The second gets made on instinct, at an inspection, under pressure to pay before someone else does.
+
+<HMW>How might we help people choose a flatmate with the same confidence they choose a room?</HMW>
+
+Three constraints shaped the answer from day one:
+
+- **Price is the first filter, always.** Any design that makes people work to see the monthly cost will lose them.
+- **Trust is fragile.** Fake listings and fee scams are common, so the app has to earn trust before it asks for anything.
+- **Compatibility has to explain itself.** A number on its own reads like a horoscope. People need to see why.
+
+</Section>
+
+<Section id="research" title="Research and findings">
+
+{/* TODO: Samuel to confirm the methods used, how many people took part, and the findings themselves. */}
+
+I started by understanding how people actually find shared rooms today, and what goes wrong once they move in.
+
+<Methods
+  items={[
+    { name: "Interviews", detail: "Conversations with people who had recently looked for a shared room in Lagos, and with tenants who had a room to fill." },
+    { name: "Community listening", detail: "Reading roommate and housing groups to see how listings are written and which questions come up again and again." },
+    { name: "Competitive review", detail: "Listing apps, agent platforms and roommate apps from other markets: what they surface first, and what they leave out." },
+    { name: "Assumption mapping", detail: "Ranking our riskiest assumptions about trust and compatibility so testing could target them first." },
+  ]}
+/>
+
+Patterns clustered into four themes. Open each one to see what it was built from and what it changed in the design.
+
+<Findings
+  items={[
+    {
+      theme: "Compatibility",
+      insight: "The flat matters less than the flatmate.",
+      evidence: [
+        "Bad flatmate stories were about habits: cleanliness, guests, noise and schedules.",
+        "People described leaving a good flat early because of who they shared it with.",
+        "Nobody had a structured way to ask about habits before moving in.",
+      ],
+      implication: "A short compatibility profile at sign-up, and a match on every listing with a you-versus-them breakdown on the detail screen.",
+    },
+    {
+      theme: "Trust",
+      insight: "People don't trust listings they can't verify.",
+      evidence: [
+        "Inspection fees paid for rooms that didn't match the photos.",
+        "Hesitation to share phone numbers with strangers from a group chat.",
+        "Listings without a visible person behind them were treated as suspicious.",
+      ],
+      implication: "A real host on every card, verification badges, and in-app chat so nobody has to hand over a number before they're ready.",
+    },
+    {
+      theme: "Cost",
+      insight: "Price is the first filter, and the full cost is a surprise.",
+      evidence: [
+        "People sort by budget before anything else.",
+        "Agency, legal and service charges often appear late in the conversation.",
+      ],
+      implication: "Monthly price leads every listing card. The detail screen shows the full cost before any request is sent.",
+    },
+    {
+      theme: "Location",
+      insight: "Commute decides the shortlist.",
+      evidence: [
+        "In Lagos traffic, area matters as much as price.",
+        "People searched by neighbourhood names, not map pins.",
+      ],
+      implication: "Search by location sits at the top of Home, with a Nearby tab one tap away.",
+    },
+  ]}
+/>
+
+</Section>
+
+<Section id="personas" title="Who we designed for">
+
+Research pointed to three people with different stakes in the same match. Room8 had to work for both sides: the person looking for a room, and the person with one to fill.
+
+<Personas
+  tint="#2f9e5b"
+  personas={[
+    {
+      name: "Jemmy Bassey",
+      archetype: "Young professional moving to Lagos for work",
+      context: "Starting a new job on the island and can't afford a whole flat yet. Needs a room fast, close enough to make the commute bearable, with someone she can actually live with.",
+      goals: ["A room within budget near work", "A flatmate with similar routines", "Move in before her start date"],
+      frustrations: ["Inspection fees for rooms that don't exist", "Not knowing who she'd live with until it's too late", "Sharing her number with strangers"],
+      needs: ["Price and area up front", "Compatibility she can understand", "A safe way to talk first"],
+    },
+    {
+      name: "Marcus Brown",
+      archetype: "Tenant with a spare room to fill",
+      context: "Has two bedrooms and a lease to cover. Wants to share the rent with someone reliable, without spending every weekend showing the room to people who won't commit.",
+      goals: ["Fill the room with someone dependable", "Keep the peace at home", "Spend less time on enquiries"],
+      frustrations: ["Flaky enquiries that go nowhere", "Strangers turning up for viewings", "No way to screen for habits"],
+      needs: ["Requests that show the person, not just the message", "One place to manage enquiries", "Control over who sees his details"],
+    },
+    {
+      name: "Ife Adeyemi",
+      archetype: "Corps member posted to Lagos for a year",
+      context: "Arriving for national service on a fixed allowance and a fixed end date. Needs something affordable and short-term in a city she doesn't know yet.",
+      goals: ["An affordable room for twelve months", "A safe area she can learn quickly", "Flatmates who won't mind a short stay"],
+      frustrations: ["Leases that assume years, not months", "Not knowing which areas are safe or practical"],
+      needs: ["Clear lease length on listings", "Neighbourhood context", "Budget-first search"],
+    },
+  ]}
+/>
+
+</Section>
+
+<Section id="stories" title="User stories">
+
+I turned the findings into stories and prioritised them with the team, using MoSCoW, so the first release would solve the riskiest problems first. Filter by person or priority.
+
+<UserStories
+  stories={[
+    { persona: "Room seeker", want: "to filter rooms by monthly budget and area", so: "I only spend time on places I can afford and reach", priority: "Must" },
+    { persona: "Room seeker", want: "to see how well I match with the people already living there", so: "I know whether we'd get along before I visit", priority: "Must" },
+    { persona: "Room seeker", want: "to chat with the host inside the app", so: "I don't have to share my number with a stranger", priority: "Must" },
+    { persona: "Host", want: "to review requests alongside each person's habits", so: "I can choose who to meet instead of meeting everyone", priority: "Must" },
+    { persona: "Room seeker", want: "to see the full cost of moving in on the listing", so: "there are no surprise fees after I've committed", priority: "Should" },
+    { persona: "Room seeker", want: "to save listings to favourites", so: "I can compare my shortlist later", priority: "Should" },
+    { persona: "Host", want: "to get verified", so: "serious people trust my listing over the fake ones", priority: "Should" },
+    { persona: "Corps member", want: "to find rooms that accept a twelve-month stay", so: "my lease matches my service year", priority: "Could" },
+    { persona: "Room seeker", want: "to see a rent split per person", so: "I understand exactly what I'm paying for", priority: "Could" },
+  ]}
+/>
+
+</Section>
+
+<Section id="journey" title="User journey">
+
+Mapping how Jemmy finds a room today showed where the experience breaks. The low points are where Room8 had to do its most important work. It opens on the lowest point; step through the rest.
+
+<JourneyMap
+  persona="Jemmy, finding a room today"
+  stages={[
+    { name: "Decide to move", doing: "Accepts the job offer and works out a budget.", thinking: "This is exciting. How hard can it be?", feeling: 1, pain: "No idea what a fair price is in each area.", opportunity: "Show typical prices by area up front." },
+    { name: "Search", doing: "Joins housing groups, asks friends, scrolls agent pages.", thinking: "Half of these posts are a year old.", feeling: -1, pain: "Listings scattered across chats with no filters.", opportunity: "One searchable feed, budget and area first." },
+    { name: "Vet the listing", doing: "Tries to work out if the room is real.", thinking: "Is this even the same flat as the photos?", feeling: -2, pain: "No way to verify the room or the person.", opportunity: "Verified hosts and a real person on every listing." },
+    { name: "Meet the flatmate", doing: "Visits and makes small talk with the current tenant.", thinking: "They seem nice, but I'll only know once I've moved in.", feeling: -1, pain: "Compatibility is guessed in ten minutes.", opportunity: "A match with reasons before the visit." },
+    { name: "Pay and commit", doing: "Pays rent, agency and legal fees.", thinking: "Nobody mentioned these fees before.", feeling: -2, pain: "The full cost appears too late.", opportunity: "The all-in cost on the listing, before any request." },
+    { name: "Move in", doing: "Settles into the room.", thinking: "Finally. I hope this works out.", feeling: 1, pain: "Still no shared ground rules.", opportunity: "Carry the compatibility answers into house rules." },
+  ]}
+/>
+
+</Section>
+
+<Section id="ia" title="Information architecture">
+
+The structure follows the two jobs people come to do: find a room, and decide on a person. Everything to do with deciding lives inside the listing, so comparing never means jumping between tabs. Explore the sitemap with a mouse or the arrow keys.
+
+<IATree
+  tree={[
+    { label: "Onboarding", children: [
+      { label: "Welcome", note: "Find your perfect roommate" },
+      { label: "Sign up and verify phone" },
+      { label: "Compatibility profile", children: [
+        { label: "Sleep schedule" }, { label: "Cleanliness" }, { label: "Guests" }, { label: "Work pattern" }, { label: "Budget and areas" },
+      ] },
+    ] },
+    { label: "Home", children: [
+      { label: "Search by location" },
+      { label: "Recommended", note: "sorted by match" },
+      { label: "Nearby" },
+      { label: "Luxury" },
+      { label: "Listing detail", children: [
+        { label: "Photos" }, { label: "Price and full cost" }, { label: "Compatibility breakdown" }, { label: "Current roommates" }, { label: "Request to join" },
+      ] },
+    ] },
+    { label: "Explore", children: [{ label: "Map view" }, { label: "Filters" }] },
+    { label: "Chats", children: [{ label: "Requests", note: "with status" }, { label: "Conversations" }] },
+    { label: "Favourites" },
+    { label: "Profile", children: [{ label: "My compatibility profile" }, { label: "My listing", note: "for hosts" }, { label: "Verification" }, { label: "Settings" }] },
+  ]}
+/>
+
+</Section>
+
+<Section id="decisions" title="Key decisions">
+
+<DecisionLog
+  items={[
+    {
+      title: "A match with reasons, not a swipe",
+      context: "Matching apps default to a swipe deck, and it was the first idea in the room.",
+      chose: "A match percentage on every listing card, with a you-versus-them breakdown on the detail screen, so the number is always explainable.",
+      rejected: [
+        { option: "A swipe deck of people", why: "It turns a year-long housing decision into a snap judgement on a face, and hides price and location, the two things people filter on first." },
+        { option: "A hidden score that only says 'good match'", why: "Opaque. If people can't see why, they don't trust it, and they can't tell which habit to ask about at the visit." },
+      ],
+    },
+    {
+      title: "Lead every card with the monthly price",
+      context: "Cards have to support fast comparison on a small screen.",
+      chose: "Price first, then room type, area, host and match: the order people actually ask the questions in.",
+      rejected: [
+        { option: "Large photo-first cards", why: "Beautiful, but two listings per screen makes comparing slow." },
+        { option: "Price revealed on the detail screen", why: "It only delays the first filter everyone applies." },
+      ],
+    },
+    {
+      title: "Chat stays in the app until both sides are ready",
+      context: "Trust is the product. Phone numbers in public listings are how scams and harassment start.",
+      chose: "Requests and conversations live in Chats. Contact details are shared only when both people choose to.",
+      rejected: [
+        { option: "Phone number on every listing", why: "Fastest to build, worst for safety, and it moves the relationship off the platform." },
+      ],
+    },
+    {
+      title: "Three intent tabs instead of a filter screen",
+      context: "Most searches fall into a few intents.",
+      chose: "Recommended, Nearby and Luxury as one-tap tabs, with a filter button for everything else.",
+      rejected: [
+        { option: "A single advanced filter sheet", why: "Powerful but slow; most people never open it, and it buries the common cases." },
+      ],
+    },
+  ]}
+/>
+
+</Section>
+
+<Section id="prototype" title="Prototype: browse, compare, request">
+
+This is the key flow, rebuilt in code from the Figma screens. Switch tabs, open a listing, and send a request. Try it at 0.25× to see how the listing photo and price carry over into the detail screen.
+
+<Prototype
+  name="room8-listings"
+  title="Room8, listing to request"
+  caption="Why it moves like this: tapping a card expands that same card into the detail sheet, so the listing you chose never disappears. Filtering keeps surviving cards in view while they glide, so you can see what the filter removed. The match bars fill one after another so they read as a breakdown, not a wall of numbers."
+/>
+
+<CompareSlider
+  tint="#2f9e5b"
+  kind="mobile"
+  before="Early wireframe: match shown as a lone percentage"
+  after="Final: match with the host and a you-versus-them breakdown"
+/>
+
+</Section>
+
+<Section id="testing" title="Usability testing">
+
+{/* TODO: Samuel to confirm the rounds, who took part, and what was found. Replace these with the real notes. */}
+
+I tested in two rounds: rough wireframes to check the concept, then high-fidelity screens to check the details.
+
+<TestingRounds
+  rounds={[
+    {
+      name: "Round 1: wireframes",
+      method: "Moderated walkthroughs of clickable wireframes, thinking aloud.",
+      who: "People who had recently looked for a shared room in Lagos.",
+      tasks: ["Find a room under ₦250,000 a month in Lekki.", "Tell me how well you'd get on with the current roommate.", "Get in touch with the host."],
+      issues: [
+        { issue: "The match percentage read as a rating of the room, not the people.", severity: "High", change: "Renamed it to a match with the host's name beside it, and added the you-versus-them breakdown." },
+        { issue: "After sending a request, people couldn't find where it went.", severity: "Medium", change: "Added Requests inside Chats, with a clear status on each one." },
+      ],
+    },
+    {
+      name: "Round 2: high fidelity",
+      method: "Task-based tests on the Figma prototype.",
+      who: "A mix of room seekers and tenants with a room to fill.",
+      tasks: ["Compare two rooms and pick one.", "As a host, review a request and reply."],
+      issues: [
+        { issue: "People wanted the full cost of moving in, not just the rent.", severity: "Medium", change: "Added a cost breakdown to the listing detail." },
+        { issue: "The Luxury tab's meaning was unclear.", severity: "Low", change: "Kept the tab and added a price range under the label." },
+      ],
+    },
+  ]}
+/>
+
+</Section>
+
+<Section id="outcome" title="Outcome">
+
+{/* TODO: Samuel to add real outcomes: launch status, screen count, any usage numbers or feedback he can stand behind. */}
+
+The result is a complete mobile experience: onboarding with a compatibility profile, a budget-first home feed, listing details that explain every match, in-app requests and chat, and favourites for shortlisting. The compatibility model is the core idea, and it shows up everywhere a decision gets made.
+
+</Section>
+
+<Section id="reflection" title="Reflection">
+
+The biggest lesson was that **an explanation is a feature.** The match percentage only became useful once it could explain itself, and that changed how I think about any score in a product, AI-generated or not.
+
+If I took Room8 further, I'd test the compatibility questions themselves. Which habits actually predict a good flatshare is a research question, not a design one. I'd also carry the answers into shared house rules after move-in, so the match keeps paying off after the decision.
+
+</Section>

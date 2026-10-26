@@ -1,0 +1,309 @@
+---
+{
+  "title": "FundPath",
+  "slug": "fundpath",
+  "summary": "A crowdfunding app where donors can see their money arrive and see where it goes.",
+  "role": "Product designer (UI/UX)",
+  "company": "FundPath",
+  "timeline": "To confirm",
+  "year": "",
+  "domain": "Fintech, social impact",
+  "platform": "iOS and Android",
+  "tldr": [
+    "People give generously to causes, but rarely find out whether their money arrived or what it paid for.",
+    "FundPath makes every gift visible: live progress, a public activity feed, and a ledger of how funds were spent.",
+    "I designed 30+ screens across donating, fundraising and the wallet, from research to high-fidelity UI."
+  ],
+  "outcomes": [
+    { "value": "30+", "label": "screens across donor, fundraiser and wallet flows" }
+  ],
+  "cover": "/work/fundpath.png",
+  "coverAlt": "FundPath app screens: a home screen with wallet balance and campaign categories, a list of trending campaigns, and a campaign page for kidney transplant bills showing funds raised.",
+  "tint": "#7c4ddb",
+  "featured": true,
+  "order": 2,
+  "draft": true
+}
+---
+
+{/* TODO: Samuel to confirm year, timeline, client or self-initiated, and every research detail below. Nothing here is a measured result except the screen count from the Figma file. */}
+
+<Section id="context" title="Context">
+
+When someone needs help paying for surgery, school fees or rebuilding after a flood, the appeal usually travels by WhatsApp: a photo, a story and a bank account number. People give, often generously. Then the trail goes cold. Donors rarely learn whether the target was reached, and fundraisers spend hours answering "did my transfer arrive?"
+
+FundPath set out to make giving feel as trustworthy as it is generous. The brief came down to one question.
+
+<HMW>How might we offer real-time updates of funds from donors, and make transparency the default?</HMW>
+
+</Section>
+
+<Section id="problem" title="Problem">
+
+Crowdfunding runs on trust, and trust runs on evidence. The informal way of fundraising gives donors almost none:
+
+- **No proof of arrival.** A bank transfer to a stranger has no shared record, and no receipt the donor can point to.
+- **No proof of use.** Even when a target is reached, donors don't see what the money paid for.
+- **No momentum.** Without a visible total, a campaign can't show that other people are already giving, which is one of the strongest reasons people give at all.
+
+So the design problem wasn't "build a donate button". It was: show money moving, in real time, from the donor to the cause and out the other side.
+
+</Section>
+
+<Section id="research" title="Research and findings">
+
+{/* TODO: Samuel to confirm methods, participants and findings. */}
+
+<Methods
+  items={[
+    { name: "Interviews", detail: "Donors who had given to medical or community appeals, and people who had raised money for themselves or family." },
+    { name: "Appeal audit", detail: "Collected real appeals shared in group chats to see what information they include, and what's missing." },
+    { name: "Competitive review", detail: "Global crowdfunding platforms and local giving apps: how they show progress, proof and updates." },
+    { name: "Card sorting", detail: "How people group causes, to shape categories like Medical, Education, Disasters, Pets and Charity." },
+  ]}
+/>
+
+<Findings
+  items={[
+    {
+      theme: "Trust",
+      insight: "People give to people they can verify.",
+      evidence: [
+        "Donors gave most readily when they knew the fundraiser, or someone who did.",
+        "Fear of fake appeals was the main reason for not giving.",
+        "A named organiser and documents made strangers' appeals feel safer.",
+      ],
+      implication: "Every campaign shows who organised it, what was verified, and a transparency report one tap from the story.",
+    },
+    {
+      theme: "Visibility",
+      insight: "Donors almost never hear what happened next.",
+      evidence: [
+        "Most donors couldn't say whether a campaign they'd given to reached its goal.",
+        "The few updates they received were screenshots forwarded in chats.",
+      ],
+      implication: "A live activity feed and progress on every card, plus a ledger of spending against receipts.",
+    },
+    {
+      theme: "Friction",
+      insight: "Bank transfers work, but leave no shared record.",
+      evidence: [
+        "Account numbers copied out of chat messages, with typos and wrong recipients.",
+        "Fundraisers reconciling transfers by hand.",
+      ],
+      implication: "An in-app wallet: top up once, give in two taps, and every donation is recorded for both sides.",
+    },
+    {
+      theme: "Urgency",
+      insight: "Medical campaigns run against the clock.",
+      evidence: ["Many appeals had a hard deadline: a surgery date or a hospital bill.", "Donors wanted to know how far the target was, right now."],
+      implication: "Raised-versus-goal and days left on every campaign card, not hidden in the detail screen.",
+    },
+  ]}
+/>
+
+</Section>
+
+<Section id="personas" title="Who we designed for">
+
+<Personas
+  tint="#7c4ddb"
+  personas={[
+    {
+      name: "Tunde Bakare",
+      archetype: "Regular donor, often giving from abroad",
+      context: "Lives in London and gives to causes at home a few times a year, usually after a friend shares an appeal. Generous, but burned once by an appeal that turned out to be fake.",
+      goals: ["Give quickly when something moves him", "Know the money reached the right person", "See what it actually paid for"],
+      frustrations: ["Copying account numbers out of chats", "Never hearing what happened next", "Not knowing if an appeal is real"],
+      needs: ["Proof the campaign is genuine", "A receipt for every gift", "Updates without having to ask"],
+    },
+    {
+      name: "Mrs Okon",
+      archetype: "Raising money for her daughter's surgery",
+      context: "Facing a hospital bill with a deadline. Not comfortable with technology, already overwhelmed, and anxious about asking people for money.",
+      goals: ["Reach the target before the surgery date", "Thank people properly", "Spend less time answering messages"],
+      frustrations: ["Tracking transfers one by one", "Proving to strangers that she's genuine", "Repeating the same update in many chats"],
+      needs: ["A simple way to start a campaign", "One link to share", "Automatic updates for donors"],
+    },
+    {
+      name: "Adaora Eze",
+      archetype: "Programme lead at a small foundation",
+      context: "Runs several campaigns at once for the communities her foundation supports, and has to report on every naira to donors and trustees.",
+      goals: ["Run campaigns side by side", "Report spending without spreadsheets", "Build long-term donors"],
+      frustrations: ["Reconciling donations by hand", "Writing reports that donors don't read"],
+      needs: ["A ledger that publishes itself", "Receipts attached to spending", "Donor history"],
+    },
+  ]}
+/>
+
+</Section>
+
+<Section id="stories" title="User stories">
+
+<UserStories
+  stories={[
+    { persona: "Donor", want: "to see how much has been raised and how much is left", so: "I know my gift still matters", priority: "Must" },
+    { persona: "Donor", want: "to give from a wallet in two taps", so: "I don't have to copy bank details from a chat", priority: "Must" },
+    { persona: "Donor", want: "to see where the money was spent, with receipts", so: "I can trust the campaign and give again", priority: "Must" },
+    { persona: "Fundraiser", want: "donations to appear automatically on my campaign", so: "I don't have to reconcile transfers by hand", priority: "Must" },
+    { persona: "Fundraiser", want: "to post an update once and have every donor see it", so: "I stop repeating myself in many chats", priority: "Should" },
+    { persona: "Donor", want: "to browse campaigns by cause", so: "I can find causes I care about", priority: "Should" },
+    { persona: "Organisation", want: "to attach receipts to each withdrawal", so: "the transparency report builds itself", priority: "Should" },
+    { persona: "Donor", want: "to chat with the organiser", so: "I can ask a question before I give", priority: "Could" },
+    { persona: "Organisation", want: "to export a donor report", so: "I can share it with trustees", priority: "Could" },
+  ]}
+/>
+
+</Section>
+
+<Section id="journey" title="User journey">
+
+Tunde's journey shows the gap clearly: the giving moment is fine, but everything before and after it erodes trust.
+
+<JourneyMap
+  persona="Tunde, giving to an appeal today"
+  stages={[
+    { name: "Sees the appeal", doing: "A friend shares a photo and an account number in a group.", thinking: "That's awful. I want to help.", feeling: 1, pain: "The appeal is a screenshot with no way to check it.", opportunity: "A shareable campaign page with a verified organiser." },
+    { name: "Checks it's real", doing: "Asks around, searches the name, hesitates.", thinking: "Is this genuine? I've been caught before.", feeling: -2, pain: "No proof, no documents, no history.", opportunity: "Verification and the organiser's track record on the page." },
+    { name: "Chooses an amount", doing: "Decides what feels right.", thinking: "How close are they to the target?", feeling: 0, pain: "No idea how much has already been raised.", opportunity: "Live raised-versus-goal and recent donors." },
+    { name: "Pays", doing: "Copies the account number into his banking app.", thinking: "I hope I typed that right.", feeling: -1, pain: "Error-prone, and no shared record.", opportunity: "Wallet donation with an instant receipt." },
+    { name: "Waits for news", doing: "Nothing happens. Weeks pass.", thinking: "Did they make it? Did the surgery happen?", feeling: -2, pain: "The donor is left out once the money moves.", opportunity: "Automatic updates and a spending ledger." },
+    { name: "Gives again?", doing: "Sees another appeal.", thinking: "Maybe. If I knew it was real.", feeling: -1, pain: "Last time's silence makes the next gift less likely.", opportunity: "History of past gifts and their outcomes." },
+  ]}
+/>
+
+</Section>
+
+<Section id="ia" title="Information architecture">
+
+<IATree
+  tree={[
+    { label: "Onboarding", children: [{ label: "Welcome", note: "sow the seeds of change" }, { label: "Log in" }, { label: "Sign up" }] },
+    { label: "Home", children: [
+      { label: "Wallet balance" },
+      { label: "Categories", children: [{ label: "Medical" }, { label: "Education" }, { label: "Disasters" }, { label: "Pets" }, { label: "Charity" }] },
+      { label: "Trending campaigns" },
+    ] },
+    { label: "Campaigns", children: [
+      { label: "Search and filter" },
+      { label: "Campaign detail", children: [
+        { label: "Story" }, { label: "Raised versus goal" }, { label: "Live activity" }, { label: "Transparency report", note: "spending and receipts" }, { label: "Organiser" }, { label: "Chat" }, { label: "Donate" },
+      ] },
+    ] },
+    { label: "Start a campaign", children: [{ label: "Story and photos" }, { label: "Goal and deadline" }, { label: "Verification documents" }, { label: "Review and publish" }] },
+    { label: "Donations", children: [{ label: "History" }, { label: "Receipts" }] },
+    { label: "Wallet", children: [{ label: "Top up" }, { label: "Withdraw", note: "fundraisers" }, { label: "Transactions" }] },
+    { label: "Profile and settings" },
+  ]}
+/>
+
+</Section>
+
+<Section id="decisions" title="Key decisions">
+
+<DecisionLog
+  items={[
+    {
+      title: "Transparency is a tab, not a PDF",
+      context: "Platforms often treat reporting as a document the organiser uploads at the end.",
+      chose: "A 'Where the money went' view next to live activity on every campaign, with spending tied to receipts and funds held in escrow until spent.",
+      rejected: [
+        { option: "A downloadable report at the end of the campaign", why: "Arrives too late to build trust, and almost nobody opens it." },
+        { option: "Organiser-written updates only", why: "Useful for the story, but not evidence. Updates should sit next to the numbers, not replace them." },
+      ],
+    },
+    {
+      title: "Give from a wallet, not straight to an account",
+      context: "Bank transfers are familiar, but they leave no record on the platform.",
+      chose: "An in-app wallet: top up once, donate in two taps, and every gift is recorded for the donor and the campaign at the same moment.",
+      rejected: [
+        { option: "Show the organiser's bank details", why: "Recreates the exact problem: no proof of arrival and no live total." },
+        { option: "Card payment at every donation", why: "More steps for every gift, and it puts a payment form between the donor and the moment they decided to give." },
+      ],
+    },
+    {
+      title: "Show progress on every card",
+      context: "Momentum drives giving, and urgency matters for medical campaigns.",
+      chose: "Raised-versus-goal, a progress bar, donor faces and days left on every campaign card in every list.",
+      rejected: [
+        { option: "Progress only on the detail screen", why: "Hides the most persuasive and most honest information until after the tap." },
+      ],
+    },
+    {
+      title: "Confirm in a sheet that shows the wallet before and after",
+      context: "Money flows need a clear moment of commitment, without feeling like a bank form.",
+      chose: "A bottom sheet that restates the amount, shows the wallet balance before and after, and says where the funds go (escrow).",
+      rejected: [
+        { option: "One-tap donate with no confirmation", why: "Fast, but easy to send the wrong amount, and there's no moment to reassure the donor." },
+      ],
+    },
+  ]}
+/>
+
+</Section>
+
+<Section id="prototype" title="Prototype: give, and watch it land">
+
+The key flow, rebuilt in code. Pick an amount, donate, and watch the total, the bar and the activity feed respond. Then switch to "Where the money went", or simulate other donors to see real-time updates arriving.
+
+<Prototype
+  name="fundpath-donate"
+  title="FundPath, donate to a campaign"
+  caption="Why it moves like this: the total counts up while the bar springs forward, so the donor sees their money arrive instead of a number silently changing. New gifts enter the feed at the top and push older ones down, which reads as live. The confirm sheet rises from the button area on the iOS drawer curve, so it feels connected to the tap that opened it."
+/>
+
+<CompareSlider
+  tint="#7c4ddb"
+  kind="mobile"
+  before="Early wireframe: progress hidden on the detail screen"
+  after="Final: progress and donors visible on every card"
+/>
+
+</Section>
+
+<Section id="testing" title="Usability testing">
+
+{/* TODO: Samuel to confirm the rounds, participants and findings. Replace with real notes. */}
+
+<TestingRounds
+  rounds={[
+    {
+      name: "Round 1: wireframes",
+      method: "Moderated walkthroughs of a clickable wireframe, thinking aloud.",
+      who: "People who had given to an online appeal before.",
+      tasks: ["Find a medical campaign close to its goal.", "Donate ₦5,000.", "Find out how the money from a campaign has been used."],
+      issues: [
+        { issue: "People couldn't tell how close a campaign was to its goal from the list.", severity: "High", change: "Moved raised-versus-goal and the progress bar onto every card." },
+        { issue: "'Transparency report' was overlooked as a link at the bottom of the story.", severity: "High", change: "Promoted it to a tab beside live activity, renamed 'Where the money went'." },
+      ],
+    },
+    {
+      name: "Round 2: high fidelity",
+      method: "Task-based tests on the Figma prototype.",
+      who: "Donors and first-time fundraisers.",
+      tasks: ["Top up the wallet and donate.", "Start a campaign and add a document."],
+      issues: [
+        { issue: "Donors weren't sure the gift had gone through.", severity: "Medium", change: "Added the success state, the feed entry and the receipt in the same moment." },
+        { issue: "Fundraisers didn't know why documents were requested.", severity: "Low", change: "Added a one-line reason under each document step." },
+      ],
+    },
+  ]}
+/>
+
+</Section>
+
+<Section id="outcome" title="Outcome">
+
+{/* TODO: Samuel to add any real outcomes: launch status, feedback, numbers he can stand behind. */}
+
+FundPath came together as 30+ screens covering onboarding, discovery by cause, campaign pages with live activity and a spending ledger, the wallet, donation history with receipts, and starting a campaign with verification. Transparency stopped being a report and became part of the interface.
+
+</Section>
+
+<Section id="reflection" title="Reflection">
+
+I learned that **in money products, motion is evidence.** A number that counts up while a bar fills tells the donor something happened. The same update, applied instantly, reads like a page that refreshed. The interaction carries part of the trust.
+
+Next, I'd design the fundraiser's side of updates in more depth. The emotional moment of thanking donors is underserved, and it's what turns a one-time gift into a returning donor.
+
+</Section>
