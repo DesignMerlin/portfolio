@@ -8,6 +8,7 @@ import { mdxComponents } from "@/components/case-study/mdx-components";
 import { ReadingChrome, SectionNav } from "@/components/case-study/reading-chrome";
 import { PageTransition } from "@/components/site/page-transition";
 import { ArrowLeft, ArrowRight } from "@/components/ui/icons";
+import { RollingNumber } from "@/components/ui/rolling-number";
 import { getAllWork, getWork } from "@/lib/content";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -112,7 +113,7 @@ export default async function CaseStudyPage({ params }: Props) {
           <section aria-label="Outcomes" className="mt-12 grid gap-6 sm:grid-cols-3">
             {meta.outcomes.map((o) => (
               <div key={o.label} className="rounded-[var(--radius-l)] bg-surface p-6">
-                <p className="font-display text-h2 font-semibold tabular">{o.value}</p>
+                <RollingNumber value={o.value} className="block font-display text-h2 font-semibold tabular" />
                 <p className="mt-2 text-small text-ink-2">{o.label}</p>
               </div>
             ))}

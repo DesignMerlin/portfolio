@@ -1,6 +1,7 @@
 "use client";
 
-import { AnimatePresence, LayoutGroup, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, LayoutGroup, motion } from "motion/react";
+import { useReducedMotion } from "@/components/ui/use-reduced-motion";
 import { useEffect, useRef, useState } from "react";
 import { useSlow } from "@/components/case-study/prototype-speed";
 import { ArrowUpRight, CheckIcon, StopIcon } from "@/components/ui/icons";

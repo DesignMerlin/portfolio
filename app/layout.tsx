@@ -53,9 +53,9 @@ export const viewport: Viewport = {
 /*
   Runs before first paint:
   1. Theme: the visitor's saved choice, else dark (the site's home look). No flash of the wrong theme.
-  2. Intro: plays once per session (add ?intro to the URL to replay it).
+  2. Intro: plays on every full page load (client-side navigation never remounts it).
 */
-const bootScript = `(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t='dark'}d.dataset.theme=t}catch(e){d.dataset.theme='dark'}try{var replay=new URLSearchParams(location.search).has('intro');d.dataset.intro=(!replay&&sessionStorage.getItem('intro-seen'))?'skip':'play'}catch(e){d.dataset.intro='play'}})()`;
+const bootScript = `(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t='dark'}d.dataset.theme=t}catch(e){d.dataset.theme='dark'}d.dataset.intro='play'})()`;
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const [profile, work] = await Promise.all([getProfile(), getAllWork()]);

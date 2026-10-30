@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { AnimatePresence, LayoutGroup, motion, useReducedMotion, type PanInfo } from "motion/react";
+import { AnimatePresence, LayoutGroup, motion, type PanInfo } from "motion/react";
+import { useReducedMotion } from "@/components/ui/use-reduced-motion";
 import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import { ArrowLeft, ArrowRight, ArrowUpRight, CloseIcon } from "@/components/ui/icons";

@@ -1,6 +1,7 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
+import { useReducedMotion } from "@/components/ui/use-reduced-motion";
 import { useId, useState } from "react";
 import { useRovingTabs } from "@/components/case-study/use-roving-tabs";
 import { tween } from "@/lib/motion";

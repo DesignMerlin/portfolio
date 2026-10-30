@@ -4,19 +4,19 @@ import { PageTransition } from "@/components/site/page-transition";
 import { shotFilters, shots } from "@/content/shots";
 
 export const metadata: Metadata = {
-  title: "UI shots",
+  title: "Playground",
   description: "Interface work by Samuel Ekwenze across mobile, web, dashboards and brand.",
 };
 
-export default function ShotsPage() {
+export default function PlaygroundPage() {
   return (
     <PageTransition>
       <div className="mx-auto max-w-[1320px] px-4 pt-14 sm:px-8 lg:pt-20">
         <div className="grid gap-6 lg:grid-cols-12">
-          <h1 className="text-h1 font-semibold lg:col-span-6">UI shots</h1>
+          <h1 className="text-h1 font-semibold lg:col-span-6">Playground</h1>
           <p className="max-w-[46ch] self-end text-ink-2 lg:col-span-5 lg:col-start-8">
-            Screens from shipped products and explorations. Open any shot for the thinking behind it. Shots marked as
-            placeholders are on their way from Figma.
+            Screens from shipped products, work without a full case study yet, and explorations. Open any shot for the
+            thinking behind it. Shots marked as placeholders are on their way from Figma.
           </p>
         </div>
         <div className="mt-12">

@@ -60,7 +60,7 @@
     -webkit-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
-    scroll-padding-top: 5rem;
+    scroll-padding-top: calc(var(--header-h) + 1.5rem);
   }
 
   body {
@@ -112,13 +112,29 @@
     font-size: 16px; /* stops iOS zooming into the field */
   }
 
-  /* Geist carries body text; Bricolage carries headings and display numbers */
+  /* Type tracking (Samuel: "tighter between letters").
+     Geist body text: -4%, set per element so each size computes its own value (an inherited em
+     arrives as the parent's px). Bricolage headings and display: a flat -2px, as Samuel asked;
+     it reads well at heading sizes but crushes small text, so it isn't used for Geist.
+     :where() keeps both at zero specificity, so tracking utilities still win. Mono stays at 0. */
+  :where(body, body *) {
+    letter-spacing: -0.04em;
+  }
+  :where(h1, h2, h3, h1 *, h2 *, h3 *, .font-display, .font-display *) {
+    letter-spacing: -2px;
+  }
+  /* Headings deliberately set in Geist (e.g. the small "What I do" label) keep the body tracking */
+  :where(.font-sans, .font-sans *) {
+    letter-spacing: -0.04em;
+  }
   h1,
   h2,
   h3 {
     font-family: var(--font-display);
     text-wrap: balance;
-    letter-spacing: -0.02em;
+  }
+  :where(code, kbd, .font-mono, .font-mono *) {
+    letter-spacing: 0;
   }
 
   p {
@@ -176,6 +192,87 @@
 
   .tabular {
     font-variant-numeric: tabular-nums;
+  }
+
+  /* The nav pill: the previous nav's paper tone as frosted glass, theme-aware */
+  .glass-nav {
+    background: color-mix(in oklab, var(--paper) 78%, transparent);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    backdrop-filter: blur(18px) saturate(180%);
+    box-shadow:
+      inset 0 0 0 1px var(--line),
+      0 10px 30px -16px rgb(0 0 0 / 0.35);
+  }
+
+  /* Hero dot grid: fades in under the header and out at the bottom, so it appears out of the page */
+  .dot-grid {
+    mask-image: linear-gradient(transparent, #000 40px, #000 70%, transparent);
+  }
+  .dot-grid-blur {
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    mask-image: linear-gradient(#000 20%, transparent);
+  }
+
+  /* Rolling numbers: digits fade in and out at the column edges instead of being cut */
+  .rolling-digit {
+    mask-image: linear-gradient(transparent, #000 0.2em, #000 calc(100% - 0.2em), transparent);
+  }
+
+  /* Footer: the name as a hairline outline. A 2px stroke is painted first and the fill (in the
+     page colour) on top, so the fill hides the inside half of the stroke and every internal
+     overlapping contour of the font, leaving a clean 1px outer edge that follows the theme. */
+  .footer-name {
+    color: var(--paper);
+    -webkit-text-stroke: 2px color-mix(in oklab, var(--ink) 30%, var(--paper));
+    paint-order: stroke fill;
+  }
+
+  /* The fill that sweeps in over the outline on hover: slow, deliberate in; quicker out */
+  .footer-name-fill {
+    color: var(--accent);
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path var(--dur-deliberate) var(--ease-exit);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .group\/name:hover .footer-name-fill {
+      clip-path: inset(0 0 0 0);
+      transition: clip-path var(--dur-scene) var(--ease-emphasized);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .footer-name-fill {
+      clip-path: none;
+      opacity: 0;
+      transition: opacity var(--dur-base) ease;
+    }
+    .group\/name:hover .footer-name-fill {
+      clip-path: none;
+      opacity: 1;
+    }
+  }
+
+  /* Footer marquee: two identical halves; moving by exactly one half loops seamlessly.
+     CSS animation so it runs off the main thread. Hover pauses it, reduced motion stops it. */
+  .marquee-track {
+    animation: marquee 38s linear infinite;
+  }
+  .group\/marquee:hover .marquee-track,
+  .group\/marquee:focus-visible .marquee-track {
+    animation-play-state: paused;
+  }
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+    }
   }
 
   /* One side of a flipping card. Safari still needs the prefixed property. */
@@ -303,11 +400,31 @@
 }
 
 /* ------------------------------------------------------------------
-   Intro (0 → 100%). Server-rendered so it covers the page before JS.
+   Intro (falling letters). Server-rendered so it covers the page before JS.
    An inline script marks html[data-intro="skip"] for returning visitors.
 ------------------------------------------------------------------- */
 html[data-intro="skip"] .intro {
   display: none;
+}
+.intro-ghost {
+  color: color-mix(in oklab, var(--ink) 7%, transparent);
+}
+/* Very tight, still readable: letters nearly touch but never overlap */
+.intro-glyph + .intro-glyph {
+  margin-left: -0.055em;
+}
+/* Letters wait above the screen until the script drops them, so nothing flashes in place first */
+.intro-letter {
+  transform: translateY(-110vh);
+}
+.intro-status {
+  color: color-mix(in oklab, var(--accent) 80%, var(--ink));
+}
+@media (prefers-reduced-motion: reduce) {
+  .intro-letter {
+    transform: none;
+    opacity: 0;
+  }
 }
 
 /* Hero entrance, released when the curtain lifts (data-intro: play → done) */
@@ -430,14 +547,20 @@ html[data-intro="play"] .hero-photo {
 }
 
 /* Header is the spatial anchor: it never moves during a page change */
-::view-transition-group(site-header) {
+::view-transition-group(site-header),
+::view-transition-group(site-header-glass) {
   animation: none;
   z-index: 100;
 }
-::view-transition-old(site-header) {
+::view-transition-group(site-header) {
+  z-index: 101;
+}
+::view-transition-old(site-header),
+::view-transition-old(site-header-glass) {
   display: none;
 }
-::view-transition-new(site-header) {
+::view-transition-new(site-header),
+::view-transition-new(site-header-glass) {
   animation: none;
 }
 
@@ -471,5 +594,575 @@ html.theme-swap * {
   }
   .collapse-grid {
     transition: none;
+  }
+}
+
+/* Tag pile: the layer never catches the pointer; tags do while the pile is active */
+.tag-pile[data-active="true"] .pile-tag {
+  pointer-events: auto;
+}
+.pile-tag {
+  will-change: transform;
+  -webkit-tap-highlight-color: transparent;
+}
+.pile-tag[data-dragging="true"] {
+  z-index: 10;
+  cursor: grabbing;
+}
+
+/* Desktop hero name: as large as the viewport allows (6.2vw), but never so large that it runs
+   into the centred portrait. Space per side = 44% of the 1500px-capped container, minus half
+   the portrait (min(19vw, 300px) / 2), minus a 3rem gap; "EKWENZE" is about 4.8em wide. */
+.hero-name-size {
+  font-size: min(6.2vw, calc((0.44 * min(100vw, 1500px) - min(9.5vw, 150px) - 3rem) / 4.8));
+}
+
+/* ------------------------------------------------------------------
+   Rope carousel ("What I do")
+   ------------------------------------------------------------------ */
+/* Tall enough for the rope's dip, the tallest card and its shadow */
+.rope-stage {
+  height: calc(var(--rc-top) + var(--rc-sag) * 100vw + var(--rc-cw) / var(--rc-ratio) + 96px);
+  cursor: grab;
+}
+.rope-stage[data-dragging] {
+  cursor: grabbing;
+}
+
+/* A page torn from a spiral notebook. Sized in container units so the
+   writing stays on the ruled lines at any width. Light paper in the light
+   theme, dark paper in the dark theme, from the same variables. */
+.notebook-page {
+  --lh: 10.6cqw;
+  --margin: 12cqw;
+  --nb-paper: #fbfaf6;
+  --nb-ink: #1f2126;
+  --nb-ink-2: #3f434c;
+  --nb-rule: rgb(84 132 206 / 0.26);
+  --nb-margin: rgb(222 82 82 / 0.5);
+  --nb-hl: 80%;
+  --nb-edge: transparent;
+  --nb-tick: #1f9d57;
+  aspect-ratio: var(--rc-ratio);
+  overflow: hidden;
+  padding: var(--lh) 6cqw 0 calc(var(--margin) + 4cqw);
+  color: var(--nb-ink);
+  background-color: var(--nb-paper);
+  background-image:
+    linear-gradient(90deg, transparent calc(var(--margin) - 1px), var(--nb-margin) calc(var(--margin) - 1px), var(--nb-margin) var(--margin), transparent var(--margin)),
+    repeating-linear-gradient(180deg, transparent 0, transparent calc(var(--lh) - 1px), var(--nb-rule) calc(var(--lh) - 1px), var(--nb-rule) var(--lh));
+  background-position: 0 0, 0 var(--lh);
+  background-size: 100% 100%, 100% calc(100% - var(--lh));
+  background-repeat: no-repeat;
+  box-shadow: inset 0 0 0 1px var(--nb-edge);
+  /* Perforated top edge, where it tore off the spiral */
+  mask:
+    radial-gradient(circle at 50% 0, transparent 1.6cqw, #000 calc(1.6cqw + 0.5px)) top / 6cqw 4cqw repeat-x,
+    linear-gradient(#000, #000) bottom / 100% calc(100% - 4cqw) no-repeat;
+}
+:root[data-theme="dark"] .notebook-page {
+  --nb-paper: #1b1d23;
+  --nb-ink: #f1f2f4;
+  --nb-ink-2: #c3c7cf;
+  --nb-rule: rgb(150 178 235 / 0.16);
+  --nb-margin: rgb(255 120 120 / 0.42);
+  --nb-hl: 42%;
+  --nb-edge: rgb(255 255 255 / 0.08);
+  --nb-tick: #3ccf7e;
+}
+.notebook-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 10cqw;
+  line-height: var(--lh);
+  letter-spacing: -0.02em;
+}
+.notebook-title span {
+  /* Highlighter stroke across the lower half of the words; fainter on dark paper so the words stay readable */
+  --hl-c: color-mix(in oklab, var(--hl) var(--nb-hl), transparent);
+  background: linear-gradient(transparent 50%, var(--hl-c) 50%, var(--hl-c) 92%, transparent 92%);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  padding-inline: 0.12em;
+  margin-inline: -0.12em;
+}
+.notebook-line {
+  font-size: 6.6cqw;
+  line-height: var(--lh);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  margin-bottom: var(--lh);
+}
+.notebook-list {
+  font-size: 6cqw;
+  line-height: var(--lh);
+  letter-spacing: -0.01em;
+  color: var(--nb-ink-2);
+}
+.notebook-list li {
+  position: relative;
+  padding-left: 9cqw;
+}
+/* Ticked box: green square, white check */
+.notebook-list li::before,
+.notebook-list li::after {
+  content: "";
+  position: absolute;
+}
+.notebook-list li::before {
+  left: 0;
+  top: calc(var(--lh) / 2 - 2.6cqw);
+  width: 5.2cqw;
+  height: 5.2cqw;
+  border-radius: 1.2cqw;
+  background: var(--nb-tick);
+  transform: rotate(-4deg);
+}
+.notebook-list li::after {
+  left: 1.75cqw;
+  top: calc(var(--lh) / 2 - 1.75cqw);
+  width: 1.6cqw;
+  height: 2.9cqw;
+  border: solid #fff;
+  border-width: 0 0.6cqw 0.6cqw 0;
+  transform: rotate(40deg);
+}
+
+/* ------------------------------------------------------------------
+   Sticker cards (Selected work)
+   ------------------------------------------------------------------ */
+.sticker {
+  /* The sticker's paper back, as seen on the peeled flap: same in both themes */
+  --peel-fold: #c3cbe0;
+  --peel-mid: #eef1f9;
+  --peel-hi: #ffffff;
+  --peel-tip: #dfe5f3;
+  cursor: grab;
+}
+.sticker[data-dragging] {
+  cursor: grabbing;
+}
+.sticker-bed {
+  background: var(--sunken);
+  box-shadow: var(--shadow-float);
+  transition: scale var(--dur-quick) var(--ease-enter);
+}
+/* Squish on press, spring back on release */
+.sticker[data-pressed] .sticker-bed {
+  scale: 0.985;
+}
+.sticker-front {
+  cursor: inherit;
+}
+/* A faint gloss across the sticker's face */
+.sticker-sheen {
+  background: linear-gradient(125deg, rgb(255 255 255 / 0.16), transparent 38%, transparent 70%, rgb(255 255 255 / 0.06));
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.12);
+  border-radius: inherit;
+}
+/* Frosted glass over the revealed cover, darkest at the bottom where the text sits */
+.sticker-frost {
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  backdrop-filter: blur(22px) saturate(140%);
+  background: linear-gradient(180deg, rgb(10 11 14 / 0.25), rgb(10 11 14 / 0.62) 55%, rgb(10 11 14 / 0.8));
+}
+/* The flap's shadow falls on the card under it */
+.sticker-flap-shadow {
+  filter: drop-shadow(-6px 10px 12px rgb(0 0 0 / 0.28));
+}
+.sticker-flap {
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.6);
+}
+
+/* Arc dial testimonials. Geometry (--R, --S, --arrow-*) is measured and set by arc-dial.tsx. */
+@property --t-accent {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #4b37d6;
+}
+@property --t-glow {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #4b37d6;
+}
+.arc-dial {
+  isolation: isolate;
+  --glow-core: 34%;
+  transition:
+    --t-accent var(--dur-deliberate) var(--ease-standard),
+    --t-glow var(--dur-deliberate) var(--ease-standard);
+}
+:root[data-theme="dark"] .arc-dial {
+  --glow-core: 30%;
+}
+/* A soft pool of the story's colour behind the ring and quote only. Its ellipse fits the box and
+   reaches fully transparent before any edge, on an eased falloff, so it reads as a blurred light
+   rather than a container. */
+.arc-glow {
+  left: 50%;
+  top: -170px;
+  width: min(780px, 100%);
+  height: 720px;
+  translate: -50% 0;
+  background: radial-gradient(
+    closest-side,
+    color-mix(in oklab, var(--t-glow) var(--glow-core), transparent) 0%,
+    color-mix(in oklab, var(--t-glow) calc(var(--glow-core) * 0.82), transparent) 22%,
+    color-mix(in oklab, var(--t-glow) calc(var(--glow-core) * 0.5), transparent) 48%,
+    color-mix(in oklab, var(--t-glow) calc(var(--glow-core) * 0.2), transparent) 68%,
+    color-mix(in oklab, var(--t-glow) calc(var(--glow-core) * 0.05), transparent) 82%,
+    transparent 92%
+  );
+}
+@media (width < 640px) {
+  .arc-glow {
+    top: -90px;
+    height: 500px;
+  }
+}
+.arc-quote-mark {
+  color: color-mix(in oklab, var(--t-accent) 22%, transparent);
+}
+.arc-stage {
+  --R: 460px;
+  --S: 116px;
+  --y0: calc(var(--S) / 2 + 14px);
+  min-height: calc(var(--y0) + var(--R) + var(--S) * 0.4);
+  padding-bottom: 8px;
+  cursor: grab;
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease-enter);
+}
+.arc-stage[data-ready] {
+  opacity: 1;
+}
+.arc-stage[data-dragging] {
+  cursor: grabbing;
+}
+.arc-guide {
+  left: 50%;
+  top: var(--y0);
+  width: calc(var(--R) * 2);
+  height: calc(var(--R) * 2);
+  margin-left: calc(var(--R) * -1);
+  border-radius: 50%;
+  border: 1.5px dotted var(--line-strong);
+  mask-image: linear-gradient(#000 0, #000 30%, transparent 52%);
+}
+/* The active stretch of the dial: runs well past the arrows and fades out along the arc */
+.arc-guide-accent {
+  /* Capped so it never wraps down the sides on small dials, where the arrows sit off the arc */
+  --span: min(calc(var(--arrow-a, 20deg) * 3.2), 40deg);
+  border: 2.5px solid var(--t-accent);
+  mask-image: conic-gradient(
+    from calc(var(--span) * -1),
+    transparent 0deg,
+    #000 calc(var(--span) * 0.6),
+    #000 calc(var(--span) * 1.4),
+    transparent calc(var(--span) * 2)
+  );
+}
+.arc-portrait {
+  left: 50%;
+  top: var(--y0);
+  width: var(--S);
+  height: var(--S);
+  margin: calc(var(--S) / -2) 0 0 calc(var(--S) / -2);
+  background: var(--sunken);
+  box-shadow:
+    0 0 0 3px var(--paper),
+    0 10px 24px -12px rgb(0 0 0 / 0.45);
+  cursor: inherit;
+}
+.arc-portrait:focus-visible {
+  outline: 2px solid var(--t-accent);
+  outline-offset: 5px;
+}
+.arc-monogram {
+  background: radial-gradient(circle at 30% 25%, color-mix(in oklab, var(--p-accent) 34%, var(--surface)), color-mix(in oklab, var(--p-accent) 14%, var(--surface)));
+  color: color-mix(in oklab, var(--p-accent) 68%, var(--ink));
+  font-size: calc(var(--S) * 0.4);
+}
+.arc-ring {
+  z-index: 200;
+  left: 50%;
+  top: calc(var(--y0) - var(--S) / 2 - 9px);
+  width: calc(var(--S) + 18px);
+  height: calc(var(--S) + 18px);
+  margin-left: calc(var(--S) / -2 - 9px);
+  rotate: -90deg;
+  fill: none;
+}
+.arc-ring-track {
+  stroke: var(--line);
+  stroke-width: 1.4;
+}
+.arc-ring-fill {
+  stroke: var(--t-accent);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+.arc-arrow-prev,
+.arc-arrow-next {
+  z-index: 210;
+  top: calc(var(--y0) + var(--arrow-y, 12px));
+  translate: -50% -50%;
+}
+.arc-arrow-prev {
+  left: calc(50% - var(--arrow-x, 98px));
+}
+.arc-arrow-next {
+  left: calc(50% + var(--arrow-x, 98px));
+}
+.arc-content {
+  z-index: 150;
+  padding-top: var(--content-top, calc(var(--S) + 34px));
+}
+.arc-badge {
+  background: color-mix(in oklab, var(--t-accent) 16%, var(--surface));
+  color: color-mix(in oklab, var(--t-accent) 60%, var(--ink));
+}
+.arc-quote p {
+  color: var(--t-text);
+}
+.arc-more {
+  color: color-mix(in oklab, var(--t-accent) 68%, var(--ink));
+}
+.arc-more:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ------------------------------------------------------------------
+   Say hello (footer contact): liquid glass pills and circles
+------------------------------------------------------------------- */
+:root {
+  --glass-tint: rgb(255 255 255 / 0.36);
+  --glass-rim-hi: rgb(255 255 255 / 0.95);
+  --glass-rim-lo: rgb(255 255 255 / 0.25);
+  --glass-edge: rgb(17 19 24 / 0.08);
+  --glass-drop: 0 1px 2px rgb(17 19 24 / 0.06), 0 14px 32px -16px rgb(17 19 24 / 0.32);
+  --glass-glint: rgb(255 255 255 / 0.85);
+}
+:root[data-theme="dark"] {
+  --glass-tint: rgb(255 255 255 / 0.06);
+  --glass-rim-hi: rgb(255 255 255 / 0.42);
+  --glass-rim-lo: rgb(255 255 255 / 0.05);
+  --glass-edge: rgb(0 0 0 / 0.35);
+  --glass-drop: 0 1px 2px rgb(0 0 0 / 0.3), 0 18px 40px -18px rgb(0 0 0 / 0.75);
+  --glass-glint: rgb(255 255 255 / 0.28);
+}
+.say-hello-dots {
+  background-image: radial-gradient(color-mix(in oklab, var(--ink) 22%, transparent) 1.1px, transparent 1.6px);
+  background-size: 22px 22px;
+  background-position: center;
+  mask-image: radial-gradient(ellipse 60% 70% at 50% 60%, #000 20%, transparent 75%);
+}
+.glass {
+  --gx: 50%;
+  --gy: 0%;
+  position: relative;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  color: var(--ink);
+  background: var(--glass-tint);
+  -webkit-backdrop-filter: blur(14px) saturate(180%);
+  backdrop-filter: blur(14px) saturate(180%);
+  box-shadow:
+    inset 0 1px 0 var(--glass-rim-hi),
+    inset 0 -1px 0 var(--glass-rim-lo),
+    inset 0 -14px 24px -18px var(--glass-rim-hi),
+    0 0 0 1px var(--glass-edge),
+    var(--glass-drop);
+  transition: transform var(--dur-deliberate) cubic-bezier(0.34, 1.45, 0.64, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+/* The rim: a bright edge that thins out around the sides, like light caught in a thick lens */
+.glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(160deg, var(--glass-rim-hi), var(--glass-rim-lo) 38%, var(--glass-rim-lo) 62%, var(--glass-rim-hi));
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+/* The glint: follows the pointer across the surface */
+.glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at var(--gx) var(--gy), var(--glass-glint), transparent 55%);
+  opacity: 0.35;
+  transition: opacity var(--dur-base) var(--ease-enter);
+  pointer-events: none;
+}
+.glass:not([data-inert]):hover {
+  transform: translateY(-3px) scale(1.04);
+}
+.glass:not([data-inert]):hover::after,
+.glass:focus-visible::after {
+  opacity: 0.8;
+}
+.glass:not([data-inert]):active {
+  transform: translateY(0) scale(0.97);
+  transition-duration: var(--dur-instant);
+}
+.glass:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+.glass-circle {
+  width: 64px;
+  height: 64px;
+}
+.glass-pill {
+  width: min(100%, 420px);
+  height: 64px;
+  margin-inline: auto;
+  font-size: 1.0625rem;
+}
+@media (min-width: 640px) {
+  .glass-circle {
+    width: 80px;
+    height: 80px;
+  }
+  .glass-pill {
+    width: 360px;
+    height: 80px;
+  }
+}
+.glass-circle[data-inert] {
+  cursor: default;
+  color: var(--ink-3);
+}
+.glass-icon {
+  position: relative;
+  z-index: 1;
+  transition: transform var(--dur-base) var(--ease-enter);
+}
+.glass:not([data-inert]):hover .glass-icon {
+  transform: translateY(-2px) scale(1.08);
+}
+/* The name, rising from below the circle */
+.glass-tip {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  translate: -50% 8px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+  font-size: var(--text-micro);
+  color: var(--ink-2);
+  background: var(--glass-tint);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
+  backdrop-filter: blur(10px) saturate(180%);
+  box-shadow:
+    inset 0 1px 0 var(--glass-rim-hi),
+    0 0 0 1px var(--glass-edge);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    translate var(--dur-base) var(--ease-enter),
+    opacity var(--dur-quick) var(--ease-enter);
+}
+.glass:hover .glass-tip,
+.glass:focus-visible .glass-tip {
+  translate: -50% 0;
+  opacity: 1;
+}
+/* Email pill: "Email me" lifts away and the address rises from below */
+.glass-swap {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  overflow: hidden;
+  height: 1.6em;
+  line-height: 1.6em;
+}
+.glass-swap > span {
+  grid-area: 1 / 1;
+  white-space: nowrap;
+  transition:
+    transform var(--dur-base) var(--ease-enter),
+    opacity var(--dur-base) var(--ease-enter);
+}
+.glass-swap-b {
+  transform: translateY(100%);
+  opacity: 0;
+  font-weight: 500;
+}
+.glass:hover .glass-swap-a,
+.glass:focus-visible .glass-swap-a {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+.glass:hover .glass-swap-b,
+.glass:focus-visible .glass-swap-b {
+  transform: translateY(0);
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .glass,
+  .glass-icon,
+  .glass-swap > span,
+  .glass-tip {
+    transition-property: opacity;
+  }
+  .glass-swap-a,
+  .glass-swap-b,
+  .glass:hover .glass-swap-a,
+  .glass:hover .glass-swap-b {
+    transform: none;
+  }
+  .glass-tip {
+    translate: -50% 0;
+  }
+}
+
+/* Site nav: hidden over the home hero, drops in once you scroll (header.tsx sets data-shown) */
+.site-header-pill {
+  translate: 0 calc(-100% - 24px);
+  opacity: 0;
+  transition:
+    translate var(--dur-deliberate) var(--ease-enter),
+    opacity var(--dur-base) var(--ease-enter);
+}
+.site-header[data-shown] .site-header-pill,
+.site-header-pill:focus-within {
+  translate: 0 0;
+  opacity: 1;
+}
+.site-header:not([data-shown]) .site-header-pill:not(:focus-within) {
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-header-pill {
+    translate: none;
+    transition: opacity var(--dur-base) ease;
+  }
+}
+/* Nav avatar: a quick wobble, tilting left then right, when the wordmark is hovered */
+@keyframes nav-avatar-wobble {
+  0% { rotate: 0deg; }
+  25% { rotate: -12deg; }
+  55% { rotate: 9deg; }
+  80% { rotate: -4deg; }
+  100% { rotate: 0deg; }
+}
+.group:hover .nav-avatar,
+.group:focus-visible .nav-avatar {
+  animation: nav-avatar-wobble 600ms var(--ease-standard);
+}
+@media (prefers-reduced-motion: reduce) {
+  .group:hover .nav-avatar,
+  .group:focus-visible .nav-avatar {
+    animation: none;
   }
 }

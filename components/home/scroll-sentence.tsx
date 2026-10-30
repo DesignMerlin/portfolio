@@ -4,11 +4,11 @@ import {
   motion,
   motionValue,
   useMotionTemplate,
-  useReducedMotion,
   useScroll,
   useTransform,
   type MotionValue,
 } from "motion/react";
+import { useReducedMotion } from "@/components/ui/use-reduced-motion";
 import { useRef } from "react";
 
 type Unit = { text: string; note?: string };
@@ -21,7 +21,7 @@ const units: Unit[] = [
   { text: "and" },
   { text: "code", note: "Components" },
   { text: "to make" },
-  { text: "AI products", note: "Trust" },
+  { text: "digital products", note: "Trust" },
   { text: "that just…" },
   { text: "make sense." },
 ];
@@ -42,7 +42,7 @@ export function ScrollSentence() {
 
   return (
     <div ref={ref}>
-      <p className="max-w-[17ch] font-display text-h1 font-semibold leading-[1.18]">
+      <p className="mx-auto max-w-[17ch] text-balance font-display text-h1 font-semibold leading-[1.55] sm:leading-[1.45] lg:leading-[1.36]">
         {units.map((u, i) => (
           <Word
             key={u.text}

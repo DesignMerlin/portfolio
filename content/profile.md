@@ -6,9 +6,10 @@ location: Lagos, Nigeria
 timezone: WAT (UTC+1)
 availability: Open to full-time Product Designer and Design Engineer roles — remote, or relocation (incl. EU)
 email: psalmuhel.ekwenze@gmail.com
-linkedin: TODO
-x_twitter: TODO
-behance: TODO
+linkedin: https://www.linkedin.com/in/psalmuhel
+x_twitter: https://x.com/D_DesignMerlin
+instagram: https://www.instagram.com/psalmuhel_designmerlin/
+behance: https://www.behance.net/psalmuhel
 cv_url: TODO
 last_updated: 2026-10
 ---
@@ -50,7 +51,7 @@ Working from Lagos, Nigeria · <local time, live>
 
 ## Scroll-driven hero sentence (Arjun-style; annotations appear around the words)
 
-I blend **product thinking** [annotation: Research] with **interaction design** [annotation: Motion] and **code** [annotation: Components] to make **AI products** [annotation: Trust] that just… **make sense.**
+I blend **product thinking** [annotation: Research] with **interaction design** [annotation: Motion] and **code** [annotation: Components] to make **digital products** [annotation: Trust] that just… **make sense.**
 
 Bridge line into work: "Okay, so what does that look like in practice?"
 
@@ -253,6 +254,32 @@ Display format: Arjun-style chat thread.
   source: LAGProperties project lead
   photo: "[photo]"
   placeholder: true
+
+- quote: "[Placeholder — 2–3 sentences from Boulevard Legacy on Simplexity, the LinkedIn data extraction web app.]"
+  name: "[Name]"
+  role: "[Client role]"
+  company: Boulevard Legacy
+  source: Simplexity client
+  photo: "[photo]"
+  placeholder: true
+
+- quote: "[Placeholder — 2–3 sentences from a day-to-day collaborator (PowerRoute, QuitBet or FundPath) on feedback, scope changes and a hard problem.]"
+  name: "[Name]"
+  role: "[Developer / PM]"
+  company: "[To confirm]"
+  source: Day-to-day collaborator
+  photo: "[photo]"
+  placeholder: true
+
+- quote: "[Placeholder — 2–3 sentences from someone in the design community Samuel mentored or reviewed work for.]"
+  name: "[Name]"
+  role: "[Designer]"
+  company: "[To confirm]"
+  source: Design community
+  photo: "[photo]"
+  placeholder: true
+
+The home page arc dial reads from content/testimonials.ts (8 slots, same people). Update both when a quote arrives.
 
 Message to send them (copy and edit):
 "Hi <name>, I'm launching my new portfolio and would love 2–3 honest sentences about what it was like working with me on <project>. Anything specific (how I handled a hard problem, collaboration, the result) is perfect. Okay to use your name, role and photo?"

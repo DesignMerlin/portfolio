@@ -9,9 +9,15 @@ export const heroIntro = [
   "I care about clear typography, small interactions done well, ambitious teams, and software people genuinely enjoy using. Along the way I've designed for an AI immigration platform, fintech and edtech startups, real estate, a legal tech product I'm founding, and my own side projects. This site is a bit of all of it.",
 ];
 
-/** Hero portrait (photo by iJohn). Set src to null to show the placeholder card instead. */
-export const heroPhoto: { src: string | null; alt: string } = {
-  src: "/me/hero.jpg",
+/**
+ * Hero portrait (photo by iJohn). `stylized` is the Ghibli-style render shown by default; hovering
+ * reveals `src`, the real photo. The two are aligned for the tile-by-tile reveal: hero-photo.jpg is
+ * hero.jpg (signature retouched out) cropped and scaled so the face, shirt and hands sit where the
+ * render draws them. Both 1080×1350. Replacing either means re-aligning the other.
+ */
+export const heroPhoto: { src: string | null; stylized: string; alt: string } = {
+  src: "/me/hero-photo.jpg",
+  stylized: "/me/hero-art.jpg",
   alt: "Samuel Ekwenze smiling with arms crossed, wearing a blue plaid shirt",
 };
 

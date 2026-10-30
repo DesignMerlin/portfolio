@@ -17,6 +17,9 @@ export type Profile = {
   availability: string;
   email: string;
   linkedin: string | null;
+  x: string | null;
+  instagram: string | null;
+  behance: string | null;
   cv_url: string | null;
 };
 
@@ -38,6 +41,9 @@ export const getProfile = cache(async (): Promise<Profile> => {
     availability: data.availability ?? "",
     email: data.email ?? "",
     linkedin: real(data.linkedin),
+    x: real(data.x_twitter),
+    instagram: real(data.instagram),
+    behance: real(data.behance),
     cv_url: real(data.cv_url),
   };
 });
