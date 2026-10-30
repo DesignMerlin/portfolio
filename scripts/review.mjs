@@ -22,7 +22,7 @@ const run = async (engine, label, options) => {
   await page.screenshot({ path: `${out}/${label}-home.png` });
   await page.screenshot({ path: `${out}/${label}-home-full.png`, fullPage: true });
 
-  for (const p of ["/work/room8", "/work/fundpath", "/work/immigify", "/shots", "/about"]) {
+  for (const p of ["/work/room8", "/work/fundpath", "/work/immigify", "/playground", "/about"]) {
     await page.goto(base + p, { waitUntil: "networkidle" });
     await page.waitForTimeout(400);
     const name = p.replaceAll("/", "-").slice(1);

@@ -3,28 +3,75 @@
 import { useEffect, useRef, useState } from "react";
 import { INTRO_DONE } from "@/lib/site";
 
-const stages = [
-  { at: 0, label: "Loading type" },
-  { at: 34, label: "Setting the grid" },
-  { at: 68, label: "Tuning springs" },
-  { at: 100, label: "Ready" },
+/** One colour per letter, cycled. Saturated enough to read on both the light and dark paper */
+const COLORS = ["#e4572e", "#7c4ddb", "#3b6cf6", "#0ea5a4", "#22a35a", "#d63d8f"];
+/** Where each letter starts its fall: sideways drift (px), spin (deg), and when it lets go (ms). Fixed, so it plays the same every time */
+const DROPS = [
+  { dx: -70, spin: -38, delay: 0 },
+  { dx: 50, spin: 24, delay: 520 },
+  { dx: -30, spin: -16, delay: 260 },
+  { dx: 80, spin: 42, delay: 900 },
+  { dx: -50, spin: -26, delay: 690 },
+  { dx: 40, spin: 18, delay: 1120 },
+];
+/** The fall (gravity: speeds up all the way down), then three bounces, each lower, sized to the letter, not the drop */
+const FALL_MS = 1150;
+const BOUNCE_MS = 1100;
+/** After everything has landed, the word bounces once, as a wave through the letters */
+const HOP_MS = 620;
+const HOP_STAGGER = 90;
+/** The loader always runs this long before the letters leave (unless skipped) */
+const RUN_MS = 5000;
+/** Leaving: each letter shoots up and fades, left to right, quicker than it came in */
+const LEAVE_MS = 560;
+const LEAVE_STAGGER = 75;
+const GRAVITY = "cubic-bezier(0.55, 0, 1, 0.45)";
+const RISE = "cubic-bezier(0, 0.55, 0.45, 1)";
+
+function dropFrames(dx: number, spin: number): Keyframe[] {
+  const fall = FALL_MS / (FALL_MS + BOUNCE_MS);
+  const rest = 1 - fall;
+  // Each bounce is lower and shorter than the last, like a real ball losing energy
+  return [
+    { transform: `translate(${dx}px, -110vh) rotate(${spin}deg)`, easing: GRAVITY },
+    { transform: `translate(0, 0) rotate(${spin * 0.2}deg)`, offset: fall, easing: RISE },
+    { transform: `translate(0, -0.26em) rotate(${spin * -0.1}deg)`, offset: fall + rest * 0.25, easing: GRAVITY },
+    { transform: "translate(0, 0) rotate(0deg)", offset: fall + rest * 0.5, easing: RISE },
+    { transform: "translate(0, -0.1em) rotate(0deg)", offset: fall + rest * 0.66, easing: GRAVITY },
+    { transform: "translate(0, 0) rotate(0deg)", offset: fall + rest * 0.82, easing: RISE },
+    { transform: "translate(0, -0.03em) rotate(0deg)", offset: fall + rest * 0.91, easing: GRAVITY },
+    { transform: "translate(0, 0) rotate(0deg)" },
+  ];
+}
+
+const squash = (amount: number): Keyframe[] => [
+  { transform: "scale(1, 1)" },
+  { transform: `scale(${1 + 0.14 * amount}, ${1 - 0.2 * amount})`, offset: 0.3 },
+  { transform: `scale(${1 - 0.03 * amount}, ${1 + 0.05 * amount})`, offset: 0.65 },
+  { transform: "scale(1, 1)" },
 ];
 
 /**
- * The page's one orchestrated moment: a 0 → 100% count while the page and
- * fonts load, then the curtain lifts and the hero statement rises in.
+ * The page's one orchestrated moment. The first name is set huge as a faint
+ * ghost; its letters then drop in from above one by one, each in its own
+ * colour, spinning as they fall under gravity, and land with three bounces
+ * (each lower) and a squash. The word is sized to span the screen. Once the
+ * whole word is down it bounces once, as a wave left to right. At 5s (and
+ * once the page has loaded: fonts, window load) the letters leave one by
+ * one, shooting up and fading, faster than they came, while the paper
+ * dissolves and the hero rises in underneath. The hero's tag pile drops on
+ * that same signal (INTRO_DONE).
  *
- * The count tracks real signals (fonts ready, window load) and never sits
- * idle: it eases to 82% on its own, then finishes once loading is done.
- * Any key or tap skips it. Plays once per session (?intro replays it).
- * Values are written to the DOM directly, never through React state.
+ * Any key or tap skips it. Plays on every full page load.
+ * Reduced motion: no falling; the letters fade in over the ghost, then the
+ * overlay fades out.
  */
 export function Intro({ name }: { name: string }) {
   const [done, setDone] = useState(false);
   const root = useRef<HTMLDivElement>(null);
-  const count = useRef<HTMLSpanElement>(null);
-  const bar = useRef<HTMLDivElement>(null);
-  const stage = useRef<HTMLSpanElement>(null);
+  const status = useRef<HTMLParagraphElement>(null);
+  const wordRef = useRef<HTMLDivElement>(null);
+  const word = name.split(" ")[0] ?? name;
 
   useEffect(() => {
     const html = document.documentElement;
@@ -35,45 +82,73 @@ export function Intro({ name }: { name: string }) {
     const el = root.current!;
     html.style.overflow = "hidden";
 
-    let raf = 0;
-    let shown = 0;
-    let ready = false;
     let skipping = false;
     let exiting = false;
+    let ready = false;
+    let timer = 0;
     const start = performance.now();
-    // The automatic climb. Reduced motion keeps the count (it is information) but shortens it.
-    const climbMs = reduce ? 450 : 1150;
-    const minTotal = reduce ? 600 : 1500;
-    const maxWait = 3200;
+    const letters = [...el.querySelectorAll<HTMLElement>("[data-letter]")];
+
+    // Size the word to span the screen inside the padding (and stay short enough to sit in the
+    // middle). CSS starts close; this corrects for the real font once it has loaded.
+    const wordEl = wordRef.current!;
+    const ghost = wordEl.firstElementChild as HTMLElement;
+    const fit = () => {
+      const pad = parseFloat(getComputedStyle(el.querySelector("[data-intro-content]")!).paddingLeft) || 16;
+      const size = parseFloat(getComputedStyle(wordEl).fontSize);
+      const width = ghost.getBoundingClientRect().width;
+      if (!width) return;
+      const next = Math.min((size * (el.clientWidth - pad * 2)) / width, innerHeight * 0.62);
+      wordEl.style.fontSize = `${next}px`;
+    };
+    fit();
+    document.fonts?.ready.then(fit);
+    addEventListener("resize", fit);
+    const landedAt = reduce ? 500 : Math.max(...letters.map((_, i) => DROPS[i % DROPS.length]!.delay)) + FALL_MS + BOUNCE_MS;
+    const maxWait = 7000;
+    const leaveAt = reduce ? 1200 : Math.max(landedAt + 300, RUN_MS);
+
+    // Drop the letters
+    letters.forEach((letter, i) => {
+      const d = DROPS[i % DROPS.length]!;
+      if (reduce) {
+        letter.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 280, delay: i * 50, easing: "ease", fill: "both" });
+        return;
+      }
+      letter.animate(dropFrames(d.dx, d.spin), { duration: FALL_MS + BOUNCE_MS, delay: d.delay, fill: "both" });
+      // Squash on impact (the hardest), then smaller on the first bounce, from the baseline
+      const glyph = letter.firstElementChild as HTMLElement;
+      const rest = BOUNCE_MS;
+      glyph.animate(squash(1), { duration: 380, delay: d.delay + FALL_MS - 20, easing: "ease-out" });
+      glyph.animate(squash(0.5), { duration: 300, delay: d.delay + FALL_MS + rest * 0.5 - 20, easing: "ease-out" });
+      // Once the whole word is down: one bounce, passing through the letters left to right
+      glyph.animate(
+        [
+          { transform: "translateY(0)", easing: RISE },
+          { transform: "translateY(-0.1em)", offset: 0.4, easing: GRAVITY },
+          { transform: "translateY(0)", offset: 0.8 },
+          { transform: "translateY(0)" },
+        ],
+        { duration: HOP_MS + HOP_STAGGER * 2, delay: landedAt + 250 + i * HOP_STAGGER, composite: "add" },
+      );
+    });
 
     const loaded = new Promise<void>((resolve) => {
       if (document.readyState === "complete") resolve();
       else addEventListener("load", () => resolve(), { once: true });
     });
-    Promise.all([loaded, document.fonts?.ready]).then(() => (ready = true));
-
-    let lastStage = -1;
-    const paint = (v: number) => {
-      const n = Math.round(v);
-      if (count.current) count.current.textContent = String(n).padStart(3, "0");
-      if (bar.current) bar.current.style.transform = `scaleX(${v / 100})`;
-      let s = 0;
-      for (let i = 0; i < stages.length; i++) if (n >= stages[i]!.at) s = i;
-      if (s !== lastStage && stage.current) {
-        stage.current.textContent = stages[s]!.label;
-        lastStage = s;
-      }
-    };
+    Promise.all([loaded, document.fonts?.ready]).then(() => {
+      ready = true;
+      check();
+    });
 
     const exit = () => {
       if (exiting) return;
       exiting = true;
-      paint(100);
+      clearTimeout(timer);
+      if (status.current) status.current.textContent = "Ready";
       html.dataset.intro = "done";
       window.dispatchEvent(new Event(INTRO_DONE));
-      try {
-        sessionStorage.setItem("intro-seen", "1");
-      } catch {}
 
       const finish = () => {
         html.style.overflow = "";
@@ -81,50 +156,60 @@ export function Intro({ name }: { name: string }) {
       };
 
       if (reduce) {
-        el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 280, easing: "ease", fill: "forwards" })
-          .finished.then(finish, finish);
+        el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 280, easing: "ease", fill: "forwards" }).finished.then(finish, finish);
         return;
       }
-      // Curtain lifts upward; content inside drifts with it so it reads as one sheet.
-      el.animate([{ clipPath: "inset(0 0 0 0)" }, { clipPath: "inset(0 0 100% 0)" }], {
-        duration: skipping ? 450 : 700,
-        delay: skipping ? 0 : 140,
-        easing: "cubic-bezier(0.32, 0.72, 0, 1)",
+      // The letters leave one by one, left to right: each shoots up and fades, faster than it
+      // came in. Meanwhile the paper dissolves, so the hero (already rising in) shows through.
+      const stagger = skipping ? 30 : LEAVE_STAGGER;
+      const leave = skipping ? 380 : LEAVE_MS;
+      const flights = letters.map((letter, i) => {
+        const d = DROPS[i % DROPS.length]!;
+        return letter.animate(
+          [
+            { transform: "translate(0, 0) rotate(0deg)", opacity: 1 },
+            { transform: `translate(${d.dx * -0.3}px, -0.12em) rotate(${d.spin * -0.1}deg)`, opacity: 1, offset: 0.18 },
+            { transform: `translate(${d.dx * 0.4}px, -75vh) rotate(${d.spin * 0.4}deg)`, opacity: 0 },
+          ],
+          { duration: leave, delay: i * stagger, easing: "cubic-bezier(0.5, 0, 0.75, 0)", fill: "forwards" },
+        );
+      });
+      const fadeMs = leave + stagger * (letters.length - 1);
+      el.querySelector<HTMLElement>(".intro-ghost")?.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 260, fill: "forwards" });
+      status.current?.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 260, fill: "forwards" });
+      el.querySelector<HTMLElement>("[data-intro-chrome]")?.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 260, fill: "forwards" });
+      // The paper fades a little behind the letters, so the last ones still read against it
+      el.querySelector<HTMLElement>("[data-intro-paper]")?.animate([{ opacity: 1 }, { opacity: 0 }], {
+        duration: fadeMs * 0.85,
+        delay: 80,
+        easing: "cubic-bezier(0.4, 0, 0.2, 1)",
         fill: "forwards",
-      }).finished.then(finish, finish);
-      el.querySelector<HTMLElement>("[data-intro-content]")?.animate(
-        [{ transform: "translateY(0)", opacity: 1 }, { transform: "translateY(-48px)", opacity: 0 }],
-        { duration: 500, delay: skipping ? 0 : 140, easing: "cubic-bezier(0.23, 1, 0.32, 1)", fill: "forwards" },
-      );
+      });
+      Promise.all(flights.map((f) => f.finished)).then(finish, finish);
     };
 
-    const tick = (now: number) => {
-      const t = now - start;
-      // Strong ease-out climb towards 82%, then finish quickly once everything has loaded.
-      const climb = 1 - Math.pow(1 - Math.min(t / climbMs, 1), 3);
-      let target = climb * 82;
-      if ((ready && t > minTotal * 0.6) || t > maxWait || skipping) target = 100;
-      shown += (target - shown) * (target === 100 ? 0.18 : 0.35);
-      if (target === 100 && 100 - shown < 0.6) shown = 100;
-      paint(shown);
-      if (shown >= 100 && (t >= minTotal || skipping)) {
-        exit();
-        return;
-      }
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
+    // Leave once every letter has landed (plus a beat to read the word) and the page is loaded
+    function check() {
+      const t = performance.now() - start;
+      if (skipping || t >= maxWait || (ready && t >= leaveAt)) exit();
+      else timer = window.setTimeout(check, Math.max(60, leaveAt - t));
+    }
+    timer = window.setTimeout(check, leaveAt);
+    const hardStop = window.setTimeout(exit, maxWait);
 
     const skip = () => {
       skipping = true;
+      exit();
     };
     addEventListener("keydown", skip);
     addEventListener("pointerdown", skip);
 
     return () => {
-      cancelAnimationFrame(raf);
+      clearTimeout(timer);
+      clearTimeout(hardStop);
       removeEventListener("keydown", skip);
       removeEventListener("pointerdown", skip);
+      removeEventListener("resize", fit);
       html.style.overflow = "";
     };
   }, []);
@@ -135,39 +220,42 @@ export function Intro({ name }: { name: string }) {
     <div
       ref={root}
       aria-hidden="true"
-      className="intro fixed inset-0 z-[200] flex flex-col justify-between bg-[#0d0e12] p-4 text-[#eceef1] select-none sm:p-8"
-      style={{ clipPath: "inset(0 0 0 0)" }}
+      className="intro fixed inset-0 z-[200] overflow-hidden text-ink select-none"
     >
-      <div data-intro-content className="flex h-full flex-col justify-between">
-        <div className="flex items-start justify-between text-small">
-          <span>{name}</span>
-          <span className="text-right text-[#a0a5b0]">
-            Product designer
-            <br />
-            and design engineer
+      {/* The page colour on its own layer, so leaving can fade it (opacity) under the departing letters */}
+      <div data-intro-paper className="absolute inset-0 bg-paper" />
+      <div data-intro-content className="relative flex h-full flex-col items-center justify-center px-4 sm:px-8">
+        <span data-intro-chrome className="absolute top-4 right-4 rounded-full border border-line-strong px-3 py-1.5 text-micro text-ink-2 sm:top-8 sm:right-8">
+          Skip intro
+        </span>
+
+        <div
+          ref={wordRef}
+          className="grid font-display text-[calc((100vw-2rem)/3)] leading-[0.9] font-semibold whitespace-nowrap sm:text-[calc((100vw-4rem)/3)]"
+        >
+          {/* The ghost: where each letter is going. Both layers set each letter in its own box, so the
+              tight fit comes from a negative margin per letter (letter-spacing doesn't apply between boxes) */}
+          <span className="intro-ghost col-start-1 row-start-1">
+            {[...word].map((ch, i) => (
+              <span key={i} className="intro-glyph inline-block">
+                {ch}
+              </span>
+            ))}
+          </span>
+          <span className="col-start-1 row-start-1">
+            {[...word].map((ch, i) => (
+              <span key={i} data-letter className="intro-letter intro-glyph inline-block">
+                <span className="inline-block origin-bottom" style={{ color: COLORS[i % COLORS.length] }}>
+                  {ch}
+                </span>
+              </span>
+            ))}
           </span>
         </div>
 
-        <div>
-          <div className="flex items-end justify-between gap-6">
-            <p className="font-mono leading-[0.8] font-medium tracking-[-0.06em] tabular text-[clamp(5.5rem,24vw,20rem)]">
-              <span ref={count}>000</span>
-              <span className="text-[0.35em] tracking-normal text-[#a99cff]">%</span>
-            </p>
-            <p className="hidden pb-3 text-right text-small text-[#a0a5b0] sm:block">
-              Press any key
-              <br />
-              to skip
-            </p>
-          </div>
-          <div className="mt-6 flex items-center justify-between font-mono text-micro text-[#a0a5b0]">
-            <span ref={stage}>Loading type</span>
-            <span>Lagos, Nigeria</span>
-          </div>
-          <div className="mt-3 h-px w-full bg-white/15">
-            <div ref={bar} className="h-px origin-left bg-[#a99cff]" style={{ transform: "scaleX(0)" }} />
-          </div>
-        </div>
+        <p ref={status} className="intro-status mt-10 text-small font-medium sm:mt-14">
+          Getting things up
+        </p>
       </div>
     </div>
   );

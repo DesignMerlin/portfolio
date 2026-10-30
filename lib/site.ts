@@ -3,7 +3,7 @@ export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:300
 
 export const nav = [
   { href: "/#work", label: "Work", match: (p: string) => p.startsWith("/work") },
-  { href: "/shots", label: "Shots", match: (p: string) => p.startsWith("/shots") },
+  { href: "/playground", label: "Playground", match: (p: string) => p.startsWith("/playground") },
   { href: "/about", label: "About", match: (p: string) => p.startsWith("/about") },
   { href: "/#contact", label: "Contact", match: () => false },
 ] as const;

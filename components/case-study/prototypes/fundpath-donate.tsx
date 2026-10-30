@@ -1,6 +1,7 @@
 "use client";
 
-import { animate, AnimatePresence, motion, useMotionValue, useReducedMotion, useTransform } from "motion/react";
+import { animate, AnimatePresence, motion, useMotionValue, useTransform } from "motion/react";
+import { useReducedMotion } from "@/components/ui/use-reduced-motion";
 import { useEffect, useRef, useState } from "react";
 import { PhoneStage } from "@/components/case-study/prototypes/phone-stage";
 import { useSlow } from "@/components/case-study/prototype-speed";

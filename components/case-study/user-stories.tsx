@@ -1,6 +1,7 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
+import { useReducedMotion } from "@/components/ui/use-reduced-motion";
 import { useState } from "react";
 import { spring, tween } from "@/lib/motion";
 

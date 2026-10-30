@@ -26,21 +26,29 @@ await page.goto(base + "/", { waitUntil: "networkidle" });
 await page.keyboard.press("Escape"); // skip intro
 await page.waitForTimeout(900);
 
-await step("hover second work row swaps preview", async () => {
-  await page.locator("#work ol li a").nth(1).hover();
-  await page.waitForTimeout(500);
-  await page.locator("#work").scrollIntoViewIfNeeded();
-  await shot("01-hover-fundpath");
+await step("peel a sticker open", async () => {
+  await page.locator("#work .sticker").nth(1).scrollIntoViewIfNeeded();
+  const box = await page.locator("#work .sticker").nth(1).boundingBox();
+  await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
+  await page.waitForTimeout(900);
+  await shot("01-sticker-open");
 });
 
-await step("hover preview shows Figma hover state", async () => {
-  await page.locator("#work .group\\/preview").hover();
-  await page.waitForTimeout(400);
-  await shot("02-preview-hover");
+await step("drag a sticker corner halfway", async () => {
+  await page.locator("#work .sticker").nth(0).scrollIntoViewIfNeeded();
+  const box = await page.locator("#work .sticker").nth(0).boundingBox();
+  const sx = box.x + 30;
+  const sy = box.y + box.height - 30;
+  await page.mouse.move(sx, sy);
+  await page.mouse.down();
+  for (let i = 1; i <= 10; i++) await page.mouse.move(sx + i * 16, sy - i * 13);
+  await shot("02-sticker-drag");
+  await page.mouse.up();
+  await page.waitForTimeout(900);
 });
 
-await step("click row navigates to case study", async () => {
-  await page.locator("#work ol li a").nth(1).click();
+await step("read case study from the revealed sticker", async () => {
+  await page.locator("#work .sticker").nth(1).getByRole("link", { name: "Read case study" }).click();
   await page.waitForURL("**/work/fundpath");
   await page.waitForTimeout(800);
   await shot("03-fundpath-case");
@@ -101,8 +109,8 @@ await step("journey arrow keys + IA tree", async () => {
   await shot("10-journey-step");
 });
 
-await step("shots filter + lightbox", async () => {
-  await page.goto(base + "/shots", { waitUntil: "networkidle" });
+await step("playground filter + lightbox", async () => {
+  await page.goto(base + "/playground", { waitUntil: "networkidle" });
   await page.getByRole("button", { name: /^Mobile/ }).click();
   await page.waitForTimeout(700);
   await shot("11-shots-mobile-filter");

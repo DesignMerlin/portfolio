@@ -1,6 +1,7 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring } from "motion/react";
+import { AnimatePresence, motion, useScroll, useSpring } from "motion/react";
+import { useReducedMotion } from "@/components/ui/use-reduced-motion";
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, CloseIcon } from "@/components/ui/icons";
 import { spring, tween } from "@/lib/motion";
@@ -42,7 +43,7 @@ export function ReadingChrome({ sections }: { sections: WorkSection[] }) {
     <>
       <motion.div
         aria-hidden="true"
-        className="fixed inset-x-0 top-14 z-40 h-[2px] origin-left bg-accent"
+        className="fixed inset-x-0 top-[var(--header-h)] z-40 h-[2px] origin-left bg-accent"
         style={{ scaleX: reduce ? scrollYProgress : progress }}
       />
       <MobileContents sections={sections} active={active} />
