@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore, ViewTransition } from "react";
 import { PlaceholderShot, type PlaceholderKind } from "@/components/ui/placeholder-shot";
 import { RollingNumber } from "@/components/ui/rolling-number";
+import { DeviceMockup, type Mockup } from "@/components/ui/device-mockup";
 import { useReducedMotion } from "@/components/ui/use-reduced-motion";
 import type { PeelEngine, PeelSettings } from "@/components/home/sticker-grid/peel-engine";
 
@@ -21,6 +22,8 @@ export type StickerWork = {
   coverAlt: string;
   tint: string;
   placeholder: PlaceholderKind;
+  /** Real screenshots as a laptop + phone motion ad, when there's no cover image */
+  mockup?: Mockup;
   href: string;
   cta: string;
   status: "case-study" | "soon";
@@ -101,13 +104,16 @@ export function StickerCard({
     engine.current?.toggle(false);
   };
 
-  const art = (sizes: string) =>
-    work.cover ? (
+  // A motion ad (laptop + phone, or three phones) wins over a still cover when there is one
+  const art = (covered: boolean) =>
+    work.mockup ? (
+      <DeviceMockup mockup={work.mockup} label={work.title} covered={covered} priority={priority} />
+    ) : work.cover ? (
       <Image
         src={work.cover}
         alt=""
         fill
-        sizes={sizes}
+        sizes="(min-width: 640px) 50vw, 100vw"
         priority={priority}
         draggable={false}
         className="object-cover"
@@ -115,8 +121,6 @@ export function StickerCard({
     ) : (
       <PlaceholderShot kind={work.placeholder} tint={work.tint} label={work.title} className="absolute inset-0 h-full w-full" />
     );
-
-  const sizes = "(min-width: 640px) 50vw, 100vw";
 
   return (
     <li className="min-w-0">
@@ -134,7 +138,7 @@ export function StickerCard({
           {/* What the sticker was hiding */}
           <div className="absolute inset-0" inert={!open}>
             <ViewTransition name={mounted && work.morphName ? work.morphName : undefined} share="morph" default="none">
-              <div className="absolute inset-0">{art(sizes)}</div>
+              <div className="absolute inset-0">{art(!open)}</div>
             </ViewTransition>
             {mode === "image-text" ? (
               <div className="sticker-frost absolute inset-0 flex flex-col justify-end p-5 text-white sm:p-7">
@@ -190,7 +194,7 @@ export function StickerCard({
             }}
             className="sticker-front absolute inset-0 block cursor-grab"
           >
-            {art(sizes)}
+            {art(open)}
             <span aria-hidden="true" className="sticker-sheen pointer-events-none absolute inset-0" />
           </button>
 

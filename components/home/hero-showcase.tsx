@@ -77,6 +77,9 @@ function DesktopHero({ first, last, photo, intro }: Props) {
   const [pileActive, setPileActive] = useState(true);
   useMotionValueEvent(pileOpacity, "change", (v) => setPileActive(v > 0.15));
   const pile = usePileSettings();
+  const controlsOpacity = useTransform(split, [0, 0.12], [1, 0]);
+  const [controlsShown, setControlsShown] = useState(true);
+  useMotionValueEvent(controlsOpacity, "change", (v) => setControlsShown(v > 0.05));
 
   const introOpacity = useTransform(p, INTRO_IN, [0, 1]);
   const introY = useTransform(p, INTRO_IN, [reduce ? 0 : 32, 0]);
@@ -86,21 +89,28 @@ function DesktopHero({ first, last, photo, intro }: Props) {
 
   return (
     <section ref={ref} aria-labelledby="hero-name" className="relative hidden h-[245vh] lg:block">
-      <div className="sticky top-[var(--header-h)] h-[calc(100svh-var(--header-h))] overflow-hidden">
+      <div className="sticky top-0 h-svh overflow-hidden">
         <DotGrid />
         {/* The layer spans the hero but only the tags and controls take the pointer, so the portrait under it stays hoverable */}
         <motion.div className="pointer-events-none absolute inset-0 z-20" style={{ opacity: pileOpacity, visibility: pileActive ? "visible" : "hidden" }}>
           <TagPile tags={pileTags} settings={pile.settings} dropKey={pile.dropKey} active={pileActive} className="inset-0" />
-          <PileControls {...pile} className="pointer-events-auto absolute top-5 right-6" />
         </motion.div>
-        <div className="relative mx-auto h-full max-w-[1500px]">
+        {/* Pile buttons float bottom left, and go as soon as the hero starts moving on from the pile */}
+        <motion.div
+          className="absolute bottom-6 left-6 z-30"
+          style={{ opacity: controlsOpacity, visibility: controlsShown ? "visible" : "hidden" }}
+        >
+          <PileControls {...pile} placement="above" />
+        </motion.div>
+        {/* Content keeps clear of where the nav appears; the grid and pile run the full height */}
+        <div className="absolute inset-x-0 top-[var(--header-h)] bottom-0 mx-auto max-w-[1600px]">
           <h1 id="hero-name" className="sr-only">
             {first} {last}, product designer and design engineer
           </h1>
 
           {/* Name, split around the portrait */}
-          <motion.div aria-hidden="true" className="absolute top-[30%] left-[6%]" style={{ opacity: nameOpacity, transform: firstTransform }}>
-            <p className="hero-fade mb-3 text-small text-ink-2">Product designer</p>
+          <motion.div aria-hidden="true" className="absolute top-[28%] left-[3%]" style={{ opacity: nameOpacity, transform: firstTransform }}>
+            <p className="hero-fade mb-4 text-[20px] text-ink-2">Product designer</p>
             <p className="hero-name-size font-display leading-[0.9] font-bold uppercase">
               <span className="hero-mask">
                 <span className="hero-word" style={{ "--i": 0 } as React.CSSProperties}>
@@ -109,8 +119,8 @@ function DesktopHero({ first, last, photo, intro }: Props) {
               </span>
             </p>
           </motion.div>
-          <motion.div aria-hidden="true" className="absolute top-[30%] right-[6%] text-right" style={{ opacity: nameOpacity, transform: lastTransform }}>
-            <p className="hero-fade mb-3 text-small text-ink-2">Design engineer, AI-native</p>
+          <motion.div aria-hidden="true" className="absolute top-[28%] right-[3%] text-right" style={{ opacity: nameOpacity, transform: lastTransform }}>
+            <p className="hero-fade mb-4 text-[20px] text-ink-2">Design engineer, AI-native</p>
             <p className="hero-name-size font-display leading-[0.9] font-bold uppercase">
               <span className="hero-mask">
                 <span className="hero-word" style={{ "--i": 2 } as React.CSSProperties}>
@@ -178,9 +188,9 @@ function MobileHero({ first, last, photo, intro }: Props) {
   return (
     <section aria-labelledby="hero-name-mobile" className="relative isolate overflow-hidden border-b border-line lg:hidden">
       <DotGrid />
-      <div className="mx-auto max-w-[720px] px-4 pt-10 pb-14 sm:px-8">
-        <p className="hero-fade text-small text-ink-2">Product designer and design engineer</p>
-        <h1 id="hero-name-mobile" className="mt-2 text-[clamp(3rem,15vw,6rem)] leading-[0.88] font-bold uppercase">
+      <div className="mx-auto max-w-[720px] px-4 pt-[calc(var(--header-h)+2.5rem)] pb-4 sm:px-8">
+        <p className="hero-fade text-[20px] text-ink-2">Product designer and design engineer</p>
+        <h1 id="hero-name-mobile" className="mt-2 text-[clamp(3.5rem,17.5vw,8rem)] leading-[0.88] font-bold tracking-[-0.02em] uppercase">
           <span className="hero-mask">
             <span className="hero-word" style={{ "--i": 0 } as React.CSSProperties}>
               {first}
@@ -211,12 +221,17 @@ function MobileHero({ first, last, photo, intro }: Props) {
           ))}
         </div>
       </div>
-      {/* The pile gets its own floor on phones */}
+      {/* Phones: the pile falls from the very top of the hero, past the name and portrait, and
+          settles on its own floor at the bottom. The layer ignores the pointer; only the tags take it */}
       <div className="relative">
-        <PileControls {...pile} className="mx-4 flex justify-end sm:mx-8" />
-        <div className="relative mt-3 h-[480px]">
-          <TagPile tags={pileTags} settings={pile.settings} dropKey={pile.dropKey} className="inset-0" />
-        </div>
+        {/* Left, stacked; the panel opens upward over the intro, since the hero clips anything below its floor */}
+        <PileControls {...pile} stacked placement="above" className="relative z-30 mx-4 w-fit sm:mx-8" />
+        {/* Floor just tall enough for the settled pile, so it sits about 96px under the intro. The pile
+            gets taller as the screen narrows (same tags, less width), hence the vw term */}
+        <div aria-hidden="true" className="mt-3 h-[max(280px,calc(580px-57vw))]" />
+      </div>
+      <div className="pointer-events-none absolute inset-0 z-20">
+        <TagPile tags={pileTags} settings={pile.settings} dropKey={pile.dropKey} className="inset-0" />
       </div>
     </section>
   );

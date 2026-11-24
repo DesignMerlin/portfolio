@@ -6,7 +6,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
   const profile = await getProfile();
   return (
     <>
-      <Header />
+      <Header email={profile.email} />
       <main id="main">{children}</main>
       <Footer profile={profile} />
     </>

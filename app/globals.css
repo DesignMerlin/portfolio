@@ -194,24 +194,35 @@
     font-variant-numeric: tabular-nums;
   }
 
-  /* The nav pill: the previous nav's paper tone as frosted glass, theme-aware */
+  /* The nav pill: liquid glass, same material as the contact pills. Mostly clear, so the page shows
+     through blurred as it scrolls underneath; a bright lens rim and soft drop shadow give it an edge */
   .glass-nav {
-    background: color-mix(in oklab, var(--paper) 78%, transparent);
-    -webkit-backdrop-filter: blur(18px) saturate(180%);
-    backdrop-filter: blur(18px) saturate(180%);
+    position: relative;
+    background: var(--glass-tint);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    backdrop-filter: blur(16px) saturate(180%);
     box-shadow:
-      inset 0 0 0 1px var(--line),
-      0 10px 30px -16px rgb(0 0 0 / 0.35);
+      inset 0 1px 0 var(--glass-rim-hi),
+      inset 0 -1px 0 var(--glass-rim-lo),
+      0 0 0 1px var(--glass-edge),
+      var(--glass-drop);
+  }
+  .glass-nav::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(160deg, var(--glass-rim-hi), var(--glass-rim-lo) 38%, var(--glass-rim-lo) 62%, var(--glass-rim-hi));
+    mask:
+      linear-gradient(#000 0 0) content-box exclude,
+      linear-gradient(#000 0 0);
+    pointer-events: none;
   }
 
-  /* Hero dot grid: fades in under the header and out at the bottom, so it appears out of the page */
+  /* Hero dot grid: runs right up to the top of the page and fades out at the bottom */
   .dot-grid {
-    mask-image: linear-gradient(transparent, #000 40px, #000 70%, transparent);
-  }
-  .dot-grid-blur {
-    -webkit-backdrop-filter: blur(6px);
-    backdrop-filter: blur(6px);
-    mask-image: linear-gradient(#000 20%, transparent);
+    mask-image: linear-gradient(#000 70%, transparent);
   }
 
   /* Rolling numbers: digits fade in and out at the column edges instead of being cut */
@@ -411,7 +422,7 @@ html[data-intro="skip"] .intro {
 }
 /* Very tight, still readable: letters nearly touch but never overlap */
 .intro-glyph + .intro-glyph {
-  margin-left: -0.055em;
+  margin-left: -0.038em;
 }
 /* Letters wait above the screen until the script drops them, so nothing flashes in place first */
 .intro-letter {
@@ -613,8 +624,12 @@ html.theme-swap * {
 /* Desktop hero name: as large as the viewport allows (6.2vw), but never so large that it runs
    into the centred portrait. Space per side = 44% of the 1500px-capped container, minus half
    the portrait (min(19vw, 300px) / 2), minus a 3rem gap; "EKWENZE" is about 4.8em wide. */
+/* Hero name: as big as fits between the portrait and the page edge (the longer word, EKWENZE, is
+   about 4.8em wide, plus a gap). About 116px on a 1600px-wide screen, up to 140px on very wide ones; smaller
+   desktops scale down so it never runs under the portrait. */
 .hero-name-size {
-  font-size: min(6.2vw, calc((0.44 * min(100vw, 1500px) - min(9.5vw, 150px) - 3rem) / 4.8));
+  font-size: min(140px, calc(((min(100vw, 1600px) - min(19vw, 300px)) / 2 - 0.03 * min(100vw, 1600px) - 28px) / 4.95));
+  letter-spacing: -0.02em;
 }
 
 /* ------------------------------------------------------------------
@@ -1165,4 +1180,267 @@ html.theme-swap * {
   .group:focus-visible .nav-avatar {
     animation: none;
   }
+}
+/* Home: the header floats over the hero instead of reserving a strip, so the hero (and its dot grid)
+   starts at the very top of the page */
+.site-header[data-home] {
+  margin-bottom: calc(var(--header-h) * -1);
+}
+
+/* Liquid glass panel (pile settings): the same material as the nav and contact pills, thicker for a
+   large surface: heavier blur and saturation so busy content behind it stays readable, the lens rim,
+   an inner top sheen, and a deep soft shadow */
+.glass-panel {
+  background: color-mix(in oklab, var(--paper) 64%, transparent);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  backdrop-filter: blur(28px) saturate(190%);
+  box-shadow:
+    inset 0 1px 0 var(--glass-rim-hi),
+    inset 0 -1px 0 var(--glass-rim-lo),
+    inset 0 24px 40px -32px var(--glass-rim-hi),
+    0 0 0 1px var(--glass-edge),
+    0 2px 6px rgb(0 0 0 / 0.08),
+    0 30px 60px -24px rgb(0 0 0 / 0.45);
+}
+.glass-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(160deg, var(--glass-rim-hi), var(--glass-rim-lo) 30%, var(--glass-rim-lo) 70%, var(--glass-rim-hi));
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+/* Phones: the panel opens over the intro paragraph, and mobile browsers blur a surface this tall too
+   weakly to hide text behind it, so the glass is frosted thicker there */
+@media (width < 1024px) {
+  .glass-panel {
+    background: color-mix(in oklab, var(--paper) 88%, transparent);
+  }
+}
+
+/* Liquid glass as a text button (Replay, Reset, the phone Menu): same material and hover/press as the
+   contact pills, laid out as a row */
+.glass-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.glass-btn > * {
+  position: relative;
+  z-index: 1;
+}
+@media (width >= 768px) {
+  .site-header .glass-btn.md\:hidden {
+    display: none;
+  }
+}
+
+/* Phone menu sheet: drops down from the nav */
+.mobile-menu[open] {
+  animation: mobile-menu-in var(--dur-base) var(--ease-enter);
+}
+.mobile-menu[open]::backdrop {
+  animation: mobile-menu-fade var(--dur-base) var(--ease-enter);
+}
+@keyframes mobile-menu-in {
+  from { opacity: 0; translate: 0 -12px; scale: 0.98; }
+}
+@keyframes mobile-menu-fade {
+  from { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  @keyframes mobile-menu-in {
+    from { opacity: 0; }
+  }
+}
+
+/* ------------------------------------------------------------------
+   Device mockup motion ad (components/ui/device-mockup.tsx)
+   Sized in container units of the card it fills.
+------------------------------------------------------------------- */
+.device-wash {
+  background:
+    radial-gradient(70% 60% at 18% 20%, var(--wash-a), transparent 70%),
+    radial-gradient(70% 70% at 85% 80%, var(--wash-b), transparent 70%),
+    linear-gradient(160deg, color-mix(in oklab, var(--wash-a) 55%, white), color-mix(in oklab, var(--wash-b) 55%, white));
+}
+.device-screen {
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+}
+.device-scroll {
+  will-change: transform;
+}
+
+/* Laptop: lid with a thin dark bezel and camera, aluminium base wider than the lid */
+.device-laptop {
+  left: 7cqw;
+  bottom: 21cqh;
+  width: 70cqw;
+}
+.device-laptop-lid {
+  position: relative;
+  padding: 1.5cqw 1.5cqw 1.9cqw;
+  border-radius: 2.2cqw 2.2cqw 0.6cqw 0.6cqw;
+  background: #0d0f14;
+  box-shadow:
+    inset 0 0 0 0.25cqw #2a2e37,
+    0 3cqw 6cqw -2cqw rgb(20 24 40 / 0.45);
+}
+.device-laptop-lid .device-screen {
+  aspect-ratio: 16 / 10;
+  border-radius: 0.5cqw;
+}
+.device-laptop-cam {
+  position: absolute;
+  top: 0.55cqw;
+  left: 50%;
+  width: 0.55cqw;
+  height: 0.55cqw;
+  translate: -50% 0;
+  border-radius: 50%;
+  background: #2b3140;
+}
+.device-laptop-base {
+  position: relative;
+  left: -6%;
+  width: 112%;
+  height: 2.6cqw;
+  background: linear-gradient(#e6e8ee, #b9bdc7 55%, #8d929d);
+  clip-path: polygon(0 0, 100% 0, 97% 100%, 3% 100%);
+  border-radius: 0 0 1.2cqw 1.2cqw;
+}
+.device-laptop-base::before {
+  /* The thumb notch */
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 14%;
+  height: 0.9cqw;
+  translate: -50% 0;
+  border-radius: 0 0 0.8cqw 0.8cqw;
+  background: linear-gradient(#a7acb7, #c9ccd4);
+}
+
+/* Phone: dark rounded body, screen with a Dynamic Island */
+.device-phone {
+  right: 7cqw;
+  bottom: 15cqh;
+  width: 21cqw;
+  padding: 0.85cqw;
+  border-radius: 3.8cqw;
+  background: #0d0f14;
+  box-shadow:
+    inset 0 0 0 0.3cqw #353a45,
+    0 3cqw 5cqw -1.5cqw rgb(20 24 40 / 0.5);
+}
+.device-phone-screen {
+  aspect-ratio: 9 / 19.5;
+  border-radius: 3cqw;
+}
+.device-island {
+  position: absolute;
+  z-index: 1;
+  top: 1.1cqw;
+  left: 50%;
+  width: 34%;
+  height: 1.9cqw;
+  translate: -50% 0;
+  border-radius: 999px;
+  background: #0d0f14;
+}
+
+/* Motion: entrance once it's seen, then the screens browse up and down while it's on screen */
+.device-mockup:not([data-seen]) .device-laptop,
+.device-mockup:not([data-seen]) .device-phone {
+  opacity: 0;
+}
+.device-mockup[data-seen] .device-laptop {
+  animation: device-rise 900ms var(--ease-emphasized) both;
+}
+.device-mockup[data-seen] .device-phone {
+  animation: device-slide 1000ms var(--ease-emphasized) 220ms both;
+}
+.device-mockup[data-seen] .device-scroll-desktop {
+  /* The screenshot is 25% taller than the 16:10 screen: travel the 20% that's hidden */
+  animation: device-browse-desktop 10s cubic-bezier(0.65, 0, 0.35, 1) 1.2s infinite;
+}
+.device-mockup[data-seen] .device-scroll-mobile {
+  /* Phone screenshot vs a 9:19.5 screen: 22.5% hidden */
+  animation: device-browse-mobile 8s cubic-bezier(0.65, 0, 0.35, 1) 1.6s infinite;
+}
+.device-mockup:not([data-playing]) .device-scroll {
+  animation-play-state: paused;
+}
+@keyframes device-rise {
+  from { opacity: 0; translate: 0 14cqh; scale: 0.94; }
+}
+@keyframes device-slide {
+  from { opacity: 0; translate: 6cqw 30cqh; rotate: 6deg; }
+}
+@keyframes device-browse-desktop {
+  0%, 12% { translate: 0 0; }
+  48%, 62% { translate: 0 -20%; }
+  100% { translate: 0 0; }
+}
+@keyframes device-browse-mobile {
+  0%, 12% { translate: 0 0; }
+  48%, 62% { translate: 0 -22.5%; }
+  100% { translate: 0 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .device-mockup .device-laptop,
+  .device-mockup .device-phone,
+  .device-mockup .device-scroll {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Phone trio: three phones take turns at the front. One 12s loop, each phone 4s apart, so they
+   always occupy all three spots: front, back right, back left. Each move is a 1s glide; z-order
+   switches at the start of a move, so the phone coming forward always passes in front. */
+.device-trio {
+  right: auto;
+  bottom: auto;
+  left: 50%;
+  top: 50%;
+  width: 27cqw;
+  transform: translate(-50%, -50%);
+}
+.device-trio-screen {
+  aspect-ratio: 600 / 1076;
+  border-radius: 3cqw;
+}
+.device-mockup[data-seen] .device-trio {
+  animation:
+    device-trio-in 900ms var(--ease-emphasized) calc(var(--slot) * 120ms) both,
+    device-trio-loop 12s cubic-bezier(0.65, 0, 0.35, 1) calc(var(--slot) * -4s) infinite both;
+}
+.device-mockup:not([data-playing]) .device-trio {
+  /* Only the loop waits; the entrance always finishes, so the phones are there when a sticker is peeled */
+  animation-play-state: running, paused;
+}
+@keyframes device-trio-in {
+  from { opacity: 0; translate: 0 18cqh; }
+}
+@keyframes device-trio-loop {
+  0%, 25% { transform: translate(-50%, -50%) scale(1) rotate(0deg); z-index: 3; filter: none; }
+  25.01% { z-index: 2; }
+  33.33%, 58.33% { transform: translate(calc(-50% + 30cqw), calc(-50% + 3cqh)) scale(0.8) rotate(9deg); z-index: 2; filter: brightness(0.94); }
+  58.34% { z-index: 1; }
+  66.66%, 91.66% { transform: translate(calc(-50% - 30cqw), calc(-50% + 3cqh)) scale(0.8) rotate(-9deg); z-index: 1; filter: brightness(0.94); }
+  91.67% { z-index: 4; }
+  100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); z-index: 4; filter: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .device-trio:nth-child(2) { transform: translate(-50%, -50%); z-index: 3; }
+  .device-trio:nth-child(3) { transform: translate(calc(-50% + 30cqw), calc(-50% + 3cqh)) scale(0.8) rotate(9deg); z-index: 2; }
+  .device-trio:nth-child(4) { transform: translate(calc(-50% - 30cqw), calc(-50% + 3cqh)) scale(0.8) rotate(-9deg); z-index: 1; }
 }

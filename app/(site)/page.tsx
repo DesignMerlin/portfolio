@@ -6,6 +6,7 @@ import { RollingNumber } from "@/components/ui/rolling-number";
 import { PageTransition } from "@/components/site/page-transition";
 import { getAllWork, getProfile } from "@/lib/content";
 import { archive } from "@/content/archive";
+import { workMockups } from "@/content/mockups";
 import { heroIntro, heroPhoto, skills } from "@/content/about";
 import { ServicesSection } from "@/components/home/services-section";
 import { ArcDial } from "@/components/home/arc-dial/arc-dial";
@@ -34,6 +35,7 @@ export default async function HomePage() {
       coverAlt: m.coverAlt,
       tint: m.tint,
       placeholder: "web" as const,
+      mockup: workMockups[m.slug],
       href: `/work/${m.slug}`,
       cta: "Read case study",
       status: "case-study" as const,
@@ -49,6 +51,7 @@ export default async function HomePage() {
       coverAlt: "",
       tint: a.tint,
       placeholder: a.kind,
+      mockup: a.mockup,
       href: "/playground",
       cta: "Enter playground",
       status: "soon" as const,

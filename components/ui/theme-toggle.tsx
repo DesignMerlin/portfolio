@@ -13,6 +13,8 @@ const subscribe = (fn: () => void) => {
   listeners.add(fn);
   return () => listeners.delete(fn);
 };
+/** Swaps in flight, so an interrupted one doesn't re-enable transitions under its replacement */
+let swaps = 0;
 const read = (): Theme => (document.documentElement.dataset.theme === "dark" ? "dark" : "light");
 
 /** Swap the theme. The whole page crossfades through a view transition where supported. */
@@ -29,7 +31,13 @@ export function setTheme(next: Theme) {
   if (!document.startViewTransition || reduce) return apply();
   // The view transition does the crossfade; per-element colour transitions would double it.
   html.classList.add("theme-swap");
-  document.startViewTransition(apply).finished.finally(() => html.classList.remove("theme-swap"));
+  swaps++;
+  const vt = document.startViewTransition(apply);
+  // Skipped by another transition (a quick second toggle, a page change): the theme still applied
+  vt.ready.catch(() => {});
+  vt.finished.catch(() => {}).finally(() => {
+    if (--swaps === 0) html.classList.remove("theme-swap");
+  });
 }
 
 export function useTheme() {

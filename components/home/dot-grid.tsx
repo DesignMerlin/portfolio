@@ -154,7 +154,8 @@ export function DotGrid({
 
     const tick = (now: number) => {
       raf = 0;
-      const dt = Math.min(now - last, 40) / 1000;
+      // A frame's timestamp can predate the event that woke the loop; draw() reads 0 as "jump to the end"
+      const dt = Math.max(1, Math.min(now - last, 40)) / 1000;
       last = now;
       clock += dt;
       const moving = draw(dt);
@@ -213,8 +214,6 @@ export function DotGrid({
         aria-hidden="true"
         className="dot-grid pointer-events-none absolute inset-0 -z-10 h-full w-full text-ink"
       />
-      {/* Blur layer over the top edge: the grid comes into focus as it fades in */}
-      <div aria-hidden="true" className="dot-grid-blur pointer-events-none absolute inset-x-0 top-0 -z-10 h-[56px]" />
     </>
   );
 }

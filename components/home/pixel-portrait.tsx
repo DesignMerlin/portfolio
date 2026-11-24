@@ -6,23 +6,28 @@ import { useReducedMotion } from "@/components/ui/use-reduced-motion";
 
 type Photo = { src: string | null; alt: string };
 
-/** Cells across the card; rows follow from the aspect ratio */
-const COLS = 18;
+/** Grains across the card (about 4–6px each); rows follow from the aspect ratio */
+const COLS = 56;
 /** Reach of the cursor's reveal, as a fraction of the card width */
-const REACH = 0.34;
-/** Time constants (s): tiles flip to the photo quickly and drift back slowly, leaving a trail */
-const RISE = 0.07;
-const FALL = 0.55;
+const REACH = 0.3;
+/** Time constants (s): grains flip to the photo quickly and settle back to the art in well under a second */
+const RISE = 0.06;
+const FALL = 0.24;
+/** The reveal trails the cursor slightly, so fast moves sweep smoothly instead of jumping */
+const FOLLOW = 0.05;
+/** Whole-card dissolve (keyboard, tap): grains start at random moments across this long (s) */
+const DISSOLVE = 0.5;
 
 type Cell = { heat: number; jitter: number };
 
 /**
  * Portrait that is an illustration by default and the real photo underneath.
- * Around the cursor the tiles turn into the photo in steps, coarse mosaic,
- * then fine mosaic, then sharp, and drift back to the illustration after
- * the cursor has moved on, leaving a pixel trail. The edge is ragged on
- * purpose: each tile has its own small offset, so the reveal dissolves
- * rather than drawing a clean circle.
+ * Around the cursor, tiny grains (about 4–6px) turn into the photo in steps,
+ * 2×2 mosaic, then single-grain mosaic, then sharp, and settle back to the
+ * illustration within about half a second of the cursor moving on, leaving a
+ * short grain trail. The reveal eases after the cursor so fast sweeps stay
+ * smooth. The edge is ragged on purpose: each grain has its own small offset,
+ * so the reveal dissolves rather than drawing a clean circle.
  *
  * Keyboard (Enter/Space) and touch (tap) dissolve the whole card to the
  * photo and back. Reduced motion: no trail; the photo crossfades in on
@@ -79,7 +84,8 @@ export function PixelPortrait({
     let fine: Uint8ClampedArray | null = null;
     let coarse: Uint8ClampedArray | null = null;
 
-    const pointer = { x: 0, y: 0, inside: false };
+    // Where the cursor is (tx, ty) and where the reveal is centred (x, y), which eases after it
+    const pointer = { x: 0, y: 0, tx: 0, ty: 0, inside: false, fresh: true };
     let raf = 0;
     let last = 0;
     let fullSince = 0;
@@ -108,7 +114,9 @@ export function PixelPortrait({
       ch = h / rows;
       let seed = 11;
       const rand = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
-      cells = Array.from({ length: cols * rows }, () => ({ heat: 0, jitter: rand() }));
+      // A resize keeps the photo showing if it was switched on
+      const heat = live.current.full ? 1 : 0;
+      cells = Array.from({ length: cols * rows }, () => ({ heat, jitter: rand() }));
       if (img.complete && img.naturalWidth) prepare();
       paint();
     };
@@ -136,28 +144,33 @@ export function PixelPortrait({
       ctx.clearRect(0, 0, w, h);
       if (!fine || !coarse || cells.length !== rows * cols) return;
       const cc = Math.ceil(cols / 2);
+      // Sharp photo wherever a grain is fully revealed: one clipped draw for all of them
+      ctx.beginPath();
+      let any = false;
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          if (cells[r * cols + c]!.heat < 0.66) continue;
+          ctx.rect(c * cw, r * ch, cw + 0.5, ch + 0.5);
+          any = true;
+        }
+      }
+      if (any) {
+        ctx.save();
+        ctx.clip();
+        ctx.drawImage(img, sx, sy, sw, sh, 0, 0, w, h);
+        ctx.restore();
+      }
+      // The grains in between: averaged colour, 2×2 blocks at the outer edge, single grains nearer in
       for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
           const heat = cells[r * cols + c]!.heat;
-          if (heat < 0.05) continue;
-          const x = c * cw;
-          const y = r * ch;
-          if (heat >= 0.62) {
-            // Sharp photo for this tile (a hair of overlap hides seams)
-            const fx = sx + (x / w) * sw;
-            const fy = sy + (y / h) * sh;
-            ctx.globalAlpha = Math.min(1, (heat - 0.62) / 0.12 + 0.6);
-            ctx.drawImage(img, fx, fy, (cw / w) * sw, (ch / h) * sh, x, y, cw + 0.5, ch + 0.5);
-          }
-          if (heat < 0.74) {
-            // Mosaic: coarse 2×2 blocks first, then single tiles
-            const coarseStep = heat < 0.36;
-            const data = coarseStep ? coarse : fine;
-            const i = coarseStep ? ((r >> 1) * cc + (c >> 1)) * 4 : (r * cols + c) * 4;
-            ctx.globalAlpha = heat >= 0.62 ? 1 - (heat - 0.62) / 0.12 : Math.min(1, heat / 0.2);
-            ctx.fillStyle = `rgb(${data[i]},${data[i + 1]},${data[i + 2]})`;
-            ctx.fillRect(x, y, cw + 0.5, ch + 0.5);
-          }
+          if (heat < 0.06 || heat >= 0.66) continue;
+          const coarseStep = heat < 0.3;
+          const data = coarseStep ? coarse : fine;
+          const i = coarseStep ? ((r >> 1) * cc + (c >> 1)) * 4 : (r * cols + c) * 4;
+          ctx.globalAlpha = Math.min(1, heat / 0.16);
+          ctx.fillStyle = `rgb(${data[i]},${data[i + 1]},${data[i + 2]})`;
+          ctx.fillRect(c * cw, r * ch, cw + 0.5, ch + 0.5);
         }
       }
       ctx.globalAlpha = 1;
@@ -167,26 +180,31 @@ export function PixelPortrait({
       raf = 0;
       // Not measured yet (e.g. hidden at this breakpoint): nothing to animate
       if (cells.length !== rows * cols) return;
-      const dt = Math.min(now - last, 50) / 1000;
+      // A frame's timestamp can predate the event that woke the loop, so never let time run backwards
+      const dt = Math.max(0, Math.min(now - last, 50)) / 1000;
       last = now;
       const kUp = 1 - Math.exp(-dt / RISE);
       const kDown = 1 - Math.exp(-dt / FALL);
       const reach = REACH * w;
       const showAll = live.current.full;
       const since = (now - fullSince) / 1000;
-      let busy = pointer.inside;
+      const kFollow = 1 - Math.exp(-dt / FOLLOW);
+      pointer.x += (pointer.tx - pointer.x) * kFollow;
+      pointer.y += (pointer.ty - pointer.y) * kFollow;
+      // Keep going until the last grain's turn in the whole-card dissolve has come round
+      let busy = pointer.inside || (showAll && since <= DISSOLVE);
       for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
           const cell = cells[r * cols + c]!;
           let target = 0;
           if (showAll) {
-            // Whole-card dissolve: tiles flip in a random order over ~0.5s
-            target = since > cell.jitter * 0.5 ? 1 : 0;
+            // Whole-card dissolve: grains flip in a random order; ones already showing the photo stay put
+            target = since > cell.jitter * DISSOLVE ? 1 : cell.heat;
           } else if (pointer.inside) {
             const dx = (c + 0.5) * cw - pointer.x;
             const dy = (r + 0.5) * ch - pointer.y;
-            const d = Math.hypot(dx, dy) / reach + (cell.jitter - 0.5) * 0.45;
-            target = d < 1 ? Math.min(1, (1 - d) * 2.6) : 0;
+            const d = Math.hypot(dx, dy) / reach + (cell.jitter - 0.5) * 0.4;
+            target = d < 1 ? Math.min(1, (1 - d) * 2.4) : 0;
           }
           const k = target > cell.heat ? kUp : kDown;
           cell.heat += (target - cell.heat) * k;
@@ -206,13 +224,20 @@ export function PixelPortrait({
     const onMove = (e: PointerEvent) => {
       if (e.pointerType !== "mouse") return;
       const r = el.getBoundingClientRect();
-      pointer.x = e.clientX - r.left;
-      pointer.y = e.clientY - r.top;
+      pointer.tx = e.clientX - r.left;
+      pointer.ty = e.clientY - r.top;
+      // Entering: start the reveal right under the cursor, then ease after it
+      if (pointer.fresh) {
+        pointer.x = pointer.tx;
+        pointer.y = pointer.ty;
+        pointer.fresh = false;
+      }
       pointer.inside = true;
       wake();
     };
     const onLeave = () => {
       pointer.inside = false;
+      pointer.fresh = true;
       wake();
     };
     const onFull = () => {
