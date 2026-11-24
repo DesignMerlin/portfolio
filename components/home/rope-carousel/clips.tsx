@@ -1,3 +1,4 @@
+import { useId } from "react";
 import type { ClipStyle } from "@/components/home/rope-carousel/settings";
 
 /**
@@ -12,17 +13,18 @@ export function Clip({ style }: { style: ClipStyle }) {
 
 /** Wooden clothes peg: two halves, a wire spring across the middle */
 function Peg() {
+  const id = useId();
   return (
     <svg aria-hidden="true" width="14" height="40" viewBox="0 0 14 40" className="absolute -top-[15px] left-1/2 -translate-x-1/2 overflow-visible">
       <defs>
-        <linearGradient id="rc-peg" x1="0" x2="1">
+        <linearGradient id={id} x1="0" x2="1">
           <stop offset="0" stopColor="#c45c3c" />
           <stop offset="0.45" stopColor="#e2865f" />
           <stop offset="1" stopColor="#b44f33" />
         </linearGradient>
       </defs>
-      <rect x="0.5" y="0" width="6.2" height="40" rx="1.6" fill="url(#rc-peg)" />
-      <rect x="7.3" y="0" width="6.2" height="40" rx="1.6" fill="url(#rc-peg)" />
+      <rect x="0.5" y="0" width="6.2" height="40" rx="1.6" fill={`url(#${id})`} />
+      <rect x="7.3" y="0" width="6.2" height="40" rx="1.6" fill={`url(#${id})`} />
       <rect x="6.6" y="1" width="0.8" height="38" fill="rgb(70 25 10 / 0.35)" />
       <rect x="-0.5" y="15" width="15" height="4.2" rx="1" fill="#e9e3d6" />
       <rect x="-0.5" y="18.2" width="15" height="1" fill="rgb(0 0 0 / 0.18)" />

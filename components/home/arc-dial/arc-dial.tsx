@@ -177,12 +177,19 @@ export function ArcDial({
   const pxPerStep = () => geo.current.R * geo.current.step;
 
   const onPointerDown = (e: React.PointerEvent) => {
+    // A touch swipe isn't followed by a click, so don't let it swallow the next real one
+    suppressClick.current = false;
     if (e.button !== 0 || (e.target as HTMLElement).closest("[data-no-drag]")) return;
     drag.current = { id: e.pointerId, x: e.clientX, from: pos.get(), moved: false };
   };
   const onPointerMove = (e: React.PointerEvent) => {
     const d = drag.current;
     if (!d || d.id !== e.pointerId) return;
+    // Let go outside the dial before a drag began: the release never reached us
+    if (!e.buttons && !d.moved) {
+      drag.current = null;
+      return;
+    }
     const dx = e.clientX - d.x;
     if (!d.moved) {
       if (Math.abs(dx) < DRAG_THRESHOLD) return;

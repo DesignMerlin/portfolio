@@ -212,6 +212,9 @@ export class PileEngine {
     M.Composite.remove(engine.world, this.bodies);
     const { W, H } = this.size();
     const n = this.bodies.length;
+    // Drop from the top of what's on screen, not the top of the area: on phones the area is the whole
+    // (tall) hero, and a replay from the bottom would otherwise fall for seconds out of sight
+    const top = Math.max(0, Math.min(H - 200, -this.area.getBoundingClientRect().top));
 
     const place = (b: Body, i: number, height: number) => {
       const { w } = this.sizes[i]!;
@@ -238,14 +241,21 @@ export class PileEngine {
     }
 
     this.bodies.forEach((b, i) => {
-      const delay = st.entrance === "together" ? 0 : st.entrance === "sequence" ? i * 110 : Math.random() * 1400;
-      const height = st.entrance === "together" ? -40 - Math.random() * 260 : -60 - Math.random() * 40;
+      // The first tag always goes at once, so a replay starts the moment it's asked for
+      const delay =
+        i === 0 || st.entrance === "together" ? 0 : st.entrance === "sequence" ? i * 110 : Math.random() * 1100;
+      const height = top + (st.entrance === "together" ? -40 - Math.random() * 260 : -60 - Math.random() * 40);
       const enter = () => {
         this.pending = Math.max(0, this.pending - 1);
         place(b, i, height);
         M.Composite.add(engine.world, b);
         const el = this.els[i];
-        if (el) el.style.opacity = "1";
+        const sz = this.sizes[i];
+        if (el && sz) {
+          // Move it to its start point before showing it, or it flashes for a frame where it used to rest
+          el.style.transform = `translate3d(${b.position.x - sz.w / 2}px, ${b.position.y - sz.h / 2}px, 0) rotate(${b.angle}rad)`;
+          el.style.opacity = "1";
+        }
       };
       if (delay === 0) enter();
       else {

@@ -263,6 +263,11 @@ export class PeelEngine {
   private onMove = (e: PointerEvent) => {
     const ptr = this.pointer;
     if (!ptr || ptr.id !== e.pointerId) return;
+    // Let go outside the sticker before a drag began: the release never reached us
+    if (!e.buttons) {
+      this.onCancel();
+      return;
+    }
     const p = this.local(e);
     if (!ptr.dragging) {
       if (Math.hypot(p.x - ptr.start.x, p.y - ptr.start.y) < DRAG_THRESHOLD) return;

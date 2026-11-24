@@ -34,16 +34,17 @@ function toColumns(items: Shot[], n: number) {
   return cols;
 }
 
+const columnQueries = ["(min-width: 1024px)", "(min-width: 640px)"];
+const subscribeColumns = (onChange: () => void) => {
+  const queries = columnQueries.map((q) => matchMedia(q));
+  queries.forEach((q) => q.addEventListener("change", onChange));
+  return () => queries.forEach((q) => q.removeEventListener("change", onChange));
+};
+const readColumns = () => (matchMedia(columnQueries[0]!).matches ? 3 : matchMedia(columnQueries[1]!).matches ? 2 : 1);
+
+/** Right from the first client render: a wrong first guess would overflow a phone and abort the page transition */
 function useColumnCount() {
-  const [n, setN] = useState(3);
-  useEffect(() => {
-    const queries = [matchMedia("(min-width: 1024px)"), matchMedia("(min-width: 640px)")];
-    const update = () => setN(queries[0]!.matches ? 3 : queries[1]!.matches ? 2 : 1);
-    update();
-    queries.forEach((q) => q.addEventListener("change", update));
-    return () => queries.forEach((q) => q.removeEventListener("change", update));
-  }, []);
-  return n;
+  return useSyncExternalStore(subscribeColumns, readColumns, () => 3);
 }
 
 /**
@@ -133,7 +134,7 @@ export function ShotsGallery({ shots, filters }: { shots: Shot[]; filters: { id:
                     </motion.div>
                     <div className="mt-3 flex items-baseline justify-between gap-3">
                       <p className="text-small font-medium text-ink">{shot.title}</p>
-                      <p className="shrink-0 text-micro text-ink-3">{shot.project}</p>
+                      <p className="min-w-0 truncate text-micro text-ink-3">{shot.project}</p>
                     </div>
                   </button>
                 </motion.li>

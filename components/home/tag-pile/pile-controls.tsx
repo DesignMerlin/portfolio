@@ -32,12 +32,18 @@ export function PileControls({
   replay,
   reset,
   className = "",
+  placement = "below",
+  stacked = false,
 }: {
   settings: PileSettings;
   update: (patch: Partial<PileSettings>) => void;
   replay: () => void;
   reset: () => void;
   className?: string;
+  /** Where the panel opens: under the buttons, or above them for a bar pinned to the bottom */
+  placement?: "below" | "above";
+  /** Buttons one above the other, left-aligned (phones) */
+  stacked?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const reduce = useReducedMotion();
@@ -66,13 +72,13 @@ export function PileControls({
 
   return (
     <div ref={root} className={`pointer-events-auto ${className || "relative"}`}>
-      <div className="flex items-center gap-1.5">
+      <div className={stacked ? "flex flex-col items-start gap-1.5" : "flex items-center gap-1.5"}>
         <button
           type="button"
           onClick={replay}
-          className="pressable inline-flex items-center gap-1.5 rounded-full border border-line bg-surface/80 px-3 py-1.5 text-small text-ink-2 backdrop-blur hover:text-ink"
+          className="pressable inline-flex items-center gap-1.5 rounded-full border border-line bg-surface/80 px-2.5 py-1 text-[13px] text-ink-2 backdrop-blur hover:text-ink"
         >
-          <ReplayIcon />
+          <ReplayIcon width={14} height={14} />
           Drop again
         </button>
         <button
@@ -81,7 +87,7 @@ export function PileControls({
           aria-expanded={open}
           aria-controls={id}
           onClick={() => setOpen((o) => !o)}
-          className="pressable inline-flex items-center gap-1.5 rounded-full border border-line bg-surface/80 px-3 py-1.5 text-small text-ink-2 backdrop-blur hover:text-ink"
+          className="pressable inline-flex items-center gap-1.5 rounded-full border border-line bg-surface/80 px-2.5 py-1 text-[13px] text-ink-2 backdrop-blur hover:text-ink"
         >
           <SlidersIcon />
           Play with the pile
@@ -98,7 +104,7 @@ export function PileControls({
             animate={{ opacity: 1, transform: "scale(1)" }}
             exit={reduce ? { opacity: 0 } : { opacity: 0, transform: "scale(0.96)", transition: tween("instant", "exit") }}
             transition={tween("quick")}
-            className="absolute top-[calc(100%+8px)] right-0 z-50 w-[min(320px,calc(100vw-32px))] origin-top-right rounded-[var(--radius-l)] border border-line bg-surface p-4 text-small text-ink shadow-[var(--shadow-float)]"
+            className={`absolute z-50 w-[min(320px,calc(100vw-32px))] ${placement === "above" ? "bottom-[calc(100%+8px)] left-0 origin-bottom-left" : "top-[calc(100%+8px)] right-0 origin-top-right"} glass-panel rounded-[24px] p-4 text-small text-ink`}
           >
             <div className="mb-3 flex items-center justify-between">
               <p className="font-medium">Play with the pile</p>
@@ -154,14 +160,14 @@ export function PileControls({
               <button
                 type="button"
                 onClick={replay}
-                className="pressable flex-1 rounded-full bg-ink px-3 py-2 text-small font-medium text-paper"
+                className="glass glass-btn flex-1 px-3 py-2.5 text-small font-semibold"
               >
                 Replay
               </button>
               <button
                 type="button"
                 onClick={reset}
-                className="pressable flex-1 rounded-full border border-line px-3 py-2 text-small text-ink-2 hover:text-ink"
+                className="glass glass-btn flex-1 px-3 py-2.5 text-small text-ink-2 hover:text-ink"
               >
                 Reset
               </button>
@@ -235,7 +241,7 @@ function Toggle({ label, checked, onChange }: { label: string; checked: boolean;
 
 function SlidersIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true">
       <path d="M2.5 4.5h7M12.5 4.5h1M2.5 11.5h2M7.5 11.5h6" />
       <circle cx="11" cy="4.5" r="1.5" />
       <circle cx="6" cy="11.5" r="1.5" />

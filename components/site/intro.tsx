@@ -93,13 +93,53 @@ export function Intro({ name }: { name: string }) {
     // middle). CSS starts close; this corrects for the real font once it has loaded.
     const wordEl = wordRef.current!;
     const ghost = wordEl.firstElementChild as HTMLElement;
+    // Fit and centre on the visible ink, not the letter boxes: the "S" starts inside its box and the
+    // "l" ends past its own, so box-based fitting leaves uneven margins. Each glyph is drawn into an
+    // offscreen canvas at its box position and the outermost inked columns are found, so both sides
+    // get exactly the page padding.
+    const inkEdges = () => {
+      const cs = getComputedStyle(wordEl);
+      const size = parseFloat(cs.fontSize);
+      const boxes = [...ghost.children].map((c) => c.getBoundingClientRect());
+      const g = ghost.getBoundingClientRect();
+      if (!boxes.length || !g.width) return null;
+      const padX = Math.ceil(size * 0.3);
+      const cv = document.createElement("canvas");
+      cv.width = Math.ceil(g.width + padX * 2);
+      cv.height = Math.ceil(size * 1.4);
+      const c = cv.getContext("2d", { willReadFrequently: true });
+      if (!c) return null;
+      c.font = `${cs.fontWeight} ${size}px ${cs.fontFamily}`;
+      c.textBaseline = "alphabetic";
+      boxes.forEach((r, i) => c.fillText(word[i] ?? "", r.left - g.left + padX, size));
+      const d = c.getImageData(0, 0, cv.width, cv.height).data;
+      let L = cv.width;
+      let R = -1;
+      for (let y = 0; y < cv.height; y++) {
+        for (let x = 0; x < cv.width; x++) {
+          if (d[(y * cv.width + x) * 4 + 3]! > 40) {
+            if (x < L) L = x;
+            if (x > R) R = x;
+          }
+        }
+      }
+      if (R < 0) return null;
+      // Ink edges relative to the box row, in px at the current size
+      return { left: L - padX, right: R + 1 - padX, box: g.width, size };
+    };
     const fit = () => {
       const pad = parseFloat(getComputedStyle(el.querySelector("[data-intro-content]")!).paddingLeft) || 16;
-      const size = parseFloat(getComputedStyle(wordEl).fontSize);
-      const width = ghost.getBoundingClientRect().width;
-      if (!width) return;
-      const next = Math.min((size * (el.clientWidth - pad * 2)) / width, innerHeight * 0.62);
-      wordEl.style.fontSize = `${next}px`;
+      for (let pass = 0; pass < 2; pass++) {
+        const m = inkEdges();
+        if (!m) return;
+        const next = Math.min((m.size * (el.clientWidth - pad * 2)) / (m.right - m.left), innerHeight * 0.62);
+        wordEl.style.fontSize = `${next}px`;
+        if (pass === 1) {
+          // The grid centres the box row; shift so the ink is centred instead
+          const k = next / m.size;
+          wordEl.style.translate = `${(m.box - m.left - m.right) * k / 2}px 0`;
+        }
+      }
     };
     fit();
     document.fonts?.ready.then(fit);
@@ -212,7 +252,7 @@ export function Intro({ name }: { name: string }) {
       removeEventListener("resize", fit);
       html.style.overflow = "";
     };
-  }, []);
+  }, [word]);
 
   if (done) return null;
 
@@ -231,7 +271,7 @@ export function Intro({ name }: { name: string }) {
 
         <div
           ref={wordRef}
-          className="grid font-display text-[calc((100vw-2rem)/3)] leading-[0.9] font-semibold whitespace-nowrap sm:text-[calc((100vw-4rem)/3)]"
+          className="grid font-sans text-[calc((100vw-2rem)/3.2)] leading-[0.9] font-bold whitespace-nowrap sm:text-[calc((100vw-4rem)/3.2)]"
         >
           {/* The ghost: where each letter is going. Both layers set each letter in its own box, so the
               tight fit comes from a negative margin per letter (letter-spacing doesn't apply between boxes) */}

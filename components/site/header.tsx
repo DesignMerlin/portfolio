@@ -3,9 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { MenuIcon } from "@/components/ui/icons";
+import { MobileMenu } from "@/components/site/mobile-menu";
 import { nav, OPEN_COMMAND_MENU } from "@/lib/site";
 
 export function openCommandMenu(via: "pointer" | "keyboard") {
@@ -47,11 +48,13 @@ function useScrolled(threshold = 8) {
  * The wordmark's wand is an animated emoji, loaded only once the nav is
  * shown; reduced motion gets the still version.
  */
-export function Header() {
+export function Header({ email }: { email: string }) {
   const pathname = usePathname();
   const home = pathname === "/";
   const scrolled = useScrolled();
-  const shown = !home || scrolled;
+  const [menuOpen, setMenuOpen] = useState(false);
+  const closeMenu = useCallback(() => setMenuOpen(false), []);
+  const shown = !home || scrolled || menuOpen;
   // Load the animated wand the first time the nav appears, not with the page
   const [wand, setWand] = useState(false);
   if (shown && !wand) setWand(true);
@@ -61,6 +64,7 @@ export function Header() {
     // glass could no longer blur the page behind it. The pill carries its own name.
     <header
       data-shown={shown ? "" : undefined}
+      data-home={home ? "" : undefined}
       className="site-header pointer-events-none sticky top-0 z-50 flex h-[var(--header-h)] items-center justify-center px-3"
     >
       <div
@@ -111,13 +115,16 @@ export function Header() {
         <ThemeToggle />
         <button
           type="button"
-          onClick={() => openCommandMenu("pointer")}
-          className="pressable flex items-center gap-2 rounded-full bg-ink py-2 pr-4 pl-3 text-small font-medium text-paper md:hidden"
+          onClick={() => setMenuOpen(true)}
+          aria-haspopup="dialog"
+          aria-expanded={menuOpen}
+          className="glass glass-btn gap-2 py-2 pr-4 pl-3 text-small font-medium md:hidden"
         >
           <MenuIcon />
           Menu
         </button>
       </div>
+      <MobileMenu open={menuOpen} onClose={closeMenu} email={email} />
     </header>
   );
 }

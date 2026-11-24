@@ -12,7 +12,7 @@ type Item = {
   label: string;
   hint?: string;
   keywords?: string;
-} & ({ href: string; type?: "nav-forward" | "nav-back" } | { action: "copy" | "theme" | "intro" });
+} & ({ href: string; type?: "nav-forward" | "nav-back" } | { action: "copy" | "theme" });
 
 /** Subsequence match with bonuses for word starts and runs. 0 means no match. */
 function score(query: string, text: string) {
@@ -66,7 +66,6 @@ export function CommandMenu({
       { id: "contact", group: "Pages", label: "Contact", keywords: "hire email message", href: "/#contact" },
       { id: "copy-email", group: "Actions", label: "Copy email address", hint: email, action: "copy" },
       { id: "theme", group: "Actions", label: "Switch theme", keywords: "dark light mode", action: "theme" },
-      { id: "intro", group: "Actions", label: "Replay the intro", keywords: "loader preloader letters", action: "intro" },
     ],
     [work, email],
   );
@@ -126,13 +125,9 @@ export function CommandMenu({
         },
         () => window.location.assign(`mailto:${email}`),
       );
-    } else if (item.action === "theme") {
+    } else {
       close();
       setTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
-    } else {
-      // A full reload on purpose: the intro measures a real page load, which client navigation can't give it
-      // eslint-disable-next-line @next/next/no-location-assign-relative-destination
-      window.location.assign(`${window.location.origin}/?intro`);
     }
   };
 

@@ -24,7 +24,7 @@ export type Profile = {
 };
 
 export const getProfile = cache(async (): Promise<Profile> => {
-  const raw = await readFile(path.join(CONTENT, "profile.md"), "utf8");
+  const raw = (await readFile(path.join(CONTENT, "profile.md"), "utf8")).replace(/\r\n/g, "\n");
   const block = raw.match(/^---\n([\s\S]*?)\n---/)?.[1] ?? "";
   const data: Record<string, string> = {};
   for (const line of block.split("\n")) {
