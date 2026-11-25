@@ -22,7 +22,7 @@ export const shot = (x: number, y: number, z: number, tilt: number, pan: number,
 
 /** A place on the screen, in points */
 export type Box = [x: number, y: number, w: number, h: number];
-export const at = ([x, y, w, h]: Box): React.CSSProperties => ({ left: x * PT, top: y * PT, width: w * PT, height: h * PT });
+export const at = ([x, y, w, h]: Box, pt = PT): React.CSSProperties => ({ left: x * pt, top: y * pt, width: w * pt, height: h * pt });
 
 // Tracks ------------------------------------------------------------------
 
@@ -104,7 +104,7 @@ export type Typing = {
   src?: string;
 };
 
-export function uiTracks(id: string, { touches = [], presses = [], typing = [] }: { touches?: Touch[]; presses?: Press[]; typing?: Typing[] }) {
+export function uiTracks(id: string, { touches = [], presses = [], typing = [] }: { touches?: Touch[]; presses?: Press[]; typing?: Typing[] }, pt = PT) {
   const tracks: Record<string, Frame[]> = {};
   touches.forEach((x, i) => (tracks[`${id}-touch-${i}`] = tap(x.t)));
   presses.forEach((x, i) => (tracks[`${id}-press-${i}`] = press(x.t)));
@@ -118,7 +118,7 @@ export function uiTracks(id: string, { touches = [], presses = [], typing = [] }
     // Typed over a placeholder: it stays until the first character
     if (x.src) tracks[`${id}-ink-${i}`] = show(x.from);
     tracks[`${id}-focus-${i}`] = focus(x.focusAt, x.blurAt);
-    const end = x.text[2] * PT;
+    const end = x.text[2] * pt;
     tracks[`${id}-caret-${i}`] = [
       [0, { transform: "translateX(0px)" }],
       [x.from, { transform: "translateX(0px)" }, steps],
@@ -130,24 +130,24 @@ export function uiTracks(id: string, { touches = [], presses = [], typing = [] }
 }
 
 /** Fields and buttons, drawn inside the screen they belong to */
-export function ScreenUI({ id, presses = [], typing = [] }: { id: string; presses?: Press[]; typing?: Typing[] }) {
+export function ScreenUI({ id, presses = [], typing = [], pt = PT }: { id: string; presses?: Press[]; typing?: Typing[]; pt?: number }) {
   return (
     <>
       {typing.map((x, i) => (
         <span key={`t${i}`}>
-          <span data-track={`${id}-ink-${i}`} className="fp-typed" style={{ ...at(x.text), background: x.src ? x.bg : undefined }}>
+          <span data-track={`${id}-ink-${i}`} className="fp-typed" style={{ ...at(x.text, pt), background: x.src ? x.bg : undefined }}>
             {x.src ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img src={x.src} alt="" className="fp-typed-ink" draggable={false} />
             ) : null}
             <span data-track={`${id}-cover-${i}`} style={{ background: x.bg }} />
           </span>
-          <span data-track={`${id}-focus-${i}`} className="fp-focus" style={{ ...at(x.field), borderRadius: x.r * PT }} />
-          <span data-track={`${id}-caret-${i}`} className="fp-caret" style={{ left: x.text[0] * PT, top: (x.text[1] + 2) * PT, height: (x.text[3] - 4) * PT }} />
+          <span data-track={`${id}-focus-${i}`} className="fp-focus" style={{ ...at(x.field, pt), borderRadius: x.r * pt }} />
+          <span data-track={`${id}-caret-${i}`} className="fp-caret" style={{ left: x.text[0] * pt, top: (x.text[1] + 2) * pt, height: (x.text[3] - 4) * pt }} />
         </span>
       ))}
       {presses.map((x, i) => (
-        <span key={`p${i}`} data-track={`${id}-press-${i}`} className="fp-press" style={{ ...at(x.box), borderRadius: x.r * PT }} />
+        <span key={`p${i}`} data-track={`${id}-press-${i}`} className="fp-press" style={{ ...at(x.box, pt), borderRadius: x.r * pt }} />
       ))}
     </>
   );

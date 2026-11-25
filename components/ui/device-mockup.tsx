@@ -9,6 +9,7 @@ const films = {
   room8: dynamic(() => import("@/components/case-study/room8/film")),
   fundpath: dynamic(() => import("@/components/case-study/fundpath/film")),
   yoyo: dynamic(() => import("@/components/case-study/yoyo/film")),
+  revivalStream: dynamic(() => import("@/components/case-study/revival-stream/film")),
   caseTracker: dynamic(() => import("@/components/case-study/case-tracker/film")),
 };
 
@@ -98,7 +99,7 @@ export function DeviceMockup({
 
   const playing = visible && !covered && !paused;
   const Film = "film" in mockup ? films[mockup.film] : null;
-  const what = "film" in mockup ? "iPhones, as a short 3D film" : "phones" in mockup ? "three phones" : "a laptop and a phone";
+  const what = "film" in mockup ? (mockup.film === "revivalStream" ? "a laptop and an iPhone, as a short film" : "iPhones, as a short film") : "phones" in mockup ? "three phones" : "a laptop and a phone";
 
   return (
     <div

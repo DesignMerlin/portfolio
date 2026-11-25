@@ -17,6 +17,10 @@ export const workMockups: Record<string, Mockup> = {
     film: "caseTracker",
     wash: ["#b61f2a", "#640c16"],
   },
+  "revival-stream": {
+    film: "revivalStream",
+    wash: ["#ff8c62", "#fb7d4f"],
+  },
   yoyo: {
     film: "yoyo",
     wash: ["#dcebff", "#dcebff"],

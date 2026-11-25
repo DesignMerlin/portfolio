@@ -364,3 +364,26 @@ Samuel asked for the whole site in one go ("non-negotiable build"), so the usual
 - Email addresses on FundPath, Yoyo and the attorney's profile, and FundPath's phone number, are replaced with placeholders. Case Tracker's community and group screens are exported at 1.8x (the section is too wide for 3x).
 - Copy on built screens is sample copy for Samuel to check. Bank names are "Sample Bank".
 
+## 2026-11-25: prototypes off the project pages
+
+- Samuel asked for prototypes to come off every project page (the Immigify agent demo too). Only the display is gone: the `prototype` sections in the MDX, `components/case-study/prototypes`, `content/built` and `scripts/screens` stay, so they can come back by rendering that section again in `work/[slug]/page.tsx`.
+- "More work" shows two projects, picked at random in the browser each time the page opens (`random-two.tsx`), from those with visuals.
+
+## 2026-11-25: Revival Stream
+
+- **Source:** Figma REVIVAL STREAM, section 324:24549 (the listener's side; the admin side beside it isn't used). The whole section was exported once as SVG and rendered in the browser at any size, which also gives every layer's exact box and lets single layers be cut out with nothing behind them. At that size Figma leaves corner radii, strokes and blurs unscaled in the SVG, so those are corrected before rendering; the player pages, which use background blur, are normal PNG exports.
+- **Film** (`components/case-study/revival-stream/film.tsx`, 66s): the front of a radio. Dial and needle at the bottom, an equaliser behind that only plays while a channel does, and six stations: sign up, listen on mobile, listen on desktop, browse, library, account. Tuning slides the devices out one side and in the other. Flat, like Yoyo's, but the first with a laptop and a pointer.
+- **Logo:** sound bars first, the flame catches behind them, the name rises, then the lockup flies into the laptop's own corner. The same parts animate on the sign-up and log-in screens.
+- **Lottie:** the waveform and the green tick are the GIFs in the Figma file, as sprite grids in `public/work/motion`. The waveform is taken out of the player pages underneath (`plate-*.webp`).
+- **Live scenes** can now be any size (`LiveScene.size`), not just 375×812.
+- **Key screens** can be shown in devices (`devices: true` on a panel): a CSS laptop for desktop, an iPhone for mobile. Opening a long mobile page shows it at reading size and scrolls.
+- **Changed from the file:** Samuel's email and the Google account hint are placeholders, and the now-playing bar is drawn above the sidebar (in the file the sidebar covers its title).
+- Headless: 55 to 57fps. Nav contrast at least 5.9:1 down the page, both themes.
+- **Samuel to confirm:** client, year (2024 is from the footer), role, results, and the copy. (Confirmed: the screens can be public.)
+- **No repeated pictures** (Samuel's request, non-negotiable; exports only, the Figma file isn't changed). Across every page the film shows (both homes, channels, ministers, minstrels, testimonies, desktop and mobile) there are 105 pictures and each is on one page only. The exceptions are a channel or person being followed (Soaking Worship into its player, a minister from home into his, the playing channel's thumbnail in the bar) and the account's own avatar.
+  - Desktop and mobile lists show different people and channels. New portraits and scenes are from Unsplash (or the file's Dump page first), with made-up names so no real person's name is on a stock photo.
+  - Mobile home has its own banner. Two commenters in the mobile chat, with their own avatars.
+  - Film: the phone listens to Soaking Worship, the laptop to a minister; while browsing, the phone is on a different list from the laptop. 64s.
+  - Key screens pair a laptop with a phone on a different page. The like is shown on Mercy Chinwo's page.
+  - Images live in `public/work/revival`. When a picture changes, rename the file or folder: next/image copies are cached in browsers for hours under the old name.
+- **Figma file edited at Samuel's request (2026-11-25):** the same pictures and names are now in REVIVAL STREAM's frames: desktop and mobile Home (and their playing copies), Channels (and its playing copy), Ministers, Minstrels and Testimonies. 94 picture fills and 74 labels changed; each fill keeps its crop mode and each label its own font. Pictures from Unsplash were uploaded into the file; the rest were already in it (Dump page). Nothing else in the file was changed: the now-playing bar still sits under the sidebar there, and the emails are still the originals.

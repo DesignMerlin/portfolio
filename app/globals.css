@@ -2098,6 +2098,227 @@ html.theme-swap * {
 .yo-bit {
   margin: -8px 0 0 -8px;
 }
+/* Revival Stream film (components/case-study/revival-stream/film.tsx): the front of a radio */
+.rs {
+  --film-shade: 90 26 4;
+  --field: #ea4609;
+  background: radial-gradient(90% 80% at 50% 40%, #ffa07c, #ff8c62 62%, #fb7d4f);
+}
+.rs-eq {
+  display: flex;
+  top: 136px;
+  left: -8px;
+  width: 1200px;
+  height: 620px;
+  justify-content: space-between;
+}
+.rs-eq span {
+  width: 28px;
+  height: 100%;
+  border-radius: 14px;
+  background: #f4662f;
+}
+.rs-camera,
+.rs-at {
+  left: 592px;
+  top: 446px;
+  width: 0;
+  height: 0;
+}
+.rs-camera > * {
+  position: absolute;
+}
+.rs-at {
+  left: 0;
+  top: 0;
+}
+.rs-mark svg {
+  display: block;
+  width: 100%;
+  overflow: visible;
+}
+/* The laptop: its screen is 1440×1024 points at 0.75px to a point, centred on this box */
+.rs-laptop {
+  position: absolute;
+  width: 0;
+  height: 0;
+  transform: scale(0.7);
+}
+.rs-lid {
+  position: absolute;
+  left: -558px;
+  top: -404px;
+  width: 1116px;
+  height: 808px;
+  border-radius: 30px 30px 10px 10px;
+  background: #0a0b0d;
+  box-shadow:
+    inset 0 0 0 2px #3a3f48,
+    0 40px 90px -30px rgb(60 14 0 / 0.55);
+  transform-origin: 50% 100%;
+}
+.rs-cam {
+  position: absolute;
+  top: 7px;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  margin-left: -3px;
+  border-radius: 50%;
+  background: #262c38;
+}
+.rs-screen {
+  position: absolute;
+  left: 18px;
+  top: 20px;
+  width: 1080px;
+  height: 768px;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #141414;
+}
+.rs-base {
+  position: absolute;
+  left: -650px;
+  top: 404px;
+  width: 1300px;
+  height: 34px;
+  border-radius: 4px 4px 26px 26px;
+  background: linear-gradient(#eceef2, #c3c7cf 30%, #a0a5b0 70%, #7c818c);
+  box-shadow: 0 40px 70px -20px rgb(60 14 0 / 0.5);
+}
+.rs-base span {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 190px;
+  height: 12px;
+  margin-left: -95px;
+  border-radius: 0 0 12px 12px;
+  background: linear-gradient(#9399a4, #bfc4cc);
+}
+.rs-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #141414;
+}
+.rs-layer img {
+  max-width: none;
+}
+.rs-scroll {
+  position: absolute;
+  inset: 0;
+}
+.rs-layer > img,
+.rs-scroll > img,
+.rs-live {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.rs-fixed {
+  position: absolute;
+  overflow: hidden;
+}
+.rs-screen .fp-caret {
+  width: 2px;
+}
+.rs-screen .fp-focus {
+  box-shadow: inset 0 0 0 1.5px var(--field), 0 0 0 4px color-mix(in srgb, var(--field) 26%, transparent);
+}
+.rs .fp-typed-ink {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.rs-pointer-show {
+  position: absolute;
+  inset: 0;
+}
+.rs-pointer {
+  position: absolute;
+  left: -3px;
+  top: -3px;
+  filter: drop-shadow(0 2px 4px rgb(0 0 0 / 0.45));
+}
+.rs-click {
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  margin: -28px 0 0 -28px;
+  border-radius: 50%;
+  background: rgb(255 140 98 / 0.28);
+  box-shadow: inset 0 0 0 2px rgb(255 255 255 / 0.85);
+}
+/* Graphite, against the peach */
+.rs .yo-frame {
+  background: linear-gradient(150deg, #767a82, #3b3e44 16%, #24262a 40%, #44474d 60%, #1d1f22 82%, #63676f);
+  box-shadow:
+    inset 0 0 0 2px rgb(255 255 255 / 0.18),
+    0 50px 90px -30px rgb(60 14 0 / 0.65);
+}
+.rs .yo-button {
+  background: linear-gradient(90deg, #4a4d54, #24262a);
+}
+.rs .fp-screen {
+  background: #141414;
+  transform: none;
+}
+.rs .fp-bezel {
+  width: 686px;
+  height: 1442px;
+  margin: -721px 0 0 -343px;
+  border-radius: 99px;
+  background: #050507;
+  transform: none;
+}
+.rs .fp-screen > .fp-touch {
+  background: radial-gradient(circle, rgb(255 255 255 / 0.4) 0 38%, rgb(255 255 255 / 0.2) 39% 100%);
+}
+.rs-dial {
+  left: 0;
+  top: 818px;
+  width: 1184px;
+  height: 214px;
+  overflow: hidden;
+  background: linear-gradient(transparent, #fb7d4f 20%);
+}
+.rs-strip {
+  position: absolute;
+  left: 0;
+  top: 62px;
+  width: 8200px;
+  height: 64px;
+  margin-left: -600px;
+  padding-left: 600px;
+  background:
+    repeating-linear-gradient(90deg, #7a2503 0 3px, transparent 3px 118px) 8px 30px / 8200px 34px no-repeat,
+    repeating-linear-gradient(90deg, rgb(122 37 3 / 0.55) 0 2px, transparent 2px 23.6px) 8px 44px / 8200px 20px no-repeat;
+}
+.rs-strip span {
+  position: absolute;
+  top: -10px;
+  margin-left: 600px;
+  translate: -50% 0;
+  white-space: nowrap;
+  color: #2b0d02;
+  font: 600 26px/1 var(--font-sans), sans-serif;
+  letter-spacing: -0.02em;
+}
+.rs-needle {
+  position: absolute;
+  left: 590px;
+  top: 86px;
+  width: 5px;
+  height: 46px;
+  border-radius: 3px;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgb(234 70 9 / 0.9);
+}
 .fp-dust {
   border-radius: 50%;
   background: #e6dcff;
@@ -2123,6 +2344,110 @@ html.theme-swap * {
 }
 .screen-card:active {
   transform: scale(0.985);
+}
+/* Work that runs on both: each screen in its device, sized in container units */
+.device-panel {
+  container-type: inline-size;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 3cqw;
+  padding: 6cqw 5cqw 5.2cqw;
+  background: color-mix(in oklab, var(--tint) 14%, #fff);
+}
+.device-panel[data-tone="deep"] {
+  background: color-mix(in oklab, var(--tint) 78%, #1c0a03);
+}
+.frame-laptop,
+.frame-phone {
+  position: relative;
+  display: block;
+  flex: none;
+  cursor: zoom-in;
+  outline-offset: 6px;
+  transition: transform var(--dur-quick) var(--ease-enter);
+}
+.frame-laptop:active,
+.frame-phone:active {
+  transform: scale(0.99);
+}
+.frame-laptop {
+  width: 68cqw;
+  padding: 0 3.6cqw;
+}
+/* Two desktop screens share a panel: both get a laptop, a little smaller */
+.frame-laptop:has(+ .frame-laptop),
+.frame-laptop + .frame-laptop {
+  width: 44cqw;
+  padding: 0 2.2cqw;
+}
+.frame-phone {
+  width: 17cqw;
+}
+.frame-body {
+  display: block;
+  background: #0a0b0d;
+}
+.frame-laptop .frame-body {
+  padding: 1.1cqw 0.9cqw 0.9cqw;
+  border-radius: 1.7cqw 1.7cqw 0.5cqw 0.5cqw;
+  box-shadow: inset 0 0 0 1px #3a3f48;
+}
+.frame-phone .frame-body {
+  padding: 0.6cqw;
+  border-radius: 2.75cqw;
+  box-shadow:
+    inset 0 0 0 0.22cqw #565a62,
+    0 2.4cqw 4cqw -1.6cqw rgb(40 10 0 / 0.55);
+}
+.frame-screen {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background: #141414;
+}
+.frame-laptop .frame-screen {
+  aspect-ratio: 1440 / 1024;
+  border-radius: 0.35cqw;
+}
+.frame-phone .frame-screen {
+  aspect-ratio: 375 / 812;
+  border-radius: 2.2cqw;
+}
+.frame-island {
+  position: absolute;
+  top: 0.45cqw;
+  left: 50%;
+  width: 32%;
+  height: 1.3cqw;
+  translate: -50% 0;
+  border-radius: 99px;
+  background: #050507;
+}
+.frame-base {
+  display: block;
+  height: 1.7cqw;
+  margin: 0 -3.6cqw;
+  border-radius: 0.2cqw 0.2cqw 1.4cqw 1.4cqw;
+  background:
+    radial-gradient(ellipse 100% 100% at 50% 0, #9ea4ae 0 98%, transparent) 50% 0 / 11cqw 0.6cqw no-repeat,
+    linear-gradient(#eceef2, #c3c7cf 35%, #8b909b);
+  box-shadow: 0 2.4cqw 4cqw -1.6cqw rgb(40 10 0 / 0.55);
+}
+.frame-laptop:has(+ .frame-laptop) .frame-base,
+.frame-laptop + .frame-laptop .frame-base {
+  margin: 0 -2.2cqw;
+}
+/* On a phone there isn't room side by side: the laptop, then the iPhone in front of its corner */
+@container (max-width: 520px) {
+  .device-panel > .frame-laptop:has(+ .frame-phone) {
+    width: 78cqw;
+  }
+  .device-panel > .frame-phone {
+    width: 21cqw;
+    margin-left: -12cqw;
+    margin-bottom: -2cqw;
+  }
 }
 .screen-viewer {
   position: fixed;
@@ -2152,6 +2477,28 @@ html.theme-swap * {
   border-radius: 32px;
   box-shadow: 0 40px 90px -30px rgb(0 0 0 / 0.7);
   animation: screen-in var(--dur-base) var(--ease-enter);
+}
+.screen-viewer-desktop {
+  width: min(100%, calc((100svh - 108px) * 1.40625));
+  border-radius: 12px;
+}
+.screen-viewer-long {
+  width: min(390px, 100%);
+  max-height: calc(100svh - 108px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-radius: 32px;
+  scrollbar-width: none;
+  outline-offset: 4px;
+  animation: screen-in var(--dur-base) var(--ease-enter);
+}
+.screen-viewer-long .screen-viewer-img {
+  display: block;
+  width: 100%;
+  max-height: none;
+  border-radius: 0;
+  box-shadow: none;
+  animation: none;
 }
 @keyframes screen-in {
   from { opacity: 0; transform: scale(0.97); }

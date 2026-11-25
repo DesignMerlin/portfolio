@@ -7,7 +7,7 @@ import { useReducedMotion } from "@/components/ui/use-reduced-motion";
 /**
  * Screens that move: a logo arriving, an hourglass turning, a tick landing, a
  * chart filling in. A scene is a list of parts placed over a screen in its own
- * points (375×812), each with frames in seconds. The same scene runs inside a
+ * points (375×812, unless it says), each with frames in seconds. The same scene runs inside a
  * film (on the film's clock), in a prototype and on the case study's screens.
  *
  * `--pt` is one point, so a scene fits whatever size its screen is shown at.
@@ -40,6 +40,8 @@ export type Part = {
   /** An exact piece of a screen: what's at `sliceAt` (the box, unless it differs) */
   slice?: string;
   sliceAt?: [x: number, y: number];
+  /** The slice's whole size, if it isn't the scene's */
+  sliceSize?: [w: number, h: number];
   /** A file that fills the box */
   img?: string;
   sprite?: Sprite;
@@ -54,10 +56,14 @@ export type LiveScene = {
   /** Seconds. A looping scene starts again here; the rest hold their last frame */
   length: number;
   loop?: boolean;
+  /** The screen's size in points: 375×812 unless set */
+  size?: [w: number, h: number];
   /** Reduced motion and stills show this moment (the end, unless set) */
   still?: number;
   parts: Part[];
 };
+
+const PHONE: [number, number] = [375, 812];
 
 export const HOLD = "steps(1, jump-end)";
 
@@ -108,18 +114,19 @@ export function liveTracks(id: string, scene: LiveScene, t: number, until = Infi
 export function LiveParts({ id, scene }: { id: string; scene: LiveScene }) {
   return (
     <span className="live" aria-hidden="true">
-      <span className="live-in">
+      <span className="live-in" style={scene.size ? ({ "--pt": `calc(100cqw / ${scene.size[0]})` } as React.CSSProperties) : undefined}>
         {scene.parts.map((p) => (
-          <PartView key={p.id} id={id} part={p} from={[0, 0]} />
+          <PartView key={p.id} id={id} part={p} from={[0, 0]} size={scene.size ?? PHONE} />
         ))}
       </span>
     </span>
   );
 }
 
-function PartView({ id, part: p, from }: { id: string; part: Part; from: [number, number] }) {
+function PartView({ id, part: p, from, size }: { id: string; part: Part; from: [number, number]; size: [number, number] }) {
   const [x, y, w, h] = p.box;
   const [sx, sy] = p.sliceAt ?? [x, y];
+  const [sw, sh] = p.sliceSize ?? size;
   return (
     <span
       data-track={p.frames ? `${id}-${p.id}` : undefined}
@@ -139,7 +146,7 @@ function PartView({ id, part: p, from }: { id: string; part: Part; from: [number
     >
       {p.slice ? (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={p.slice} alt="" draggable={false} style={{ left: pt(-sx), top: pt(-sy), width: pt(375), height: pt(812) }} />
+        <img src={p.slice} alt="" draggable={false} style={{ left: pt(-sx), top: pt(-sy), width: pt(sw), height: pt(sh) }} />
       ) : null}
       {p.img ? (
         // eslint-disable-next-line @next/next/no-img-element
@@ -156,7 +163,7 @@ function PartView({ id, part: p, from }: { id: string; part: Part; from: [number
         />
       ) : null}
       {p.node?.((name) => ({ "data-track": `${id}-${p.id}-${name}` }))}
-      {p.parts?.map((q) => <PartView key={q.id} id={id} part={q} from={[x, y]} />)}
+      {p.parts?.map((q) => <PartView key={q.id} id={id} part={q} from={[x, y]} size={size} />)}
     </span>
   );
 }
