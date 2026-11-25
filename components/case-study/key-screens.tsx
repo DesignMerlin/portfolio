@@ -63,8 +63,15 @@ export function KeyScreens({
           {g.live === "room8-tour" ? (
             <TourModes />
           ) : (
-            <div className={`grid gap-3 sm:gap-4 ${g.panels.length > 1 ? "grid-cols-2" : ""}`}>
-              {g.panels.map((panel, i) => (
+            <div className={`grid gap-3 sm:gap-4 ${g.panels.length > 1 && !g.panels.some((p) => p.devices) ? "grid-cols-2" : ""}`}>
+              {g.panels.map((panel, i) =>
+                panel.devices ? (
+                  <div key={i} data-tone={panel.tone} className="device-panel overflow-hidden rounded-[var(--radius-l)]">
+                    {panel.screens.map((screen) => (
+                      <FramedScreen key={screen.src} screen={screen} onOpen={() => setOpen(all.indexOf(screen))} />
+                    ))}
+                  </div>
+                ) : (
                 <div
                   key={i}
                   data-tone={panel.tone}
@@ -84,13 +91,33 @@ export function KeyScreens({
                     </button>
                   ))}
                 </div>
-              ))}
+                ),
+              )}
             </div>
           )}
         </section>
       ))}
       <ScreenViewer screens={all} index={open} onIndex={setOpen} onClose={close} />
     </div>
+  );
+}
+
+/** A desktop screen in a laptop, or a mobile one in an iPhone. Longer pages show their top; opening one shows all of it */
+function FramedScreen({ screen, onOpen }: { screen: Screen; onOpen: () => void }) {
+  const { w = 375, h = 812 } = screen;
+  const laptop = w > 600;
+  const scene = liveScene(screen.src);
+  return (
+    <button type="button" onClick={onOpen} aria-label={`Open screen. ${screen.alt}`} className={laptop ? "frame-laptop" : "frame-phone"}>
+      <span className="frame-body">
+        <span className="frame-screen">
+          <Image src={screen.src} alt="" width={w} height={h} sizes={laptop ? "(min-width: 1024px) 720px, 92vw" : "(min-width: 1024px) 200px, 30vw"} draggable={false} className="block h-auto w-full max-w-none" />
+          {scene ? <LiveOverlay scene={scene} /> : null}
+          {laptop ? null : <span className="frame-island" />}
+        </span>
+      </span>
+      {laptop ? <span className="frame-base" /> : null}
+    </button>
   );
 }
 
@@ -109,6 +136,10 @@ function ScreenViewer({
   const swipe = useRef<{ x: number; y: number } | null>(null);
   const screen = index === null ? undefined : screens[index];
   const isOpen = !!screen;
+  const { w = 375, h = 812 } = screen ?? {};
+  const desktop = w > 600;
+  // A long phone page is shown at reading size and scrolls
+  const long = !desktop && h / w > 2.4;
 
   useEffect(() => {
     const d = dialog.current;
@@ -145,16 +176,17 @@ function ScreenViewer({
     >
       {screen ? (
         <>
-          <Image
-            key={screen.src}
-            src={screen.src}
-            alt={screen.alt}
-            width={948}
-            height={2100}
-            sizes="(min-width: 640px) 45vh, 80vw"
-            draggable={false}
-            className="screen-viewer-img"
-          />
+          <div key={screen.src} className={long ? "screen-viewer-long" : "contents"} tabIndex={long ? 0 : undefined} role={long ? "group" : undefined} aria-label={long ? "The whole page. Scroll to see more" : undefined}>
+            <Image
+              src={screen.src}
+              alt={screen.alt}
+              width={screen.w ?? 948}
+              height={screen.h ?? 2100}
+              sizes={desktop ? "92vw" : "(min-width: 640px) 45vh, 80vw"}
+              draggable={false}
+              className={`screen-viewer-img ${desktop ? "screen-viewer-desktop" : ""}`}
+            />
+          </div>
           <div className="screen-viewer-bar">
             <button type="button" onClick={() => go(-1)} aria-label="Previous screen">
               <ArrowLeft />

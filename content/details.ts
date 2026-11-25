@@ -1,6 +1,7 @@
 import type { PlaceholderKind } from "@/components/ui/placeholder-shot";
 import { caseTracker } from "@/content/case-tracker";
 import { fundpath } from "@/content/fundpath";
+import { revival } from "@/content/revival-stream";
 import { room8 } from "@/content/room8";
 import { yoyo } from "@/content/yoyo";
 
@@ -9,13 +10,24 @@ import { yoyo } from "@/content/yoyo";
  * Facts only, from content/profile.md and the case study MDX. A section with no confirmed content is
  * `null` and the page says it's on its way; never fill one in with a guess.
  */
-export type Screen = { src: string; alt: string };
+export type Screen = {
+  src: string;
+  alt: string;
+  /** Size in points, when it isn't a 375×812 phone screen */
+  w?: number;
+  h?: number;
+};
 
 export type KeyScreenGroup = {
   title: string;
   body: string;
   /** Panels sit side by side on wide screens; each holds one or more phone screens */
-  panels: { tone: "deep" | "soft"; screens: Screen[] }[];
+  panels: {
+    tone: "deep" | "soft";
+    screens: Screen[];
+    /** Shown in an iPhone and a laptop, for work that runs on both */
+    devices?: boolean;
+  }[];
   /** An interactive piece shown instead of still screens */
   live?: "room8-tour";
 };
@@ -43,6 +55,7 @@ const s = room8;
 const f = fundpath;
 const c = caseTracker;
 const y = yoyo;
+const r = revival;
 
 export const details: Record<string, ProjectDetail> = {
   room8: {
@@ -244,6 +257,87 @@ export const details: Record<string, ProjectDetail> = {
         title: "The same app, at night",
         body: "Dark mode keeps the hierarchy: the same shapes, with colour saved for what needs attention.",
         panels: [{ tone: "soft", screens: [y.darkSplash, y.darkWelcome, y.darkHome, y.darkHealth] }],
+      },
+    ],
+  },
+  // TODO: Samuel to confirm this copy. Written from the designs (Figma REVIVAL STREAM, section 324:24549); no research or results are claimed
+  "revival-stream": {
+    headline: "Where every godly mood finds its stream",
+    tags: ["Music and media", "Web", "Mobile"],
+    kind: "web",
+    challenge:
+      "Nobody opens a worship radio knowing the name of the channel. They arrive with a mood, a preacher they trust or a singer they love, often on a phone, and they want sound right away. The product had to answer all three starting points, keep playing while people look around, and still feel like listening together.",
+    approach:
+      "I gave each starting point its own door: channels for a mood, ministers for a sermon, minstrels for a song, testimonies for encouragement. You can look through all of them before signing up. A bar holds whatever is on air while you browse, and opens into a full player with what's on now, what's next, a live chat and sharing. I designed every page for desktop and mobile side by side, on one dark system with a single orange, so the covers bring the colour.",
+    outcome:
+      "A complete product across desktop and mobile: sign-up with email verification, log-in, home, channels, ministers, minstrels and testimonies, the player with live chat, sharing and favourites, channel requests, notifications and settings, with their loading, empty and success states.",
+    keyScreens: [
+      {
+        title: "Get in quickly",
+        body: "Three fields, or one tap with Google, Facebook or Apple. The button only lights up when there's something to send, and a four-digit code confirms the address.",
+        panels: [
+          { tone: "deep", devices: true, screens: [r.signup, r.mSignup] },
+          { tone: "soft", devices: true, screens: [r.code, r.mCode] },
+          { tone: "deep", devices: true, screens: [r.verified, r.mVerified] },
+        ],
+      },
+      {
+        title: "Come back",
+        body: "Logging in shows its work: the button turns into a spinner, so a slow connection never looks like a dead click. Then you land on home, with everything that's live.",
+        panels: [{ tone: "soft", devices: true, screens: [r.loginLoading, r.mHome] }],
+      },
+      {
+        title: "Start from a mood",
+        body: "One promise, then live channels. Home leads with what's trending and keeps ministers, minstrels and testimonies a scroll away. Play something and a bar holds it while you keep looking.",
+        panels: [
+          { tone: "deep", devices: true, screens: [r.homePlaying, r.mMenu] },
+        ],
+      },
+      {
+        title: "The player",
+        body: "The cover fills the background, so every channel has its own light. The waveform moves while it's live, and below it is what's on now and what's up next, with a reminder for anything you don't want to miss.",
+        panels: [{ tone: "deep", devices: true, screens: [r.minister, r.mPlayer] }],
+      },
+      {
+        title: "Listen together",
+        body: "The chat opens beside the player on a laptop and as a sheet under the cover on a phone, so the music stays in view. Liking a channel fills the heart and says where it went.",
+        panels: [
+          { tone: "soft", devices: true, screens: [r.chat, r.mMenuIn] },
+          { tone: "deep", devices: true, screens: [r.like, r.mChat] },
+        ],
+      },
+      {
+        title: "Pass it on",
+        body: "Every channel has its own address. Share it where people already talk, or copy the link.",
+        panels: [{ tone: "soft", devices: true, screens: [r.share] }],
+      },
+      {
+        title: "By channel, by minister, by minstrel",
+        body: "Channels are wide cards, because they're about a feeling. People are round portraits, because you look for a face. The shape tells you which kind of page you're on before you read it.",
+        panels: [
+          { tone: "deep", devices: true, screens: [r.channelPlaying, r.mMinisters] },
+          { tone: "soft", devices: true, screens: [r.ministers, r.mMinstrels] },
+          { tone: "deep", devices: true, screens: [r.minstrels, r.mTestimonies] },
+          { tone: "soft", devices: true, screens: [r.testimonies, r.mChannels] },
+        ],
+      },
+      {
+        title: "Your library",
+        body: "An empty list points back to the channels. If what you want isn't there, you can ask for it: what it is, why, and who it's by.",
+        panels: [
+          { tone: "soft", devices: true, screens: [r.favourites, r.mRequest] },
+          { tone: "deep", devices: true, screens: [r.request, r.mFavourites] },
+        ],
+      },
+      {
+        title: "Your account",
+        body: "Settings are three short pages. Disconnecting an account asks for your password, and notifications are set by where they reach you.",
+        panels: [
+          { tone: "soft", devices: true, screens: [r.account, r.mSettings] },
+          { tone: "deep", devices: true, screens: [r.disconnect, r.mPassword] },
+          { tone: "soft", devices: true, screens: [r.prefs, r.mPrefs] },
+          { tone: "deep", devices: true, screens: [r.notifications, r.mNotifications] },
+        ],
       },
     ],
   },
