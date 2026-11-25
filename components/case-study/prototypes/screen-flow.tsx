@@ -35,6 +35,30 @@ export type FlowNode<Id extends string> = {
 };
 export type Flow<Id extends string> = Partial<Record<Id, FlowNode<Id>>>;
 
+/** A screen rendered by scripts/screens, with its own tap targets */
+type Built = {
+  src: string;
+  alt: string;
+  spots: { label: string; at: number[]; size: number[]; to: string; move: string }[];
+  fields?: { label: string; text: number[]; clear: number[]; field: number[]; r: number; bg: string; chars: number; src: string }[];
+  sheet?: { top: number; over: string };
+  auto?: { to: string; after: number; move: string };
+};
+
+/** The app's whole flow: what's drawn in Figma, more spots on those, and the screens built to complete it */
+export function wholeFlow<Id extends string>(drawn: Flow<Id>, more: Partial<Record<Id, Partial<FlowNode<Id>>>>, built: Record<string, Built>): Flow<Id> {
+  const out: Record<string, FlowNode<Id>> = {};
+  for (const id of new Set([...Object.keys(drawn), ...Object.keys(more)])) {
+    const a = drawn[id as Id];
+    const b = more[id as Id];
+    // The same label twice means the second one wins
+    const spots = new Map([...(a?.spots ?? []), ...(b?.spots ?? [])].map((s) => [s.label, s]));
+    out[id] = { ...a, ...b, spots: [...spots.values()], fields: [...(a?.fields ?? []), ...(b?.fields ?? [])] };
+  }
+  for (const [id, s] of Object.entries(built)) out[id] = { spots: s.spots, fields: s.fields, sheet: s.sheet, auto: s.auto } as unknown as FlowNode<Id>;
+  return out as Flow<Id>;
+}
+
 export const FULL: [number, number] = [375, 812];
 export const BTN: [number, number] = [343, 52];
 export const ICON: [number, number] = [48, 48];

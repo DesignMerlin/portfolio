@@ -2,8 +2,8 @@
  * Immigify Case Tracker+ screens, exported at 3× (1125×2436) from Samuel's Figma file Immigify-App, page
  * "Mobile", section 2002:10800. The film, the case study and the prototype all read from here.
  * `home` carries the app's own tab bar at the bottom of the first screen; `book` brings the times and the
- * button up under the calendar (the design is 1007 tall). The attorney's profile is left out: it shows a
- * contact email address.
+ * button up under the calendar (the design is 1007 tall). The email address on the attorney's profile
+ * is taken out here.
  */
 const screen = (file: string, alt: string) => ({ src: `/work/case-tracker/${file}.webp`, alt });
 
@@ -29,6 +29,65 @@ export const caseTracker = {
   book: screen("book", "Book an appointment: pick a date and a time."),
   pay: screen("pay", "Confirm payment: notes for the consultant and card details."),
   confirmed: screen("confirmed", "Appointment confirmed, with a reminder added."),
+  login: screen("login", "Welcome back: log in with email, Google or Apple, or continue as a guest."),
+  statusEmpty: screen("status-empty", "What brings you here? Nothing selected yet."),
+  interestsEmpty: screen("interests-empty", "Choose your interests: none selected yet."),
+  homeEmpty: screen("home-empty", "Home for a guest: no case, events or communities yet."),
+  feedAll: screen("feed-all", "Community feed, all topics."),
+  feedEmployment: screen("feed-employment", "Community feed, employment green card."),
+  feedFamily: screen("feed-family", "Community feed, family green card."),
+  feedBusiness: screen("feed-business", "Community feed, business, work and student visas."),
+  forYou: screen("for-you", "Community, For you, signed in."),
+  category: screen("category", "Select a category for a post."),
+  categoryOpen: screen("category-open", "Employment green card categories."),
+  categoryPicked: screen("category-picked", "Three categories picked: EB1, EB2 and EB2-NIW."),
+  categoryMax: screen("category-max", "You can only select 3 maximum."),
+  postCategory: screen("post-category", "Create post, with its categories."),
+  whoReply: screen("who-reply", "Who can reply: everyone, or only users you mention."),
+  postMention: screen("post-mention", "Create post: only users you mention can reply."),
+  postImages: screen("post-images", "Create post, with hashtags and three photos."),
+  drafts: screen("drafts", "Drafts."),
+  draftsEdit: screen("drafts-edit", "Drafts, being edited."),
+  draftsPicked: screen("drafts-picked", "Drafts, one selected."),
+  chooseCase: screen("choose-case", "Choose a case to share its timeline."),
+  chooseCasePicked: screen("choose-case-picked", "Choose a case: one selected."),
+  updateEmpty: screen("update-empty", "Add an update on your case, empty."),
+  updateFilled: screen("update-filled", "Add an update: changed service center to Texas."),
+  timelineUpdated: screen("timeline-updated", "Visa timeline with the update added."),
+  postTimeline: screen("post-timeline", "Create post, with the case timeline attached."),
+  postView: screen("post-view", "A post with its timeline and comments."),
+  postMenu: screen("post-menu", "Post options: report, hide, share or cancel."),
+  event: screen("event", "Green Card Interview Prep Workshop: when, where and who's going."),
+  newChoice: screen("new-choice", "New: a post or a group?"),
+  newGroupChoice: screen("new-group-choice", "New: a group is selected."),
+  createGroup: screen("create-group", "Create a group: category, name and description."),
+  createGroupLook: screen("create-group-look", "Create a group: cover image, privacy and posting rules."),
+  groupPrivacy: screen("group-privacy", "Privacy level: public, private or hidden."),
+  groupPosting: screen("group-posting", "Posting rules: who can post."),
+  groupSubmitted: screen("group-submitted", "Group submitted for review."),
+  profile: screen("profile", "More: my activity, with cases, appointments, posts, groups and bookmarks."),
+  myGroups: screen("my-groups", "My groups, approved."),
+  myGroupsPending: screen("my-groups-pending", "My groups, pending approval."),
+  myGroupsRejected: screen("my-groups-rejected", "My groups, rejected."),
+  groupRejection: screen("group-rejection", "The reason a group was rejected."),
+  myGroup: screen("my-group", "A group you own, with no posts yet."),
+  myGroupMenu: screen("my-group-menu", "Your group's options: edit, share or delete."),
+  myPosts: screen("my-posts", "My posts."),
+  myReplies: screen("my-replies", "My posts, replies."),
+  myLikes: screen("my-likes", "My posts, likes."),
+  bookmarks: screen("bookmarks", "Bookmarked posts."),
+  groupMenu: screen("group-menu", "Group options: report, share or leave."),
+  leaveGroup: screen("leave-group", "Leave group?"),
+  leftGroup: screen("left-group", "You have left the group."),
+  report: screen("report", "Report an issue: what are you reporting?"),
+  reportPicked: screen("report-picked", "Report an issue: spam is selected."),
+  reportDone: screen("report-done", "Report submitted, and what happens next."),
+  consultant: screen("consultant", "Maria Alvarez's profile: about, office and practice areas."),
+  bookEmpty: screen("book-empty", "Book an appointment: choose an event type and a date."),
+  bookType: screen("book-type", "Book an appointment: the event types."),
+  bookTyped: screen("book-typed", "Book an appointment: an initial strategy session."),
+  appointments: screen("appointments", "My appointments, upcoming: Maria Alvarez."),
+  pricing: screen("pricing", "Pricing and packages."),
 } as const;
 
 export type CaseTrackerScreen = keyof typeof caseTracker;

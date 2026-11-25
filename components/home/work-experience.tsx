@@ -4,7 +4,7 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import type { Job } from "@/content/about";
 
 /**
- * Roles as a plain table of rows: who, what, when. Hovering or focusing a row
+ * Roles as a plain list: what and when, then who, beneath. Hovering or focusing a row
  * that links out brightens the company's underline and nudges its arrow up
  * and out, the way it's about to send you. The whole row is the hit area.
  */
@@ -18,9 +18,11 @@ export function WorkExperience({ jobs }: { jobs: Job[] }) {
         {jobs.map((j) => (
           <li
             key={j.company}
-            className="job relative grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-6 gap-y-1.5 border-b border-line py-5 md:grid-cols-[minmax(0,0.46fr)_minmax(0,1fr)_7rem]"
+            className="job relative grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-6 gap-y-3 border-b border-line py-6"
           >
-            <p className="flex min-w-0 items-center gap-2.5">
+            <p>{j.role}</p>
+            <p className="text-right text-ink-2 tabular">{j.years}</p>
+            <p className="col-span-2 flex min-w-0 items-center gap-2.5">
               {j.logo ? (
                 <Image src={j.logo} alt="" width={24} height={24} className="size-6 shrink-0 rounded-[6px] ring-1 ring-line" />
               ) : (
@@ -38,8 +40,6 @@ export function WorkExperience({ jobs }: { jobs: Job[] }) {
                 <span className="font-semibold">{j.company}</span>
               )}
             </p>
-            <p className="col-span-2 row-start-2 pl-[34px] text-ink-2 md:col-span-1 md:row-start-auto md:pl-0 md:text-ink">{j.role}</p>
-            <p className="col-start-2 row-start-1 text-right text-ink-2 tabular md:col-start-auto md:row-start-auto">{j.years}</p>
           </li>
         ))}
       </ul>

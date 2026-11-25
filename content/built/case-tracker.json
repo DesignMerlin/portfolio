@@ -1,0 +1,3169 @@
+{
+ "signUp": {
+  "src": "/work/case-tracker/b-sign-up.webp",
+  "alt": "Sign up: name, email and password, or continue with Google or Apple.",
+  "spots": [
+   {
+    "label": "Sign up",
+    "at": [
+     187.5,
+     483
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "statusEmpty",
+    "move": "push"
+   },
+   {
+    "label": "Continue with Google",
+    "at": [
+     187.5,
+     543
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "statusEmpty",
+    "move": "push"
+   },
+   {
+    "label": "Log in",
+    "at": [
+     266.7,
+     595
+    ],
+    "size": [
+     36.9,
+     32
+    ],
+    "to": "login",
+    "move": "back"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Full name",
+    "text": [
+     60,
+     230.5,
+     78.5,
+     17
+    ],
+    "clear": [
+     60,
+     230.5,
+     109.1,
+     17
+    ],
+    "field": [
+     16,
+     215,
+     343,
+     48
+    ],
+    "r": 8,
+    "bg": "rgb(243, 243, 243)",
+    "chars": 10,
+    "src": "/work/case-tracker/b-sign-up-ink-0.webp"
+   },
+   {
+    "label": "Email",
+    "text": [
+     60,
+     317.5,
+     138.9,
+     17
+    ],
+    "clear": [
+     60,
+     317.5,
+     107.5,
+     17
+    ],
+    "field": [
+     16,
+     302,
+     343,
+     48
+    ],
+    "r": 8,
+    "bg": "rgb(243, 243, 243)",
+    "chars": 17,
+    "src": "/work/case-tracker/b-sign-up-ink-1.webp"
+   },
+   {
+    "label": "Password",
+    "text": [
+     60,
+     404.5,
+     80.2,
+     17
+    ],
+    "clear": [
+     60,
+     404.5,
+     136.1,
+     17
+    ],
+    "field": [
+     16,
+     389,
+     343,
+     48
+    ],
+    "r": 8,
+    "bg": "rgb(243, 243, 243)",
+    "chars": 10,
+    "src": "/work/case-tracker/b-sign-up-ink-2.webp"
+   }
+  ]
+ },
+ "forgotPassword": {
+  "src": "/work/case-tracker/b-forgot-password.webp",
+  "alt": "Forgot password: enter your email.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     34,
+     72
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "login",
+    "move": "back"
+   },
+   {
+    "label": "Send reset link",
+    "at": [
+     187.5,
+     748
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "resetSent",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Email",
+    "text": [
+     60,
+     208.5,
+     138.9,
+     17
+    ],
+    "clear": [
+     60,
+     208.5,
+     107.5,
+     17
+    ],
+    "field": [
+     16,
+     193,
+     343,
+     48
+    ],
+    "r": 8,
+    "bg": "rgb(243, 243, 243)",
+    "chars": 17,
+    "src": "/work/case-tracker/b-forgot-password-ink-0.webp"
+   }
+  ]
+ },
+ "resetSent": {
+  "src": "/work/case-tracker/b-reset-sent.webp",
+  "alt": "Check your email for the reset link.",
+  "spots": [
+   {
+    "label": "Set a new password",
+    "at": [
+     187.5,
+     688
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "newPassword",
+    "move": "push"
+   },
+   {
+    "label": "Back to log in",
+    "at": [
+     187.5,
+     748
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "login",
+    "move": "back"
+   }
+  ]
+ },
+ "newPassword": {
+  "src": "/work/case-tracker/b-new-password.webp",
+  "alt": "Set a new password.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     34,
+     72
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "login",
+    "move": "back"
+   },
+   {
+    "label": "Save password",
+    "at": [
+     187.5,
+     748
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "login",
+    "move": "back"
+   }
+  ],
+  "fields": [
+   {
+    "label": "New password",
+    "text": [
+     60,
+     146.5,
+     80.2,
+     17
+    ],
+    "clear": [
+     60,
+     146.5,
+     136.1,
+     17
+    ],
+    "field": [
+     16,
+     131,
+     343,
+     48
+    ],
+    "r": 8,
+    "bg": "rgb(243, 243, 243)",
+    "chars": 10,
+    "src": "/work/case-tracker/b-new-password-ink-0.webp"
+   },
+   {
+    "label": "Confirm password",
+    "text": [
+     60,
+     233.5,
+     80.2,
+     17
+    ],
+    "clear": [
+     60,
+     233.5,
+     85.5,
+     17
+    ],
+    "field": [
+     16,
+     218,
+     343,
+     48
+    ],
+    "r": 8,
+    "bg": "rgb(243, 243, 243)",
+    "chars": 10,
+    "src": "/work/case-tracker/b-new-password-ink-1.webp"
+   }
+  ]
+ },
+ "notifications": {
+  "src": "/work/case-tracker/b-notifications.webp",
+  "alt": "Notifications: a case update, an appointment reminder, a reply and an event.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     34,
+     72
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "home",
+    "move": "back"
+   },
+   {
+    "label": "Mark all read",
+    "at": [
+     316.7,
+     72
+    ],
+    "size": [
+     84.7,
+     32
+    ],
+    "to": "notificationsRead",
+    "move": "fade"
+   },
+   {
+    "label": "Your case moved to biometrics",
+    "at": [
+     187.5,
+     192.5
+    ],
+    "size": [
+     343,
+     65
+    ],
+    "to": "caseDetails",
+    "move": "push"
+   },
+   {
+    "label": "Appointment tomorrow",
+    "at": [
+     187.5,
+     257.5
+    ],
+    "size": [
+     343,
+     65
+    ],
+    "to": "appointments",
+    "move": "push"
+   },
+   {
+    "label": "Emeka replied to your post",
+    "at": [
+     187.5,
+     374.5
+    ],
+    "size": [
+     343,
+     65
+    ],
+    "to": "postView",
+    "move": "push"
+   },
+   {
+    "label": "Green Card Interview Prep Workshop",
+    "at": [
+     187.5,
+     439.5
+    ],
+    "size": [
+     343,
+     65
+    ],
+    "to": "eventGoing",
+    "move": "push"
+   },
+   {
+    "label": "Your group was approved",
+    "at": [
+     187.5,
+     504.5
+    ],
+    "size": [
+     343,
+     65
+    ],
+    "to": "myGroups",
+    "move": "push"
+   }
+  ]
+ },
+ "notificationsRead": {
+  "src": "/work/case-tracker/b-notifications-read.webp",
+  "alt": "Notifications, all read.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     34,
+     72
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "home",
+    "move": "back"
+   },
+   {
+    "label": "Back to home",
+    "at": [
+     187.5,
+     748
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "home",
+    "move": "back"
+   }
+  ]
+ },
+ "askAI": {
+  "src": "/work/case-tracker/b-ask-a-i.webp",
+  "alt": "Immigify AI: suggested questions about your case, and a field to ask your own.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     34,
+     72
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "home",
+    "move": "back"
+   },
+   {
+    "label": "What does “biometrics” mean?",
+    "at": [
+     187.5,
+     403.5
+    ],
+    "size": [
+     343,
+     47
+    ],
+    "to": "askAnswer",
+    "move": "fade"
+   },
+   {
+    "label": "How long does it take?",
+    "at": [
+     187.5,
+     460.5
+    ],
+    "size": [
+     343,
+     47
+    ],
+    "to": "askMore",
+    "move": "fade"
+   },
+   {
+    "label": "What should I bring?",
+    "at": [
+     187.5,
+     517.5
+    ],
+    "size": [
+     343,
+     47
+    ],
+    "to": "askBring",
+    "move": "fade"
+   },
+   {
+    "label": "Send",
+    "at": [
+     337,
+     750
+    ],
+    "size": [
+     44,
+     44
+    ],
+    "to": "askAnswer",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Message",
+    "text": [
+     29,
+     741.5,
+     191.1,
+     17
+    ],
+    "clear": [
+     29,
+     741.5,
+     194.9,
+     17
+    ],
+    "field": [
+     30,
+     728,
+     269,
+     44
+    ],
+    "r": 8,
+    "bg": "rgb(240, 242, 245)",
+    "chars": 26,
+    "src": "/work/case-tracker/b-ask-a-i-ink-0.webp"
+   }
+  ]
+ },
+ "askAnswer": {
+  "src": "/work/case-tracker/b-ask-answer.webp",
+  "alt": "Immigify AI explains biometrics, shows its source, and offers a consultant.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     34,
+     72
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "home",
+    "move": "back"
+   },
+   {
+    "label": "See my case",
+    "at": [
+     69.7,
+     555.8
+    ],
+    "size": [
+     107.3,
+     34
+    ],
+    "to": "caseDetails",
+    "move": "fade"
+   },
+   {
+    "label": "Ask a consultant",
+    "at": [
+     196.7,
+     555.8
+    ],
+    "size": [
+     130.8,
+     34
+    ],
+    "to": "consultants",
+    "move": "fade"
+   },
+   {
+    "label": "Send",
+    "at": [
+     337,
+     750
+    ],
+    "size": [
+     44,
+     44
+    ],
+    "to": "askMore",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Message",
+    "text": [
+     29,
+     741.5,
+     149.6,
+     17
+    ],
+    "clear": [
+     29,
+     741.5,
+     103.9,
+     17
+    ],
+    "field": [
+     30,
+     728,
+     269,
+     44
+    ],
+    "r": 8,
+    "bg": "rgb(240, 242, 245)",
+    "chars": 22,
+    "src": "/work/case-tracker/b-ask-answer-ink-0.webp"
+   }
+  ]
+ },
+ "askMore": {
+  "src": "/work/case-tracker/b-ask-more.webp",
+  "alt": "Immigify AI answers a follow-up about how long it takes.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     34,
+     72
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "home",
+    "move": "back"
+   },
+   {
+    "label": "Turn on alerts",
+    "at": [
+     72.8,
+     427.7
+    ],
+    "size": [
+     113.6,
+     34
+    ],
+    "to": "notifications",
+    "move": "fade"
+   },
+   {
+    "label": "See my case",
+    "at": [
+     191.2,
+     427.7
+    ],
+    "size": [
+     107.3,
+     34
+    ],
+    "to": "caseDetails",
+    "move": "fade"
+   },
+   {
+    "label": "Start over",
+    "at": [
+     297.6,
+     427.7
+    ],
+    "size": [
+     89.3,
+     34
+    ],
+    "to": "askAI",
+    "move": "fade"
+   },
+   {
+    "label": "Send",
+    "at": [
+     337,
+     750
+    ],
+    "size": [
+     44,
+     44
+    ],
+    "to": "askAI",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Message",
+    "text": [
+     29,
+     741.5,
+     70.9,
+     17
+    ],
+    "clear": [
+     29,
+     741.5,
+     103.9,
+     17
+    ],
+    "field": [
+     30,
+     728,
+     269,
+     44
+    ],
+    "r": 8,
+    "bg": "rgb(240, 242, 245)",
+    "chars": 9,
+    "src": "/work/case-tracker/b-ask-more-ink-0.webp"
+   }
+  ]
+ },
+ "askBring": {
+  "src": "/work/case-tracker/b-ask-bring.webp",
+  "alt": "Immigify AI lists what to bring to biometrics.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     34,
+     72
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "home",
+    "move": "back"
+   },
+   {
+    "label": "Ask a consultant",
+    "at": [
+     81.4,
+     328.8
+    ],
+    "size": [
+     130.8,
+     34
+    ],
+    "to": "consultants",
+    "move": "fade"
+   },
+   {
+    "label": "See my case",
+    "at": [
+     208.4,
+     328.8
+    ],
+    "size": [
+     107.3,
+     34
+    ],
+    "to": "caseDetails",
+    "move": "fade"
+   },
+   {
+    "label": "Start over",
+    "at": [
+     60.7,
+     370.8
+    ],
+    "size": [
+     89.3,
+     34
+    ],
+    "to": "askAI",
+    "move": "fade"
+   },
+   {
+    "label": "Send",
+    "at": [
+     337,
+     750
+    ],
+    "size": [
+     44,
+     44
+    ],
+    "to": "askMore",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Message",
+    "text": [
+     29,
+     741.5,
+     149.6,
+     17
+    ],
+    "clear": [
+     29,
+     741.5,
+     103.9,
+     17
+    ],
+    "field": [
+     30,
+     728,
+     269,
+     44
+    ],
+    "r": 8,
+    "bg": "rgb(240, 242, 245)",
+    "chars": 22,
+    "src": "/work/case-tracker/b-ask-bring-ink-0.webp"
+   }
+  ]
+ },
+ "caseDetails": {
+  "src": "/work/case-tracker/b-case-details.webp",
+  "alt": "I-485 case: progress, what's next, and every update.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     34,
+     72
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "cases",
+    "move": "back"
+   },
+   {
+    "label": "Share",
+    "at": [
+     344,
+     72
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "shareCase",
+    "move": "sheet"
+   },
+   {
+    "label": "Ask Immigify AI",
+    "at": [
+     187.5,
+     293.4
+    ],
+    "size": [
+     343,
+     86.8
+    ],
+    "to": "askAI",
+    "move": "push"
+   },
+   {
+    "label": "Add update",
+    "at": [
+     321.1,
+     366.8
+    ],
+    "size": [
+     75.8,
+     32
+    ],
+    "to": "updateEmpty",
+    "move": "push"
+   }
+  ]
+ },
+ "caseApproved": {
+  "src": "/work/case-tracker/b-case-approved.webp",
+  "alt": "I-765 case: approved, with the full timeline.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     34,
+     72
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "cases",
+    "move": "back"
+   },
+   {
+    "label": "Share",
+    "at": [
+     344,
+     72
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "shareCase",
+    "move": "sheet"
+   },
+   {
+    "label": "Share this timeline",
+    "at": [
+     187.5,
+     748
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "timeline",
+    "move": "push"
+   }
+  ]
+ },
+ "shareCase": {
+  "src": "/work/case-tracker/b-share-case.webp",
+  "alt": "Share the case: post it, copy a link or save it.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     260
+    ],
+    "size": [
+     375,
+     520
+    ],
+    "to": "caseDetails",
+    "move": "drop"
+   },
+   {
+    "label": "Post to the community",
+    "at": [
+     187.5,
+     586
+    ],
+    "size": [
+     343,
+     64
+    ],
+    "to": "postTimeline",
+    "move": "push"
+   },
+   {
+    "label": "Copy a private link",
+    "at": [
+     187.5,
+     650
+    ],
+    "size": [
+     343,
+     64
+    ],
+    "to": "caseShared",
+    "move": "fade"
+   },
+   {
+    "label": "Save as PDF",
+    "at": [
+     187.5,
+     714
+    ],
+    "size": [
+     343,
+     64
+    ],
+    "to": "caseShared",
+    "move": "fade"
+   }
+  ],
+  "sheet": {
+   "top": 520,
+   "over": "caseDetails"
+  }
+ },
+ "caseShared": {
+  "src": "/work/case-tracker/b-case-shared.webp",
+  "alt": "Done: the case link is ready.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     305
+    ],
+    "size": [
+     375,
+     610
+    ],
+    "to": "caseDetails",
+    "move": "drop"
+   },
+   {
+    "label": "Done",
+    "at": [
+     187.5,
+     748
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "caseDetails",
+    "move": "drop"
+   }
+  ],
+  "sheet": {
+   "top": 610,
+   "over": "caseDetails"
+  }
+ },
+ "events": {
+  "src": "/work/case-tracker/b-events.webp",
+  "alt": "Upcoming events: a green card workshop and an H-1B town hall.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     34,
+     72
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "home",
+    "move": "back"
+   },
+   {
+    "label": "Going",
+    "at": [
+     273.9,
+     125
+    ],
+    "size": [
+     65.9,
+     34
+    ],
+    "to": "eventGoing",
+    "move": "fade"
+   },
+   {
+    "label": "Open Green Card Interview Prep Workshop",
+    "at": [
+     187.5,
+     269
+    ],
+    "size": [
+     343,
+     222
+    ],
+    "to": "event",
+    "move": "push"
+   },
+   {
+    "label": "Open H-1B Lottery Town Hall",
+    "at": [
+     187.5,
+     498
+    ],
+    "size": [
+     343,
+     208
+    ],
+    "to": "event",
+    "move": "push"
+   },
+   {
+    "label": "Open Family Petitions Q&A",
+    "at": [
+     187.5,
+     720
+    ],
+    "size": [
+     343,
+     208
+    ],
+    "to": "event",
+    "move": "push"
+   }
+  ]
+ },
+ "eventGoing": {
+  "src": "/work/case-tracker/b-event-going.webp",
+  "alt": "You're going to the Green Card Interview Prep Workshop.",
+  "spots": [
+   {
+    "label": "See all events",
+    "at": [
+     187.5,
+     688
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "events",
+    "move": "push"
+   },
+   {
+    "label": "Back to Home",
+    "at": [
+     187.5,
+     748
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "home",
+    "move": "out"
+   }
+  ]
+ },
+ "messages": {
+  "src": "/work/case-tracker/b-messages.webp",
+  "alt": "Messages: Maria Alvarez, Emeka Daniels and a group.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     34,
+     72
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "community",
+    "move": "back"
+   },
+   {
+    "label": "Maria Alvarez, Esq.",
+    "at": [
+     187.5,
+     193.5
+    ],
+    "size": [
+     343,
+     71
+    ],
+    "to": "thread",
+    "move": "push"
+   },
+   {
+    "label": "Emeka Daniels",
+    "at": [
+     187.5,
+     264.5
+    ],
+    "size": [
+     343,
+     71
+    ],
+    "to": "threadEmeka",
+    "move": "push"
+   },
+   {
+    "label": "Blessing Esther",
+    "at": [
+     187.5,
+     335.5
+    ],
+    "size": [
+     343,
+     71
+    ],
+    "to": "threadBlessing",
+    "move": "push"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Search messages",
+    "text": [
+     59,
+     119.5,
+     39.4,
+     17
+    ],
+    "clear": [
+     59,
+     119.5,
+     118.2,
+     17
+    ],
+    "field": [
+     16,
+     108,
+     343,
+     40
+    ],
+    "r": 22,
+    "bg": "rgb(242, 242, 242)",
+    "chars": 5,
+    "src": "/work/case-tracker/b-messages-ink-0.webp"
+   }
+  ]
+ },
+ "thread": {
+  "src": "/work/case-tracker/b-thread.webp",
+  "alt": "Conversation with Maria Alvarez about biometrics.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     34,
+     72
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "messages",
+    "move": "back"
+   },
+   {
+    "label": "Video call",
+    "at": [
+     344,
+     72
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "meeting",
+    "move": "in"
+   },
+   {
+    "label": "Send",
+    "at": [
+     337,
+     750
+    ],
+    "size": [
+     44,
+     44
+    ],
+    "to": "threadSent",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Message",
+    "text": [
+     29,
+     741.5,
+     194.2,
+     17
+    ],
+    "clear": [
+     29,
+     741.5,
+     110.9,
+     17
+    ],
+    "field": [
+     30,
+     728,
+     269,
+     44
+    ],
+    "r": 8,
+    "bg": "rgb(240, 242, 245)",
+    "chars": 27,
+    "src": "/work/case-tracker/b-thread-ink-0.webp"
+   }
+  ]
+ },
+ "threadSent": {
+  "src": "/work/case-tracker/b-thread-sent.webp",
+  "alt": "Conversation with Maria Alvarez, with your message sent.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     34,
+     72
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "messages",
+    "move": "back"
+   },
+   {
+    "label": "Video call",
+    "at": [
+     344,
+     72
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "meeting",
+    "move": "in"
+   },
+   {
+    "label": "Send",
+    "at": [
+     337,
+     750
+    ],
+    "size": [
+     44,
+     44
+    ],
+    "to": "thread",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Message",
+    "text": [
+     29,
+     741.5,
+     126.2,
+     17
+    ],
+    "clear": [
+     29,
+     741.5,
+     110.9,
+     17
+    ],
+    "field": [
+     30,
+     728,
+     269,
+     44
+    ],
+    "r": 8,
+    "bg": "rgb(240, 242, 245)",
+    "chars": 17,
+    "src": "/work/case-tracker/b-thread-sent-ink-0.webp"
+   }
+  ]
+ },
+ "threadEmeka": {
+  "src": "/work/case-tracker/b-thread-emeka.webp",
+  "alt": "Conversation with Emeka Daniels.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     34,
+     72
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "messages",
+    "move": "back"
+   },
+   {
+    "label": "Video call",
+    "at": [
+     344,
+     72
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "meeting",
+    "move": "in"
+   },
+   {
+    "label": "Send",
+    "at": [
+     337,
+     750
+    ],
+    "size": [
+     44,
+     44
+    ],
+    "to": "threadEmekaSent",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Message",
+    "text": [
+     29,
+     741.5,
+     133.8,
+     17
+    ],
+    "clear": [
+     29,
+     741.5,
+     110.9,
+     17
+    ],
+    "field": [
+     30,
+     728,
+     269,
+     44
+    ],
+    "r": 8,
+    "bg": "rgb(240, 242, 245)",
+    "chars": 19,
+    "src": "/work/case-tracker/b-thread-emeka-ink-0.webp"
+   }
+  ]
+ },
+ "threadBlessing": {
+  "src": "/work/case-tracker/b-thread-blessing.webp",
+  "alt": "Conversation with Blessing Esther.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     34,
+     72
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "messages",
+    "move": "back"
+   },
+   {
+    "label": "Video call",
+    "at": [
+     344,
+     72
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "meeting",
+    "move": "in"
+   },
+   {
+    "label": "Send",
+    "at": [
+     337,
+     750
+    ],
+    "size": [
+     44,
+     44
+    ],
+    "to": "threadBlessingSent",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Message",
+    "text": [
+     29,
+     741.5,
+     92.6,
+     17
+    ],
+    "clear": [
+     29,
+     741.5,
+     110.9,
+     17
+    ],
+    "field": [
+     30,
+     728,
+     269,
+     44
+    ],
+    "r": 8,
+    "bg": "rgb(240, 242, 245)",
+    "chars": 13,
+    "src": "/work/case-tracker/b-thread-blessing-ink-0.webp"
+   }
+  ]
+ },
+ "searchCommunity": {
+  "src": "/work/case-tracker/b-search-community.webp",
+  "alt": "Search the community: I-485 is typed, with posts, groups and people.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     34,
+     72
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "community",
+    "move": "back"
+   },
+   {
+    "label": "Sarah Chen",
+    "at": [
+     187.5,
+     239.3
+    ],
+    "size": [
+     343,
+     78.6
+    ],
+    "to": "postView",
+    "move": "push"
+   },
+   {
+    "label": "Blessing Esther",
+    "at": [
+     187.5,
+     317.9
+    ],
+    "size": [
+     343,
+     78.6
+    ],
+    "to": "postView",
+    "move": "push"
+   },
+   {
+    "label": "Immigify, Beyond Borders Community",
+    "at": [
+     187.5,
+     441.7
+    ],
+    "size": [
+     343,
+     65
+    ],
+    "to": "group",
+    "move": "push"
+   },
+   {
+    "label": "Maria Alvarez, Esq.",
+    "at": [
+     187.5,
+     558.7
+    ],
+    "size": [
+     343,
+     65
+    ],
+    "to": "consultant",
+    "move": "push"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Search for anything",
+    "text": [
+     59,
+     119.5,
+     38.4,
+     17
+    ],
+    "clear": [
+     59,
+     119.5,
+     129.8,
+     17
+    ],
+    "field": [
+     16,
+     108,
+     343,
+     40
+    ],
+    "r": 22,
+    "bg": "rgb(242, 242, 242)",
+    "chars": 5,
+    "src": "/work/case-tracker/b-search-community-ink-0.webp"
+   }
+  ]
+ },
+ "searchConsultants": {
+  "src": "/work/case-tracker/b-search-consultants.webp",
+  "alt": "Search consultants: green card is typed.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     34,
+     72
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "consultants",
+    "move": "back"
+   },
+   {
+    "label": "Maria Alvarez, Esq.",
+    "at": [
+     187.5,
+     236.5
+    ],
+    "size": [
+     343,
+     73
+    ],
+    "to": "consultant",
+    "move": "push"
+   },
+   {
+    "label": "Pere Adeshina",
+    "at": [
+     187.5,
+     309.5
+    ],
+    "size": [
+     343,
+     73
+    ],
+    "to": "consultantOther",
+    "move": "push"
+   },
+   {
+    "label": "Isaiah Jose",
+    "at": [
+     187.5,
+     382.5
+    ],
+    "size": [
+     343,
+     73
+    ],
+    "to": "consultantOther",
+    "move": "push"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Search by name or specialty",
+    "text": [
+     59,
+     119.5,
+     73.2,
+     17
+    ],
+    "clear": [
+     59,
+     119.5,
+     187,
+     17
+    ],
+    "field": [
+     16,
+     108,
+     343,
+     40
+    ],
+    "r": 22,
+    "bg": "rgb(242, 242, 242)",
+    "chars": 10,
+    "src": "/work/case-tracker/b-search-consultants-ink-0.webp"
+   }
+  ]
+ },
+ "consultantOther": {
+  "src": "/work/case-tracker/b-consultant-other.webp",
+  "alt": "Isaiah Jose, consultant: employment and H-1B, with packages.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     34,
+     72
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "consultants",
+    "move": "back"
+   },
+   {
+    "label": "Share",
+    "at": [
+     344,
+     72
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "consultantShared",
+    "move": "sheet"
+   },
+   {
+    "label": "View all",
+    "at": [
+     333.7,
+     453
+    ],
+    "size": [
+     50.5,
+     32
+    ],
+    "to": "pricing",
+    "move": "push"
+   },
+   {
+    "label": "Initial Strategy Session",
+    "at": [
+     187.5,
+     508.4
+    ],
+    "size": [
+     341,
+     64.8
+    ],
+    "to": "bookEmpty",
+    "move": "push"
+   },
+   {
+    "label": "Document Review",
+    "at": [
+     187.5,
+     573.7
+    ],
+    "size": [
+     341,
+     65.8
+    ],
+    "to": "bookEmpty",
+    "move": "push"
+   },
+   {
+    "label": "Message",
+    "at": [
+     98.8,
+     748
+    ],
+    "size": [
+     165.5,
+     48
+    ],
+    "to": "thread",
+    "move": "push"
+   },
+   {
+    "label": "Book",
+    "at": [
+     276.3,
+     748
+    ],
+    "size": [
+     165.5,
+     48
+    ],
+    "to": "bookEmpty",
+    "move": "push"
+   }
+  ]
+ },
+ "consultantMore": {
+  "src": "/work/case-tracker/b-consultant-more.webp",
+  "alt": "Maria Alvarez's packages and reviews, with a button to book.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     34,
+     72
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "consultant",
+    "move": "back"
+   },
+   {
+    "label": "View All",
+    "at": [
+     332.8,
+     138
+    ],
+    "size": [
+     52.5,
+     32
+    ],
+    "to": "pricing",
+    "move": "push"
+   },
+   {
+    "label": "Initial Strategy Session",
+    "at": [
+     187.5,
+     193.4
+    ],
+    "size": [
+     341,
+     64.8
+    ],
+    "to": "bookTyped",
+    "move": "push"
+   },
+   {
+    "label": "Strategy Consultation",
+    "at": [
+     187.5,
+     258.7
+    ],
+    "size": [
+     341,
+     65.8
+    ],
+    "to": "bookTyped",
+    "move": "push"
+   },
+   {
+    "label": "Premium Consultation",
+    "at": [
+     187.5,
+     324.5
+    ],
+    "size": [
+     341,
+     65.8
+    ],
+    "to": "bookTyped",
+    "move": "push"
+   },
+   {
+    "label": "Message",
+    "at": [
+     98.8,
+     748
+    ],
+    "size": [
+     165.5,
+     48
+    ],
+    "to": "thread",
+    "move": "push"
+   },
+   {
+    "label": "Book",
+    "at": [
+     276.3,
+     748
+    ],
+    "size": [
+     165.5,
+     48
+    ],
+    "to": "bookEmpty",
+    "move": "push"
+   }
+  ]
+ },
+ "consultantShared": {
+  "src": "/work/case-tracker/b-consultant-shared.webp",
+  "alt": "Profile link copied.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     310
+    ],
+    "size": [
+     375,
+     620
+    ],
+    "to": "consultant",
+    "move": "drop"
+   },
+   {
+    "label": "Done",
+    "at": [
+     187.5,
+     748
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "consultant",
+    "move": "drop"
+   }
+  ],
+  "sheet": {
+   "top": 620,
+   "over": "consultant"
+  }
+ },
+ "appointmentsPast": {
+  "src": "/work/case-tracker/b-appointments-past.webp",
+  "alt": "My appointments, past: a finished session with a button to book again.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     34,
+     72
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "profile",
+    "move": "back"
+   },
+   {
+    "label": "Upcoming 1",
+    "at": [
+     101.8,
+     128.5
+    ],
+    "size": [
+     171.5,
+     41
+    ],
+    "to": "appointments",
+    "move": "fade"
+   },
+   {
+    "label": "Notes",
+    "at": [
+     107.3,
+     376.1
+    ],
+    "size": [
+     148.5,
+     42
+    ],
+    "to": "appointmentNotes",
+    "move": "push"
+   },
+   {
+    "label": "Book again",
+    "at": [
+     267.8,
+     376.1
+    ],
+    "size": [
+     148.5,
+     42
+    ],
+    "to": "bookEmpty",
+    "move": "push"
+   }
+  ]
+ },
+ "appointmentNotes": {
+  "src": "/work/case-tracker/b-appointment-notes.webp",
+  "alt": "Notes from a past appointment.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     34,
+     72
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "appointmentsPast",
+    "move": "back"
+   },
+   {
+    "label": "Done",
+    "at": [
+     187.5,
+     748
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "appointmentsPast",
+    "move": "back"
+   }
+  ]
+ },
+ "meeting": {
+  "src": "/work/case-tracker/b-meeting.webp",
+  "alt": "Video consultation with Maria Alvarez, in progress.",
+  "spots": [
+   {
+    "label": "Mute",
+    "at": [
+     105.5,
+     712
+    ],
+    "size": [
+     60,
+     60
+    ],
+    "to": "meetingMuted",
+    "move": "fade"
+   },
+   {
+    "label": "End call",
+    "at": [
+     187.5,
+     712
+    ],
+    "size": [
+     60,
+     60
+    ],
+    "to": "meetingEnded",
+    "move": "out"
+   },
+   {
+    "label": "Chat",
+    "at": [
+     269.5,
+     712
+    ],
+    "size": [
+     60,
+     60
+    ],
+    "to": "thread",
+    "move": "push"
+   }
+  ]
+ },
+ "meetingMuted": {
+  "src": "/work/case-tracker/b-meeting-muted.webp",
+  "alt": "Video consultation, with your microphone muted.",
+  "spots": [
+   {
+    "label": "Unmute",
+    "at": [
+     105.5,
+     712
+    ],
+    "size": [
+     60,
+     60
+    ],
+    "to": "meeting",
+    "move": "fade"
+   },
+   {
+    "label": "End call",
+    "at": [
+     187.5,
+     712
+    ],
+    "size": [
+     60,
+     60
+    ],
+    "to": "meetingEnded",
+    "move": "out"
+   },
+   {
+    "label": "Chat",
+    "at": [
+     269.5,
+     712
+    ],
+    "size": [
+     60,
+     60
+    ],
+    "to": "thread",
+    "move": "push"
+   }
+  ]
+ },
+ "meetingEnded": {
+  "src": "/work/case-tracker/b-meeting-ended.webp",
+  "alt": "The call has ended: rate it or see your notes.",
+  "spots": [
+   {
+    "label": "Rate 5 stars",
+    "at": [
+     187.5,
+     688
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "appointmentsPast",
+    "move": "fade"
+   },
+   {
+    "label": "Back to appointments",
+    "at": [
+     187.5,
+     748
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "appointments",
+    "move": "out"
+   }
+  ]
+ },
+ "editProfile": {
+  "src": "/work/case-tracker/b-edit-profile.webp",
+  "alt": "Edit profile: photo, name, username and immigration status.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     34,
+     72
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "profile",
+    "move": "back"
+   },
+   {
+    "label": "Immigration status",
+    "at": [
+     187.5,
+     441
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "status",
+    "move": "push"
+   },
+   {
+    "label": "Interests",
+    "at": [
+     187.5,
+     528
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "interests",
+    "move": "push"
+   },
+   {
+    "label": "Save changes",
+    "at": [
+     187.5,
+     748
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "profile",
+    "move": "back"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Name",
+    "text": [
+     30,
+     258.5,
+     78.5,
+     17
+    ],
+    "clear": [
+     30,
+     258.5,
+     72.4,
+     17
+    ],
+    "field": [
+     16,
+     243,
+     343,
+     48
+    ],
+    "r": 8,
+    "bg": "rgb(243, 243, 243)",
+    "chars": 10,
+    "src": "/work/case-tracker/b-edit-profile-ink-0.webp"
+   },
+   {
+    "label": "Username",
+    "text": [
+     30,
+     345.5,
+     84.3,
+     17
+    ],
+    "clear": [
+     30,
+     345.5,
+     81,
+     17
+    ],
+    "field": [
+     16,
+     330,
+     343,
+     48
+    ],
+    "r": 8,
+    "bg": "rgb(243, 243, 243)",
+    "chars": 10,
+    "src": "/work/case-tracker/b-edit-profile-ink-1.webp"
+   }
+  ]
+ },
+ "profileMore": {
+  "src": "/work/case-tracker/b-profile-more.webp",
+  "alt": "More, further down: U.S. immigration resources, help and log out.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     34,
+     72
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "profile",
+    "move": "back"
+   },
+   {
+    "label": "USCIS processing times",
+    "at": [
+     187.5,
+     172
+    ],
+    "size": [
+     341,
+     68
+    ],
+    "to": "resource",
+    "move": "push"
+   },
+   {
+    "label": "Forms and fees",
+    "at": [
+     187.5,
+     240.5
+    ],
+    "size": [
+     341,
+     69
+    ],
+    "to": "resource",
+    "move": "push"
+   },
+   {
+    "label": "Visa bulletin",
+    "at": [
+     187.5,
+     309.5
+    ],
+    "size": [
+     341,
+     69
+    ],
+    "to": "resource",
+    "move": "push"
+   },
+   {
+    "label": "Help centre",
+    "at": [
+     187.5,
+     427
+    ],
+    "size": [
+     341,
+     68
+    ],
+    "to": "helpCentre",
+    "move": "push"
+   },
+   {
+    "label": "Settings",
+    "at": [
+     187.5,
+     495.5
+    ],
+    "size": [
+     341,
+     69
+    ],
+    "to": "settings",
+    "move": "push"
+   },
+   {
+    "label": "Log out",
+    "at": [
+     187.5,
+     564.5
+    ],
+    "size": [
+     341,
+     69
+    ],
+    "to": "logout",
+    "move": "sheet"
+   },
+   {
+    "label": "Home",
+    "at": [
+     40,
+     739
+    ],
+    "size": [
+     68,
+     52
+    ],
+    "to": "home",
+    "move": "fade"
+   },
+   {
+    "label": "My cases",
+    "at": [
+     114,
+     739
+    ],
+    "size": [
+     68,
+     52
+    ],
+    "to": "cases",
+    "move": "fade"
+   },
+   {
+    "label": "Consultants",
+    "at": [
+     187,
+     739
+    ],
+    "size": [
+     68,
+     52
+    ],
+    "to": "consultants",
+    "move": "fade"
+   },
+   {
+    "label": "Community",
+    "at": [
+     261,
+     739
+    ],
+    "size": [
+     68,
+     52
+    ],
+    "to": "community",
+    "move": "fade"
+   },
+   {
+    "label": "More",
+    "at": [
+     335,
+     739
+    ],
+    "size": [
+     68,
+     52
+    ],
+    "to": "profile",
+    "move": "fade"
+   }
+  ]
+ },
+ "resource": {
+  "src": "/work/case-tracker/b-resource.webp",
+  "alt": "USCIS processing times, explained simply.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     34,
+     72
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "profileMore",
+    "move": "back"
+   },
+   {
+    "label": "Ask Immigify AI",
+    "at": [
+     187.5,
+     748
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "askAI",
+    "move": "push"
+   }
+  ]
+ },
+ "helpCentre": {
+  "src": "/work/case-tracker/b-help-centre.webp",
+  "alt": "Help centre: common questions and contact.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     34,
+     72
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "profileMore",
+    "move": "back"
+   },
+   {
+    "label": "Message support",
+    "at": [
+     187.5,
+     748
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "messages",
+    "move": "push"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Search for help",
+    "text": [
+     59,
+     119.5,
+     101.4,
+     17
+    ],
+    "clear": [
+     59,
+     119.5,
+     101.8,
+     17
+    ],
+    "field": [
+     16,
+     108,
+     343,
+     40
+    ],
+    "r": 22,
+    "bg": "rgb(242, 242, 242)",
+    "chars": 14,
+    "src": "/work/case-tracker/b-help-centre-ink-0.webp"
+   }
+  ]
+ },
+ "settings": {
+  "src": "/work/case-tracker/b-settings.webp",
+  "alt": "Settings: alerts and privacy.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     34,
+     72
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "profileMore",
+    "move": "back"
+   },
+   {
+    "label": "Change password",
+    "at": [
+     187.5,
+     506.3
+    ],
+    "size": [
+     341,
+     47
+    ],
+    "to": "newPassword",
+    "move": "push"
+   }
+  ]
+ },
+ "logout": {
+  "src": "/work/case-tracker/b-logout.webp",
+  "alt": "Log out?",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     280
+    ],
+    "size": [
+     375,
+     560
+    ],
+    "to": "profileMore",
+    "move": "drop"
+   },
+   {
+    "label": "Log out",
+    "at": [
+     187.5,
+     688
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "login",
+    "move": "out"
+   },
+   {
+    "label": "Stay",
+    "at": [
+     187.5,
+     748
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "profileMore",
+    "move": "drop"
+   }
+  ],
+  "sheet": {
+   "top": 560,
+   "over": "profileMore"
+  }
+ },
+ "hashtags": {
+  "src": "/work/case-tracker/b-hashtags.webp",
+  "alt": "Add hashtags to a post: immigration and visa.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     215
+    ],
+    "size": [
+     375,
+     430
+    ],
+    "to": "createPost",
+    "move": "drop"
+   },
+   {
+    "label": "Done",
+    "at": [
+     187.5,
+     748
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "postImages",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Hashtag",
+    "text": [
+     30,
+     513.5,
+     87.6,
+     17
+    ],
+    "clear": [
+     30,
+     513.5,
+     175.8,
+     17
+    ],
+    "field": [
+     16,
+     498,
+     343,
+     48
+    ],
+    "r": 8,
+    "bg": "rgb(243, 243, 243)",
+    "chars": 12,
+    "src": "/work/case-tracker/b-hashtags-ink-0.webp"
+   }
+  ],
+  "sheet": {
+   "top": 430,
+   "over": "createPost"
+  }
+ },
+ "posted": {
+  "src": "/work/case-tracker/b-posted.webp",
+  "alt": "Your post is live in the community.",
+  "spots": [
+   {
+    "label": "See it in the community",
+    "at": [
+     187.5,
+     688
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "feedEmployment",
+    "move": "push"
+   },
+   {
+    "label": "Back to Home",
+    "at": [
+     187.5,
+     748
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "home",
+    "move": "out"
+   }
+  ]
+ },
+ "draftSaved": {
+  "src": "/work/case-tracker/b-draft-saved.webp",
+  "alt": "Saved as a draft.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     300
+    ],
+    "size": [
+     375,
+     600
+    ],
+    "to": "createGroup",
+    "move": "drop"
+   },
+   {
+    "label": "Go to drafts",
+    "at": [
+     187.5,
+     748
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "drafts",
+    "move": "push"
+   }
+  ],
+  "sheet": {
+   "top": 600,
+   "over": "createGroup"
+  }
+ },
+ "commentPosted": {
+  "src": "/work/case-tracker/b-comment-posted.webp",
+  "alt": "The post, with your comment added.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     34,
+     72
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "community",
+    "move": "back"
+   },
+   {
+    "label": "More",
+    "at": [
+     344,
+     72
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "postMenu",
+    "move": "sheet"
+   },
+   {
+    "label": "Send",
+    "at": [
+     337,
+     750
+    ],
+    "size": [
+     44,
+     44
+    ],
+    "to": "postView",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Message",
+    "text": [
+     29,
+     741.5,
+     103.6,
+     17
+    ],
+    "clear": [
+     29,
+     741.5,
+     113,
+     17
+    ],
+    "field": [
+     30,
+     728,
+     269,
+     44
+    ],
+    "r": 8,
+    "bg": "rgb(240, 242, 245)",
+    "chars": 14,
+    "src": "/work/case-tracker/b-comment-posted-ink-0.webp"
+   }
+  ]
+ },
+ "groupJoined": {
+  "src": "/work/case-tracker/b-group-joined.webp",
+  "alt": "The group after joining: you can post, and posts are open.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     34,
+     72
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "groups",
+    "move": "back"
+   },
+   {
+    "label": "More",
+    "at": [
+     341,
+     72
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "groupMenu",
+    "move": "sheet"
+   },
+   {
+    "label": "Write something to the group",
+    "at": [
+     187.5,
+     335
+    ],
+    "size": [
+     343,
+     58
+    ],
+    "to": "writePost",
+    "move": "sheet"
+   },
+   {
+    "label": "Open Emeka’s post",
+    "at": [
+     187.5,
+     445.8
+    ],
+    "size": [
+     343,
+     123.5
+    ],
+    "to": "postView",
+    "move": "push"
+   },
+   {
+    "label": "Open Blessing’s post",
+    "at": [
+     187.5,
+     589.3
+    ],
+    "size": [
+     343,
+     123.5
+    ],
+    "to": "postView",
+    "move": "push"
+   }
+  ]
+ },
+ "groupsCareer": {
+  "src": "/work/case-tracker/b-groups-career.webp",
+  "alt": "Groups, filtered to career.",
+  "spots": [
+   {
+    "label": "Messages",
+    "at": [
+     343,
+     72
+    ],
+    "size": [
+     40,
+     40
+    ],
+    "to": "messages",
+    "move": "push"
+   },
+   {
+    "label": "Search for anything",
+    "at": [
+     187.5,
+     128
+    ],
+    "size": [
+     343,
+     40
+    ],
+    "to": "searchCommunity",
+    "move": "fade"
+   },
+   {
+    "label": "For you",
+    "at": [
+     101.8,
+     176.5
+    ],
+    "size": [
+     171.5,
+     41
+    ],
+    "to": "forYou",
+    "move": "fade"
+   },
+   {
+    "label": "All",
+    "at": [
+     38.6,
+     231
+    ],
+    "size": [
+     45.3,
+     34
+    ],
+    "to": "groups",
+    "move": "fade"
+   },
+   {
+    "label": "Social",
+    "at": [
+     181.7,
+     231
+    ],
+    "size": [
+     66.7,
+     34
+    ],
+    "to": "groups",
+    "move": "fade"
+   },
+   {
+    "label": "Health",
+    "at": [
+     257.9,
+     231
+    ],
+    "size": [
+     69.6,
+     34
+    ],
+    "to": "groups",
+    "move": "fade"
+   },
+   {
+    "label": "+ Join Group",
+    "at": [
+     187.5,
+     509
+    ],
+    "size": [
+     309,
+     42
+    ],
+    "to": "groupJoined",
+    "move": "push"
+   },
+   {
+    "label": "Home",
+    "at": [
+     40,
+     739
+    ],
+    "size": [
+     68,
+     52
+    ],
+    "to": "home",
+    "move": "fade"
+   },
+   {
+    "label": "My cases",
+    "at": [
+     114,
+     739
+    ],
+    "size": [
+     68,
+     52
+    ],
+    "to": "cases",
+    "move": "fade"
+   },
+   {
+    "label": "Consultants",
+    "at": [
+     187,
+     739
+    ],
+    "size": [
+     68,
+     52
+    ],
+    "to": "consultants",
+    "move": "fade"
+   },
+   {
+    "label": "More",
+    "at": [
+     335,
+     739
+    ],
+    "size": [
+     68,
+     52
+    ],
+    "to": "profile",
+    "move": "fade"
+   }
+  ]
+ },
+ "groupDeleted": {
+  "src": "/work/case-tracker/b-group-deleted.webp",
+  "alt": "Delete the group?",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     280
+    ],
+    "size": [
+     375,
+     560
+    ],
+    "to": "myGroup",
+    "move": "drop"
+   },
+   {
+    "label": "Delete group",
+    "at": [
+     187.5,
+     688
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "myGroups",
+    "move": "out"
+   },
+   {
+    "label": "Keep it",
+    "at": [
+     187.5,
+     748
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "myGroup",
+    "move": "drop"
+   }
+  ],
+  "sheet": {
+   "top": 560,
+   "over": "myGroup"
+  }
+ },
+ "threadEmekaSent": {
+  "src": "/work/case-tracker/b-thread-emeka-sent.webp",
+  "alt": "Conversation with Emeka Daniels, with your message sent.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     34,
+     72
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "messages",
+    "move": "back"
+   },
+   {
+    "label": "Video call",
+    "at": [
+     344,
+     72
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "meeting",
+    "move": "in"
+   },
+   {
+    "label": "Send",
+    "at": [
+     337,
+     750
+    ],
+    "size": [
+     44,
+     44
+    ],
+    "to": "threadEmeka",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Message",
+    "text": [
+     29,
+     741.5,
+     133.8,
+     17
+    ],
+    "clear": [
+     29,
+     741.5,
+     110.9,
+     17
+    ],
+    "field": [
+     30,
+     728,
+     269,
+     44
+    ],
+    "r": 8,
+    "bg": "rgb(240, 242, 245)",
+    "chars": 19,
+    "src": "/work/case-tracker/b-thread-emeka-sent-ink-0.webp"
+   }
+  ]
+ },
+ "threadBlessingSent": {
+  "src": "/work/case-tracker/b-thread-blessing-sent.webp",
+  "alt": "Conversation with Blessing Esther, with your message sent.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     34,
+     72
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "messages",
+    "move": "back"
+   },
+   {
+    "label": "Video call",
+    "at": [
+     344,
+     72
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "meeting",
+    "move": "in"
+   },
+   {
+    "label": "Send",
+    "at": [
+     337,
+     750
+    ],
+    "size": [
+     44,
+     44
+    ],
+    "to": "threadBlessing",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Message",
+    "text": [
+     29,
+     741.5,
+     92.6,
+     17
+    ],
+    "clear": [
+     29,
+     741.5,
+     110.9,
+     17
+    ],
+    "field": [
+     30,
+     728,
+     269,
+     44
+    ],
+    "r": 8,
+    "bg": "rgb(240, 242, 245)",
+    "chars": 13,
+    "src": "/work/case-tracker/b-thread-blessing-sent-ink-0.webp"
+   }
+  ]
+ }
+}

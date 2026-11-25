@@ -1,0 +1,3169 @@
+{
+ "question2": {
+  "src": "/work/room8/b-question2.webp",
+  "alt": "Matching question 2 of 7: What's your monthly budget?",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     78
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "questions",
+    "move": "back"
+   },
+   {
+    "label": "Continue",
+    "at": [
+     187.5,
+     763
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "question3",
+    "move": "push"
+   }
+  ]
+ },
+ "question3": {
+  "src": "/work/room8/b-question3.webp",
+  "alt": "Matching question 3 of 7: When do you want to move in?",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     78
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "question2",
+    "move": "back"
+   },
+   {
+    "label": "Continue",
+    "at": [
+     187.5,
+     763
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "question4",
+    "move": "push"
+   }
+  ]
+ },
+ "question4": {
+  "src": "/work/room8/b-question4.webp",
+  "alt": "Matching question 4 of 7: What kind of place?",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     78
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "question3",
+    "move": "back"
+   },
+   {
+    "label": "Continue",
+    "at": [
+     187.5,
+     763
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "question5",
+    "move": "push"
+   }
+  ]
+ },
+ "question5": {
+  "src": "/work/room8/b-question5.webp",
+  "alt": "Matching question 5 of 7: Who would you live with?",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     78
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "question4",
+    "move": "back"
+   },
+   {
+    "label": "Continue",
+    "at": [
+     187.5,
+     763
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "question6",
+    "move": "push"
+   }
+  ]
+ },
+ "question6": {
+  "src": "/work/room8/b-question6.webp",
+  "alt": "Matching question 6 of 7: How do you spend your days?",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     78
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "question5",
+    "move": "back"
+   },
+   {
+    "label": "Continue",
+    "at": [
+     187.5,
+     763
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "question7",
+    "move": "push"
+   }
+  ]
+ },
+ "question7": {
+  "src": "/work/room8/b-question7.webp",
+  "alt": "Matching question 7 of 7: How tidy are you?",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     78
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "question6",
+    "move": "back"
+   },
+   {
+    "label": "Continue",
+    "at": [
+     187.5,
+     763
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "preferences",
+    "move": "push"
+   }
+  ]
+ },
+ "getStartedRent": {
+  "src": "/work/room8/b-get-started-rent.webp",
+  "alt": "How do you want to use Room8? Rent a room or apartment is selected.",
+  "spots": [
+   {
+    "label": "Find a roommate",
+    "at": [
+     101.6,
+     336
+    ],
+    "size": [
+     155.1,
+     208
+    ],
+    "to": "getStarted",
+    "move": "fade"
+   },
+   {
+    "label": "Continue",
+    "at": [
+     187.5,
+     763
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "question2",
+    "move": "push"
+   }
+  ]
+ },
+ "notifications": {
+  "src": "/work/room8/b-notifications.webp",
+  "alt": "Notifications: a new match, a reply from a host, a tour reminder and a price drop.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     78
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "home",
+    "move": "back"
+   },
+   {
+    "label": "Mark all read",
+    "at": [
+     316.2,
+     78
+    ],
+    "size": [
+     85.5,
+     32
+    ],
+    "to": "notificationsRead",
+    "move": "fade"
+   },
+   {
+    "label": "Steph Campbell is a 92% match",
+    "at": [
+     187.5,
+     202.8
+    ],
+    "size": [
+     343,
+     79.6
+    ],
+    "to": "roommate",
+    "move": "push"
+   },
+   {
+    "label": "Marcus replied to you",
+    "at": [
+     187.5,
+     277.1
+    ],
+    "size": [
+     343,
+     69
+    ],
+    "to": "chatMarcus",
+    "move": "push"
+   },
+   {
+    "label": "Your tour is tomorrow",
+    "at": [
+     187.5,
+     397.1
+    ],
+    "size": [
+     343,
+     65
+    ],
+    "to": "bookConfirmed",
+    "move": "push"
+   },
+   {
+    "label": "Price drop on a saved room",
+    "at": [
+     187.5,
+     462.1
+    ],
+    "size": [
+     343,
+     65
+    ],
+    "to": "savedRooms",
+    "move": "push"
+   },
+   {
+    "label": "Payment held in escrow",
+    "at": [
+     187.5,
+     527.1
+    ],
+    "size": [
+     343,
+     65
+    ],
+    "to": "payReceipt",
+    "move": "push"
+   }
+  ]
+ },
+ "notificationsRead": {
+  "src": "/work/room8/b-notifications-read.webp",
+  "alt": "Notifications, all read.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     78
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "home",
+    "move": "back"
+   },
+   {
+    "label": "Back to home",
+    "at": [
+     187.5,
+     763
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "home",
+    "move": "back"
+   }
+  ]
+ },
+ "searchArea": {
+  "src": "/work/room8/b-search-area.webp",
+  "alt": "Search: an area is typed, with recent searches and popular areas below.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     76
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "home",
+    "move": "back"
+   },
+   {
+    "label": "Yaba, Lagos",
+    "at": [
+     187.5,
+     178.5
+    ],
+    "size": [
+     343,
+     43
+    ],
+    "to": "roomsForRent",
+    "move": "push"
+   },
+   {
+    "label": "Ibeju-Lekki, Lagos",
+    "at": [
+     187.5,
+     221.5
+    ],
+    "size": [
+     343,
+     43
+    ],
+    "to": "roomsForRent",
+    "move": "push"
+   },
+   {
+    "label": "Surulere, Lagos",
+    "at": [
+     187.5,
+     264.5
+    ],
+    "size": [
+     343,
+     43
+    ],
+    "to": "roomsForRent",
+    "move": "push"
+   },
+   {
+    "label": "Lekki",
+    "at": [
+     47.2,
+     356.5
+    ],
+    "size": [
+     62.3,
+     35
+    ],
+    "to": "roomsForRent",
+    "move": "fade"
+   },
+   {
+    "label": "Ikeja",
+    "at": [
+     115.7,
+     356.5
+    ],
+    "size": [
+     58.8,
+     35
+    ],
+    "to": "roomsForRent",
+    "move": "fade"
+   },
+   {
+    "label": "Victoria Island",
+    "at": [
+     211.4,
+     356.5
+    ],
+    "size": [
+     116.7,
+     35
+    ],
+    "to": "roomsForRent",
+    "move": "fade"
+   },
+   {
+    "label": "Gbagada",
+    "at": [
+     58.4,
+     399.5
+    ],
+    "size": [
+     84.7,
+     35
+    ],
+    "to": "roomsForRent",
+    "move": "fade"
+   },
+   {
+    "label": "Ajah",
+    "at": [
+     137.4,
+     399.5
+    ],
+    "size": [
+     57.5,
+     35
+    ],
+    "to": "roomsForRent",
+    "move": "fade"
+   },
+   {
+    "label": "Open the map",
+    "at": [
+     187.5,
+     535
+    ],
+    "size": [
+     343,
+     130
+    ],
+    "to": "exploreMap",
+    "move": "push"
+   }
+  ],
+  "fields": [
+   {
+    "label": "search by location",
+    "text": [
+     95,
+     67,
+     33.9,
+     18
+    ],
+    "clear": [
+     95,
+     67,
+     119.4,
+     18
+    ],
+    "field": [
+     52,
+     56,
+     307,
+     40
+    ],
+    "r": 8,
+    "bg": "rgb(245, 245, 245)",
+    "chars": 4,
+    "src": "/work/room8/b-search-area-ink-0.webp"
+   }
+  ]
+ },
+ "roomsForRent": {
+  "src": "/work/room8/b-rooms-for-rent.webp",
+  "alt": "Explore, rooms for rent: a list with photos, areas, prices and ratings.",
+  "spots": [
+   {
+    "label": "search anything",
+    "at": [
+     161.5,
+     76
+    ],
+    "size": [
+     291,
+     40
+    ],
+    "to": "searchArea",
+    "move": "fade"
+   },
+   {
+    "label": "Filters",
+    "at": [
+     341,
+     74
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "filters",
+    "move": "sheet"
+   },
+   {
+    "label": "Roommates",
+    "at": [
+     101.8,
+     125
+    ],
+    "size": [
+     171.5,
+     42
+    ],
+    "to": "explore",
+    "move": "fade"
+   },
+   {
+    "label": "Open Sunlit Studio near UNILAG",
+    "at": [
+     187.5,
+     220
+    ],
+    "size": [
+     343,
+     114
+    ],
+    "to": "room",
+    "move": "push"
+   },
+   {
+    "label": "Open Garden Apartment",
+    "at": [
+     187.5,
+     346
+    ],
+    "size": [
+     343,
+     114
+    ],
+    "to": "room",
+    "move": "push"
+   },
+   {
+    "label": "Open The Marina Suite",
+    "at": [
+     187.5,
+     472
+    ],
+    "size": [
+     343,
+     114
+    ],
+    "to": "room",
+    "move": "push"
+   },
+   {
+    "label": "Open Loft with a view",
+    "at": [
+     187.5,
+     598
+    ],
+    "size": [
+     343,
+     114
+    ],
+    "to": "room",
+    "move": "push"
+   },
+   {
+    "label": "Home",
+    "at": [
+     77,
+     768
+    ],
+    "size": [
+     48,
+     48
+    ],
+    "to": "home",
+    "move": "fade"
+   },
+   {
+    "label": "Chats",
+    "at": [
+     244,
+     768
+    ],
+    "size": [
+     48,
+     48
+    ],
+    "to": "chats",
+    "move": "fade"
+   },
+   {
+    "label": "Saved",
+    "at": [
+     297,
+     768
+    ],
+    "size": [
+     48,
+     48
+    ],
+    "to": "saved",
+    "move": "fade"
+   }
+  ]
+ },
+ "savedRoommates": {
+  "src": "/work/room8/b-saved-roommates.webp",
+  "alt": "Favourites, roommates: Steph Campbell is saved.",
+  "spots": [
+   {
+    "label": "Rooms",
+    "at": [
+     103.8,
+     157
+    ],
+    "size": [
+     167.5,
+     36
+    ],
+    "to": "saved",
+    "move": "fade"
+   },
+   {
+    "label": "Open Steph Campbell",
+    "at": [
+     187.5,
+     252.1
+    ],
+    "size": [
+     343,
+     106.2
+    ],
+    "to": "roommate",
+    "move": "push"
+   },
+   {
+    "label": "Home",
+    "at": [
+     80,
+     768
+    ],
+    "size": [
+     48,
+     48
+    ],
+    "to": "home",
+    "move": "fade"
+   },
+   {
+    "label": "Explore",
+    "at": [
+     132,
+     768
+    ],
+    "size": [
+     48,
+     48
+    ],
+    "to": "explore",
+    "move": "fade"
+   },
+   {
+    "label": "Chats",
+    "at": [
+     185,
+     768
+    ],
+    "size": [
+     48,
+     48
+    ],
+    "to": "chats",
+    "move": "fade"
+   }
+  ]
+ },
+ "savedRooms": {
+  "src": "/work/room8/b-saved-rooms.webp",
+  "alt": "Favourites, rooms: two saved rooms.",
+  "spots": [
+   {
+    "label": "Roommates",
+    "at": [
+     271.3,
+     157
+    ],
+    "size": [
+     167.5,
+     36
+    ],
+    "to": "savedRoommates",
+    "move": "fade"
+   },
+   {
+    "label": "Open Garden Apartment",
+    "at": [
+     187.5,
+     256
+    ],
+    "size": [
+     343,
+     114
+    ],
+    "to": "room",
+    "move": "push"
+   },
+   {
+    "label": "Open Sunlit Studio near UNILAG",
+    "at": [
+     187.5,
+     382
+    ],
+    "size": [
+     343,
+     114
+    ],
+    "to": "room",
+    "move": "push"
+   },
+   {
+    "label": "Home",
+    "at": [
+     80,
+     768
+    ],
+    "size": [
+     48,
+     48
+    ],
+    "to": "home",
+    "move": "fade"
+   },
+   {
+    "label": "Explore",
+    "at": [
+     132,
+     768
+    ],
+    "size": [
+     48,
+     48
+    ],
+    "to": "explore",
+    "move": "fade"
+   },
+   {
+    "label": "Chats",
+    "at": [
+     185,
+     768
+    ],
+    "size": [
+     48,
+     48
+    ],
+    "to": "chats",
+    "move": "fade"
+   }
+  ]
+ },
+ "gallery": {
+  "src": "/work/room8/b-gallery.webp",
+  "alt": "All four photos of the room, with a button to open the 3D tour.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     78
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "room",
+    "move": "back"
+   },
+   {
+    "label": "Share",
+    "at": [
+     344,
+     78
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "shareRoom",
+    "move": "sheet"
+   },
+   {
+    "label": "Open the 3D tour",
+    "at": [
+     187.5,
+     763
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "vrLoader",
+    "move": "in"
+   }
+  ]
+ },
+ "amenities": {
+  "src": "/work/room8/b-amenities.webp",
+  "alt": "All 10 amenities, in a sheet over the room.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     95
+    ],
+    "size": [
+     375,
+     190
+    ],
+    "to": "roomRoommates",
+    "move": "drop"
+   },
+   {
+    "label": "Close",
+    "at": [
+     343,
+     240
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "roomRoommates",
+    "move": "drop"
+   },
+   {
+    "label": "Done",
+    "at": [
+     187.5,
+     763
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "roomRoommates",
+    "move": "drop"
+   }
+  ],
+  "sheet": {
+   "top": 190,
+   "over": "roomRoommates"
+  }
+ },
+ "shareRoom": {
+  "src": "/work/room8/b-share-room.webp",
+  "alt": "Share the room: copy link, message or other apps.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     260
+    ],
+    "size": [
+     375,
+     520
+    ],
+    "to": "room",
+    "move": "drop"
+   },
+   {
+    "label": "Close",
+    "at": [
+     343,
+     570
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "room",
+    "move": "drop"
+   },
+   {
+    "label": "Copy link",
+    "at": [
+     50,
+     644
+    ],
+    "size": [
+     52,
+     76
+    ],
+    "to": "roomShared",
+    "move": "fade"
+   },
+   {
+    "label": "Room8 chat",
+    "at": [
+     144,
+     644
+    ],
+    "size": [
+     66.2,
+     76
+    ],
+    "to": "chats",
+    "move": "fade"
+   },
+   {
+    "label": "Email",
+    "at": [
+     238.1,
+     644
+    ],
+    "size": [
+     52,
+     76
+    ],
+    "to": "roomShared",
+    "move": "fade"
+   },
+   {
+    "label": "More",
+    "at": [
+     325,
+     644
+    ],
+    "size": [
+     52,
+     76
+    ],
+    "to": "roomShared",
+    "move": "fade"
+   }
+  ],
+  "sheet": {
+   "top": 520,
+   "over": "room"
+  }
+ },
+ "roomShared": {
+  "src": "/work/room8/b-room-shared.webp",
+  "alt": "The room, with a message that the link was copied.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     330
+    ],
+    "size": [
+     375,
+     660
+    ],
+    "to": "room",
+    "move": "drop"
+   },
+   {
+    "label": "Done",
+    "at": [
+     187.5,
+     763
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "room",
+    "move": "drop"
+   }
+  ],
+  "sheet": {
+   "top": 660,
+   "over": "room"
+  }
+ },
+ "bookWho": {
+  "src": "/work/room8/b-book-who.webp",
+  "alt": "Book a tour, step 2: who's coming.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     46
+    ],
+    "size": [
+     375,
+     92
+    ],
+    "to": "room",
+    "move": "drop"
+   },
+   {
+    "label": "Close",
+    "at": [
+     343,
+     142
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "room",
+    "move": "drop"
+   },
+   {
+    "label": "Continue",
+    "at": [
+     187.5,
+     763
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "bookReview",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Note for Marcus",
+    "text": [
+     30,
+     457,
+     207.1,
+     18
+    ],
+    "clear": [
+     30,
+     457,
+     134.7,
+     18
+    ],
+    "field": [
+     16,
+     444,
+     343,
+     110
+    ],
+    "r": 8,
+    "bg": "rgb(255, 255, 255)",
+    "chars": 32,
+    "src": "/work/room8/b-book-who-ink-0.webp"
+   }
+  ],
+  "sheet": {
+   "top": 92,
+   "over": "room"
+  }
+ },
+ "bookReview": {
+  "src": "/work/room8/b-book-review.webp",
+  "alt": "Book a tour, step 3: review the day, time, place and who's coming.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     46
+    ],
+    "size": [
+     375,
+     92
+    ],
+    "to": "room",
+    "move": "drop"
+   },
+   {
+    "label": "Close",
+    "at": [
+     343,
+     142
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "room",
+    "move": "drop"
+   },
+   {
+    "label": "Confirm tour",
+    "at": [
+     187.5,
+     705
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "bookConfirmed",
+    "move": "fade"
+   },
+   {
+    "label": "Change the time",
+    "at": [
+     187.5,
+     763
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "bookVisit",
+    "move": "fade"
+   }
+  ],
+  "sheet": {
+   "top": 92,
+   "over": "room"
+  }
+ },
+ "bookConfirmed": {
+  "src": "/work/room8/b-book-confirmed.webp",
+  "alt": "Tour booked: Monday 23 November at 9:00 AM with Marcus.",
+  "spots": [
+   {
+    "label": "Message Marcus",
+    "at": [
+     187.5,
+     705
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "chatMarcus",
+    "move": "push"
+   },
+   {
+    "label": "Back to home",
+    "at": [
+     187.5,
+     763
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "home",
+    "move": "out"
+   }
+  ]
+ },
+ "host": {
+  "src": "/work/room8/b-host.webp",
+  "alt": "Marcus Brown, host: verified, replies within an hour, with his rooms.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     78
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "roomRoommates",
+    "move": "back"
+   },
+   {
+    "label": "Report",
+    "at": [
+     344,
+     78
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "report",
+    "move": "push"
+   },
+   {
+    "label": "Open Sunlit Studio near UNILAG",
+    "at": [
+     187.5,
+     458
+    ],
+    "size": [
+     343,
+     114
+    ],
+    "to": "room",
+    "move": "push"
+   },
+   {
+    "label": "Open The Marina Suite",
+    "at": [
+     187.5,
+     584
+    ],
+    "size": [
+     343,
+     114
+    ],
+    "to": "room",
+    "move": "push"
+   },
+   {
+    "label": "Message Marcus",
+    "at": [
+     187.5,
+     763
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "chatMarcus",
+    "move": "push"
+   }
+  ]
+ },
+ "roommateMore": {
+  "src": "/work/room8/b-roommate-more.webp",
+  "alt": "Alex Hunter's full profile: biography, room description, lifestyle and amenities.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     78
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "roommate",
+    "move": "back"
+   },
+   {
+    "label": "Report",
+    "at": [
+     344,
+     78
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "report",
+    "move": "push"
+   },
+   {
+    "label": "Contact",
+    "at": [
+     98.8,
+     763
+    ],
+    "size": [
+     165.5,
+     46
+    ],
+    "to": "conversation",
+    "move": "push"
+   },
+   {
+    "label": "Book a Tour",
+    "at": [
+     276.3,
+     763
+    ],
+    "size": [
+     165.5,
+     46
+    ],
+    "to": "bookVisit",
+    "move": "sheet"
+   }
+  ]
+ },
+ "chatMarcus": {
+  "src": "/work/room8/b-chat-marcus.webp",
+  "alt": "Conversation with Marcus Brown, the host, after a video tour.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     77
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "chats",
+    "move": "back"
+   },
+   {
+    "label": "Call",
+    "at": [
+     307,
+     77
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "callRinging",
+    "move": "in"
+   },
+   {
+    "label": "More options",
+    "at": [
+     345,
+     77
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "chatMenuHost",
+    "move": "fade"
+   },
+   {
+    "label": "Attach",
+    "at": [
+     283,
+     772
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "attach",
+    "move": "sheet"
+   },
+   {
+    "label": "Send",
+    "at": [
+     337,
+     772
+    ],
+    "size": [
+     44,
+     44
+    ],
+    "to": "chatMarcusSent",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Message",
+    "text": [
+     29,
+     763,
+     169.5,
+     18
+    ],
+    "clear": [
+     29,
+     763,
+     79.1,
+     18
+    ],
+    "field": [
+     30,
+     750,
+     237,
+     44
+    ],
+    "r": 8,
+    "bg": "rgb(240, 242, 245)",
+    "chars": 25,
+    "src": "/work/room8/b-chat-marcus-ink-0.webp"
+   }
+  ]
+ },
+ "chatMarcusSent": {
+  "src": "/work/room8/b-chat-marcus-sent.webp",
+  "alt": "Conversation with Marcus, with your message sent.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     77
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "chats",
+    "move": "back"
+   },
+   {
+    "label": "Call",
+    "at": [
+     307,
+     77
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "callRinging",
+    "move": "in"
+   },
+   {
+    "label": "More options",
+    "at": [
+     345,
+     77
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "chatMenuHost",
+    "move": "fade"
+   },
+   {
+    "label": "Attach",
+    "at": [
+     283,
+     772
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "attach",
+    "move": "sheet"
+   },
+   {
+    "label": "Send",
+    "at": [
+     337,
+     772
+    ],
+    "size": [
+     44,
+     44
+    ],
+    "to": "chatMarcus",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Message",
+    "text": [
+     29,
+     763,
+     71.8,
+     18
+    ],
+    "clear": [
+     29,
+     763,
+     79.1,
+     18
+    ],
+    "field": [
+     30,
+     750,
+     237,
+     44
+    ],
+    "r": 8,
+    "bg": "rgb(240, 242, 245)",
+    "chars": 10,
+    "src": "/work/room8/b-chat-marcus-sent-ink-0.webp"
+   }
+  ]
+ },
+ "chatSteph": {
+  "src": "/work/room8/b-chat-steph.webp",
+  "alt": "Conversation with Steph Campbell, a possible roommate.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     77
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "chats",
+    "move": "back"
+   },
+   {
+    "label": "Call",
+    "at": [
+     307,
+     77
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "callRinging",
+    "move": "in"
+   },
+   {
+    "label": "More options",
+    "at": [
+     345,
+     77
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "chatMenuHost",
+    "move": "fade"
+   },
+   {
+    "label": "Attach",
+    "at": [
+     283,
+     772
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "attach",
+    "move": "sheet"
+   },
+   {
+    "label": "Send",
+    "at": [
+     337,
+     772
+    ],
+    "size": [
+     44,
+     44
+    ],
+    "to": "chatStephSent",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Message",
+    "text": [
+     29,
+     763,
+     128.7,
+     18
+    ],
+    "clear": [
+     29,
+     763,
+     79.1,
+     18
+    ],
+    "field": [
+     30,
+     750,
+     237,
+     44
+    ],
+    "r": 8,
+    "bg": "rgb(240, 242, 245)",
+    "chars": 20,
+    "src": "/work/room8/b-chat-steph-ink-0.webp"
+   }
+  ]
+ },
+ "chatAdrej": {
+  "src": "/work/room8/b-chat-adrej.webp",
+  "alt": "Conversation with Adrej Lisakov about a cancelled tour.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     77
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "chats",
+    "move": "back"
+   },
+   {
+    "label": "Call",
+    "at": [
+     307,
+     77
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "callRinging",
+    "move": "in"
+   },
+   {
+    "label": "More options",
+    "at": [
+     345,
+     77
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "chatMenuHost",
+    "move": "fade"
+   },
+   {
+    "label": "Rebook the tour",
+    "at": [
+     316.8,
+     323.9
+    ],
+    "size": [
+     50.3,
+     32
+    ],
+    "to": "bookVisit",
+    "move": "sheet"
+   },
+   {
+    "label": "Attach",
+    "at": [
+     283,
+     772
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "attach",
+    "move": "sheet"
+   },
+   {
+    "label": "Send",
+    "at": [
+     337,
+     772
+    ],
+    "size": [
+     44,
+     44
+    ],
+    "to": "chatAdrejSent",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Message",
+    "text": [
+     29,
+     763,
+     102.3,
+     18
+    ],
+    "clear": [
+     29,
+     763,
+     79.1,
+     18
+    ],
+    "field": [
+     30,
+     750,
+     237,
+     44
+    ],
+    "r": 8,
+    "bg": "rgb(240, 242, 245)",
+    "chars": 15,
+    "src": "/work/room8/b-chat-adrej-ink-0.webp"
+   }
+  ]
+ },
+ "chatMenuHost": {
+  "src": "/work/room8/b-chat-menu-host.webp",
+  "alt": "Conversation options: video call, view host, mute, search, report.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     235
+    ],
+    "size": [
+     375,
+     470
+    ],
+    "to": "chatMarcus",
+    "move": "drop"
+   },
+   {
+    "label": "Video call",
+    "at": [
+     187.5,
+     526
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "callRinging",
+    "move": "fade"
+   },
+   {
+    "label": "View contact",
+    "at": [
+     187.5,
+     570
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "host",
+    "move": "fade"
+   },
+   {
+    "label": "Mute notifications",
+    "at": [
+     187.5,
+     614
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "chatMuted",
+    "move": "fade"
+   },
+   {
+    "label": "Search",
+    "at": [
+     187.5,
+     658
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "chatSearch",
+    "move": "fade"
+   },
+   {
+    "label": "Report",
+    "at": [
+     187.5,
+     702
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "report",
+    "move": "fade"
+   }
+  ],
+  "sheet": {
+   "top": 470,
+   "over": "chatMarcus"
+  }
+ },
+ "chatMuted": {
+  "src": "/work/room8/b-chat-muted.webp",
+  "alt": "Alex Hunter's conversation is muted.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     300
+    ],
+    "size": [
+     375,
+     600
+    ],
+    "to": "conversation",
+    "move": "drop"
+   },
+   {
+    "label": "Done",
+    "at": [
+     187.5,
+     705
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "conversation",
+    "move": "drop"
+   },
+   {
+    "label": "Unmute",
+    "at": [
+     187.5,
+     763
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "conversation",
+    "move": "drop"
+   }
+  ],
+  "sheet": {
+   "top": 600,
+   "over": "conversation"
+  }
+ },
+ "chatSearch": {
+  "src": "/work/room8/b-chat-search.webp",
+  "alt": "Search in the conversation: payments found.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     76
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "conversation",
+    "move": "back"
+   },
+   {
+    "label": "Payment sent · ₦130,000",
+    "at": [
+     187.5,
+     189.5
+    ],
+    "size": [
+     343,
+     65
+    ],
+    "to": "payReceipt",
+    "move": "push"
+   },
+   {
+    "label": "Payment sent · ₦130,000, 2",
+    "at": [
+     187.5,
+     254.5
+    ],
+    "size": [
+     343,
+     65
+    ],
+    "to": "payReceipt",
+    "move": "push"
+   },
+   {
+    "label": "Payment sent · ₦130,000, 3",
+    "at": [
+     187.5,
+     319.5
+    ],
+    "size": [
+     343,
+     65
+    ],
+    "to": "payReceipt",
+    "move": "push"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Search messages",
+    "text": [
+     95,
+     67,
+     58.8,
+     18
+    ],
+    "clear": [
+     95,
+     67,
+     116.7,
+     18
+    ],
+    "field": [
+     52,
+     56,
+     307,
+     40
+    ],
+    "r": 8,
+    "bg": "rgb(245, 245, 245)",
+    "chars": 7,
+    "src": "/work/room8/b-chat-search-ink-0.webp"
+   }
+  ]
+ },
+ "attach": {
+  "src": "/work/room8/b-attach.webp",
+  "alt": "Attach a photo, document or location to the conversation.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     280
+    ],
+    "size": [
+     375,
+     560
+    ],
+    "to": "conversation",
+    "move": "drop"
+   },
+   {
+    "label": "Close",
+    "at": [
+     343,
+     610
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "conversation",
+    "move": "drop"
+   },
+   {
+    "label": "Photo",
+    "at": [
+     56,
+     684
+    ],
+    "size": [
+     52,
+     76
+    ],
+    "to": "conversationSent",
+    "move": "fade"
+   },
+   {
+    "label": "Camera",
+    "at": [
+     142.1,
+     684
+    ],
+    "size": [
+     52,
+     76
+    ],
+    "to": "conversationSent",
+    "move": "fade"
+   },
+   {
+    "label": "Document",
+    "at": [
+     230.5,
+     684
+    ],
+    "size": [
+     56.8,
+     76
+    ],
+    "to": "conversationSent",
+    "move": "fade"
+   },
+   {
+    "label": "Location",
+    "at": [
+     319,
+     684
+    ],
+    "size": [
+     52,
+     76
+    ],
+    "to": "conversationSent",
+    "move": "fade"
+   }
+  ],
+  "sheet": {
+   "top": 560,
+   "over": "conversation"
+  }
+ },
+ "conversationSent": {
+  "src": "/work/room8/b-conversation-sent.webp",
+  "alt": "Conversation with Alex Hunter, with a photo sent.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     77
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "chats",
+    "move": "back"
+   },
+   {
+    "label": "Call",
+    "at": [
+     307,
+     77
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "callRinging",
+    "move": "in"
+   },
+   {
+    "label": "More options",
+    "at": [
+     345,
+     77
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "chatMenu",
+    "move": "fade"
+   },
+   {
+    "label": "Attach",
+    "at": [
+     283,
+     772
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "attach",
+    "move": "sheet"
+   },
+   {
+    "label": "Send",
+    "at": [
+     337,
+     772
+    ],
+    "size": [
+     44,
+     44
+    ],
+    "to": "conversation",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Message",
+    "text": [
+     29,
+     763,
+     181.3,
+     18
+    ],
+    "clear": [
+     29,
+     763,
+     79.1,
+     18
+    ],
+    "field": [
+     30,
+     750,
+     237,
+     44
+    ],
+    "r": 8,
+    "bg": "rgb(240, 242, 245)",
+    "chars": 27,
+    "src": "/work/room8/b-conversation-sent-ink-0.webp"
+   }
+  ]
+ },
+ "report": {
+  "src": "/work/room8/b-report.webp",
+  "alt": "Report someone: pick a reason.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     78
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "chats",
+    "move": "back"
+   },
+   {
+    "label": "Send report",
+    "at": [
+     187.5,
+     763
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "reportDone",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Tell us more",
+    "text": [
+     30,
+     441,
+     285.5,
+     18
+    ],
+    "clear": [
+     30,
+     441,
+     142.2,
+     18
+    ],
+    "field": [
+     16,
+     428,
+     343,
+     110
+    ],
+    "r": 8,
+    "bg": "rgb(255, 255, 255)",
+    "chars": 43,
+    "src": "/work/room8/b-report-ink-0.webp"
+   }
+  ]
+ },
+ "reportDone": {
+  "src": "/work/room8/b-report-done.webp",
+  "alt": "Report sent.",
+  "spots": [
+   {
+    "label": "Back to chats",
+    "at": [
+     187.5,
+     763
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "chats",
+    "move": "out"
+   }
+  ]
+ },
+ "payBank": {
+  "src": "/work/room8/b-pay-bank.webp",
+  "alt": "Pay with bank: transfer ₦130,000 to the escrow account.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     78
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "payMethod",
+    "move": "back"
+   },
+   {
+    "label": "I’ve sent it",
+    "at": [
+     187.5,
+     705
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "payDone",
+    "move": "fade"
+   },
+   {
+    "label": "Copy account number",
+    "at": [
+     187.5,
+     763
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "payBankCopied",
+    "move": "fade"
+   }
+  ]
+ },
+ "payBankCopied": {
+  "src": "/work/room8/b-pay-bank-copied.webp",
+  "alt": "Account number copied.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     310
+    ],
+    "size": [
+     375,
+     620
+    ],
+    "to": "payBank",
+    "move": "drop"
+   },
+   {
+    "label": "Got it",
+    "at": [
+     187.5,
+     763
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "payBank",
+    "move": "drop"
+   }
+  ],
+  "sheet": {
+   "top": 620,
+   "over": "payBank"
+  }
+ },
+ "payPaypal": {
+  "src": "/work/room8/b-pay-paypal.webp",
+  "alt": "Pay with PayPal: confirm ₦130,000.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     78
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "payMethod",
+    "move": "back"
+   },
+   {
+    "label": "Continue to PayPal",
+    "at": [
+     187.5,
+     763
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "payDone",
+    "move": "fade"
+   }
+  ]
+ },
+ "payReceipt": {
+  "src": "/work/room8/b-pay-receipt.webp",
+  "alt": "Receipt for ₦130,000, held in escrow.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     78
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "conversation",
+    "move": "back"
+   },
+   {
+    "label": "Download",
+    "at": [
+     344,
+     78
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "receiptSaved",
+    "move": "fade"
+   },
+   {
+    "label": "Back to home",
+    "at": [
+     187.5,
+     763
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "home",
+    "move": "out"
+   }
+  ]
+ },
+ "receiptSaved": {
+  "src": "/work/room8/b-receipt-saved.webp",
+  "alt": "Receipt saved to files.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     320
+    ],
+    "size": [
+     375,
+     640
+    ],
+    "to": "payReceipt",
+    "move": "drop"
+   },
+   {
+    "label": "Done",
+    "at": [
+     187.5,
+     763
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "payReceipt",
+    "move": "drop"
+   }
+  ],
+  "sheet": {
+   "top": 640,
+   "over": "payReceipt"
+  }
+ },
+ "callRated": {
+  "src": "/work/room8/b-call-rated.webp",
+  "alt": "Thank you for rating the tour five stars.",
+  "spots": [
+   {
+    "label": "Make payment",
+    "at": [
+     187.5,
+     705
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "payMethod",
+    "move": "push"
+   },
+   {
+    "label": "Back to room",
+    "at": [
+     187.5,
+     763
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "room",
+    "move": "out"
+   }
+  ]
+ },
+ "vrHeadset": {
+  "src": "/work/room8/b-vr-headset.webp",
+  "alt": "3D tour in VR: connect a headset.",
+  "spots": [
+   {
+    "label": "Back to walk mode",
+    "at": [
+     32,
+     70
+    ],
+    "size": [
+     40,
+     40
+    ],
+    "to": "vrWalk",
+    "move": "out"
+   },
+   {
+    "label": "Keep walking here",
+    "at": [
+     187.5,
+     763
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "vrWalk",
+    "move": "out"
+   }
+  ]
+ },
+ "settingsMore": {
+  "src": "/work/room8/b-settings-more.webp",
+  "alt": "Settings, further down: notifications, account, help and log out.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     78
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "settings",
+    "move": "back"
+   },
+   {
+    "label": "Payment methods",
+    "at": [
+     187.5,
+     433
+    ],
+    "size": [
+     341,
+     68
+    ],
+    "to": "payMethod",
+    "move": "push"
+   },
+   {
+    "label": "Payments and receipts",
+    "at": [
+     187.5,
+     501.5
+    ],
+    "size": [
+     341,
+     69
+    ],
+    "to": "payReceipt",
+    "move": "push"
+   },
+   {
+    "label": "Change password",
+    "at": [
+     187.5,
+     570.5
+    ],
+    "size": [
+     341,
+     69
+    ],
+    "to": "reset",
+    "move": "push"
+   },
+   {
+    "label": "Help centre",
+    "at": [
+     187.5,
+     639.5
+    ],
+    "size": [
+     341,
+     69
+    ],
+    "to": "helpCentre",
+    "move": "push"
+   },
+   {
+    "label": "Terms of use",
+    "at": [
+     187.5,
+     708.5
+    ],
+    "size": [
+     341,
+     69
+    ],
+    "to": "terms",
+    "move": "push"
+   },
+   {
+    "label": "Log out",
+    "at": [
+     187.5,
+     763
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "logout",
+    "move": "sheet"
+   }
+  ]
+ },
+ "editProfile": {
+  "src": "/work/room8/b-edit-profile.webp",
+  "alt": "Edit profile: photo, name, about and what you're looking for.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     78
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "settings",
+    "move": "back"
+   },
+   {
+    "label": "Change photo",
+    "at": [
+     187.5,
+     215
+    ],
+    "size": [
+     91.9,
+     32
+    ],
+    "to": "editPhoto",
+    "move": "sheet"
+   },
+   {
+    "label": "Looking for",
+    "at": [
+     187.5,
+     601
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "preferences",
+    "move": "push"
+   },
+   {
+    "label": "Save changes",
+    "at": [
+     187.5,
+     763
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "settings",
+    "move": "back"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Name",
+    "text": [
+     30,
+     278,
+     50.3,
+     18
+    ],
+    "clear": [
+     30,
+     278,
+     70.5,
+     18
+    ],
+    "field": [
+     16,
+     266,
+     343,
+     42
+    ],
+    "r": 8,
+    "bg": "rgb(255, 255, 255)",
+    "chars": 5,
+    "src": "/work/room8/b-edit-profile-ink-0.webp"
+   },
+   {
+    "label": "About you",
+    "text": [
+     30,
+     361,
+     183.6,
+     18
+    ],
+    "clear": [
+     30,
+     361,
+     210.5,
+     18
+    ],
+    "field": [
+     16,
+     348,
+     343,
+     110
+    ],
+    "r": 8,
+    "bg": "rgb(255, 255, 255)",
+    "chars": 28,
+    "src": "/work/room8/b-edit-profile-ink-1.webp"
+   },
+   {
+    "label": "Occupation",
+    "text": [
+     30,
+     510,
+     113.4,
+     18
+    ],
+    "clear": [
+     30,
+     510,
+     82.7,
+     18
+    ],
+    "field": [
+     16,
+     498,
+     343,
+     42
+    ],
+    "r": 8,
+    "bg": "rgb(255, 255, 255)",
+    "chars": 15,
+    "src": "/work/room8/b-edit-profile-ink-2.webp"
+   }
+  ]
+ },
+ "editPhoto": {
+  "src": "/work/room8/b-edit-photo.webp",
+  "alt": "Change your photo: camera or gallery.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     295
+    ],
+    "size": [
+     375,
+     590
+    ],
+    "to": "editProfile",
+    "move": "drop"
+   },
+   {
+    "label": "Close",
+    "at": [
+     343,
+     640
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "editProfile",
+    "move": "drop"
+   },
+   {
+    "label": "Take a photo",
+    "at": [
+     187.5,
+     708
+    ],
+    "size": [
+     343,
+     64
+    ],
+    "to": "editProfile",
+    "move": "drop"
+   },
+   {
+    "label": "Choose from gallery",
+    "at": [
+     187.5,
+     772
+    ],
+    "size": [
+     343,
+     64
+    ],
+    "to": "editProfile",
+    "move": "drop"
+   }
+  ],
+  "sheet": {
+   "top": 590,
+   "over": "editProfile"
+  }
+ },
+ "helpCentre": {
+  "src": "/work/room8/b-help-centre.webp",
+  "alt": "Help centre: common questions and a way to message support.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     78
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "settingsMore",
+    "move": "back"
+   },
+   {
+    "label": "Message support",
+    "at": [
+     187.5,
+     763
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "chatMarcus",
+    "move": "push"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Search for help",
+    "text": [
+     59,
+     121,
+     49.3,
+     18
+    ],
+    "clear": [
+     59,
+     121,
+     101,
+     18
+    ],
+    "field": [
+     16,
+     110,
+     343,
+     40
+    ],
+    "r": 8,
+    "bg": "rgb(245, 245, 245)",
+    "chars": 6,
+    "src": "/work/room8/b-help-centre-ink-0.webp"
+   }
+  ]
+ },
+ "logout": {
+  "src": "/work/room8/b-logout.webp",
+  "alt": "Log out? Your saved rooms and chats will be here when you're back.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     280
+    ],
+    "size": [
+     375,
+     560
+    ],
+    "to": "settings",
+    "move": "drop"
+   },
+   {
+    "label": "Log out",
+    "at": [
+     187.5,
+     705
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "login",
+    "move": "out"
+   },
+   {
+    "label": "Stay",
+    "at": [
+     187.5,
+     763
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "settings",
+    "move": "drop"
+   }
+  ],
+  "sheet": {
+   "top": 560,
+   "over": "settings"
+  }
+ },
+ "resetDone": {
+  "src": "/work/room8/b-reset-done.webp",
+  "alt": "Password changed.",
+  "spots": [
+   {
+    "label": "Back to log in",
+    "at": [
+     187.5,
+     763
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "login",
+    "move": "back"
+   }
+  ]
+ },
+ "resetSent": {
+  "src": "/work/room8/b-reset-sent.webp",
+  "alt": "Check your email for the reset link.",
+  "spots": [
+   {
+    "label": "I have the link",
+    "at": [
+     187.5,
+     705
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "reset",
+    "move": "push"
+   },
+   {
+    "label": "Back to log in",
+    "at": [
+     187.5,
+     763
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "login",
+    "move": "back"
+   }
+  ]
+ },
+ "preferencesFilled": {
+  "src": "/work/room8/b-preferences-filled.webp",
+  "alt": "Roommate preferences, filled in.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     27.3,
+     78
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "preferences",
+    "move": "back"
+   },
+   {
+    "label": "See my matches",
+    "at": [
+     187.5,
+     763
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "home",
+    "move": "in"
+   }
+  ]
+ },
+ "chatStephSent": {
+  "src": "/work/room8/b-chat-steph-sent.webp",
+  "alt": "Conversation with Steph Campbell, a possible roommate, with your message sent.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     77
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "chats",
+    "move": "back"
+   },
+   {
+    "label": "Call",
+    "at": [
+     307,
+     77
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "callRinging",
+    "move": "in"
+   },
+   {
+    "label": "More options",
+    "at": [
+     345,
+     77
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "chatMenuHost",
+    "move": "fade"
+   },
+   {
+    "label": "Attach",
+    "at": [
+     283,
+     772
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "attach",
+    "move": "sheet"
+   },
+   {
+    "label": "Send",
+    "at": [
+     337,
+     772
+    ],
+    "size": [
+     44,
+     44
+    ],
+    "to": "chatSteph",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Message",
+    "text": [
+     29,
+     763,
+     128.7,
+     18
+    ],
+    "clear": [
+     29,
+     763,
+     79.1,
+     18
+    ],
+    "field": [
+     30,
+     750,
+     237,
+     44
+    ],
+    "r": 8,
+    "bg": "rgb(240, 242, 245)",
+    "chars": 20,
+    "src": "/work/room8/b-chat-steph-sent-ink-0.webp"
+   }
+  ]
+ },
+ "chatAdrejSent": {
+  "src": "/work/room8/b-chat-adrej-sent.webp",
+  "alt": "Conversation with Adrej Lisakov about a cancelled tour, with your message sent.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     77
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "chats",
+    "move": "back"
+   },
+   {
+    "label": "Call",
+    "at": [
+     307,
+     77
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "callRinging",
+    "move": "in"
+   },
+   {
+    "label": "More options",
+    "at": [
+     345,
+     77
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "chatMenuHost",
+    "move": "fade"
+   },
+   {
+    "label": "Rebook the tour",
+    "at": [
+     316.8,
+     323.9
+    ],
+    "size": [
+     50.3,
+     32
+    ],
+    "to": "bookVisit",
+    "move": "sheet"
+   },
+   {
+    "label": "Attach",
+    "at": [
+     283,
+     772
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "attach",
+    "move": "sheet"
+   },
+   {
+    "label": "Send",
+    "at": [
+     337,
+     772
+    ],
+    "size": [
+     44,
+     44
+    ],
+    "to": "chatAdrej",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Message",
+    "text": [
+     29,
+     763,
+     102.3,
+     18
+    ],
+    "clear": [
+     29,
+     763,
+     79.1,
+     18
+    ],
+    "field": [
+     30,
+     750,
+     237,
+     44
+    ],
+    "r": 8,
+    "bg": "rgb(240, 242, 245)",
+    "chars": 15,
+    "src": "/work/room8/b-chat-adrej-sent-ink-0.webp"
+   }
+  ]
+ }
+}

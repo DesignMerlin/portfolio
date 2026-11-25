@@ -73,7 +73,8 @@ export default async function ProjectPage({ params }: Props) {
   const project = projects[index];
   if (!project) notFound();
   const { detail, entry } = project;
-  const more = [1, 2].map((n) => projects[(index + n) % projects.length]!);
+  // Every other project there's something to see of, starting with the next one along
+  const more = projects.map((_, n) => projects[(index + 1 + n) % projects.length]!).filter((x) => x.slug !== slug && (x.mockup || x.cover));
 
   const mdx = async (keep: (id: string) => boolean) =>
     entry && pickSections(entry.source, keep)
@@ -127,32 +128,6 @@ export default async function ProjectPage({ params }: Props) {
                 </li>
               ))}
             </ul>
-
-            <div className="mt-8 grid gap-x-8 gap-y-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
-              {project.tldr ? (
-                <div>
-                  <h2 className="font-sans text-small font-medium tracking-[-0.01em] text-ink">TL;DR</h2>
-                  <ul className="mt-3 max-w-[58ch] space-y-2">
-                    {project.tldr.map((line) => (
-                      <li key={line} className="flex gap-3 text-ink-2">
-                        <span className="mt-[0.7em] h-px w-3 shrink-0 bg-ink-3" aria-hidden="true" />
-                        {line}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ) : null}
-              {project.facts.length ? (
-                <dl className="grid grid-cols-2 gap-x-10 gap-y-4">
-                  {project.facts.map(([k, v]) => (
-                    <div key={k}>
-                      <dt className="text-small font-medium text-ink">{k}</dt>
-                      <dd className="mt-0.5 max-w-[22ch] text-small text-ink-2">{v}</dd>
-                    </div>
-                  ))}
-                </dl>
-              ) : null}
-            </div>
 
             <div className="mt-8 aspect-[1184/1032] overflow-hidden rounded-[var(--radius-l)] bg-sunken sm:aspect-[1184/860]">
               <ViewTransition name={`cover-${project.slug}`} share="morph" default="none">

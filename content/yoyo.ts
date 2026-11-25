@@ -1,8 +1,7 @@
 /**
  * Yoyo's screens, exported at 3× (1125×2436) from Samuel's Figma file Yoyo, section 598:4075. The film,
  * the case study and the prototype all read from here.
- * Left out on purpose: sign up, email verification and the profile, which show an email address, a name
- * and a postal address.
+ * The email address on the sign-up screens is a placeholder.
  */
 const screen = (file: string, alt: string) => ({ src: `/work/yoyo/${file}.webp`, alt });
 
@@ -56,6 +55,9 @@ export const yoyo = {
   darkReady: screen("dark-ready", "Let's get started, in dark mode."),
   darkHome: screen("dark-home", "Overview in dark mode."),
   darkHealth: screen("dark-health", "Financial health score in dark mode."),
+  signUp: screen("sign-up", "Create account with an email, Google or Apple."),
+  verify: screen("verify", "Check your mail: a four-digit code."),
+  profile: screen("profile", "Profile, personal: account details and postal address."),
 } as const;
 
 export type YoyoScreen = keyof typeof yoyo;
