@@ -29,7 +29,7 @@ const run = async (engine, label, options) => {
     await page.screenshot({ path: `${out}/${label}-${name}.png` });
     if (p === "/work/room8") {
       // Too long for one image on phones: capture key sections one viewport at a time
-      for (const id of ["research", "personas", "journey", "ia", "decisions", "prototype", "testing"]) {
+      for (const id of ["research", "personas", "journey", "ia", "decisions", "testing"]) {
         await page.evaluate((i) => document.getElementById(i)?.scrollIntoView(), id);
         await page.waitForTimeout(900);
         await page.screenshot({ path: `${out}/${label}-${name}-${id}.png` });

@@ -80,96 +80,22 @@ await step("command menu opens with Ctrl+K and filters", async () => {
   await page.waitForTimeout(800);
 });
 
-await step("immigify agent: ask, think, stream, expand card", async () => {
-  await page.goto(base + "/work/immigify", { waitUntil: "networkidle" });
-  await page.waitForTimeout(600);
-  await page.keyboard.press("Escape");
-  await page.waitForTimeout(900);
-  await page.locator("#prototype").scrollIntoViewIfNeeded();
-  await page.waitForTimeout(1200);
-  await page.getByRole("button", { name: "What's still missing from Adaeze's H-1B file?" }).click();
-  await page.waitForTimeout(900);
-  await shot("05-agent-thinking");
-  await page.waitForTimeout(4500);
-  await page.getByRole("button", { name: "2 missing documents" }).click();
-  await page.waitForTimeout(700);
-  await shot("06-agent-card");
-});
-
-await step("fundpath prototype: find a campaign, read its report, give", async () => {
-  await page.goto(base + "/work/fundpath", { waitUntil: "networkidle" });
-  await page.locator("#prototype").scrollIntoViewIfNeeded();
-  await page.waitForTimeout(3400);
-  const proto = page.getByRole("group", { name: "FundPath prototype" });
-  const tap = async (name) => {
-    await proto.getByRole("button", { name, exact: true }).click();
-    await page.waitForTimeout(750);
-  };
-  for (const name of ["Next", "Log in", "Password, type into it", "Sign in", "Open Jane's kidney transplant bills", "Transparency report"]) await tap(name);
-  await shot("07-fundpath-report");
-  for (const name of ["Back", "Share", "Close share", "Donate now"]) await tap(name);
-  await shot("08-fundpath-amount");
-  for (const name of ["Proceed", "Proceed", "Pay now"]) await tap(name);
-  await page.waitForTimeout(2200);
-  await tap("Back to home");
-});
-
-await step("room8 prototype: onboarding to roommate and 3D tour", async () => {
-  await page.goto(base + "/work/room8", { waitUntil: "networkidle" });
-  await page.locator("#prototype").scrollIntoViewIfNeeded();
-  await page.waitForTimeout(3200);
-  const proto = page.getByRole("group", { name: "Room8 prototype" });
-  const tap = async (name) => {
-    await proto.getByRole("button", { name, exact: true }).click();
-    await page.waitForTimeout(700);
-  };
-  for (const name of ["Skip", "Sign in", "Settings", "Edit profile", "Back", "Back", "Notifications", "Back", "Explore", "Open Steph Campbell", "Back", "Home", "Open Sunlit Studio", "Start the 3D tour"]) await tap(name);
-  await page.waitForTimeout(2200);
-  await tap("Walk");
-  await shot("09-room8-tour");
-});
-
-await step("case tracker prototype: type a receipt number, get the case, book and pay", async () => {
-  await page.goto(base + "/work/immigify-case-tracker", { waitUntil: "networkidle" });
-  await page.locator("#prototype").scrollIntoViewIfNeeded();
-  await page.waitForTimeout(3600);
-  const proto = page.getByRole("group", { name: "Case Tracker+ prototype" });
-  const tap = async (name) => {
-    await proto.getByRole("button", { name, exact: true }).click();
-    await page.waitForTimeout(750);
-  };
-  for (const name of ["Get started", "Newcomer", "Continue", "Pick interests", "Continue", "Receipt number, type into it"]) await tap(name);
-  await page.waitForTimeout(900);
-  await shot("09b-tracker-typed");
-  await tap("Finish");
-  await page.waitForTimeout(3200);
-  for (const name of ["Ask AI", "What does “biometrics” mean?", "See my case", "Back", "Consultants", "View Maria Alvarez", "See packages and book", "Book", "Select event type", "Initial Strategy Session", "Pick a date", "Confirm and pay $120", "Card number, type into it", "Pay $120", "View my appointments", "Join meeting", "End call"]) await tap(name);
-});
-
-await step("yoyo prototype: pick goals, build a budget, log a transaction, save for a goal", async () => {
-  await page.goto(base + "/work/yoyo", { waitUntil: "networkidle" });
-  await page.keyboard.press("Escape");
-  await page.waitForTimeout(1200);
-  await page.locator("#prototype").scrollIntoViewIfNeeded();
-  await page.waitForTimeout(4200);
-  const proto = page.getByRole("group", { name: "Yoyo prototype" });
-  const tap = async (name) => {
-    await proto.getByRole("button", { name, exact: true }).click();
-    await page.waitForTimeout(750);
-  };
-  for (const name of ["Sign up", "Get started", "Continue", "Password, type into it", "Continue", "Skip", "Make a budget", "Continue", "Go to dashboard", "Budget", "Create a budget", "Create a budget", "Budget name, type into it", "Add income", "Amount, type into it", "Confirm", "Continue", "Housing", "Confirm", "Continue"]) await tap(name);
-  await shot("09c-yoyo-summary");
-  for (const name of ["Continue", "Go to home", "Overview", "Transaction history", "Add a transaction", "Amount, type into it", "Expenses", "Save", "Back", "Goals", "Create a goal", "Create a goal", "Weekly", "Tuesdays", "Confirm", "Confirm", "Confirm", "Continue", "Create goal", "View savings", "Save", "Save $250", "Back to Vacation"]) await tap(name);
-});
-
-await step("project page: no TL;DR or facts, and only real projects under More work", async () => {
-  for (const slug of ["room8", "yoyo", "iexcelo", "heightgpt"]) {
-    await page.goto(base + "/work/" + slug, { waitUntil: "networkidle" });
+await step("project page: no TL;DR, facts or prototype, and two other projects at random", async () => {
+  for (const slug of ["room8", "fundpath", "immigify-case-tracker", "yoyo", "immigify", "iexcelo"]) {
+    const seen = new Set();
+    for (let i = 0; i < 6; i++) {
+      await page.goto(base + "/work/" + slug, { waitUntil: "load" });
+      await page.waitForTimeout(500);
+      const more = await page.getByRole("navigation", { name: "More work" }).getByRole("link").evaluateAll((a) => a.map((x) => x.getAttribute("href")));
+      if (more.length !== 2 || more[0] === more[1]) throw new Error(slug + " shows " + more.join(", "));
+      if (more.includes("/work/" + slug)) throw new Error(slug + " suggests itself");
+      seen.add(more.join());
+    }
+    if (seen.size < 2) throw new Error(slug + " always shows the same two");
     if (await page.getByText("TL;DR").count()) throw new Error(slug + " still has a TL;DR");
     if (await page.locator("#overview dt").count()) throw new Error(slug + " still lists its facts");
-    const more = page.getByRole("navigation", { name: "More work" });
-    if (await more.getByText("Placeholder").count()) throw new Error(slug + " shows a placeholder under More work");
-    if ((await more.getByRole("link").count()) < 4) throw new Error(slug + " shows too few projects");
+    if (await page.locator("#prototype, [role=group][aria-label$=prototype]").count()) throw new Error(slug + " still has a prototype");
+    if (await page.getByRole("navigation", { name: "More work" }).getByText("Placeholder").count()) throw new Error(slug + " shows a placeholder");
   }
 });
 

@@ -5,6 +5,7 @@ import { compileMDX } from "next-mdx-remote/rsc";
 import { ViewTransition } from "react";
 import { KeyScreens } from "@/components/case-study/key-screens";
 import { mdxComponents } from "@/components/case-study/mdx-components";
+import { RandomTwo } from "@/components/case-study/random-two";
 import { ProjectArt } from "@/components/case-study/project-art";
 import { ReadingChrome, SectionNav } from "@/components/case-study/reading-chrome";
 import { PageTransition } from "@/components/site/page-transition";
@@ -73,7 +74,7 @@ export default async function ProjectPage({ params }: Props) {
   const project = projects[index];
   if (!project) notFound();
   const { detail, entry } = project;
-  // Every other project there's something to see of, starting with the next one along
+  // Every other project there's something to see of. Two are shown, at random
   const more = projects.map((_, n) => projects[(index + 1 + n) % projects.length]!).filter((x) => x.slug !== slug && (x.mockup || x.cover));
 
   const mdx = async (keep: (id: string) => boolean) =>
@@ -87,9 +88,9 @@ export default async function ProjectPage({ params }: Props) {
           })
         ).content
       : null;
-  // The prototype is a key screen; what the tabs already say isn't repeated in the full process
+  // What the tabs already say isn't repeated in the full process. Prototypes aren't shown on the page
   const covered = new Set(["context", "problem", "prototype", "outcome"]);
-  const [fullProcess, prototype] = await Promise.all([mdx((id) => !covered.has(id)), mdx((id) => id === "prototype")]);
+  const fullProcess = await mdx((id) => !covered.has(id));
 
   return (
     <PageTransition>
@@ -175,14 +176,15 @@ export default async function ProjectPage({ params }: Props) {
                 Key screens
               </h2>
               <KeyScreens groups={detail.keyScreens} tint={project.tint} kind={detail.kind} title={project.title} />
-              {prototype}
             </section>
           </div>
 
           <nav aria-label="More work" className="mt-24 border-t border-line pt-10">
             <p className="font-display text-h3 font-semibold">More work</p>
-            <ul className="mt-6 grid gap-x-4 gap-y-8 sm:grid-cols-2">
-              {more.map((p) => (
+            <RandomTwo
+              key={slug}
+              className="mt-6 grid gap-x-4 gap-y-8 sm:grid-cols-2"
+              items={more.map((p) => (
                 <li key={p.slug}>
                   <Link href={`/work/${p.slug}`} transitionTypes={["nav-forward"]} className="group block">
                     <div className="aspect-[1184/1032] overflow-hidden rounded-[var(--radius-l)] bg-sunken">
@@ -202,7 +204,7 @@ export default async function ProjectPage({ params }: Props) {
                   </Link>
                 </li>
               ))}
-            </ul>
+            />
           </nav>
         </div>
       </article>
