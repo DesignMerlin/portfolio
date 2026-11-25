@@ -1,7 +1,22 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+
+// 3D films are their own chunk, fetched only where one is shown
+const films = {
+  room8: dynamic(() => import("@/components/case-study/room8/film")),
+  fundpath: dynamic(() => import("@/components/case-study/fundpath/film")),
+  yoyo: dynamic(() => import("@/components/case-study/yoyo/film")),
+  caseTracker: dynamic(() => import("@/components/case-study/case-tracker/film")),
+};
+
+/** Whether a "#rrggbb" wash is dark enough for light text */
+const dark = (hex: string) => {
+  const n = parseInt(hex.slice(1), 16);
+  return 0.299 * (n >> 16) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255) < 128;
+};
 
 export type Mockup = {
   /** Two colours for the backdrop wash, e.g. the product's brand colours */
@@ -16,6 +31,10 @@ export type Mockup = {
   | {
       /** Phone-only products: three screens (600×1076), one per phone */
       phones: [string, string, string];
+    }
+  | {
+      /** A 3D film built for this project */
+      film: keyof typeof films;
     }
 );
 
@@ -37,17 +56,25 @@ export function DeviceMockup({
   mockup,
   label,
   covered = false,
+  paused = false,
+  rate = 1,
   priority = false,
 }: {
   mockup: Mockup;
   label: string;
   /** Hidden behind something else: hold still rather than animate unseen */
   covered?: boolean;
+  /** Paused by the visitor */
+  paused?: boolean;
+  /** Film speed: 0.25 is slow motion */
+  rate?: number;
   priority?: boolean;
 }) {
   const root = useRef<HTMLDivElement>(null);
   const [seen, setSeen] = useState(false);
   const [visible, setVisible] = useState(false);
+  // Films load when their card gets close to the screen
+  const [near, setNear] = useState(false);
 
   useEffect(() => {
     const el = root.current;
@@ -61,16 +88,27 @@ export function DeviceMockup({
       { threshold: 0.25 },
     );
     io.observe(el);
-    return () => io.disconnect();
+    const nearIo = new IntersectionObserver(([e]) => e?.isIntersecting && setNear(true), { rootMargin: "500px 0px" });
+    nearIo.observe(el);
+    return () => {
+      io.disconnect();
+      nearIo.disconnect();
+    };
   }, []);
+
+  const playing = visible && !covered && !paused;
+  const Film = "film" in mockup ? films[mockup.film] : null;
+  const what = "film" in mockup ? "iPhones, as a short 3D film" : "phones" in mockup ? "three phones" : "a laptop and a phone";
 
   return (
     <div
       ref={root}
       role="img"
-      aria-label={`${label} on ${"phones" in mockup ? "three phones" : "a laptop and a phone"}`}
+      aria-label={`${label} on ${what}`}
+      // For the nav passing over it (films set their own, moment by moment)
+      data-nav-tone={dark(mockup.wash[0]) ? "dark" : "light"}
       data-seen={seen ? "" : undefined}
-      data-playing={visible && !covered ? "" : undefined}
+      data-playing={playing ? "" : undefined}
       className="device-mockup absolute inset-0 isolate overflow-hidden [container-type:size]"
       style={
         {
@@ -81,7 +119,7 @@ export function DeviceMockup({
     >
       <div aria-hidden="true" className="device-wash absolute inset-0" />
 
-      {"phones" in mockup ? (
+      {Film ? near ? <Film playing={playing} rate={rate} /> : null : "phones" in mockup ? (
         mockup.phones.map((src, i) => (
           <div
             key={src}
@@ -102,7 +140,7 @@ export function DeviceMockup({
             </div>
           </div>
         ))
-      ) : (
+      ) : "desktop" in mockup ? (
         <>
           {/* Laptop */}
           <div className="device-laptop absolute">
@@ -145,7 +183,7 @@ export function DeviceMockup({
             </div>
           </div>
         </>
-      )}
+      ) : null}
     </div>
   );
 }

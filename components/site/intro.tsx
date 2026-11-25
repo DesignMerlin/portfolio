@@ -62,14 +62,13 @@ const squash = (amount: number): Keyframe[] => [
  * dissolves and the hero rises in underneath. The hero's tag pile drops on
  * that same signal (INTRO_DONE).
  *
- * Any key or tap skips it. Plays on every full page load.
+ * Any key or tap still skips it, with nothing on screen saying so. Plays on every full page load.
  * Reduced motion: no falling; the letters fade in over the ghost, then the
  * overlay fades out.
  */
 export function Intro({ name }: { name: string }) {
   const [done, setDone] = useState(false);
   const root = useRef<HTMLDivElement>(null);
-  const status = useRef<HTMLParagraphElement>(null);
   const wordRef = useRef<HTMLDivElement>(null);
   const word = name.split(" ")[0] ?? name;
 
@@ -186,7 +185,6 @@ export function Intro({ name }: { name: string }) {
       if (exiting) return;
       exiting = true;
       clearTimeout(timer);
-      if (status.current) status.current.textContent = "Ready";
       html.dataset.intro = "done";
       window.dispatchEvent(new Event(INTRO_DONE));
 
@@ -216,8 +214,6 @@ export function Intro({ name }: { name: string }) {
       });
       const fadeMs = leave + stagger * (letters.length - 1);
       el.querySelector<HTMLElement>(".intro-ghost")?.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 260, fill: "forwards" });
-      status.current?.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 260, fill: "forwards" });
-      el.querySelector<HTMLElement>("[data-intro-chrome]")?.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 260, fill: "forwards" });
       // The paper fades a little behind the letters, so the last ones still read against it
       el.querySelector<HTMLElement>("[data-intro-paper]")?.animate([{ opacity: 1 }, { opacity: 0 }], {
         duration: fadeMs * 0.85,
@@ -265,10 +261,6 @@ export function Intro({ name }: { name: string }) {
       {/* The page colour on its own layer, so leaving can fade it (opacity) under the departing letters */}
       <div data-intro-paper className="absolute inset-0 bg-paper" />
       <div data-intro-content className="relative flex h-full flex-col items-center justify-center px-4 sm:px-8">
-        <span data-intro-chrome className="absolute top-4 right-4 rounded-full border border-line-strong px-3 py-1.5 text-micro text-ink-2 sm:top-8 sm:right-8">
-          Skip intro
-        </span>
-
         <div
           ref={wordRef}
           className="grid font-sans text-[calc((100vw-2rem)/3.2)] leading-[0.9] font-bold whitespace-nowrap sm:text-[calc((100vw-4rem)/3.2)]"
@@ -292,10 +284,6 @@ export function Intro({ name }: { name: string }) {
             ))}
           </span>
         </div>
-
-        <p ref={status} className="intro-status mt-10 text-small font-medium sm:mt-14">
-          Getting things up
-        </p>
       </div>
     </div>
   );

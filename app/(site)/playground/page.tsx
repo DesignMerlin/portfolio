@@ -1,27 +1,23 @@
 import type { Metadata } from "next";
-import { ShotsGallery } from "@/components/shots/shots-gallery";
+import { Doodle } from "@/components/playground/doodle";
 import { PageTransition } from "@/components/site/page-transition";
-import { shotFilters, shots } from "@/content/shots";
 
 export const metadata: Metadata = {
   title: "Playground",
-  description: "Interface work by Samuel Ekwenze across mobile, web, dashboards and brand.",
+  description: "A page to doodle on. Pen, marker, spray and a kaleidoscope, in Samuel Ekwenze's portfolio.",
 };
 
 export default function PlaygroundPage() {
   return (
     <PageTransition>
-      <div className="mx-auto max-w-[1320px] px-4 pt-14 sm:px-8 lg:pt-20">
-        <div className="grid gap-6 lg:grid-cols-12">
-          <h1 className="text-h1 font-semibold lg:col-span-6">Playground</h1>
-          <p className="max-w-[46ch] self-end text-ink-2 lg:col-span-5 lg:col-start-8">
-            Screens from shipped products, work without a full case study yet, and explorations. Open any shot for the
-            thinking behind it. Shots marked as placeholders are on their way from Figma.
+      <div className="mx-auto max-w-[1320px] px-4 pt-8 sm:px-8 lg:pt-10">
+        <div className="mb-6 flex flex-wrap items-end justify-between gap-x-10 gap-y-3">
+          <h1 className="text-h1 font-semibold">Playground</h1>
+          <p className="max-w-[46ch] text-ink-2">
+            Somewhere to doodle. Nothing you draw leaves your browser, and it will still be here when you come back.
           </p>
         </div>
-        <div className="mt-12">
-          <ShotsGallery shots={shots} filters={shotFilters} />
-        </div>
+        <Doodle />
       </div>
     </PageTransition>
   );

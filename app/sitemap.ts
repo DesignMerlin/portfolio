@@ -7,6 +7,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     { url: siteUrl, priority: 1 },
     { url: `${siteUrl}/about` },
+    { url: `${siteUrl}/projects` },
     { url: `${siteUrl}/playground` },
     ...work.map((w) => ({ url: `${siteUrl}/work/${w.meta.slug}`, priority: 0.8 })),
   ];

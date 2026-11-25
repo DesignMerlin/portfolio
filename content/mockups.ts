@@ -2,15 +2,23 @@ import type { Mockup } from "@/components/ui/device-mockup";
 
 /**
  * Motion-ad thumbnails for the case studies on the home page, by slug. These take the place of the
- * cover image on the sticker. Phone screens are captures of the coded prototypes in each case study.
+ * cover image on the sticker. Films are told with the app's own screens, from Figma.
  */
 export const workMockups: Record<string, Mockup> = {
   room8: {
-    phones: ["/work/room8-list.webp", "/work/room8-detail.webp", "/work/room8-nearby.webp"],
+    film: "room8",
     wash: ["#b9e6c8", "#e6f6ea"],
   },
   fundpath: {
-    phones: ["/work/fundpath-campaign.webp", "/work/fundpath-ledger.webp", "/work/fundpath-donate.webp"],
-    wash: ["#d6c8ff", "#f3ecff"],
+    film: "fundpath",
+    wash: ["#2a1a55", "#0c0719"],
+  },
+  "immigify-case-tracker": {
+    film: "caseTracker",
+    wash: ["#b61f2a", "#640c16"],
+  },
+  yoyo: {
+    film: "yoyo",
+    wash: ["#dcebff", "#dcebff"],
   },
 };

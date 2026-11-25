@@ -3,153 +3,233 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { compileMDX } from "next-mdx-remote/rsc";
 import { ViewTransition } from "react";
-import { Cover } from "@/components/case-study/cover";
+import { KeyScreens } from "@/components/case-study/key-screens";
 import { mdxComponents } from "@/components/case-study/mdx-components";
+import { ProjectArt } from "@/components/case-study/project-art";
 import { ReadingChrome, SectionNav } from "@/components/case-study/reading-chrome";
 import { PageTransition } from "@/components/site/page-transition";
-import { ArrowLeft, ArrowRight } from "@/components/ui/icons";
+import { ArrowLeft, ArrowRight, ChevronDown } from "@/components/ui/icons";
 import { RollingNumber } from "@/components/ui/rolling-number";
-import { getAllWork, getWork } from "@/lib/content";
+import { pickSections } from "@/lib/content";
+import { getProjects } from "@/lib/projects";
 
 type Props = { params: Promise<{ slug: string }> };
 
+/** The tabs, the same on every project page */
+const TABS = [
+  { id: "overview", title: "Overview" },
+  { id: "challenge", title: "The challenge" },
+  { id: "how-i-worked", title: "How I worked" },
+  { id: "outcome", title: "Outcome" },
+  { id: "key-screens", title: "Key screens" },
+];
+
 export async function generateStaticParams() {
-  return (await getAllWork()).map((w) => ({ slug: w.meta.slug }));
+  return (await getProjects()).map((p) => ({ slug: p.slug }));
 }
+
+const isDev = process.env.NODE_ENV === "development";
 
 export const dynamicParams = false;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const work = await getWork(slug);
-  if (!work) return {};
+  const p = (await getProjects()).find((x) => x.slug === slug);
+  if (!p) return {};
   return {
-    title: `${work.meta.title} case study`,
-    description: work.meta.summary,
-    openGraph: { title: `${work.meta.title}: ${work.meta.summary}`, description: work.meta.tldr[0] },
+    title: p.entry ? `${p.title} case study` : p.title,
+    description: p.summary,
+    openGraph: { title: `${p.title}: ${p.detail.headline}`, description: p.tldr?.[0] ?? p.summary },
+    // Unfinished write-ups stay out of search until they're real
+    ...(p.entry ? {} : { robots: { index: false } }),
   };
 }
 
-export default async function CaseStudyPage({ params }: Props) {
+/** A page section: its name on the left, what it says on the right */
+function Row({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
+  return (
+    <section id={id} data-section aria-labelledby={`${id}-title`} className="grid gap-x-8 gap-y-3 border-t border-line py-10 md:grid-cols-[200px_minmax(0,1fr)] lg:py-14">
+      <h2 id={`${id}-title`} className="font-sans font-medium tracking-[-0.02em] text-ink">
+        {title}
+      </h2>
+      <div className="max-w-[62ch]">{children}</div>
+    </section>
+  );
+}
+
+function Soon() {
+  return (
+    <p className="flex flex-wrap items-center gap-3 text-ink-2">
+      <span className="rounded-full border border-dashed border-line-strong px-3 py-1 text-micro">Placeholder</span>
+      This part of the write-up is on its way.
+    </p>
+  );
+}
+
+export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
-  const work = await getWork(slug);
-  if (!work) notFound();
-  const { meta, next } = work;
+  const projects = await getProjects();
+  const index = projects.findIndex((p) => p.slug === slug);
+  const project = projects[index];
+  if (!project) notFound();
+  const { detail, entry } = project;
+  const more = [1, 2].map((n) => projects[(index + n) % projects.length]!);
 
-  const { content } = await compileMDX({
-    source: work.source,
-    components: mdxComponents,
-    // Local, trusted files: allow JS expressions for component props, keep the dangerous-JS guard on
-    options: { blockJS: false, blockDangerousJS: true },
-  });
-
-  const facts = [
-    ["Role", meta.role],
-    ["Company", meta.company],
-    ["Timeline", meta.timeline],
-    ["Platform", meta.platform],
-    ...(meta.team ? [["Team", meta.team]] : []),
-  ];
+  const mdx = async (keep: (id: string) => boolean) =>
+    entry && pickSections(entry.source, keep)
+      ? (
+          await compileMDX({
+            source: pickSections(entry.source, keep),
+            components: mdxComponents,
+            // Local, trusted files: allow JS expressions for component props, keep the dangerous-JS guard on
+            options: { blockJS: false, blockDangerousJS: true },
+          })
+        ).content
+      : null;
+  // The prototype is a key screen; what the tabs already say isn't repeated in the full process
+  const covered = new Set(["context", "problem", "prototype", "outcome"]);
+  const [fullProcess, prototype] = await Promise.all([mdx((id) => !covered.has(id)), mdx((id) => id === "prototype")]);
 
   return (
     <PageTransition>
-      <ReadingChrome sections={work.sections} />
-      <article className="mx-auto max-w-[1320px] px-4 sm:px-8">
-        {meta.draft && process.env.NODE_ENV === "development" ? (
-          <p className="mt-6 rounded-[var(--radius-m)] border border-dashed border-danger/50 px-4 py-3 text-small text-danger">
-            Draft written from the designs. Research details, personas and test findings need Samuel&apos;s confirmation before
-            publishing. Search this file for TODO. (Only visible in development.)
-          </p>
-        ) : null}
-
-        <header className="grid gap-10 pt-10 lg:grid-cols-12 lg:gap-8 lg:pt-16">
-          <div className="flex flex-col lg:col-span-5">
-            <Link
-              href="/#work"
-              transitionTypes={["nav-back"]}
-              className="inline-flex w-fit items-center gap-2 text-small text-ink-2 hover:text-ink"
-            >
+      <ReadingChrome sections={TABS} />
+      <article className="mx-auto grid max-w-[1320px] gap-x-16 px-4 pt-8 sm:px-8 lg:grid-cols-[180px_minmax(0,1fr)] lg:pt-12">
+        <aside>
+          <div className="lg:sticky lg:top-28">
+            <Link href="/#work" transitionTypes={["nav-back"]} className="inline-flex w-fit items-center gap-2 text-small text-ink-2 hover:text-ink">
               <ArrowLeft />
               All work
             </Link>
-            <p className="mt-10 text-small text-ink-2">{meta.domain}</p>
-            <h1 className="mt-2 text-h1 font-semibold">{meta.title}</h1>
-            <p className="mt-4 max-w-[40ch] text-lead text-ink-2">{meta.summary}</p>
-
-            <div className="mt-auto pt-10">
-              <h2 className="text-small font-semibold">TL;DR</h2>
-              <ul className="mt-3 space-y-2.5">
-                {meta.tldr.map((line) => (
-                  <li key={line} className="flex gap-3 text-ink">
-                    <span className="mt-2.5 size-1.5 shrink-0 rounded-full bg-accent" aria-hidden="true" />
-                    {line}
-                  </li>
-                ))}
-              </ul>
+            <div className="mt-8 hidden lg:block">
+              <SectionNav sections={TABS} />
             </div>
           </div>
+        </aside>
 
-          <div className="lg:col-span-7">
-            <div className="aspect-[1184/1032] overflow-hidden rounded-[var(--radius-l)] bg-sunken shadow-[var(--shadow-raised)]">
-              <ViewTransition name={`cover-${meta.slug}`} share="morph" default="none">
+        <div className="min-w-0 max-w-[1020px]">
+          {/* Overview */}
+          <section id="overview" data-section aria-labelledby="project-title" className="pt-8 lg:pt-0">
+            {entry?.meta.draft && isDev ? (
+              <p className="mb-8 rounded-[var(--radius-m)] border border-dashed border-danger/50 px-4 py-3 text-small text-danger">
+                Draft written from the designs. Research details, personas and test findings need Samuel&apos;s confirmation before
+                publishing. Search this file for TODO. (Only visible in development.)
+              </p>
+            ) : null}
+            <p className="text-ink-2">{project.title}</p>
+            <h1 id="project-title" className="mt-2 max-w-[24ch] font-display text-[clamp(2.25rem,4.4vw,3.75rem)] leading-[1.02] font-semibold text-balance">
+              {detail.headline}
+            </h1>
+            <p className="mt-4 max-w-[60ch] text-lead text-ink-2">{project.summary}</p>
+            <ul aria-label="Topics" className="mt-4 flex flex-wrap gap-1.5">
+              {detail.tags.map((t) => (
+                <li key={t} className="rounded-full border border-line px-3 py-1 text-small text-ink-2">
+                  {t}
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-8 grid gap-x-8 gap-y-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
+              {project.tldr ? (
+                <div>
+                  <h2 className="font-sans text-small font-medium tracking-[-0.01em] text-ink">TL;DR</h2>
+                  <ul className="mt-3 max-w-[58ch] space-y-2">
+                    {project.tldr.map((line) => (
+                      <li key={line} className="flex gap-3 text-ink-2">
+                        <span className="mt-[0.7em] h-px w-3 shrink-0 bg-ink-3" aria-hidden="true" />
+                        {line}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+              {project.facts.length ? (
+                <dl className="grid grid-cols-2 gap-x-10 gap-y-4">
+                  {project.facts.map(([k, v]) => (
+                    <div key={k}>
+                      <dt className="text-small font-medium text-ink">{k}</dt>
+                      <dd className="mt-0.5 max-w-[22ch] text-small text-ink-2">{v}</dd>
+                    </div>
+                  ))}
+                </dl>
+              ) : null}
+            </div>
+
+            <div className="mt-8 aspect-[1184/1032] overflow-hidden rounded-[var(--radius-l)] bg-sunken sm:aspect-[1184/860]">
+              <ViewTransition name={`cover-${project.slug}`} share="morph" default="none">
                 <div className="h-full w-full">
-                  <Cover work={meta} sizes="(min-width: 1024px) 58vw, 100vw" priority />
+                  <ProjectArt project={project} sizes="(min-width: 1024px) 1020px, 100vw" interactive />
                 </div>
               </ViewTransition>
             </div>
-          </div>
-        </header>
-
-        <dl className="mt-12 grid grid-cols-2 gap-x-6 gap-y-5 border-y border-line py-6 md:grid-cols-5">
-          {facts.map(([k, v]) => (
-            <div key={k}>
-              <dt className="text-micro text-ink-3">{k}</dt>
-              <dd className="mt-1 text-small text-ink">{v}</dd>
-            </div>
-          ))}
-        </dl>
-
-        {meta.outcomes.length ? (
-          <section aria-label="Outcomes" className="mt-12 grid gap-6 sm:grid-cols-3">
-            {meta.outcomes.map((o) => (
-              <div key={o.label} className="rounded-[var(--radius-l)] bg-surface p-6">
-                <RollingNumber value={o.value} className="block font-display text-h2 font-semibold tabular" />
-                <p className="mt-2 text-small text-ink-2">{o.label}</p>
-              </div>
-            ))}
           </section>
-        ) : null}
 
-        <div className="mt-20 grid gap-12 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
-          <aside className="hidden lg:block">
-            <SectionNav sections={work.sections} />
-          </aside>
-          <div className="min-w-0 lg:pr-[12%]">{content}</div>
+          <div className="mt-10 lg:mt-14">
+            <Row id="challenge" title="The challenge">
+              {detail.challenge ? <p className="text-lead text-ink">{detail.challenge}</p> : <Soon />}
+            </Row>
+            <Row id="how-i-worked" title="How I worked">
+              {detail.approach ? <p className="text-lead text-ink">{detail.approach}</p> : <Soon />}
+            </Row>
+            {fullProcess ? (
+              <details className="full-process -mt-6 mb-10 lg:-mt-8 lg:mb-14">
+                <summary className="pressable inline-flex cursor-pointer items-center gap-2 rounded-full border border-line-strong px-4 py-2.5 text-small font-medium hover:border-ink-3 md:ml-[232px]">
+                  Read the full process
+                  <ChevronDown />
+                </summary>
+                <div className="pt-12">{fullProcess}</div>
+              </details>
+            ) : null}
+            <Row id="outcome" title="Outcome">
+              {detail.outcome ? <p className="text-lead text-ink">{detail.outcome}</p> : <Soon />}
+              {project.outcomes.length ? (
+                <dl className="mt-8 grid gap-x-8 gap-y-6 sm:grid-cols-3">
+                  {project.outcomes.map((o) => (
+                    <div key={o.label}>
+                      <dt className="sr-only">{o.label}</dt>
+                      <dd>
+                        <RollingNumber value={o.value} className="block font-display text-h2 font-semibold tabular" />
+                        <span className="mt-1 block text-small text-ink-2">{o.label}</span>
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              ) : null}
+            </Row>
+            <section id="key-screens" data-section aria-labelledby="key-screens-title" className="border-t border-line pt-10 lg:pt-14">
+              <h2 id="key-screens-title" className="mb-8 font-display text-h2 font-semibold">
+                Key screens
+              </h2>
+              <KeyScreens groups={detail.keyScreens} tint={project.tint} kind={detail.kind} title={project.title} />
+              {prototype}
+            </section>
+          </div>
+
+          <nav aria-label="More work" className="mt-24 border-t border-line pt-10">
+            <p className="font-display text-h3 font-semibold">More work</p>
+            <ul className="mt-6 grid gap-x-4 gap-y-8 sm:grid-cols-2">
+              {more.map((p) => (
+                <li key={p.slug}>
+                  <Link href={`/work/${p.slug}`} transitionTypes={["nav-forward"]} className="group block">
+                    <div className="aspect-[1184/1032] overflow-hidden rounded-[var(--radius-l)] bg-sunken">
+                      <ViewTransition name={`cover-${p.slug}`} share="morph" default="none">
+                        <div className="h-full w-full">
+                          <ProjectArt project={p} sizes="(min-width: 640px) 500px, 100vw" />
+                        </div>
+                      </ViewTransition>
+                    </div>
+                    <div className="mt-3 flex items-start justify-between gap-4">
+                      <div>
+                        <p className="font-medium">{p.title}</p>
+                        <p className="text-small text-ink-2">{p.detail.headline}</p>
+                      </div>
+                      <ArrowRight className="mt-1 shrink-0 text-ink-3 transition-transform duration-[var(--dur-quick)] ease-[var(--ease-enter)] group-hover:translate-x-1" />
+                    </div>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
-
-        <nav aria-label="Next case study" className="mt-32">
-          <Link
-            href={`/work/${next.slug}`}
-            transitionTypes={["nav-forward"]}
-            className="group grid items-center gap-6 rounded-[var(--radius-l)] border border-line bg-surface p-4 transition-colors duration-150 hover:border-line-strong sm:grid-cols-[200px_1fr_auto] sm:p-5"
-          >
-            <div className="aspect-[1184/1032] overflow-hidden rounded-[var(--radius-m)] bg-sunken">
-              <ViewTransition name={`cover-${next.slug}`} share="morph" default="none">
-                <div className="h-full w-full transition-transform duration-[280ms] ease-[var(--ease-enter)] group-hover:scale-[1.03]">
-                  <Cover work={next} sizes="200px" />
-                </div>
-              </ViewTransition>
-            </div>
-            <div>
-              <p className="text-small text-ink-2">Next case study</p>
-              <p className="mt-1 font-display text-h3 font-semibold">{next.title}</p>
-              <p className="mt-1 text-ink-2">{next.summary}</p>
-            </div>
-            <span className="hidden size-11 place-items-center rounded-full bg-ink text-paper transition-transform duration-[180ms] ease-[var(--ease-enter)] group-hover:translate-x-1 sm:grid">
-              <ArrowRight />
-            </span>
-          </Link>
-        </nav>
       </article>
     </PageTransition>
   );

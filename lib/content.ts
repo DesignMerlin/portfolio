@@ -125,3 +125,11 @@ export async function getWork(slug: string) {
   const next = all[(index + 1) % all.length]!;
   return { ...all[index]!, next: next.meta };
 }
+
+/** The MDX of the chosen sections, in document order */
+export function pickSections(source: string, keep: (id: string) => boolean) {
+  return [...source.matchAll(/<Section\s+id="([^"]+)"[\s\S]*?<\/Section>/g)]
+    .filter((m) => keep(m[1]!))
+    .map((m) => m[0])
+    .join("\n\n");
+}

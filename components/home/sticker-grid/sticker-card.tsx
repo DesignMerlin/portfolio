@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore, ViewTransition } from "react";
 import { PlaceholderShot, type PlaceholderKind } from "@/components/ui/placeholder-shot";
-import { RollingNumber } from "@/components/ui/rolling-number";
 import { DeviceMockup, type Mockup } from "@/components/ui/device-mockup";
 import { useReducedMotion } from "@/components/ui/use-reduced-motion";
 import type { PeelEngine, PeelSettings } from "@/components/home/sticker-grid/peel-engine";
@@ -14,20 +13,13 @@ const noop = () => () => {};
 export type StickerWork = {
   id: string;
   title: string;
-  subtitle: string;
-  meta: string;
-  /** A confirmed result, shown under the subtitle */
-  note?: string;
   cover: string | null;
-  coverAlt: string;
   tint: string;
   placeholder: PlaceholderKind;
   /** Real screenshots as a laptop + phone motion ad, when there's no cover image */
   mockup?: Mockup;
   href: string;
-  cta: string;
-  status: "case-study" | "soon";
-  /** Case studies only: the revealed cover morphs into the case study hero */
+  /** The revealed cover morphs into the project page's cover */
   morphName?: string;
 };
 
@@ -38,9 +30,11 @@ export type StickerWork = {
  *   springs back. Click or tap toggles. Every motion is interruptible.
  * - At rest the corner curls up and flutters in a light breeze; hovering
  *   lifts it a little further, as a hint.
- * - Underneath: the cover behind frosted glass, the title, one line on the
- *   work, and the next step (case study, or the Playground while a case
- *   study is on its way). "image-only" mode shows just the picture.
+ * - Hovering (or focusing it) brings up a liquid glass View button, which
+ *   goes straight to the project. Touch has no hover: tap peels the sticker,
+ *   and the link underneath goes to the same page.
+ * - Underneath: the cover behind frosted glass and the link to its page.
+ *   "image-only" mode shows just the picture.
  * Keyboard: the sticker is a button (Enter/Space peels it and moves focus
  * to the link underneath); "Stick it back" or Escape covers it again.
  * Reduced motion: no breeze, and the sticker switches state instantly.
@@ -104,6 +98,19 @@ export function StickerCard({
     engine.current?.toggle(false);
   };
 
+  // The View button leans a little towards the pointer, and its glass catches the light on that side
+  const lean = (e: React.PointerEvent<HTMLElement>) => {
+    if (e.pointerType !== "mouse") return;
+    const r = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width;
+    const y = (e.clientY - r.top) / r.height;
+    const s = e.currentTarget.style;
+    s.setProperty("--lean-x", (x * 2 - 1).toFixed(3));
+    s.setProperty("--lean-y", (y * 2 - 1).toFixed(3));
+    s.setProperty("--light-x", `${(x * 100).toFixed(1)}%`);
+    s.setProperty("--light-y", `${(y * 100).toFixed(1)}%`);
+  };
+
   // A motion ad (laptop + phone, or three phones) wins over a still cover when there is one
   const art = (covered: boolean) =>
     work.mockup ? (
@@ -127,6 +134,7 @@ export function StickerCard({
       <div
         ref={root}
         className="sticker relative aspect-[1184/1032] touch-pan-y select-none"
+        onPointerMove={lean}
         onKeyDown={(e) => {
           if (e.key === "Escape" && open) {
             e.stopPropagation();
@@ -137,35 +145,23 @@ export function StickerCard({
         <div className="sticker-bed absolute inset-0 overflow-hidden rounded-[var(--radius-l)]">
           {/* What the sticker was hiding */}
           <div className="absolute inset-0" inert={!open}>
-            <ViewTransition name={mounted && work.morphName ? work.morphName : undefined} share="morph" default="none">
+            <ViewTransition name={mounted && open ? work.morphName : undefined} share="morph" default="none">
               <div className="absolute inset-0">{art(!open)}</div>
             </ViewTransition>
             {mode === "image-text" ? (
-              <div className="sticker-frost absolute inset-0 flex flex-col justify-end p-5 text-white sm:p-7">
-                <p className="text-small text-white/70">{work.meta}</p>
-                <h3 className="mt-1 font-display text-h3 font-semibold">{work.title}</h3>
-                <p className="mt-2 max-w-[44ch] text-white/85">{work.subtitle}</p>
-                {work.note ? (
-                  <RollingNumber value={work.note} play={open} className="mt-2 block text-small font-medium tabular text-[#7ff0b3]" />
-                ) : null}
-                <div className="mt-5 flex flex-wrap items-center gap-3">
-                  <Link
-                    ref={cta}
-                    href={work.href}
-                    transitionTypes={["nav-forward"]}
-                    className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-small font-medium text-[#111318] transition-transform duration-[var(--dur-quick)] ease-[var(--ease-enter)] hover:scale-[1.03] active:scale-[0.97]"
-                  >
-                    {work.cta}
-                  </Link>
-                  {work.status === "soon" ? (
-                    <span className="rounded-full border border-dashed border-white/40 px-3 py-1.5 text-micro text-white/80">
-                      Case study soon
-                    </span>
-                  ) : null}
-                </div>
+              <div className="sticker-frost absolute inset-0 grid place-items-center">
+                <Link
+                  ref={cta}
+                  href={work.href}
+                  transitionTypes={["nav-forward"]}
+                  aria-label={`Read case study: ${work.title}`}
+                  className="inline-flex items-center rounded-full bg-white px-5 py-3 text-small font-medium text-[#111318] transition-transform duration-[var(--dur-quick)] ease-[var(--ease-enter)] hover:scale-[1.03] active:scale-[0.97]"
+                >
+                  Read case study
+                </Link>
               </div>
             ) : (
-              <Link ref={cta} href={work.href} className="absolute inset-0" aria-label={`${work.cta}: ${work.title}`} />
+              <Link ref={cta} href={work.href} className="absolute inset-0" aria-label={`Read case study: ${work.title}`} />
             )}
             <button
               type="button"
@@ -185,7 +181,7 @@ export function StickerCard({
             ref={front}
             type="button"
             aria-expanded={open}
-            aria-label={`${work.title}. Peel the sticker to ${work.status === "soon" ? "see the project" : "open the case study"}`}
+            aria-label={`${work.title}. Peel the sticker to open the case study`}
             onClick={(e) => {
               // Pointer clicks are handled by the peel engine on release; this is the keyboard path
               if (e.detail !== 0) return;
@@ -194,7 +190,9 @@ export function StickerCard({
             }}
             className="sticker-front absolute inset-0 block cursor-grab"
           >
-            {art(open)}
+            <ViewTransition name={mounted && !open ? work.morphName : undefined} share="morph" default="none">
+              <span className="absolute inset-0 block">{art(open)}</span>
+            </ViewTransition>
             <span aria-hidden="true" className="sticker-sheen pointer-events-none absolute inset-0" />
           </button>
 
@@ -202,17 +200,16 @@ export function StickerCard({
           <div aria-hidden="true" className="sticker-flap-shadow pointer-events-none absolute inset-0">
             <div ref={flap} className="sticker-flap absolute inset-0 origin-top-left rounded-[var(--radius-l)]" style={{ visibility: "hidden" }} />
           </div>
+
+          {/* Straight to the project, without peeling */}
+          <div className="pointer-events-none absolute inset-0 grid place-items-center" inert={open}>
+            <Link href={work.href} transitionTypes={["nav-forward"]} aria-label={`View ${work.title}`} className="glass sticker-view text-small font-medium">
+              <span className="relative z-[1]">View</span>
+            </Link>
+          </div>
         </div>
       </div>
 
-      <div className="mt-3 flex items-baseline justify-between gap-4">
-        <p className="min-w-0 truncate">
-          <span className="font-medium">{work.title}</span> <span className="text-ink-2">{work.meta}</span>
-        </p>
-        <span className={`shrink-0 text-small ${work.status === "soon" ? "text-ink-3" : "text-ink-2"}`}>
-          {work.status === "soon" ? "Case study soon" : "Case study"}
-        </span>
-      </div>
     </li>
   );
 }

@@ -19,7 +19,7 @@ function Media({ shot, sizes }: { shot: Shot; sizes: string }) {
   if (shot.src) {
     return <Image src={shot.src} alt={shot.title} fill sizes={sizes} className="object-cover" draggable={false} />;
   }
-  return <PlaceholderShot kind={shot.kind === "brand" ? "brand" : shot.kind} tint={shot.tint} label={shot.title} className="absolute inset-0" />;
+  return <PlaceholderShot kind={shot.kind === "brand" ? "brand" : shot.kind} tint={shot.tint} label={shot.title} className="absolute inset-0 h-full w-full" />;
 }
 
 /** Split into N columns, always adding to the shortest one, so the masonry stays balanced */

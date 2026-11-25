@@ -44,8 +44,8 @@ export function Findings({ items }: { items: Finding[] }) {
                 onClick={() => toggle(i)}
                 className="flex w-full items-start gap-4 p-5 text-left"
               >
-                <span className="mt-1 shrink-0 rounded-full bg-accent-soft px-2.5 py-0.5 text-micro text-ink">{f.theme}</span>
-                <span className="flex-1 font-medium text-ink">{f.insight}</span>
+                <span className="mt-1 shrink-0 rounded-full bg-accent-soft px-2.5 py-0.5 font-sans text-micro tracking-normal text-ink">{f.theme}</span>
+                <span className="flex-1 font-sans text-body font-medium tracking-[-0.01em] text-ink">{f.insight}</span>
                 <ChevronDown
                   className={`mt-1.5 shrink-0 text-ink-3 transition-transform duration-[280ms] ease-[var(--ease-standard)] ${isOpen ? "rotate-180" : ""}`}
                 />
