@@ -64,9 +64,9 @@ I design for moments where getting it wrong costs people something: a visa appli
 
 As the first product designer at Immigify, an AI-powered immigration platform, I owned everything a user could touch: the marketing site, the AI agent interfaces, the consultant CRM, and the multi-tenant SaaS dashboards. I built the design system from zero (100+ tokens and a reusable component library) so that a small team could move fast without the product falling apart. During that time the company raised a $1M pre-seed round.
 
-Before that I freelanced and contracted across fintech, edtech, real estate and AI, including HeightGPT, an AI mobile app that hit 10,000 downloads in its first week.
+Before and alongside that I freelanced and contracted across fintech, edtech, real estate and AI, including HeightGPT, an AI mobile app that hit 10,000 downloads in its first week.
 
-Today I'm doing two things at once: founding Voxdeed, an AI legal tech product, and growing from product designer into design engineer, building interfaces in code with AI as a daily collaborator. This portfolio is part of that. I designed it, and I built it.
+Today I'm doing two things at once: co-founding Voxdeed, an AI legal tech product, and growing from product designer into design engineer, building interfaces in code with AI as a daily collaborator. This portfolio is part of that. I designed it, and I built it.
 
 ## Something human (captioned photos — Antonio-style)
 
@@ -139,6 +139,16 @@ Proof:
 - Ran user research, usability testing and design reviews; delivered annotated specs and Figma prototypes.
 - Company raised a $1M pre-seed round during my tenure.
 
+## Nov 2025 – Feb 2026 · iExcelo (Lagos) · UI/UX Designer (Contract)
+Products: iExcelo website and student platform (WASSCE exam revision)
+
+DRAFT — I've learned that one product can hold three very different mental models. Students, sponsors and affiliates each needed the platform to make sense in their own way.
+
+Proof:
+- Designed the landing page and core platform for a Nigerian edtech product.
+- Student dashboard, revision workflows and progress tracking reduced time-to-task by 30%.
+- Multi-persona UX across three user journeys: students, sponsors, affiliates.
+
 ## 2024 – 2025 · Boulevard Legacy (NYC, USA) · UI/UX Designer (Freelance)
 Products: Simplexity, HeightGPT, budget tracking app
 
@@ -148,16 +158,6 @@ Proof:
 - HeightGPT: led UX and UI for an AI-powered mobile app from research to App Store and Google Play launch; 10,000+ downloads.
 - Simplexity: end-to-end UX and UI for a LinkedIn data extraction web app; reduced manual research effort by 25%.
 - Budget tracker: turned complex financial data into accessible dashboards.
-
-## 2024 – 2025 · iExcelo (Lagos) · UI/UX Designer (Contract)
-Products: iExcelo website and student platform (WASSCE exam revision)
-
-DRAFT — I've learned that one product can hold three very different mental models. Students, sponsors and affiliates each needed the platform to make sense in their own way.
-
-Proof:
-- Designed the landing page and core platform for a Nigerian edtech product.
-- Student dashboard, revision workflows and progress tracking reduced time-to-task by 30%.
-- Multi-persona UX across three user journeys: students, sponsors, affiliates.
 
 ## 2024 · LAGProperties (Lagos) · UI/UX Designer (Contract)
 Products: Mobile real estate app
@@ -169,7 +169,7 @@ Proof:
 - Research and usability testing improved user satisfaction scores by 10%.
 - Delivered specs and assets on schedule without slowing engineering.
 
-## Now · Voxdeed · Founder
+## Now · Voxdeed · Co-founder
 DRAFT — Building an AI legal tech product from zero: brand, product, and go-to-market. Pre-launch.
 TODO: one line on what Voxdeed does for its users (only what you're comfortable making public).
 

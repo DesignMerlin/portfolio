@@ -1,0 +1,61 @@
+/**
+ * Yoyo's screens, exported at 3× (1125×2436) from Samuel's Figma file Yoyo, section 598:4075. The film,
+ * the case study and the prototype all read from here.
+ * Left out on purpose: sign up, email verification and the profile, which show an email address, a name
+ * and a postal address.
+ */
+const screen = (file: string, alt: string) => ({ src: `/work/yoyo/${file}.webp`, alt });
+
+export const yoyo = {
+  splash: screen("splash", "Splash screen: the Yoyo mark, three banknotes fanned out, on blue. Your Budget, Simplified."),
+  welcome: screen("welcome", "Onboarding: Master your budget, own your future, with Log in and Sign up."),
+  password: screen("password", "Choose your password, typed twice."),
+  biometrics: screen("biometrics", "Unlock the future of security with biometrics: set up or skip."),
+  biometricsSheet: screen("biometrics-sheet", "Confirm biometrics to continue: a fingerprint on a sheet."),
+  goalsEmpty: screen("goals-empty", "Choose your goals to customize your experience: make a budget, track spending, save for a goal, manage subscriptions."),
+  goalsPicked: screen("goals-picked", "The same four goals with three of them ticked."),
+  ready: screen("ready", "Great choice! Let's get started: a wallet filling with money."),
+  home: screen("home", "Overview: balance of $250,000, weekly statistics as bars, and recent transactions."),
+  health: screen("health", "Financial health score: 75%, month by month, with advice."),
+  budgetEmpty: screen("budget-empty", "Budget, empty: Ready to take charge of your budget?"),
+  budgetForm: screen("budget-form", "Create a budget: name, duration, start date and income."),
+  incomeEmpty: screen("income-empty", "Add income sheet: category and amount, empty."),
+  income: screen("income", "Add income sheet: salary, $5,000."),
+  budgetFilled: screen("budget-filled", "The budget with two incomes added."),
+  categories: screen("categories", "Categorize your spending: housing, feeding, lifestyle, savings, transportation or custom."),
+  allocate: screen("allocate", "Allocate an amount to housing, with a sub-category."),
+  categoriesPicked: screen("categories-picked", "Categorize your spending, with housing ticked."),
+  summary: screen("summary", "Budget summary: a ring of housing, food, lifestyle and savings, $7,945 planned."),
+  budgetDone: screen("budget-done", "Great job setting up your budget!"),
+  plans: screen("plans", "Budget, your plans: the month's ring and what each category gets."),
+  allocations: screen("allocations", "Budget, allocations: what's been spent in each category."),
+  txEmpty: screen("tx-empty", "Transaction history, empty: a receipt printer, and Add a transaction."),
+  txNew: screen("tx-new", "New transaction: amount, type, category, wallet, narration and date, empty."),
+  txFilled: screen("tx-filled", "New transaction: $500, an expense, housing, from savings, for the monthly rental fee, automated."),
+  txCategories: screen("tx-categories", "All categories, over the new transaction."),
+  txList: screen("tx-list", "Transaction history: income and expenses, today and yesterday."),
+  goalsNone: screen("goals-none", "Goals, empty: a target, and Create a goal."),
+  goals: screen("goals", "Goals: accommodation, vacation, business and education, with $133,020.07 saved."),
+  goalNew: screen("goal-new", "A new goal: target amount, duration, start and end dates."),
+  goalWeekly: screen("goal-weekly", "The new goal, saving weekly."),
+  goalDay: screen("goal-day", "Pick a day of the week to save on."),
+  goalDayPicked: screen("goal-day-picked", "Pick a day of the week: Tuesdays."),
+  goalStart: screen("goal-start", "Pick a start date on a wheel."),
+  goalFilled: screen("goal-filled", "The goal, set for Tuesdays, for a year."),
+  goalSummary: screen("goal-summary", "Goal summary: $2,000, saved as $125 every week."),
+  goalDone: screen("goal-done", "Well done! View savings to track progress."),
+  vacation: screen("vacation", "The vacation goal: $5,000 of $10,000 saved, 50% on a gauge, and recent transactions."),
+  learn: screen("learn", "Learn: stock activity, sector performance and market news."),
+  stock: screen("stock", "Stock details: price over time, and what experts say."),
+  ai: screen("ai", "AI chat: suggested questions about stocks, and a field to ask anything."),
+  wallet: screen("wallet", "Wallet: total net worth, spendings and savings."),
+  more: screen("more", "More: wallet, categories, transactions, subscriptions and help."),
+  darkSplash: screen("dark-splash", "Splash screen in dark mode."),
+  darkWelcome: screen("dark-welcome", "Onboarding in dark mode."),
+  darkGoals: screen("dark-goals", "Choosing goals in dark mode."),
+  darkReady: screen("dark-ready", "Let's get started, in dark mode."),
+  darkHome: screen("dark-home", "Overview in dark mode."),
+  darkHealth: screen("dark-health", "Financial health score in dark mode."),
+} as const;
+
+export type YoyoScreen = keyof typeof yoyo;

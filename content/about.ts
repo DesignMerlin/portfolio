@@ -6,7 +6,7 @@
  */
 export const heroIntro = [
   "Hi, I'm Samuel. I design and build products, websites, and the odd idea that started with “what if it could just…”. For over 3 years I've been turning complicated, high-stakes processes into things that feel simple, useful and a little more human.",
-  "I care about clear typography, small interactions done well, ambitious teams, and software people genuinely enjoy using. Along the way I've designed for an AI immigration platform, fintech and edtech startups, real estate, a legal tech product I'm founding, and my own side projects. This site is a bit of all of it.",
+  "I care about clear typography, small interactions done well, ambitious teams, and software people genuinely enjoy using. Along the way I've designed for an AI immigration platform, fintech and edtech startups, real estate, a legal tech product I'm co-founding, and my own side projects. This site is a bit of all of it.",
 ];
 
 /**
@@ -24,8 +24,8 @@ export const heroPhoto: { src: string | null; stylized: string; alt: string } = 
 export const bio = [
   "I design for moments where getting it wrong costs people something: a visa application, a legal document, an exam, someone's savings. That's shaped how I work. I start with the person and the pressure they're under, then work backwards to the interface.",
   "As the first product designer at Immigify, an AI-powered immigration platform, I owned everything a user could touch: the marketing site, the AI agent interfaces, the consultant CRM, and the multi-tenant SaaS dashboards. I built the design system from zero, 100+ tokens and a reusable component library, so that a small team could move fast without the product falling apart. During that time the company raised a $1M pre-seed round.",
-  "Before that I freelanced and contracted across fintech, edtech, real estate and AI, including HeightGPT, an AI mobile app that hit 10,000 downloads in its first week.",
-  "Today I'm doing two things at once: founding Voxdeed, an AI legal tech product, and growing from product designer into design engineer, building interfaces in code with AI as a daily collaborator. This portfolio is part of that. I designed it, and I built it.",
+  "Before and alongside that I freelanced and contracted across fintech, edtech, real estate and AI, including HeightGPT, an AI mobile app that hit 10,000 downloads in its first week.",
+  "Today I'm doing two things at once: co-founding Voxdeed, an AI legal tech product, and growing from product designer into design engineer, building interfaces in code with AI as a daily collaborator. This portfolio is part of that. I designed it, and I built it.",
 ];
 
 export type Role = { when: string; company: string; where: string; title: string; lesson: string; proof: string[] };
@@ -35,7 +35,7 @@ export const experience: Role[] = [
     when: "Now",
     company: "Voxdeed",
     where: "Lagos",
-    title: "Founder",
+    title: "Co-founder",
     lesson: "Building an AI legal tech product from zero: brand, product, and go-to-market.",
     proof: ["Pre-launch."],
   },
@@ -55,6 +55,18 @@ export const experience: Role[] = [
     ],
   },
   {
+    when: "Nov 2025 to Feb 2026",
+    company: "iExcelo",
+    where: "Lagos",
+    title: "UI/UX designer, contract",
+    lesson: "I've learned that one product can hold three very different mental models.",
+    proof: [
+      "Designed the landing page and core platform for a Nigerian edtech product (WASSCE exam revision).",
+      "Student dashboard, revision workflows and progress tracking reduced time-to-task by 30%.",
+      "Multi-persona UX across three journeys: students, sponsors, affiliates.",
+    ],
+  },
+  {
     when: "2024 to 2025",
     company: "Boulevard Legacy",
     where: "NYC, USA",
@@ -64,18 +76,6 @@ export const experience: Role[] = [
       "HeightGPT: led UX and UI for an AI-powered mobile app from research to App Store and Google Play launch; 10,000+ downloads.",
       "Simplexity: end-to-end UX and UI for a LinkedIn data extraction web app; reduced manual research effort by 25%.",
       "Budget tracker: turned complex financial data into accessible dashboards.",
-    ],
-  },
-  {
-    when: "2024 to 2025",
-    company: "iExcelo",
-    where: "Lagos",
-    title: "UI/UX designer, contract",
-    lesson: "I've learned that one product can hold three very different mental models.",
-    proof: [
-      "Designed the landing page and core platform for a Nigerian edtech product (WASSCE exam revision).",
-      "Student dashboard, revision workflows and progress tracking reduced time-to-task by 30%.",
-      "Multi-persona UX across three journeys: students, sponsors, affiliates.",
     ],
   },
   {
@@ -90,6 +90,21 @@ export const experience: Role[] = [
       "Delivered specs and assets on schedule without slowing engineering.",
     ],
   },
+];
+
+/**
+ * Home page work experience: the CV's "Work experiences" list (Samuel E.O UX CV.pdf), in years only, newest first.
+ * Samuel corrected iExcelo to Nov 2025 - Feb 2026 and added Voxdeed (co-founder, present; no start date given).
+ * Links and logos only where the CV links to the company's site.
+ */
+export type Job = { company: string; role: string; years: string; href?: string; logo?: string };
+
+export const workExperience: Job[] = [
+  { company: "Voxdeed", role: "Co-founder", years: "Present", href: "https://www.voxdeed.com/", logo: "/brand/voxdeed.webp" },
+  { company: "Immigify Inc.", role: "Founding Product Designer", years: "2025 — 2026", href: "https://immigify.com/", logo: "/brand/immigify.webp" },
+  { company: "iExcelo", role: "UI/UX Designer", years: "2025 — 2026", href: "https://iexcelo.com/", logo: "/brand/iexcelo.webp" },
+  { company: "Boulevard Legacy", role: "UI/UX Designer", years: "2024 — 2025" },
+  { company: "LAGProperties", role: "UI/UX Designer", years: "2024" },
 ];
 
 export type Skill = { name: string; line: string; detail: string; tools: string[] };
@@ -142,6 +157,58 @@ export const aiProcess = [
   { step: "Then slow down", detail: "For the parts AI can't do: deciding what matters, and caring how it feels." },
 ];
 
-export const recognition = ["1st runner-up, Axia Africa Design Challenge", "Finalist, HNG Internship, product design track"];
-
 export const tools = ["Figma", "Figma Make", "Framer", "Vercel", "Adobe Creative Suite", "Claude", "Codex", "Claude Code", "Next.js and Tailwind (learning in public)"];
+
+/** From the CV (Samuel E.O UX CV.pdf): the professional headline and its summary */
+export const headline = {
+  title: "Product and Visual Designer",
+  /** Each domain previews the project behind it */
+  domains: [
+    { name: "immigration technology", slug: "immigify-case-tracker" },
+    { name: "edtech", slug: "iexcelo" },
+    { name: "fintech", slug: "fundpath" },
+    { name: "real estate", slug: "lagproperties" },
+  ],
+  summary:
+    "Lead designer on an AI-powered immigration SaaS platform, responsible for the website, AI agent interfaces, CRM and consultant dashboards, and a design system of 100+ tokens and reusable components.",
+};
+
+export const cvNumbers = [
+  { value: "10,000+", label: "active users across shipped products" },
+  { value: "10,000", label: "downloads in week one for an AI mobile app" },
+  { value: "500+", label: "users on an AI community platform" },
+  { value: "100+", label: "design tokens in one system" },
+  { value: "25%", label: "less manual effort for users" },
+  { value: "10%", label: "better task completion" },
+];
+
+export const education = [
+  { what: "Associate Degree, Computer Science", where: "University of the People, USA", when: "2024 to present" },
+  { what: "Diploma in Product Design, Distinction", where: "Vephla University, United Kingdom", when: "2023 to 2024" },
+  { what: "BSc Business Administration and Management", where: "University of Lagos, Akoka", when: "2015 to 2019" },
+];
+
+export const certifications = [
+  "Google UX Design Professional Course, Coursera",
+  "Graphics Design Course, Wootlab Foundation",
+  "Product Design, Vephla University",
+  "Certificate of National Service, NYSC",
+];
+
+export const achievements = [
+  { title: "1st runner-up, Axia Africa Design Challenge", detail: "Placed ahead of hundreds of designers across the continent." },
+  { title: "Finalist, HNG Internship, product design track", detail: "Stood out from thousands of participants in a fast-paced, collaborative programme." },
+];
+
+export const cvSkills = [
+  "User research",
+  "Information architecture",
+  "Wireframing",
+  "Prototyping",
+  "Interaction design",
+  "Design systems",
+  "Accessibility",
+  "Developer handoff",
+  "Agile and Scrum",
+  "AI-native design with Claude and Codex",
+];

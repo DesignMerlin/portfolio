@@ -1,26 +1,18 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, Geist, JetBrains_Mono } from "next/font/google";
+import { Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
 import { Intro } from "@/components/site/intro";
 import { CommandMenu } from "@/components/site/command-menu";
 import { getAllWork, getProfile } from "@/lib/content";
 import { siteUrl } from "@/lib/site";
 import "./globals.css";
 
-// Headings and display type
+// Everything: headings, body, buttons
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
   variable: "--font-bricolage",
   display: "swap",
   // Static weights, not the variable file: WebKit renders the variable font's small sizes too heavy
   weight: ["400", "500", "600", "700"],
-});
-
-// Body text
-const geist = Geist({
-  subsets: ["latin"],
-  variable: "--font-geist",
-  display: "swap",
-  weight: ["400", "500", "600"],
 });
 
 const jetbrains = JetBrains_Mono({
@@ -61,7 +53,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const [profile, work] = await Promise.all([getProfile(), getAllWork()]);
 
   return (
-    <html lang="en" suppressHydrationWarning className={`${geist.variable} ${bricolage.variable} ${jetbrains.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${bricolage.variable} ${jetbrains.variable}`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: bootScript }} />
         <noscript>

@@ -9,8 +9,10 @@ const loading = () => <div className="h-full min-h-[560px] w-full animate-pulse 
 
 // Each prototype is its own chunk, fetched only when its frame nears the viewport
 const prototypes = {
-  "room8-listings": dynamic(() => import("@/components/case-study/prototypes/room8-listings"), { loading }),
-  "fundpath-donate": dynamic(() => import("@/components/case-study/prototypes/fundpath-donate"), { loading }),
+  "room8-flow": dynamic(() => import("@/components/case-study/prototypes/room8-flow"), { loading }),
+  "fundpath-flow": dynamic(() => import("@/components/case-study/prototypes/fundpath-flow"), { loading }),
+  "case-tracker-flow": dynamic(() => import("@/components/case-study/prototypes/case-tracker-flow"), { loading }),
+  "yoyo-flow": dynamic(() => import("@/components/case-study/prototypes/yoyo-flow"), { loading }),
   "immigify-agent": dynamic(() => import("@/components/case-study/prototypes/immigify-agent"), { loading }),
 };
 

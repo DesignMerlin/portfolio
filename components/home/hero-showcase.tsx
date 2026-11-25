@@ -153,7 +153,8 @@ function DesktopHero({ first, last, photo, intro }: Props) {
 
           {/* Intro, on the right once the portrait has moved */}
           <motion.div
-            className="absolute top-1/2 right-[6%] w-[min(44%,620px)] space-y-6"
+            // Centred on the portrait beside it: where it starts, plus half its height at its final scale
+            className="absolute top-[calc(17%+min(19vw,300px)*38/27*1.12/2)] right-[6%] w-[min(44%,620px)] space-y-6"
             style={{ opacity: introOpacity, transform: introTransform, pointerEvents: introPointer }}
           >
             {intro.map((para) => (

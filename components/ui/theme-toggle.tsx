@@ -46,7 +46,6 @@ export function useTheme() {
 
 export function ThemeToggle() {
   const theme = useTheme();
-  const reduce = useReducedMotion();
   const next = theme === "dark" ? "light" : "dark";
 
   return (
@@ -56,6 +55,16 @@ export function ThemeToggle() {
       aria-label={`Switch to ${next} theme`}
       className="pressable relative grid size-9 place-items-center rounded-full text-ink-2 transition-colors duration-150 hover:bg-sunken hover:text-ink"
     >
+      <ThemeIcon />
+    </button>
+  );
+}
+
+/** The sun or moon, turning over as the theme changes */
+export function ThemeIcon() {
+  const theme = useTheme();
+  const reduce = useReducedMotion();
+  return (
       <AnimatePresence initial={false} mode="popLayout">
         <motion.span
           key={theme}
@@ -68,6 +77,5 @@ export function ThemeToggle() {
           {theme === "dark" ? <MoonIcon /> : <SunIcon />}
         </motion.span>
       </AnimatePresence>
-    </button>
   );
 }

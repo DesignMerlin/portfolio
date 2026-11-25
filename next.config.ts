@@ -1,9 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Shots was renamed Playground; keep old links working
+  // Shots became Projects; keep old links working
   async redirects() {
-    return [{ source: "/shots", destination: "/playground", permanent: true }];
+    return [{ source: "/shots", destination: "/projects", permanent: true }];
   },
   images: {
     formats: ["image/avif", "image/webp"],

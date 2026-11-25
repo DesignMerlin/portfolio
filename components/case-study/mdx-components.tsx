@@ -7,6 +7,7 @@ import { JourneyMap } from "@/components/case-study/journey-map";
 import { Personas } from "@/components/case-study/personas";
 import { Prototype } from "@/components/case-study/prototype";
 import { TestingRounds } from "@/components/case-study/testing-rounds";
+import { FeatureTable, Survey } from "@/components/case-study/survey";
 import { UserStories } from "@/components/case-study/user-stories";
 
 /** Everything a case study MDX file can use */
@@ -25,4 +26,6 @@ export const mdxComponents = {
   Prototype,
   TestingRounds,
   UserStories,
+  Survey,
+  FeatureTable,
 };
