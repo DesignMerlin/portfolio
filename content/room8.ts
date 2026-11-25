@@ -37,6 +37,14 @@ export const room8 = {
   callRinging: screen("call-ringing", "Live video tour: calling the host, Marcus Brown."),
   callLive: screen("call-live", "Live video tour: the host walks through the living room with live captions."),
   callEnded: screen("call-ended", "Call ended: rate the tour, make a payment, message or call again."),
+  login: screen("login", "Log in: email, password, or Google, Facebook or Apple."),
+  signup: screen("signup", "Sign up: name, email, password, phone number and terms."),
+  verify: screen("verify", "Check your email: a four-digit code."),
+  verified: screen("verified", "Verification successful, setting up your account."),
+  forgot: screen("forgot", "Forgot password: send a reset link."),
+  reset: screen("reset", "Set a new password, with its rules."),
+  terms: screen("terms", "Terms of use, sample text."),
+  settings: screen("settings", "Settings: profile, what's tailored to you, preferences and notifications."),
 } as const;
 
 export type Room8Screen = keyof typeof room8;

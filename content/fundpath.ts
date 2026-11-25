@@ -1,7 +1,7 @@
 /**
  * FundPath's screens, exported at 3× (1125×2436) from Samuel's Figma file Uplift-Us, page "New design",
  * section "New Design" (3707:6455). The film, the case study and the prototype all read from here.
- * Left out on purpose: sign in, sign up and email verification, which show a personal email address.
+ * The email address on the sign-in screens, and the phone number on Contact us, are placeholders here.
  */
 const screen = (file: string, alt: string) => ({ src: `/work/fundpath/${file}.webp`, alt });
 
@@ -33,6 +33,12 @@ export const fundpath = {
   chats: screen("chats", "Chats inbox."),
   report: screen("report", "Transparency report: donors by month, goal and amount raised, and recent transactions in and out."),
   profile: screen("profile", "Organiser profile: a verified foundation with its mission, goal, results and testimonials."),
+  signIn: screen("sign-in", "Sign in with email and password, or Google."),
+  signUp: screen("sign-up", "Sign up with name, email and password."),
+  checkEmail: screen("check-email", "Check your email: a four-digit code."),
+  emailVerified: screen("email-verified", "Email verified."),
+  contact: screen("contact", "Contact us: social accounts, customer service and live chat."),
+  faqs: screen("faqs", "FAQs: nine common questions."),
 } as const;
 
 export type FundpathScreen = keyof typeof fundpath;

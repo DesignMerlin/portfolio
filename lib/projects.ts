@@ -9,7 +9,6 @@ export type Project = {
   slug: string;
   title: string;
   summary: string;
-  facts: [string, string][];
   tldr: string[] | null;
   outcomes: Outcome[];
   tint: string;
@@ -23,20 +22,11 @@ export type Project = {
 /** Every project, case studies first */
 export async function getProjects(): Promise<Project[]> {
   const work = await getAllWork();
-  // Anything Samuel still has to confirm stays off the page
-  const facts = (rows: [string, string | undefined][]) =>
-    rows.filter((r): r is [string, string] => !!r[1] && r[1] !== "To confirm");
   return [
     ...work.map(({ meta, ...rest }) => ({
       slug: meta.slug,
       title: meta.title,
       summary: meta.summary,
-      facts: facts([
-        ["Time", meta.timeline],
-        ["Role", meta.role],
-        ["Platform", meta.platform],
-        ["Company", meta.company],
-      ]),
       tldr: meta.tldr,
       outcomes: meta.outcomes,
       tint: meta.tint,
@@ -52,12 +42,6 @@ export async function getProjects(): Promise<Project[]> {
         slug: a.slug,
         title: a.title,
         summary: a.what,
-        facts: facts([
-          ["Time", d.time],
-          ["Role", d.role],
-          ["Platform", d.platform],
-          ["Company", d.company],
-        ]),
         tldr: d.tldr ?? null,
         outcomes: d.figure ? [d.figure] : [],
         tint: a.tint,

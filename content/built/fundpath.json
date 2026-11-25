@@ -1,0 +1,3941 @@
+{
+ "forgotPassword": {
+  "src": "/work/fundpath/b-forgot-password.webp",
+  "alt": "Forgot password: enter your email to get a reset link.",
+  "spots": [
+   {
+    "label": "Send reset link",
+    "at": [
+     187.5,
+     422
+    ],
+    "size": [
+     335,
+     44
+    ],
+    "to": "resetSent",
+    "move": "fade"
+   },
+   {
+    "label": "Back to log in",
+    "at": [
+     187.5,
+     475
+    ],
+    "size": [
+     335,
+     32
+    ],
+    "to": "signIn",
+    "move": "back"
+   }
+  ],
+  "fields": [
+   {
+    "label": "E-mail",
+    "text": [
+     34,
+     347,
+     144.8,
+     18
+    ],
+    "clear": [
+     34,
+     347,
+     122.1,
+     18
+    ],
+    "field": [
+     20,
+     336,
+     335,
+     40
+    ],
+    "r": 8,
+    "bg": "rgb(255, 255, 255)",
+    "chars": 16,
+    "src": "/work/fundpath/b-forgot-password-ink-0.webp"
+   }
+  ]
+ },
+ "resetSent": {
+  "src": "/work/fundpath/b-reset-sent.webp",
+  "alt": "Check your email for a link to reset your password.",
+  "spots": [
+   {
+    "label": "Set a new password",
+    "at": [
+     187.5,
+     666
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "newPassword",
+    "move": "push"
+   },
+   {
+    "label": "Back to log in",
+    "at": [
+     187.5,
+     722
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "signIn",
+    "move": "back"
+   }
+  ]
+ },
+ "newPassword": {
+  "src": "/work/fundpath/b-new-password.webp",
+  "alt": "Set a new password, typed twice.",
+  "spots": [
+   {
+    "label": "Save password",
+    "at": [
+     187.5,
+     459
+    ],
+    "size": [
+     335,
+     44
+    ],
+    "to": "signIn",
+    "move": "back"
+   }
+  ],
+  "fields": [
+   {
+    "label": "New password",
+    "text": [
+     34,
+     306,
+     44.6,
+     18
+    ],
+    "clear": [
+     34,
+     306,
+     149.5,
+     18
+    ],
+    "field": [
+     20,
+     295,
+     335,
+     40
+    ],
+    "r": 8,
+    "bg": "rgb(255, 255, 255)",
+    "chars": 10,
+    "src": "/work/fundpath/b-new-password-ink-0.webp"
+   },
+   {
+    "label": "Confirm password",
+    "text": [
+     34,
+     386,
+     44.6,
+     18
+    ],
+    "clear": [
+     34,
+     386,
+     96.6,
+     18
+    ],
+    "field": [
+     20,
+     375,
+     335,
+     40
+    ],
+    "r": 8,
+    "bg": "rgb(255, 255, 255)",
+    "chars": 10,
+    "src": "/work/fundpath/b-new-password-ink-1.webp"
+   }
+  ]
+ },
+ "menu": {
+  "src": "/work/fundpath/b-menu.webp",
+  "alt": "Menu: profile, my campaigns, saved campaigns, notifications, contact us, FAQs, settings and log out.",
+  "spots": [
+   {
+    "label": "Close menu",
+    "at": [
+     340,
+     84
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "home",
+    "move": "back"
+   },
+   {
+    "label": "My profile",
+    "at": [
+     187.5,
+     172
+    ],
+    "size": [
+     341,
+     66
+    ],
+    "to": "editProfile",
+    "move": "push"
+   },
+   {
+    "label": "My campaigns",
+    "at": [
+     187.5,
+     238.5
+    ],
+    "size": [
+     341,
+     67
+    ],
+    "to": "myCampaigns",
+    "move": "push"
+   },
+   {
+    "label": "Saved campaigns",
+    "at": [
+     187.5,
+     305.5
+    ],
+    "size": [
+     341,
+     67
+    ],
+    "to": "saved",
+    "move": "push"
+   },
+   {
+    "label": "Donation wallet",
+    "at": [
+     187.5,
+     372.5
+    ],
+    "size": [
+     341,
+     67
+    ],
+    "to": "addMoney",
+    "move": "push"
+   },
+   {
+    "label": "Notifications",
+    "at": [
+     187.5,
+     439.5
+    ],
+    "size": [
+     341,
+     67
+    ],
+    "to": "notifications",
+    "move": "push"
+   },
+   {
+    "label": "Contact us",
+    "at": [
+     187.5,
+     524
+    ],
+    "size": [
+     341,
+     66
+    ],
+    "to": "contact",
+    "move": "push"
+   },
+   {
+    "label": "FAQs",
+    "at": [
+     187.5,
+     590.5
+    ],
+    "size": [
+     341,
+     67
+    ],
+    "to": "faqs",
+    "move": "push"
+   },
+   {
+    "label": "Settings",
+    "at": [
+     187.5,
+     657.5
+    ],
+    "size": [
+     341,
+     67
+    ],
+    "to": "settings",
+    "move": "push"
+   },
+   {
+    "label": "Log out",
+    "at": [
+     187.5,
+     722
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "logout",
+    "move": "sheet"
+   }
+  ]
+ },
+ "notifications": {
+  "src": "/work/fundpath/b-notifications.webp",
+  "alt": "Notifications: a fund update, a thank you, a donation going through and a campaign reaching its goal.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     68
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "home",
+    "move": "back"
+   },
+   {
+    "label": "New fund update",
+    "at": [
+     187.5,
+     190.8
+    ],
+    "size": [
+     343,
+     79.6
+    ],
+    "to": "report",
+    "move": "push"
+   },
+   {
+    "label": "Donation successful",
+    "at": [
+     187.5,
+     270.4
+    ],
+    "size": [
+     343,
+     79.6
+    ],
+    "to": "receipt",
+    "move": "push"
+   },
+   {
+    "label": "Marcus Brown sent a message",
+    "at": [
+     187.5,
+     350
+    ],
+    "size": [
+     343,
+     79.6
+    ],
+    "to": "chat",
+    "move": "push"
+   },
+   {
+    "label": "Goal reached",
+    "at": [
+     187.5,
+     480.6
+    ],
+    "size": [
+     343,
+     79.6
+    ],
+    "to": "fundUpdate",
+    "move": "push"
+   },
+   {
+    "label": "Your donation is protected",
+    "at": [
+     187.5,
+     552.9
+    ],
+    "size": [
+     343,
+     65
+    ],
+    "to": "faqAnswer",
+    "move": "push"
+   }
+  ]
+ },
+ "addMoney": {
+  "src": "/work/fundpath/b-add-money.webp",
+  "alt": "Add money to the donation wallet: amount and where from.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     68
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "home",
+    "move": "back"
+   },
+   {
+    "label": "Add money",
+    "at": [
+     187.5,
+     722
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "addMoneyDone",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Amount",
+    "text": [
+     30,
+     234,
+     38.1,
+     18
+    ],
+    "clear": [
+     30,
+     234,
+     20.9,
+     18
+    ],
+    "field": [
+     16,
+     223,
+     343,
+     40
+    ],
+    "r": 8,
+    "bg": "rgb(255, 255, 255)",
+    "chars": 4,
+    "src": "/work/fundpath/b-add-money-ink-0.webp"
+   }
+  ]
+ },
+ "addMoneyDone": {
+  "src": "/work/fundpath/b-add-money-done.webp",
+  "alt": "Money added to the wallet.",
+  "spots": [
+   {
+    "label": "Find a campaign",
+    "at": [
+     187.5,
+     666
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "campaigns",
+    "move": "push"
+   },
+   {
+    "label": "Back to Home",
+    "at": [
+     187.5,
+     722
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "home",
+    "move": "out"
+   }
+  ]
+ },
+ "categories": {
+  "src": "/work/fundpath/b-categories.webp",
+  "alt": "All causes: medical, disasters, pets, education, charity, community, sports, faith and environment.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     68
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "home",
+    "move": "back"
+   },
+   {
+    "label": "Medical",
+    "at": [
+     69.2,
+     146
+    ],
+    "size": [
+     106.3,
+     92
+    ],
+    "to": "medical",
+    "move": "push"
+   },
+   {
+    "label": "Disasters",
+    "at": [
+     187.5,
+     146
+    ],
+    "size": [
+     106.3,
+     92
+    ],
+    "to": "campaigns",
+    "move": "push"
+   },
+   {
+    "label": "Pets",
+    "at": [
+     305.8,
+     146
+    ],
+    "size": [
+     106.3,
+     92
+    ],
+    "to": "campaigns",
+    "move": "push"
+   },
+   {
+    "label": "Education",
+    "at": [
+     69.2,
+     250
+    ],
+    "size": [
+     106.3,
+     92
+    ],
+    "to": "campaigns",
+    "move": "push"
+   },
+   {
+    "label": "Charity",
+    "at": [
+     187.5,
+     250
+    ],
+    "size": [
+     106.3,
+     92
+    ],
+    "to": "campaigns",
+    "move": "push"
+   },
+   {
+    "label": "Community",
+    "at": [
+     305.8,
+     250
+    ],
+    "size": [
+     106.3,
+     92
+    ],
+    "to": "campaigns",
+    "move": "push"
+   },
+   {
+    "label": "Sports",
+    "at": [
+     69.2,
+     354
+    ],
+    "size": [
+     106.3,
+     92
+    ],
+    "to": "campaigns",
+    "move": "push"
+   },
+   {
+    "label": "Faith",
+    "at": [
+     187.5,
+     354
+    ],
+    "size": [
+     106.3,
+     92
+    ],
+    "to": "campaigns",
+    "move": "push"
+   },
+   {
+    "label": "Environment",
+    "at": [
+     305.8,
+     354
+    ],
+    "size": [
+     106.3,
+     92
+    ],
+    "to": "campaigns",
+    "move": "push"
+   }
+  ]
+ },
+ "medical": {
+  "src": "/work/fundpath/b-medical.webp",
+  "alt": "Campaigns, filtered to medical.",
+  "spots": [
+   {
+    "label": "medicals, pets, charity etc.",
+    "at": [
+     161.5,
+     76
+    ],
+    "size": [
+     291,
+     40
+    ],
+    "to": "searchCampaigns",
+    "move": "fade"
+   },
+   {
+    "label": "Filter",
+    "at": [
+     341,
+     74
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "filter",
+    "move": "sheet"
+   },
+   {
+    "label": "All",
+    "at": [
+     40.4,
+     125
+    ],
+    "size": [
+     48.8,
+     34
+    ],
+    "to": "campaigns",
+    "move": "fade"
+   },
+   {
+    "label": "Charity",
+    "at": [
+     112.7,
+     125
+    ],
+    "size": [
+     80,
+     34
+    ],
+    "to": "campaigns",
+    "move": "fade"
+   },
+   {
+    "label": "Pets",
+    "at": [
+     291.4,
+     125
+    ],
+    "size": [
+     58.8,
+     34
+    ],
+    "to": "campaigns",
+    "move": "fade"
+   },
+   {
+    "label": "Open Jane’s kidney transplant bills",
+    "at": [
+     187.5,
+     205.5
+    ],
+    "size": [
+     343,
+     111
+    ],
+    "to": "campaign",
+    "move": "push"
+   },
+   {
+    "label": "Open John’s prostate cancer treatment",
+    "at": [
+     187.5,
+     316.5
+    ],
+    "size": [
+     343,
+     111
+    ],
+    "to": "campaign",
+    "move": "push"
+   },
+   {
+    "label": "Open Jack’s prosthetic leg implant",
+    "at": [
+     187.5,
+     427.5
+    ],
+    "size": [
+     343,
+     111
+    ],
+    "to": "campaign",
+    "move": "push"
+   },
+   {
+    "label": "Open Help Sarah battle liver cancer",
+    "at": [
+     187.5,
+     538.5
+    ],
+    "size": [
+     343,
+     111
+    ],
+    "to": "fundUpdate",
+    "move": "push"
+   },
+   {
+    "label": "Home",
+    "at": [
+     38,
+     742
+    ],
+    "size": [
+     60,
+     58
+    ],
+    "to": "home",
+    "move": "fade"
+   },
+   {
+    "label": "Start a campaign",
+    "at": [
+     187,
+     742
+    ],
+    "size": [
+     60,
+     58
+    ],
+    "to": "start",
+    "move": "sheet"
+   },
+   {
+    "label": "Donations",
+    "at": [
+     262,
+     742
+    ],
+    "size": [
+     60,
+     58
+    ],
+    "to": "donations",
+    "move": "fade"
+   },
+   {
+    "label": "Chats",
+    "at": [
+     337,
+     742
+    ],
+    "size": [
+     60,
+     58
+    ],
+    "to": "chats",
+    "move": "fade"
+   }
+  ]
+ },
+ "searchCampaigns": {
+  "src": "/work/fundpath/b-search-campaigns.webp",
+  "alt": "Search fundraisers: kidney is typed, with matching campaigns.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     76
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "campaigns",
+    "move": "back"
+   },
+   {
+    "label": "Open Jane’s kidney transplant bills",
+    "at": [
+     187.5,
+     214.5
+    ],
+    "size": [
+     343,
+     111
+    ],
+    "to": "campaign",
+    "move": "push"
+   },
+   {
+    "label": "Open John’s prostate cancer treatment",
+    "at": [
+     187.5,
+     325.5
+    ],
+    "size": [
+     343,
+     111
+    ],
+    "to": "campaign",
+    "move": "push"
+   }
+  ],
+  "fields": [
+   {
+    "label": "search fundraisers",
+    "text": [
+     93,
+     67,
+     52,
+     18
+    ],
+    "clear": [
+     93,
+     67,
+     133.5,
+     18
+    ],
+    "field": [
+     50,
+     56,
+     309,
+     40
+    ],
+    "r": 8,
+    "bg": "rgb(242, 244, 247)",
+    "chars": 6,
+    "src": "/work/fundpath/b-search-campaigns-ink-0.webp"
+   }
+  ]
+ },
+ "saved": {
+  "src": "/work/fundpath/b-saved.webp",
+  "alt": "Saved campaigns: the ones you tapped the heart on.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     68
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "menu",
+    "move": "back"
+   },
+   {
+    "label": "Open Jane’s kidney transplant bills",
+    "at": [
+     187.5,
+     147.5
+    ],
+    "size": [
+     343,
+     111
+    ],
+    "to": "campaign",
+    "move": "push"
+   },
+   {
+    "label": "Open Shelter for stray dogs in Lagos",
+    "at": [
+     187.5,
+     258.5
+    ],
+    "size": [
+     343,
+     111
+    ],
+    "to": "campaign",
+    "move": "push"
+   },
+   {
+    "label": "Open Education for kids in slums",
+    "at": [
+     187.5,
+     369.5
+    ],
+    "size": [
+     343,
+     111
+    ],
+    "to": "campaign",
+    "move": "push"
+   }
+  ]
+ },
+ "campaignSaved": {
+  "src": "/work/fundpath/b-campaign-saved.webp",
+  "alt": "The campaign, saved to your list.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     305
+    ],
+    "size": [
+     375,
+     610
+    ],
+    "to": "campaign",
+    "move": "drop"
+   },
+   {
+    "label": "View saved campaigns",
+    "at": [
+     187.5,
+     722
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "saved",
+    "move": "push"
+   }
+  ],
+  "sheet": {
+   "top": 610,
+   "over": "campaign"
+  }
+ },
+ "campaignMore": {
+  "src": "/work/fundpath/b-campaign-more.webp",
+  "alt": "Jane's full story, with every donor.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     68
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "campaign",
+    "move": "back"
+   },
+   {
+    "label": "Share",
+    "at": [
+     344,
+     68
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "share",
+    "move": "sheet"
+   },
+   {
+    "label": "Chat",
+    "at": [
+     98.8,
+     722
+    ],
+    "size": [
+     165.5,
+     44
+    ],
+    "to": "chat",
+    "move": "push"
+   },
+   {
+    "label": "Donate Now",
+    "at": [
+     276.3,
+     722
+    ],
+    "size": [
+     165.5,
+     44
+    ],
+    "to": "amount",
+    "move": "sheet"
+   }
+  ]
+ },
+ "shareCopied": {
+  "src": "/work/fundpath/b-share-copied.webp",
+  "alt": "Campaign link copied.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     305
+    ],
+    "size": [
+     375,
+     610
+    ],
+    "to": "campaign",
+    "move": "drop"
+   },
+   {
+    "label": "Done",
+    "at": [
+     187.5,
+     722
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "campaign",
+    "move": "drop"
+   }
+  ],
+  "sheet": {
+   "top": 610,
+   "over": "campaign"
+  }
+ },
+ "comment": {
+  "src": "/work/fundpath/b-comment.webp",
+  "alt": "Leave a comment for Jane.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     68
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "success",
+    "move": "back"
+   },
+   {
+    "label": "Post comment",
+    "at": [
+     187.5,
+     722
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "commentPosted",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Your message",
+    "text": [
+     30,
+     207,
+     255.5,
+     18
+    ],
+    "clear": [
+     30,
+     207,
+     145.7,
+     18
+    ],
+    "field": [
+     16,
+     194,
+     343,
+     110
+    ],
+    "r": 8,
+    "bg": "rgb(255, 255, 255)",
+    "chars": 34,
+    "src": "/work/fundpath/b-comment-ink-0.webp"
+   }
+  ]
+ },
+ "commentPosted": {
+  "src": "/work/fundpath/b-comment-posted.webp",
+  "alt": "Comments on the campaign, with yours at the top.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     68
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "campaign",
+    "move": "back"
+   },
+   {
+    "label": "Back to campaign",
+    "at": [
+     187.5,
+     722
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "campaign",
+    "move": "back"
+   }
+  ]
+ },
+ "payBank": {
+  "src": "/work/fundpath/b-pay-bank.webp",
+  "alt": "Bank transfer: account details for the donation.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     68
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "payMethod",
+    "move": "back"
+   },
+   {
+    "label": "I’ve sent it",
+    "at": [
+     187.5,
+     722
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "processing",
+    "move": "fade"
+   }
+  ]
+ },
+ "payUssd": {
+  "src": "/work/fundpath/b-pay-ussd.webp",
+  "alt": "USSD: dial a code from your phone.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     68
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "payMethod",
+    "move": "back"
+   },
+   {
+    "label": "I’ve dialled it",
+    "at": [
+     187.5,
+     722
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "processing",
+    "move": "fade"
+   }
+  ]
+ },
+ "payPaypal": {
+  "src": "/work/fundpath/b-pay-paypal.webp",
+  "alt": "PayPal: confirm the donation.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     68
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "payMethod",
+    "move": "back"
+   },
+   {
+    "label": "Continue to PayPal",
+    "at": [
+     187.5,
+     722
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "processing",
+    "move": "fade"
+   }
+  ]
+ },
+ "payStripe": {
+  "src": "/work/fundpath/b-pay-stripe.webp",
+  "alt": "Stripe: confirm the donation.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     68
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "payMethod",
+    "move": "back"
+   },
+   {
+    "label": "Pay with Stripe",
+    "at": [
+     187.5,
+     722
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "processing",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Email for the receipt",
+    "text": [
+     30,
+     135,
+     144.8,
+     18
+    ],
+    "clear": [
+     30,
+     135,
+     122.1,
+     18
+    ],
+    "field": [
+     16,
+     124,
+     343,
+     40
+    ],
+    "r": 8,
+    "bg": "rgb(255, 255, 255)",
+    "chars": 16,
+    "src": "/work/fundpath/b-pay-stripe-ink-0.webp"
+   }
+  ]
+ },
+ "donationsPending": {
+  "src": "/work/fundpath/b-donations-pending.webp",
+  "alt": "Donations, pending.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     68
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "home",
+    "move": "back"
+   },
+   {
+    "label": "Successful",
+    "at": [
+     73.2,
+     360
+    ],
+    "size": [
+     114.3,
+     42
+    ],
+    "to": "donations",
+    "move": "fade"
+   },
+   {
+    "label": "Cancelled",
+    "at": [
+     301.8,
+     360
+    ],
+    "size": [
+     114.3,
+     42
+    ],
+    "to": "donationsCancelled",
+    "move": "fade"
+   },
+   {
+    "label": "See details of Give clean water to Ijebu Village",
+    "at": [
+     330.9,
+     431.5
+    ],
+    "size": [
+     56.3,
+     32
+    ],
+    "to": "receipt",
+    "move": "fade"
+   },
+   {
+    "label": "See details of Help feed poor kids in Makoko",
+    "at": [
+     330.9,
+     502.5
+    ],
+    "size": [
+     56.3,
+     32
+    ],
+    "to": "receipt",
+    "move": "fade"
+   },
+   {
+    "label": "Home",
+    "at": [
+     38,
+     729
+    ],
+    "size": [
+     60,
+     58
+    ],
+    "to": "home",
+    "move": "fade"
+   },
+   {
+    "label": "Campaigns",
+    "at": [
+     113,
+     729
+    ],
+    "size": [
+     60,
+     58
+    ],
+    "to": "campaigns",
+    "move": "fade"
+   },
+   {
+    "label": "Start a campaign",
+    "at": [
+     187,
+     729
+    ],
+    "size": [
+     60,
+     58
+    ],
+    "to": "start",
+    "move": "sheet"
+   },
+   {
+    "label": "Chats",
+    "at": [
+     337,
+     729
+    ],
+    "size": [
+     60,
+     58
+    ],
+    "to": "chats",
+    "move": "fade"
+   }
+  ]
+ },
+ "donationsCancelled": {
+  "src": "/work/fundpath/b-donations-cancelled.webp",
+  "alt": "Donations, cancelled.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     68
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "home",
+    "move": "back"
+   },
+   {
+    "label": "Successful",
+    "at": [
+     73.2,
+     360
+    ],
+    "size": [
+     114.3,
+     42
+    ],
+    "to": "donations",
+    "move": "fade"
+   },
+   {
+    "label": "Pending",
+    "at": [
+     187.5,
+     360
+    ],
+    "size": [
+     114.3,
+     42
+    ],
+    "to": "donationsPending",
+    "move": "fade"
+   },
+   {
+    "label": "See details of Help Lekki earthquake victims",
+    "at": [
+     330.9,
+     431.5
+    ],
+    "size": [
+     56.3,
+     32
+    ],
+    "to": "receipt",
+    "move": "fade"
+   },
+   {
+    "label": "Home",
+    "at": [
+     38,
+     729
+    ],
+    "size": [
+     60,
+     58
+    ],
+    "to": "home",
+    "move": "fade"
+   },
+   {
+    "label": "Campaigns",
+    "at": [
+     113,
+     729
+    ],
+    "size": [
+     60,
+     58
+    ],
+    "to": "campaigns",
+    "move": "fade"
+   },
+   {
+    "label": "Start a campaign",
+    "at": [
+     187,
+     729
+    ],
+    "size": [
+     60,
+     58
+    ],
+    "to": "start",
+    "move": "sheet"
+   },
+   {
+    "label": "Chats",
+    "at": [
+     337,
+     729
+    ],
+    "size": [
+     60,
+     58
+    ],
+    "to": "chats",
+    "move": "fade"
+   }
+  ]
+ },
+ "receiptSaved": {
+  "src": "/work/fundpath/b-receipt-saved.webp",
+  "alt": "Receipt downloaded.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     300
+    ],
+    "size": [
+     375,
+     600
+    ],
+    "to": "donations",
+    "move": "drop"
+   },
+   {
+    "label": "Done",
+    "at": [
+     187.5,
+     722
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "donations",
+    "move": "drop"
+   }
+  ],
+  "sheet": {
+   "top": 600,
+   "over": "donations"
+  }
+ },
+ "myCampaignsCompleted": {
+  "src": "/work/fundpath/b-my-campaigns-completed.webp",
+  "alt": "My campaigns, completed.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     68
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "home",
+    "move": "back"
+   },
+   {
+    "label": "Start a campaign",
+    "at": [
+     344,
+     68
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "start",
+    "move": "sheet"
+   },
+   {
+    "label": "All Campaigns",
+    "at": [
+     73.2,
+     121
+    ],
+    "size": [
+     114.3,
+     42
+    ],
+    "to": "myCampaigns",
+    "move": "fade"
+   },
+   {
+    "label": "Ongoing",
+    "at": [
+     301.8,
+     121
+    ],
+    "size": [
+     114.3,
+     42
+    ],
+    "to": "myCampaignsOngoing",
+    "move": "fade"
+   },
+   {
+    "label": "Open Help Sarah battle liver cancer",
+    "at": [
+     253.5,
+     171
+    ],
+    "size": [
+     211,
+     32
+    ],
+    "to": "fundUpdate",
+    "move": "push"
+   },
+   {
+    "label": "Update Campaign",
+    "at": [
+     253.5,
+     259
+    ],
+    "size": [
+     211,
+     36
+    ],
+    "to": "updateCampaign",
+    "move": "push"
+   },
+   {
+    "label": "Open Help Lekki Earthquake victims",
+    "at": [
+     253.5,
+     311
+    ],
+    "size": [
+     211,
+     32
+    ],
+    "to": "fundUpdate",
+    "move": "push"
+   },
+   {
+    "label": "Update Campaign, 2",
+    "at": [
+     253.5,
+     399
+    ],
+    "size": [
+     211,
+     36
+    ],
+    "to": "updateCampaign",
+    "move": "push"
+   }
+  ]
+ },
+ "myCampaignsOngoing": {
+  "src": "/work/fundpath/b-my-campaigns-ongoing.webp",
+  "alt": "My campaigns, ongoing.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     68
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "home",
+    "move": "back"
+   },
+   {
+    "label": "Start a campaign",
+    "at": [
+     344,
+     68
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "start",
+    "move": "sheet"
+   },
+   {
+    "label": "All Campaigns",
+    "at": [
+     73.2,
+     121
+    ],
+    "size": [
+     114.3,
+     42
+    ],
+    "to": "myCampaigns",
+    "move": "fade"
+   },
+   {
+    "label": "Completed",
+    "at": [
+     187.5,
+     121
+    ],
+    "size": [
+     114.3,
+     42
+    ],
+    "to": "myCampaignsCompleted",
+    "move": "fade"
+   },
+   {
+    "label": "Open Help feed poor kids in Makoko",
+    "at": [
+     253.5,
+     171
+    ],
+    "size": [
+     211,
+     32
+    ],
+    "to": "fundUpdate",
+    "move": "push"
+   },
+   {
+    "label": "Update Campaign",
+    "at": [
+     253.5,
+     259
+    ],
+    "size": [
+     211,
+     36
+    ],
+    "to": "updateCampaign",
+    "move": "push"
+   },
+   {
+    "label": "Open Give clean water to Ijebu Village",
+    "at": [
+     253.5,
+     311
+    ],
+    "size": [
+     211,
+     32
+    ],
+    "to": "fundUpdate",
+    "move": "push"
+   },
+   {
+    "label": "Update Campaign, 2",
+    "at": [
+     253.5,
+     399
+    ],
+    "size": [
+     211,
+     36
+    ],
+    "to": "updateCampaign",
+    "move": "push"
+   }
+  ]
+ },
+ "updateCampaign": {
+  "src": "/work/fundpath/b-update-campaign.webp",
+  "alt": "Update a campaign: what happened, the amount used and proof.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     68
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "myCampaigns",
+    "move": "back"
+   },
+   {
+    "label": "Upload",
+    "at": [
+     301.4,
+     468
+    ],
+    "size": [
+     81.2,
+     34
+    ],
+    "to": "updateUploaded",
+    "move": "fade"
+   },
+   {
+    "label": "Post update",
+    "at": [
+     187.5,
+     722
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "updateDone",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "What happened?",
+    "text": [
+     30,
+     137,
+     256.2,
+     18
+    ],
+    "clear": [
+     30,
+     137,
+     159.6,
+     18
+    ],
+    "field": [
+     16,
+     124,
+     343,
+     110
+    ],
+    "r": 8,
+    "bg": "rgb(255, 255, 255)",
+    "chars": 35,
+    "src": "/work/fundpath/b-update-campaign-ink-0.webp"
+   },
+   {
+    "label": "Amount used",
+    "text": [
+     30,
+     285,
+     48.7,
+     18
+    ],
+    "clear": [
+     30,
+     285,
+     20.9,
+     18
+    ],
+    "field": [
+     16,
+     274,
+     343,
+     40
+    ],
+    "r": 8,
+    "bg": "rgb(255, 255, 255)",
+    "chars": 6,
+    "src": "/work/fundpath/b-update-campaign-ink-1.webp"
+   }
+  ]
+ },
+ "updateUploaded": {
+  "src": "/work/fundpath/b-update-uploaded.webp",
+  "alt": "Update a campaign, with a receipt uploaded.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     68
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "myCampaigns",
+    "move": "back"
+   },
+   {
+    "label": "Post update",
+    "at": [
+     187.5,
+     722
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "updateDone",
+    "move": "fade"
+   }
+  ]
+ },
+ "updateDone": {
+  "src": "/work/fundpath/b-update-done.webp",
+  "alt": "Update posted: every donor has been told.",
+  "spots": [
+   {
+    "label": "See the fund update",
+    "at": [
+     187.5,
+     666
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "fundUpdate",
+    "move": "push"
+   },
+   {
+    "label": "Back to my campaigns",
+    "at": [
+     187.5,
+     722
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "myCampaigns",
+    "move": "out"
+   }
+  ]
+ },
+ "campaignDescription": {
+  "src": "/work/fundpath/b-campaign-description.webp",
+  "alt": "Help Sarah battle liver cancer: the description tab.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     68
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "myCampaigns",
+    "move": "back"
+   },
+   {
+    "label": "Edit campaign",
+    "at": [
+     344,
+     68
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "updateCampaign",
+    "move": "push"
+   },
+   {
+    "label": "Fund Update",
+    "at": [
+     273.3,
+     474
+    ],
+    "size": [
+     171.5,
+     42
+    ],
+    "to": "fundUpdate",
+    "move": "fade"
+   }
+  ]
+ },
+ "faqAnswer": {
+  "src": "/work/fundpath/b-faq-answer.webp",
+  "alt": "FAQ: Is my donation secure? The answer is open.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     68
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "faqs",
+    "move": "back"
+   },
+   {
+    "label": "How can I share my campaign?",
+    "at": [
+     187.5,
+     347.7
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "faqs",
+    "move": "fade"
+   },
+   {
+    "label": "Are there fees associated with using “Fund Path”?",
+    "at": [
+     187.5,
+     410.7
+    ],
+    "size": [
+     343,
+     60
+    ],
+    "to": "faqs",
+    "move": "fade"
+   },
+   {
+    "label": "Can I donate anonymously?",
+    "at": [
+     187.5,
+     473.7
+    ],
+    "size": [
+     343,
+     46
+    ],
+    "to": "faqs",
+    "move": "fade"
+   },
+   {
+    "label": "Still need help?",
+    "at": [
+     187.5,
+     722
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "liveChat",
+    "move": "push"
+   }
+  ],
+  "fields": [
+   {
+    "label": "search FAQs",
+    "text": [
+     59,
+     111,
+     49.5,
+     18
+    ],
+    "clear": [
+     59,
+     111,
+     92,
+     18
+    ],
+    "field": [
+     16,
+     100,
+     343,
+     40
+    ],
+    "r": 8,
+    "bg": "rgb(242, 244, 247)",
+    "chars": 6,
+    "src": "/work/fundpath/b-faq-answer-ink-0.webp"
+   }
+  ]
+ },
+ "liveChat": {
+  "src": "/work/fundpath/b-live-chat.webp",
+  "alt": "Live chat with FundPath support.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     71
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "contact",
+    "move": "back"
+   },
+   {
+    "label": "Open the report",
+    "at": [
+     84.1,
+     391.1
+    ],
+    "size": [
+     136.2,
+     34
+    ],
+    "to": "report",
+    "move": "fade"
+   },
+   {
+    "label": "Talk to a person",
+    "at": [
+     228.4,
+     391.1
+    ],
+    "size": [
+     136.4,
+     34
+    ],
+    "to": "voiceCall",
+    "move": "fade"
+   },
+   {
+    "label": "Send",
+    "at": [
+     337,
+     662
+    ],
+    "size": [
+     44,
+     44
+    ],
+    "to": "liveChatSent",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Message",
+    "text": [
+     29,
+     653,
+     145.1,
+     18
+    ],
+    "clear": [
+     29,
+     653,
+     88.6,
+     18
+    ],
+    "field": [
+     30,
+     640,
+     269,
+     44
+    ],
+    "r": 8,
+    "bg": "rgb(221, 225, 230)",
+    "chars": 20,
+    "src": "/work/fundpath/b-live-chat-ink-0.webp"
+   }
+  ]
+ },
+ "chatAlex": {
+  "src": "/work/fundpath/b-chat-alex.webp",
+  "alt": "Chat with Alex Hunter about a campaign.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     71
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "chats",
+    "move": "back"
+   },
+   {
+    "label": "Call",
+    "at": [
+     304,
+     71
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "voiceCall",
+    "move": "in"
+   },
+   {
+    "label": "More options",
+    "at": [
+     344,
+     71
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "chatMenu",
+    "move": "sheet"
+   },
+   {
+    "label": "Attach",
+    "at": [
+     283,
+     662
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "chatMenu",
+    "move": "sheet"
+   },
+   {
+    "label": "Send",
+    "at": [
+     337,
+     662
+    ],
+    "size": [
+     44,
+     44
+    ],
+    "to": "chatAlexSent",
+    "move": "fade"
+   },
+   {
+    "label": "Home",
+    "at": [
+     38,
+     729
+    ],
+    "size": [
+     60,
+     58
+    ],
+    "to": "home",
+    "move": "fade"
+   },
+   {
+    "label": "Campaigns",
+    "at": [
+     113,
+     729
+    ],
+    "size": [
+     60,
+     58
+    ],
+    "to": "campaigns",
+    "move": "fade"
+   },
+   {
+    "label": "Start a campaign",
+    "at": [
+     187,
+     729
+    ],
+    "size": [
+     60,
+     58
+    ],
+    "to": "start",
+    "move": "sheet"
+   },
+   {
+    "label": "Donations",
+    "at": [
+     262,
+     729
+    ],
+    "size": [
+     60,
+     58
+    ],
+    "to": "donations",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Message",
+    "text": [
+     29,
+     653,
+     176.3,
+     18
+    ],
+    "clear": [
+     29,
+     653,
+     88.6,
+     18
+    ],
+    "field": [
+     30,
+     640,
+     237,
+     44
+    ],
+    "r": 8,
+    "bg": "rgb(221, 225, 230)",
+    "chars": 24,
+    "src": "/work/fundpath/b-chat-alex-ink-0.webp"
+   }
+  ]
+ },
+ "chatAlec": {
+  "src": "/work/fundpath/b-chat-alec.webp",
+  "alt": "Chat with Alec Whitten.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     71
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "chats",
+    "move": "back"
+   },
+   {
+    "label": "Call",
+    "at": [
+     304,
+     71
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "voiceCall",
+    "move": "in"
+   },
+   {
+    "label": "More options",
+    "at": [
+     344,
+     71
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "chatMenu",
+    "move": "sheet"
+   },
+   {
+    "label": "Attach",
+    "at": [
+     283,
+     662
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "chatMenu",
+    "move": "sheet"
+   },
+   {
+    "label": "Send",
+    "at": [
+     337,
+     662
+    ],
+    "size": [
+     44,
+     44
+    ],
+    "to": "chatAlecSent",
+    "move": "fade"
+   },
+   {
+    "label": "Home",
+    "at": [
+     38,
+     729
+    ],
+    "size": [
+     60,
+     58
+    ],
+    "to": "home",
+    "move": "fade"
+   },
+   {
+    "label": "Campaigns",
+    "at": [
+     113,
+     729
+    ],
+    "size": [
+     60,
+     58
+    ],
+    "to": "campaigns",
+    "move": "fade"
+   },
+   {
+    "label": "Start a campaign",
+    "at": [
+     187,
+     729
+    ],
+    "size": [
+     60,
+     58
+    ],
+    "to": "start",
+    "move": "sheet"
+   },
+   {
+    "label": "Donations",
+    "at": [
+     262,
+     729
+    ],
+    "size": [
+     60,
+     58
+    ],
+    "to": "donations",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Message",
+    "text": [
+     29,
+     653,
+     151.3,
+     18
+    ],
+    "clear": [
+     29,
+     653,
+     88.6,
+     18
+    ],
+    "field": [
+     30,
+     640,
+     237,
+     44
+    ],
+    "r": 8,
+    "bg": "rgb(221, 225, 230)",
+    "chars": 21,
+    "src": "/work/fundpath/b-chat-alec-ink-0.webp"
+   }
+  ]
+ },
+ "chatSent": {
+  "src": "/work/fundpath/b-chat-sent.webp",
+  "alt": "Chat with Marcus Brown, with your message sent.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     71
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "chats",
+    "move": "back"
+   },
+   {
+    "label": "Call",
+    "at": [
+     304,
+     71
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "voiceCall",
+    "move": "in"
+   },
+   {
+    "label": "More options",
+    "at": [
+     344,
+     71
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "chatMenu",
+    "move": "sheet"
+   },
+   {
+    "label": "Attach",
+    "at": [
+     283,
+     662
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "chatMenu",
+    "move": "sheet"
+   },
+   {
+    "label": "Send",
+    "at": [
+     337,
+     662
+    ],
+    "size": [
+     44,
+     44
+    ],
+    "to": "chat",
+    "move": "fade"
+   },
+   {
+    "label": "Home",
+    "at": [
+     38,
+     729
+    ],
+    "size": [
+     60,
+     58
+    ],
+    "to": "home",
+    "move": "fade"
+   },
+   {
+    "label": "Campaigns",
+    "at": [
+     113,
+     729
+    ],
+    "size": [
+     60,
+     58
+    ],
+    "to": "campaigns",
+    "move": "fade"
+   },
+   {
+    "label": "Start a campaign",
+    "at": [
+     187,
+     729
+    ],
+    "size": [
+     60,
+     58
+    ],
+    "to": "start",
+    "move": "sheet"
+   },
+   {
+    "label": "Donations",
+    "at": [
+     262,
+     729
+    ],
+    "size": [
+     60,
+     58
+    ],
+    "to": "donations",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Message",
+    "text": [
+     29,
+     653,
+     155.5,
+     18
+    ],
+    "clear": [
+     29,
+     653,
+     88.6,
+     18
+    ],
+    "field": [
+     30,
+     640,
+     237,
+     44
+    ],
+    "r": 8,
+    "bg": "rgb(221, 225, 230)",
+    "chars": 21,
+    "src": "/work/fundpath/b-chat-sent-ink-0.webp"
+   }
+  ]
+ },
+ "newChat": {
+  "src": "/work/fundpath/b-new-chat.webp",
+  "alt": "New chat: pick an organiser.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     68
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "chats",
+    "move": "back"
+   },
+   {
+    "label": "Odion Ighalo Foundation",
+    "at": [
+     187.5,
+     186.5
+    ],
+    "size": [
+     343,
+     69
+    ],
+    "to": "chat",
+    "move": "push"
+   },
+   {
+    "label": "Marcus Brown",
+    "at": [
+     187.5,
+     255.5
+    ],
+    "size": [
+     343,
+     69
+    ],
+    "to": "chat",
+    "move": "push"
+   },
+   {
+    "label": "Alex Hunter",
+    "at": [
+     187.5,
+     324.5
+    ],
+    "size": [
+     343,
+     69
+    ],
+    "to": "chatAlex",
+    "move": "push"
+   },
+   {
+    "label": "Alec Whitten",
+    "at": [
+     187.5,
+     393.5
+    ],
+    "size": [
+     343,
+     69
+    ],
+    "to": "chatAlec",
+    "move": "push"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Search organisers",
+    "text": [
+     59,
+     111,
+     46.3,
+     18
+    ],
+    "clear": [
+     59,
+     111,
+     130.2,
+     18
+    ],
+    "field": [
+     16,
+     100,
+     343,
+     40
+    ],
+    "r": 8,
+    "bg": "rgb(242, 244, 247)",
+    "chars": 5,
+    "src": "/work/fundpath/b-new-chat-ink-0.webp"
+   }
+  ]
+ },
+ "chatMenu": {
+  "src": "/work/fundpath/b-chat-menu.webp",
+  "alt": "Chat options: view profile, mute, block and report.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     270
+    ],
+    "size": [
+     375,
+     540
+    ],
+    "to": "chat",
+    "move": "drop"
+   },
+   {
+    "label": "View profile",
+    "at": [
+     187.5,
+     596
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "profile",
+    "move": "push"
+   },
+   {
+    "label": "Mute notifications",
+    "at": [
+     187.5,
+     640
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "chat",
+    "move": "drop"
+   },
+   {
+    "label": "Report",
+    "at": [
+     187.5,
+     684
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "reportUser",
+    "move": "push"
+   }
+  ],
+  "sheet": {
+   "top": 540,
+   "over": "chat"
+  }
+ },
+ "reportUser": {
+  "src": "/work/fundpath/b-report-user.webp",
+  "alt": "Report: pick a reason.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     68
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "chat",
+    "move": "back"
+   },
+   {
+    "label": "Send report",
+    "at": [
+     187.5,
+     722
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "reportSent",
+    "move": "fade"
+   }
+  ]
+ },
+ "reportSent": {
+  "src": "/work/fundpath/b-report-sent.webp",
+  "alt": "Report sent.",
+  "spots": [
+   {
+    "label": "Back to chats",
+    "at": [
+     187.5,
+     722
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "chats",
+    "move": "out"
+   }
+  ]
+ },
+ "voiceCall": {
+  "src": "/work/fundpath/b-voice-call.webp",
+  "alt": "Voice call ringing.",
+  "spots": [
+   {
+    "label": "End call",
+    "at": [
+     187.5,
+     690
+    ],
+    "size": [
+     64,
+     64
+    ],
+    "to": "chat",
+    "move": "out"
+   }
+  ]
+ },
+ "filterCategory": {
+  "src": "/work/fundpath/b-filter-category.webp",
+  "alt": "Filter by category: medical and education are ticked.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     68
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "filter",
+    "move": "back"
+   },
+   {
+    "label": "Clear all",
+    "at": [
+     328.7,
+     68
+    ],
+    "size": [
+     60.6,
+     32
+    ],
+    "to": "filter",
+    "move": "back"
+   },
+   {
+    "label": "Apply",
+    "at": [
+     187.5,
+     722
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "filter",
+    "move": "back"
+   }
+  ]
+ },
+ "filterCurrency": {
+  "src": "/work/fundpath/b-filter-currency.webp",
+  "alt": "Filter by currency.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     68
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "filter",
+    "move": "back"
+   },
+   {
+    "label": "Apply",
+    "at": [
+     187.5,
+     722
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "filter",
+    "move": "back"
+   }
+  ]
+ },
+ "editProfile": {
+  "src": "/work/fundpath/b-edit-profile.webp",
+  "alt": "My profile: photo, name, email and phone.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     68
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "menu",
+    "move": "back"
+   },
+   {
+    "label": "Save changes",
+    "at": [
+     187.5,
+     722
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "menu",
+    "move": "back"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Full name",
+    "text": [
+     30,
+     255,
+     94.6,
+     18
+    ],
+    "clear": [
+     30,
+     255,
+     83.9,
+     18
+    ],
+    "field": [
+     16,
+     244,
+     343,
+     40
+    ],
+    "r": 8,
+    "bg": "rgb(255, 255, 255)",
+    "chars": 11,
+    "src": "/work/fundpath/b-edit-profile-ink-0.webp"
+   },
+   {
+    "label": "Email",
+    "text": [
+     30,
+     335,
+     144.8,
+     18
+    ],
+    "clear": [
+     30,
+     335,
+     82.4,
+     18
+    ],
+    "field": [
+     16,
+     324,
+     343,
+     40
+    ],
+    "r": 8,
+    "bg": "rgb(255, 255, 255)",
+    "chars": 16,
+    "src": "/work/fundpath/b-edit-profile-ink-1.webp"
+   },
+   {
+    "label": "Phone",
+    "text": [
+     30,
+     415,
+     139.3,
+     18
+    ],
+    "clear": [
+     30,
+     415,
+     98.8,
+     18
+    ],
+    "field": [
+     16,
+     404,
+     343,
+     40
+    ],
+    "r": 8,
+    "bg": "rgb(255, 255, 255)",
+    "chars": 17,
+    "src": "/work/fundpath/b-edit-profile-ink-2.webp"
+   }
+  ]
+ },
+ "editOrganiser": {
+  "src": "/work/fundpath/b-edit-organiser.webp",
+  "alt": "Edit the organiser's profile: mission and goal.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     68
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "profile",
+    "move": "back"
+   },
+   {
+    "label": "Save",
+    "at": [
+     187.5,
+     722
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "profile",
+    "move": "back"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Mission statement",
+    "text": [
+     30,
+     321,
+     179.1,
+     18
+    ],
+    "clear": [
+     30,
+     321,
+     167.4,
+     18
+    ],
+    "field": [
+     16,
+     308,
+     343,
+     110
+    ],
+    "r": 8,
+    "bg": "rgb(255, 255, 255)",
+    "chars": 25,
+    "src": "/work/fundpath/b-edit-organiser-ink-0.webp"
+   },
+   {
+    "label": "Goal",
+    "text": [
+     30,
+     471,
+     217.8,
+     18
+    ],
+    "clear": [
+     30,
+     471,
+     209.9,
+     18
+    ],
+    "field": [
+     16,
+     458,
+     343,
+     110
+    ],
+    "r": 8,
+    "bg": "rgb(255, 255, 255)",
+    "chars": 29,
+    "src": "/work/fundpath/b-edit-organiser-ink-1.webp"
+   }
+  ]
+ },
+ "testimonials": {
+  "src": "/work/fundpath/b-testimonials.webp",
+  "alt": "All testimonials for the foundation.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     68
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "profile",
+    "move": "back"
+   }
+  ]
+ },
+ "reportMonth": {
+  "src": "/work/fundpath/b-report-month.webp",
+  "alt": "Transparency report: pick a month.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     210
+    ],
+    "size": [
+     375,
+     420
+    ],
+    "to": "report",
+    "move": "drop"
+   },
+   {
+    "label": "September",
+    "at": [
+     187.5,
+     505
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "report",
+    "move": "drop"
+   },
+   {
+    "label": "August",
+    "at": [
+     187.5,
+     549
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "report",
+    "move": "drop"
+   },
+   {
+    "label": "July",
+    "at": [
+     187.5,
+     593
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "report",
+    "move": "drop"
+   },
+   {
+    "label": "June",
+    "at": [
+     187.5,
+     637
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "report",
+    "move": "drop"
+   },
+   {
+    "label": "May",
+    "at": [
+     187.5,
+     681
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "report",
+    "move": "drop"
+   }
+  ],
+  "sheet": {
+   "top": 420,
+   "over": "report"
+  }
+ },
+ "startFilled": {
+  "src": "/work/fundpath/b-start-filled.webp",
+  "alt": "Start a campaign, filled in, with the goal and deadline.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     68
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "start",
+    "move": "back"
+   },
+   {
+    "label": "Preview",
+    "at": [
+     187.5,
+     722
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "preview",
+    "move": "push"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Goal Amount",
+    "text": [
+     30,
+     135,
+     56.3,
+     18
+    ],
+    "clear": [
+     30,
+     135,
+     20.9,
+     18
+    ],
+    "field": [
+     16,
+     124,
+     343,
+     40
+    ],
+    "r": 8,
+    "bg": "rgb(255, 255, 255)",
+    "chars": 7,
+    "src": "/work/fundpath/b-start-filled-ink-0.webp"
+   }
+  ]
+ },
+ "startCategory": {
+  "src": "/work/fundpath/b-start-category.webp",
+  "alt": "Start a campaign: choose a category.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     200
+    ],
+    "size": [
+     375,
+     400
+    ],
+    "to": "start",
+    "move": "drop"
+   },
+   {
+    "label": "Medical",
+    "at": [
+     187.5,
+     485
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "start",
+    "move": "drop"
+   },
+   {
+    "label": "Education",
+    "at": [
+     187.5,
+     529
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "start",
+    "move": "drop"
+   },
+   {
+    "label": "Disasters",
+    "at": [
+     187.5,
+     573
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "start",
+    "move": "drop"
+   },
+   {
+    "label": "Pets",
+    "at": [
+     187.5,
+     617
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "start",
+    "move": "drop"
+   },
+   {
+    "label": "Charity",
+    "at": [
+     187.5,
+     661
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "start",
+    "move": "drop"
+   }
+  ],
+  "sheet": {
+   "top": 400,
+   "over": "start"
+  }
+ },
+ "startFor": {
+  "src": "/work/fundpath/b-start-for.webp",
+  "alt": "Start a campaign: who is it for?",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     250
+    ],
+    "size": [
+     375,
+     500
+    ],
+    "to": "start",
+    "move": "drop"
+   },
+   {
+    "label": "Yourself",
+    "at": [
+     187.5,
+     585
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "start",
+    "move": "drop"
+   },
+   {
+    "label": "Someone else",
+    "at": [
+     187.5,
+     629
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "start",
+    "move": "drop"
+   },
+   {
+    "label": "A charity",
+    "at": [
+     187.5,
+     673
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "start",
+    "move": "drop"
+   }
+  ],
+  "sheet": {
+   "top": 500,
+   "over": "start"
+  }
+ },
+ "settings": {
+  "src": "/work/fundpath/b-settings.webp",
+  "alt": "Settings: notifications, security, currency and language.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     68
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "menu",
+    "move": "back"
+   },
+   {
+    "label": "Change password",
+    "at": [
+     187.5,
+     399.8
+    ],
+    "size": [
+     341,
+     66
+    ],
+    "to": "newPassword",
+    "move": "push"
+   },
+   {
+    "label": "Payment methods",
+    "at": [
+     187.5,
+     466.3
+    ],
+    "size": [
+     341,
+     67
+    ],
+    "to": "payMethod",
+    "move": "push"
+   },
+   {
+    "label": "Currency",
+    "at": [
+     187.5,
+     533.3
+    ],
+    "size": [
+     341,
+     67
+    ],
+    "to": "filterCurrency",
+    "move": "push"
+   },
+   {
+    "label": "Log out",
+    "at": [
+     187.5,
+     722
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "logout",
+    "move": "sheet"
+   }
+  ]
+ },
+ "logout": {
+  "src": "/work/fundpath/b-logout.webp",
+  "alt": "Log out?",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     280
+    ],
+    "size": [
+     375,
+     560
+    ],
+    "to": "menu",
+    "move": "drop"
+   },
+   {
+    "label": "Log out",
+    "at": [
+     187.5,
+     698
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "signIn",
+    "move": "out"
+   },
+   {
+    "label": "Stay",
+    "at": [
+     187.5,
+     754
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "menu",
+    "move": "drop"
+   }
+  ],
+  "sheet": {
+   "top": 560,
+   "over": "menu"
+  }
+ },
+ "liveChatSent": {
+  "src": "/work/fundpath/b-live-chat-sent.webp",
+  "alt": "Live chat with FundPath support, with your message sent.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     71
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "contact",
+    "move": "back"
+   },
+   {
+    "label": "Open the report",
+    "at": [
+     84.1,
+     391.1
+    ],
+    "size": [
+     136.2,
+     34
+    ],
+    "to": "report",
+    "move": "fade"
+   },
+   {
+    "label": "Talk to a person",
+    "at": [
+     228.4,
+     391.1
+    ],
+    "size": [
+     136.4,
+     34
+    ],
+    "to": "voiceCall",
+    "move": "fade"
+   },
+   {
+    "label": "Send",
+    "at": [
+     337,
+     662
+    ],
+    "size": [
+     44,
+     44
+    ],
+    "to": "liveChat",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Message",
+    "text": [
+     29,
+     653,
+     145.1,
+     18
+    ],
+    "clear": [
+     29,
+     653,
+     88.6,
+     18
+    ],
+    "field": [
+     30,
+     640,
+     269,
+     44
+    ],
+    "r": 8,
+    "bg": "rgb(221, 225, 230)",
+    "chars": 20,
+    "src": "/work/fundpath/b-live-chat-sent-ink-0.webp"
+   }
+  ]
+ },
+ "chatAlexSent": {
+  "src": "/work/fundpath/b-chat-alex-sent.webp",
+  "alt": "Chat with Alex Hunter about a campaign, with your message sent.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     71
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "chats",
+    "move": "back"
+   },
+   {
+    "label": "Call",
+    "at": [
+     304,
+     71
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "voiceCall",
+    "move": "in"
+   },
+   {
+    "label": "More options",
+    "at": [
+     344,
+     71
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "chatMenu",
+    "move": "sheet"
+   },
+   {
+    "label": "Attach",
+    "at": [
+     283,
+     662
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "chatMenu",
+    "move": "sheet"
+   },
+   {
+    "label": "Send",
+    "at": [
+     337,
+     662
+    ],
+    "size": [
+     44,
+     44
+    ],
+    "to": "chatAlex",
+    "move": "fade"
+   },
+   {
+    "label": "Home",
+    "at": [
+     38,
+     729
+    ],
+    "size": [
+     60,
+     58
+    ],
+    "to": "home",
+    "move": "fade"
+   },
+   {
+    "label": "Campaigns",
+    "at": [
+     113,
+     729
+    ],
+    "size": [
+     60,
+     58
+    ],
+    "to": "campaigns",
+    "move": "fade"
+   },
+   {
+    "label": "Start a campaign",
+    "at": [
+     187,
+     729
+    ],
+    "size": [
+     60,
+     58
+    ],
+    "to": "start",
+    "move": "sheet"
+   },
+   {
+    "label": "Donations",
+    "at": [
+     262,
+     729
+    ],
+    "size": [
+     60,
+     58
+    ],
+    "to": "donations",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Message",
+    "text": [
+     29,
+     653,
+     176.3,
+     18
+    ],
+    "clear": [
+     29,
+     653,
+     88.6,
+     18
+    ],
+    "field": [
+     30,
+     640,
+     237,
+     44
+    ],
+    "r": 8,
+    "bg": "rgb(221, 225, 230)",
+    "chars": 24,
+    "src": "/work/fundpath/b-chat-alex-sent-ink-0.webp"
+   }
+  ]
+ },
+ "chatAlecSent": {
+  "src": "/work/fundpath/b-chat-alec-sent.webp",
+  "alt": "Chat with Alec Whitten, with your message sent.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     71
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "chats",
+    "move": "back"
+   },
+   {
+    "label": "Call",
+    "at": [
+     304,
+     71
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "voiceCall",
+    "move": "in"
+   },
+   {
+    "label": "More options",
+    "at": [
+     344,
+     71
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "chatMenu",
+    "move": "sheet"
+   },
+   {
+    "label": "Attach",
+    "at": [
+     283,
+     662
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "chatMenu",
+    "move": "sheet"
+   },
+   {
+    "label": "Send",
+    "at": [
+     337,
+     662
+    ],
+    "size": [
+     44,
+     44
+    ],
+    "to": "chatAlec",
+    "move": "fade"
+   },
+   {
+    "label": "Home",
+    "at": [
+     38,
+     729
+    ],
+    "size": [
+     60,
+     58
+    ],
+    "to": "home",
+    "move": "fade"
+   },
+   {
+    "label": "Campaigns",
+    "at": [
+     113,
+     729
+    ],
+    "size": [
+     60,
+     58
+    ],
+    "to": "campaigns",
+    "move": "fade"
+   },
+   {
+    "label": "Start a campaign",
+    "at": [
+     187,
+     729
+    ],
+    "size": [
+     60,
+     58
+    ],
+    "to": "start",
+    "move": "sheet"
+   },
+   {
+    "label": "Donations",
+    "at": [
+     262,
+     729
+    ],
+    "size": [
+     60,
+     58
+    ],
+    "to": "donations",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Message",
+    "text": [
+     29,
+     653,
+     151.3,
+     18
+    ],
+    "clear": [
+     29,
+     653,
+     88.6,
+     18
+    ],
+    "field": [
+     30,
+     640,
+     237,
+     44
+    ],
+    "r": 8,
+    "bg": "rgb(221, 225, 230)",
+    "chars": 21,
+    "src": "/work/fundpath/b-chat-alec-sent-ink-0.webp"
+   }
+  ]
+ }
+}

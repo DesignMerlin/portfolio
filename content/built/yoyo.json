@@ -1,0 +1,4189 @@
+{
+ "logIn": {
+  "src": "/work/yoyo/b-log-in.webp",
+  "alt": "Log in with an email and password.",
+  "spots": [
+   {
+    "label": "Close",
+    "at": [
+     32,
+     64
+    ],
+    "size": [
+     40,
+     40
+    ],
+    "to": "welcome",
+    "move": "back"
+   },
+   {
+    "label": "Forgot password?",
+    "at": [
+     305.8,
+     604
+    ],
+    "size": [
+     106.4,
+     32
+    ],
+    "to": "forgot",
+    "move": "push"
+   },
+   {
+    "label": "Log In",
+    "at": [
+     187.5,
+     650
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "home",
+    "move": "in"
+   },
+   {
+    "label": "Sign up",
+    "at": [
+     220.3,
+     696
+    ],
+    "size": [
+     44.5,
+     32
+    ],
+    "to": "signUp",
+    "move": "push"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Email Address",
+    "text": [
+     30,
+     462.5,
+     134,
+     19
+    ],
+    "clear": [
+     30,
+     462.5,
+     68.3,
+     19
+    ],
+    "field": [
+     16,
+     448,
+     343,
+     48
+    ],
+    "r": 8,
+    "bg": "rgb(252, 252, 253)",
+    "chars": 18,
+    "src": "/work/yoyo/b-log-in-ink-0.webp"
+   },
+   {
+    "label": "Password",
+    "text": [
+     30,
+     551.5,
+     94.5,
+     19
+    ],
+    "clear": [
+     30,
+     551.5,
+     96.5,
+     19
+    ],
+    "field": [
+     16,
+     537,
+     343,
+     48
+    ],
+    "r": 8,
+    "bg": "rgb(252, 252, 253)",
+    "chars": 10,
+    "src": "/work/yoyo/b-log-in-ink-1.webp"
+   }
+  ]
+ },
+ "forgot": {
+  "src": "/work/yoyo/b-forgot.webp",
+  "alt": "Forgot password: enter your email.",
+  "spots": [
+   {
+    "label": "Close",
+    "at": [
+     32,
+     64
+    ],
+    "size": [
+     40,
+     40
+    ],
+    "to": "welcome",
+    "move": "back"
+   },
+   {
+    "label": "Send code",
+    "at": [
+     187.5,
+     572
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "verify",
+    "move": "push"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Email Address",
+    "text": [
+     30,
+     501.5,
+     134,
+     19
+    ],
+    "clear": [
+     30,
+     501.5,
+     68.3,
+     19
+    ],
+    "field": [
+     16,
+     487,
+     343,
+     48
+    ],
+    "r": 8,
+    "bg": "rgb(252, 252, 253)",
+    "chars": 18,
+    "src": "/work/yoyo/b-forgot-ink-0.webp"
+   }
+  ]
+ },
+ "notifications": {
+  "src": "/work/yoyo/b-notifications.webp",
+  "alt": "Notifications: a budget alert, a saving that went through and a score update.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     66
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "home",
+    "move": "back"
+   },
+   {
+    "label": "80% of your Food budget used",
+    "at": [
+     187.5,
+     177.5
+    ],
+    "size": [
+     343,
+     65
+    ],
+    "to": "allocations",
+    "move": "push"
+   },
+   {
+    "label": "$125 saved to Vacation",
+    "at": [
+     187.5,
+     242.5
+    ],
+    "size": [
+     343,
+     65
+    ],
+    "to": "vacation",
+    "move": "push"
+   },
+   {
+    "label": "Your score is up to 75%",
+    "at": [
+     187.5,
+     358.5
+    ],
+    "size": [
+     343,
+     65
+    ],
+    "to": "health",
+    "move": "push"
+   },
+   {
+    "label": "Music subscription renews tomorrow",
+    "at": [
+     187.5,
+     423.5
+    ],
+    "size": [
+     343,
+     65
+    ],
+    "to": "subscription",
+    "move": "push"
+   }
+  ]
+ },
+ "statsPeriod": {
+  "src": "/work/yoyo/b-stats-period.webp",
+  "alt": "Statistics: choose weekly, monthly or yearly.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     270
+    ],
+    "size": [
+     375,
+     540
+    ],
+    "to": "home",
+    "move": "drop"
+   },
+   {
+    "label": "Weekly",
+    "at": [
+     187.5,
+     626
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "home",
+    "move": "drop"
+   },
+   {
+    "label": "Monthly",
+    "at": [
+     187.5,
+     670
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "statsMonthly",
+    "move": "fade"
+   },
+   {
+    "label": "Yearly",
+    "at": [
+     187.5,
+     714
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "statsMonthly",
+    "move": "fade"
+   }
+  ],
+  "sheet": {
+   "top": 540,
+   "over": "home"
+  }
+ },
+ "statsMonthly": {
+  "src": "/work/yoyo/b-stats-monthly.webp",
+  "alt": "Statistics by month, with the total spent and saved.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     66
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "home",
+    "move": "back"
+   },
+   {
+    "label": "Change period",
+    "at": [
+     294.4,
+     131
+    ],
+    "size": [
+     95.2,
+     36
+    ],
+    "to": "statsPeriod",
+    "move": "sheet"
+   },
+   {
+    "label": "Goals",
+    "at": [
+     122,
+     757
+    ],
+    "size": [
+     66,
+     62
+    ],
+    "to": "goals",
+    "move": "fade"
+   },
+   {
+    "label": "Budget",
+    "at": [
+     194,
+     757
+    ],
+    "size": [
+     66,
+     62
+    ],
+    "to": "plans",
+    "move": "fade"
+   },
+   {
+    "label": "Learn",
+    "at": [
+     271,
+     757
+    ],
+    "size": [
+     66,
+     62
+    ],
+    "to": "learn",
+    "move": "fade"
+   },
+   {
+    "label": "More",
+    "at": [
+     341,
+     757
+    ],
+    "size": [
+     66,
+     62
+    ],
+    "to": "more",
+    "move": "fade"
+   }
+  ]
+ },
+ "healthMonth": {
+  "src": "/work/yoyo/b-health-month.webp",
+  "alt": "October's score: 75%, and what moved it.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     66
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "health",
+    "move": "back"
+   },
+   {
+    "label": "Food went over for a week",
+    "at": [
+     187.5,
+     467.7
+    ],
+    "size": [
+     343,
+     63.8
+    ],
+    "to": "allocations",
+    "move": "push"
+   },
+   {
+    "label": "See my budget",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "plans",
+    "move": "push"
+   }
+  ]
+ },
+ "insights": {
+  "src": "/work/yoyo/b-insights.webp",
+  "alt": "Budget insights: spending against plan, and tips.",
+  "spots": [
+   {
+    "label": "Switch budget",
+    "at": [
+     110.7,
+     66
+    ],
+    "size": [
+     189.5,
+     32
+    ],
+    "to": "budgetSwitch",
+    "move": "sheet"
+   },
+   {
+    "label": "Edit budget",
+    "at": [
+     345,
+     66
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "budgetEdit",
+    "move": "push"
+   },
+   {
+    "label": "Your Plans",
+    "at": [
+     73.2,
+     115.5
+    ],
+    "size": [
+     114.3,
+     43
+    ],
+    "to": "plans",
+    "move": "fade"
+   },
+   {
+    "label": "Allocations",
+    "at": [
+     187.5,
+     115.5
+    ],
+    "size": [
+     114.3,
+     43
+    ],
+    "to": "allocations",
+    "move": "fade"
+   },
+   {
+    "label": "Overview",
+    "at": [
+     45,
+     757
+    ],
+    "size": [
+     66,
+     62
+    ],
+    "to": "home",
+    "move": "fade"
+   },
+   {
+    "label": "Goals",
+    "at": [
+     122,
+     757
+    ],
+    "size": [
+     66,
+     62
+    ],
+    "to": "goals",
+    "move": "fade"
+   },
+   {
+    "label": "Learn",
+    "at": [
+     271,
+     757
+    ],
+    "size": [
+     66,
+     62
+    ],
+    "to": "learn",
+    "move": "fade"
+   },
+   {
+    "label": "More",
+    "at": [
+     341,
+     757
+    ],
+    "size": [
+     66,
+     62
+    ],
+    "to": "more",
+    "move": "fade"
+   }
+  ]
+ },
+ "budgetSwitch": {
+  "src": "/work/yoyo/b-budget-switch.webp",
+  "alt": "Switch between budgets.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     260
+    ],
+    "size": [
+     375,
+     520
+    ],
+    "to": "plans",
+    "move": "drop"
+   },
+   {
+    "label": "Samuel’s Monthly budget",
+    "at": [
+     187.5,
+     616
+    ],
+    "size": [
+     343,
+     64
+    ],
+    "to": "plans",
+    "move": "drop"
+   },
+   {
+    "label": "House move",
+    "at": [
+     187.5,
+     680
+    ],
+    "size": [
+     343,
+     64
+    ],
+    "to": "plans",
+    "move": "drop"
+   },
+   {
+    "label": "Create a budget",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "budgetForm",
+    "move": "push"
+   }
+  ],
+  "sheet": {
+   "top": 520,
+   "over": "plans"
+  }
+ },
+ "budgetEdit": {
+  "src": "/work/yoyo/b-budget-edit.webp",
+  "alt": "Edit the budget: name, duration and what each category gets.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     66
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "plans",
+    "move": "back"
+   },
+   {
+    "label": "Add",
+    "at": [
+     346.1,
+     278.5
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "categories",
+    "move": "push"
+   },
+   {
+    "label": "Housing",
+    "at": [
+     187.5,
+     324.5
+    ],
+    "size": [
+     341,
+     47
+    ],
+    "to": "allocationHousing",
+    "move": "push"
+   },
+   {
+    "label": "Food",
+    "at": [
+     187.5,
+     372
+    ],
+    "size": [
+     341,
+     48
+    ],
+    "to": "allocationHousing",
+    "move": "push"
+   },
+   {
+    "label": "Lifestyle",
+    "at": [
+     187.5,
+     420
+    ],
+    "size": [
+     341,
+     48
+    ],
+    "to": "allocationHousing",
+    "move": "push"
+   },
+   {
+    "label": "Savings",
+    "at": [
+     187.5,
+     468
+    ],
+    "size": [
+     341,
+     48
+    ],
+    "to": "allocationHousing",
+    "move": "push"
+   },
+   {
+    "label": "Save changes",
+    "at": [
+     187.5,
+     716
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "plans",
+    "move": "back"
+   },
+   {
+    "label": "Delete budget",
+    "at": [
+     187.5,
+     764.5
+    ],
+    "size": [
+     343,
+     32
+    ],
+    "to": "budgetDelete",
+    "move": "sheet"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Budget Name",
+    "text": [
+     30,
+     133.5,
+     165.5,
+     19
+    ],
+    "clear": [
+     30,
+     133.5,
+     126.5,
+     19
+    ],
+    "field": [
+     16,
+     119,
+     343,
+     48
+    ],
+    "r": 8,
+    "bg": "rgb(252, 252, 253)",
+    "chars": 23,
+    "src": "/work/yoyo/b-budget-edit-ink-0.webp"
+   }
+  ]
+ },
+ "budgetDelete": {
+  "src": "/work/yoyo/b-budget-delete.webp",
+  "alt": "Delete this budget?",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     285
+    ],
+    "size": [
+     375,
+     570
+    ],
+    "to": "budgetEdit",
+    "move": "drop"
+   },
+   {
+    "label": "Delete",
+    "at": [
+     187.5,
+     705
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "budgetEmpty",
+    "move": "out"
+   },
+   {
+    "label": "Keep it",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "budgetEdit",
+    "move": "drop"
+   }
+  ],
+  "sheet": {
+   "top": 570,
+   "over": "budgetEdit"
+  }
+ },
+ "allocationHousing": {
+  "src": "/work/yoyo/b-allocation-housing.webp",
+  "alt": "Housing: rent, internet and electricity against what was planned.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     66
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "allocations",
+    "move": "back"
+   },
+   {
+    "label": "Edit amount",
+    "at": [
+     344,
+     66
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "allocate",
+    "move": "sheet"
+   },
+   {
+    "label": "Add new sub-category",
+    "at": [
+     187.5,
+     405.5
+    ],
+    "size": [
+     343,
+     43
+    ],
+    "to": "subCategory",
+    "move": "sheet"
+   },
+   {
+    "label": "Overview",
+    "at": [
+     45,
+     757
+    ],
+    "size": [
+     66,
+     62
+    ],
+    "to": "home",
+    "move": "fade"
+   },
+   {
+    "label": "Goals",
+    "at": [
+     122,
+     757
+    ],
+    "size": [
+     66,
+     62
+    ],
+    "to": "goals",
+    "move": "fade"
+   },
+   {
+    "label": "Learn",
+    "at": [
+     271,
+     757
+    ],
+    "size": [
+     66,
+     62
+    ],
+    "to": "learn",
+    "move": "fade"
+   },
+   {
+    "label": "More",
+    "at": [
+     341,
+     757
+    ],
+    "size": [
+     66,
+     62
+    ],
+    "to": "more",
+    "move": "fade"
+   }
+  ]
+ },
+ "subCategory": {
+  "src": "/work/yoyo/b-sub-category.webp",
+  "alt": "Choose a sub-category: rent, internet, electricity or water.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     235
+    ],
+    "size": [
+     375,
+     470
+    ],
+    "to": "allocationHousing",
+    "move": "drop"
+   },
+   {
+    "label": "Rent",
+    "at": [
+     187.5,
+     563
+    ],
+    "size": [
+     343,
+     58
+    ],
+    "to": "allocationHousing",
+    "move": "drop"
+   },
+   {
+    "label": "Internet",
+    "at": [
+     187.5,
+     621
+    ],
+    "size": [
+     343,
+     58
+    ],
+    "to": "allocationHousing",
+    "move": "drop"
+   },
+   {
+    "label": "Electricity",
+    "at": [
+     187.5,
+     679
+    ],
+    "size": [
+     343,
+     58
+    ],
+    "to": "allocationHousing",
+    "move": "drop"
+   },
+   {
+    "label": "Repairs",
+    "at": [
+     187.5,
+     737
+    ],
+    "size": [
+     343,
+     58
+    ],
+    "to": "allocationHousing",
+    "move": "drop"
+   }
+  ],
+  "sheet": {
+   "top": 470,
+   "over": "allocationHousing"
+  }
+ },
+ "allocatePick": {
+  "src": "/work/yoyo/b-allocate-pick.webp",
+  "alt": "Housing: choose a sub-category before setting the amount.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     235
+    ],
+    "size": [
+     375,
+     470
+    ],
+    "to": "categories",
+    "move": "drop"
+   },
+   {
+    "label": "Rent",
+    "at": [
+     187.5,
+     563
+    ],
+    "size": [
+     343,
+     58
+    ],
+    "to": "allocateFilled",
+    "move": "fade"
+   },
+   {
+    "label": "Internet",
+    "at": [
+     187.5,
+     621
+    ],
+    "size": [
+     343,
+     58
+    ],
+    "to": "allocateFilled",
+    "move": "fade"
+   },
+   {
+    "label": "Electricity",
+    "at": [
+     187.5,
+     679
+    ],
+    "size": [
+     343,
+     58
+    ],
+    "to": "allocateFilled",
+    "move": "fade"
+   }
+  ],
+  "sheet": {
+   "top": 470,
+   "over": "categories"
+  }
+ },
+ "allocateFilled": {
+  "src": "/work/yoyo/b-allocate-filled.webp",
+  "alt": "Housing: $3,450 for rent.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     227.5
+    ],
+    "size": [
+     375,
+     455
+    ],
+    "to": "categories",
+    "move": "drop"
+   },
+   {
+    "label": "Sub category",
+    "at": [
+     187.5,
+     689
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "allocatePick",
+    "move": "fade"
+   },
+   {
+    "label": "Cancel",
+    "at": [
+     41.8,
+     744
+    ],
+    "size": [
+     51.5,
+     32
+    ],
+    "to": "categories",
+    "move": "drop"
+   },
+   {
+    "label": "Confirm",
+    "at": [
+     329.3,
+     744
+    ],
+    "size": [
+     59.4,
+     32
+    ],
+    "to": "categoriesPicked",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Amount",
+    "text": [
+     30,
+     590.5,
+     47.6,
+     19
+    ],
+    "clear": [
+     30,
+     590.5,
+     90.8,
+     19
+    ],
+    "field": [
+     16,
+     576,
+     343,
+     48
+    ],
+    "r": 8,
+    "bg": "rgb(252, 252, 253)",
+    "chars": 6,
+    "src": "/work/yoyo/b-allocate-filled-ink-0.webp"
+   }
+  ],
+  "sheet": {
+   "top": 455,
+   "over": "categories"
+  }
+ },
+ "addCustom": {
+  "src": "/work/yoyo/b-add-custom.webp",
+  "alt": "Add a custom category: name and icon.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     66
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "categories",
+    "move": "back"
+   },
+   {
+    "label": "Add category",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "categoriesPicked",
+    "move": "back"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Name",
+    "text": [
+     30,
+     133.5,
+     32.6,
+     19
+    ],
+    "clear": [
+     30,
+     133.5,
+     58.6,
+     19
+    ],
+    "field": [
+     16,
+     119,
+     343,
+     48
+    ],
+    "r": 8,
+    "bg": "rgb(252, 252, 253)",
+    "chars": 4,
+    "src": "/work/yoyo/b-add-custom-ink-0.webp"
+   },
+   {
+    "label": "Amount",
+    "text": [
+     30,
+     398.5,
+     36.3,
+     19
+    ],
+    "clear": [
+     30,
+     398.5,
+     90.8,
+     19
+    ],
+    "field": [
+     16,
+     384,
+     343,
+     48
+    ],
+    "r": 8,
+    "bg": "rgb(252, 252, 253)",
+    "chars": 4,
+    "src": "/work/yoyo/b-add-custom-ink-1.webp"
+   }
+  ]
+ },
+ "txDetail": {
+  "src": "/work/yoyo/b-tx-detail.webp",
+  "alt": "A transaction: rent, $20, with its category, wallet and note.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     66
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "txList",
+    "move": "back"
+   },
+   {
+    "label": "Edit",
+    "at": [
+     344,
+     66
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "txFilled",
+    "move": "push"
+   },
+   {
+    "label": "Delete transaction",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "txDelete",
+    "move": "sheet"
+   }
+  ]
+ },
+ "txDelete": {
+  "src": "/work/yoyo/b-tx-delete.webp",
+  "alt": "Delete this transaction?",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     285
+    ],
+    "size": [
+     375,
+     570
+    ],
+    "to": "txDetail",
+    "move": "drop"
+   },
+   {
+    "label": "Delete",
+    "at": [
+     187.5,
+     705
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "txList",
+    "move": "out"
+   },
+   {
+    "label": "Keep it",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "txDetail",
+    "move": "drop"
+   }
+  ],
+  "sheet": {
+   "top": 570,
+   "over": "txDetail"
+  }
+ },
+ "txDate": {
+  "src": "/work/yoyo/b-tx-date.webp",
+  "alt": "Choose dates for the transaction history.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     200
+    ],
+    "size": [
+     375,
+     400
+    ],
+    "to": "txList",
+    "move": "drop"
+   },
+   {
+    "label": "Show 23 – 27 Dec",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "txFiltered",
+    "move": "fade"
+   }
+  ],
+  "sheet": {
+   "top": 400,
+   "over": "txList"
+  }
+ },
+ "txFilter": {
+  "src": "/work/yoyo/b-tx-filter.webp",
+  "alt": "Filter the transaction history by category.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     200
+    ],
+    "size": [
+     375,
+     400
+    ],
+    "to": "txList",
+    "move": "drop"
+   },
+   {
+    "label": "Show transactions",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "txFiltered",
+    "move": "fade"
+   }
+  ],
+  "sheet": {
+   "top": 400,
+   "over": "txList"
+  }
+ },
+ "txFiltered": {
+  "src": "/work/yoyo/b-tx-filtered.webp",
+  "alt": "Transaction history, filtered.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     66
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "txList",
+    "move": "back"
+   },
+   {
+    "label": "Clear",
+    "at": [
+     341.6,
+     66
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "txList",
+    "move": "fade"
+   },
+   {
+    "label": "23 – 27 Dec",
+    "at": [
+     64.8,
+     112
+    ],
+    "size": [
+     97.7,
+     36
+    ],
+    "to": "txDate",
+    "move": "sheet"
+   },
+   {
+    "label": "Housing",
+    "at": [
+     161.9,
+     112
+    ],
+    "size": [
+     80.5,
+     36
+    ],
+    "to": "txFilter",
+    "move": "sheet"
+   },
+   {
+    "label": "Internet",
+    "at": [
+     250,
+     112
+    ],
+    "size": [
+     79.5,
+     36
+    ],
+    "to": "txFilter",
+    "move": "sheet"
+   },
+   {
+    "label": "Rent",
+    "at": [
+     187.5,
+     180.4
+    ],
+    "size": [
+     341,
+     66.8
+    ],
+    "to": "txDetail",
+    "move": "push"
+   },
+   {
+    "label": "Internet, 2",
+    "at": [
+     187.5,
+     247.7
+    ],
+    "size": [
+     341,
+     67.8
+    ],
+    "to": "txDetail",
+    "move": "push"
+   },
+   {
+    "label": "Rent, 2",
+    "at": [
+     187.5,
+     315.5
+    ],
+    "size": [
+     341,
+     67.8
+    ],
+    "to": "txDetail",
+    "move": "push"
+   },
+   {
+    "label": "Internet, 3",
+    "at": [
+     187.5,
+     383.3
+    ],
+    "size": [
+     341,
+     67.8
+    ],
+    "to": "txDetail",
+    "move": "push"
+   }
+  ]
+ },
+ "txDownloaded": {
+  "src": "/work/yoyo/b-tx-downloaded.webp",
+  "alt": "Statement downloaded.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     300
+    ],
+    "size": [
+     375,
+     600
+    ],
+    "to": "txList",
+    "move": "drop"
+   },
+   {
+    "label": "Done",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "txList",
+    "move": "drop"
+   }
+  ],
+  "sheet": {
+   "top": 600,
+   "over": "txList"
+  }
+ },
+ "walletSetup": {
+  "src": "/work/yoyo/b-wallet-setup.webp",
+  "alt": "Set up wallets: bank, card, cash or USSD.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     66
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "wallet",
+    "move": "back"
+   },
+   {
+    "label": "Bank account",
+    "at": [
+     187.5,
+     164
+    ],
+    "size": [
+     341,
+     68
+    ],
+    "to": "walletBank",
+    "move": "push"
+   },
+   {
+    "label": "Credit or debit card",
+    "at": [
+     187.5,
+     232.5
+    ],
+    "size": [
+     341,
+     69
+    ],
+    "to": "walletBank",
+    "move": "push"
+   },
+   {
+    "label": "USSD",
+    "at": [
+     187.5,
+     301.5
+    ],
+    "size": [
+     341,
+     69
+    ],
+    "to": "walletBank",
+    "move": "push"
+   },
+   {
+    "label": "Cash",
+    "at": [
+     187.5,
+     370.5
+    ],
+    "size": [
+     341,
+     69
+    ],
+    "to": "walletBank",
+    "move": "push"
+   }
+  ]
+ },
+ "walletBank": {
+  "src": "/work/yoyo/b-wallet-bank.webp",
+  "alt": "Connect a wallet: name and starting balance.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     66
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "walletSetup",
+    "move": "back"
+   },
+   {
+    "label": "Connect",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "walletDone",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Wallet name",
+    "text": [
+     30,
+     133.5,
+     61.1,
+     19
+    ],
+    "clear": [
+     30,
+     133.5,
+     87.2,
+     19
+    ],
+    "field": [
+     16,
+     119,
+     343,
+     48
+    ],
+    "r": 8,
+    "bg": "rgb(252, 252, 253)",
+    "chars": 8,
+    "src": "/work/yoyo/b-wallet-bank-ink-0.webp"
+   },
+   {
+    "label": "Account number",
+    "text": [
+     30,
+     311.5,
+     81.6,
+     19
+    ],
+    "clear": [
+     30,
+     311.5,
+     55.9,
+     19
+    ],
+    "field": [
+     16,
+     297,
+     343,
+     48
+    ],
+    "r": 8,
+    "bg": "rgb(252, 252, 253)",
+    "chars": 10,
+    "src": "/work/yoyo/b-wallet-bank-ink-1.webp"
+   },
+   {
+    "label": "Starting balance",
+    "text": [
+     30,
+     400.5,
+     48.6,
+     19
+    ],
+    "clear": [
+     30,
+     400.5,
+     19.8,
+     19
+    ],
+    "field": [
+     16,
+     386,
+     343,
+     48
+    ],
+    "r": 8,
+    "bg": "rgb(252, 252, 253)",
+    "chars": 6,
+    "src": "/work/yoyo/b-wallet-bank-ink-2.webp"
+   }
+  ]
+ },
+ "walletDone": {
+  "src": "/work/yoyo/b-wallet-done.webp",
+  "alt": "Wallet connected.",
+  "spots": [
+   {
+    "label": "Back to wallet",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "wallet",
+    "move": "out"
+   }
+  ]
+ },
+ "walletSettings": {
+  "src": "/work/yoyo/b-wallet-settings.webp",
+  "alt": "Wallet settings: wallets in your net worth and currency.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     66
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "wallet",
+    "move": "back"
+   },
+   {
+    "label": "Add a wallet",
+    "at": [
+     187.5,
+     438.5
+    ],
+    "size": [
+     341,
+     69
+    ],
+    "to": "walletSetup",
+    "move": "push"
+   }
+  ]
+ },
+ "walletDetail": {
+  "src": "/work/yoyo/b-wallet-detail.webp",
+  "alt": "Spendings wallet: balance and its transactions.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     66
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "wallet",
+    "move": "back"
+   },
+   {
+    "label": "Settings",
+    "at": [
+     344,
+     66
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "walletSettings",
+    "move": "push"
+   },
+   {
+    "label": "See all",
+    "at": [
+     337.5,
+     238.5
+    ],
+    "size": [
+     43,
+     32
+    ],
+    "to": "txList",
+    "move": "fade"
+   },
+   {
+    "label": "Rent",
+    "at": [
+     187.5,
+     294.4
+    ],
+    "size": [
+     341,
+     66.8
+    ],
+    "to": "txDetail",
+    "move": "push"
+   },
+   {
+    "label": "Internet",
+    "at": [
+     187.5,
+     361.7
+    ],
+    "size": [
+     341,
+     67.8
+    ],
+    "to": "txDetail",
+    "move": "push"
+   },
+   {
+    "label": "Electricity",
+    "at": [
+     187.5,
+     429.5
+    ],
+    "size": [
+     341,
+     67.8
+    ],
+    "to": "txDetail",
+    "move": "push"
+   },
+   {
+    "label": "New transaction",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "txNew",
+    "move": "push"
+   }
+  ]
+ },
+ "categoriesManage": {
+  "src": "/work/yoyo/b-categories-manage.webp",
+  "alt": "Categories: edit or remove any of them.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     66
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "more",
+    "move": "back"
+   },
+   {
+    "label": "Add a category",
+    "at": [
+     344,
+     66
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "categoryNew",
+    "move": "push"
+   },
+   {
+    "label": "Housing",
+    "at": [
+     187.5,
+     182.4
+    ],
+    "size": [
+     341,
+     66.8
+    ],
+    "to": "allocationHousing",
+    "move": "push"
+   },
+   {
+    "label": "Food",
+    "at": [
+     187.5,
+     249.7
+    ],
+    "size": [
+     341,
+     67.8
+    ],
+    "to": "categoryNew",
+    "move": "push"
+   },
+   {
+    "label": "Lifestyle",
+    "at": [
+     187.5,
+     317.5
+    ],
+    "size": [
+     341,
+     67.8
+    ],
+    "to": "categoryNew",
+    "move": "push"
+   },
+   {
+    "label": "Savings",
+    "at": [
+     187.5,
+     385.3
+    ],
+    "size": [
+     341,
+     67.8
+    ],
+    "to": "categoryNew",
+    "move": "push"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Search categories",
+    "text": [
+     59,
+     104.5,
+     34.7,
+     19
+    ],
+    "clear": [
+     59,
+     104.5,
+     120.6,
+     19
+    ],
+    "field": [
+     16,
+     94,
+     343,
+     40
+    ],
+    "r": 8,
+    "bg": "rgb(242, 244, 247)",
+    "chars": 4,
+    "src": "/work/yoyo/b-categories-manage-ink-0.webp"
+   }
+  ]
+ },
+ "categoryNew": {
+  "src": "/work/yoyo/b-category-new.webp",
+  "alt": "Edit a category: name, icon and colour.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     66
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "categoriesManage",
+    "move": "back"
+   },
+   {
+    "label": "Save",
+    "at": [
+     187.5,
+     705
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "categoriesManage",
+    "move": "back"
+   },
+   {
+    "label": "Remove category",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "categoriesManage",
+    "move": "back"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Name",
+    "text": [
+     30,
+     133.5,
+     34.7,
+     19
+    ],
+    "clear": [
+     30,
+     133.5,
+     102.1,
+     19
+    ],
+    "field": [
+     16,
+     119,
+     343,
+     48
+    ],
+    "r": 8,
+    "bg": "rgb(252, 252, 253)",
+    "chars": 4,
+    "src": "/work/yoyo/b-category-new-ink-0.webp"
+   },
+   {
+    "label": "Monthly limit",
+    "text": [
+     30,
+     314.5,
+     44.6,
+     19
+    ],
+    "clear": [
+     30,
+     314.5,
+     19.8,
+     19
+    ],
+    "field": [
+     16,
+     300,
+     343,
+     48
+    ],
+    "r": 8,
+    "bg": "rgb(252, 252, 253)",
+    "chars": 6,
+    "src": "/work/yoyo/b-category-new-ink-1.webp"
+   }
+  ]
+ },
+ "subscriptions": {
+  "src": "/work/yoyo/b-subscriptions.webp",
+  "alt": "Subscriptions: what renews, when, and how much a month.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     66
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "more",
+    "move": "back"
+   },
+   {
+    "label": "Music",
+    "at": [
+     187.5,
+     265
+    ],
+    "size": [
+     341,
+     68
+    ],
+    "to": "subscription",
+    "move": "push"
+   },
+   {
+    "label": "Streaming",
+    "at": [
+     187.5,
+     333.5
+    ],
+    "size": [
+     341,
+     69
+    ],
+    "to": "subscription",
+    "move": "push"
+   },
+   {
+    "label": "Cloud storage",
+    "at": [
+     187.5,
+     402.5
+    ],
+    "size": [
+     341,
+     69
+    ],
+    "to": "subscription",
+    "move": "push"
+   }
+  ]
+ },
+ "subscription": {
+  "src": "/work/yoyo/b-subscription.webp",
+  "alt": "A subscription: $9.99 a month, with a reminder and a way to stop tracking it.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     66
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "subscriptions",
+    "move": "back"
+   },
+   {
+    "label": "Stop tracking",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "subscriptions",
+    "move": "back"
+   }
+  ]
+ },
+ "help": {
+  "src": "/work/yoyo/b-help.webp",
+  "alt": "Get help: common questions, a chat and feedback.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     66
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "more",
+    "move": "back"
+   },
+   {
+    "label": "Chat with us",
+    "at": [
+     187.5,
+     403.4
+    ],
+    "size": [
+     341,
+     68
+    ],
+    "to": "helpChat",
+    "move": "push"
+   },
+   {
+    "label": "Send feedback",
+    "at": [
+     187.5,
+     471.9
+    ],
+    "size": [
+     341,
+     69
+    ],
+    "to": "feedback",
+    "move": "push"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Search for help",
+    "text": [
+     59,
+     104.5,
+     50,
+     19
+    ],
+    "clear": [
+     59,
+     104.5,
+     100.1,
+     19
+    ],
+    "field": [
+     16,
+     94,
+     343,
+     40
+    ],
+    "r": 8,
+    "bg": "rgb(242, 244, 247)",
+    "chars": 6,
+    "src": "/work/yoyo/b-help-ink-0.webp"
+   }
+  ]
+ },
+ "helpChat": {
+  "src": "/work/yoyo/b-help-chat.webp",
+  "alt": "Chat with Yoyo support.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     66
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "help",
+    "move": "back"
+   },
+   {
+    "label": "Send",
+    "at": [
+     337,
+     746
+    ],
+    "size": [
+     44,
+     44
+    ],
+    "to": "help",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Message",
+    "text": [
+     29,
+     736.5,
+     109.2,
+     19
+    ],
+    "clear": [
+     29,
+     736.5,
+     110.3,
+     19
+    ],
+    "field": [
+     30,
+     724,
+     269,
+     44
+    ],
+    "r": 8,
+    "bg": "rgb(240, 242, 245)",
+    "chars": 16,
+    "src": "/work/yoyo/b-help-chat-ink-0.webp"
+   }
+  ]
+ },
+ "feedback": {
+  "src": "/work/yoyo/b-feedback.webp",
+  "alt": "Send feedback.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     66
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "help",
+    "move": "back"
+   },
+   {
+    "label": "Send",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "feedbackDone",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Feedback",
+    "text": [
+     30,
+     132,
+     165.5,
+     19
+    ],
+    "clear": [
+     30,
+     132,
+     103.8,
+     19
+    ],
+    "field": [
+     16,
+     119,
+     343,
+     110
+    ],
+    "r": 8,
+    "bg": "rgb(252, 252, 253)",
+    "chars": 26,
+    "src": "/work/yoyo/b-feedback-ink-0.webp"
+   }
+  ]
+ },
+ "feedbackDone": {
+  "src": "/work/yoyo/b-feedback-done.webp",
+  "alt": "Feedback sent.",
+  "spots": [
+   {
+    "label": "Back to More",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "more",
+    "move": "out"
+   }
+  ]
+ },
+ "security": {
+  "src": "/work/yoyo/b-security.webp",
+  "alt": "Profile, security: password, biometrics and devices.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     66
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "more",
+    "move": "back"
+   },
+   {
+    "label": "Personal",
+    "at": [
+     101.8,
+     115.5
+    ],
+    "size": [
+     171.5,
+     43
+    ],
+    "to": "profile",
+    "move": "fade"
+   },
+   {
+    "label": "Change password",
+    "at": [
+     187.5,
+     191
+    ],
+    "size": [
+     341,
+     68
+    ],
+    "to": "passwordNew",
+    "move": "push"
+   },
+   {
+    "label": "Dark mode",
+    "at": [
+     187.5,
+     450
+    ],
+    "size": [
+     341,
+     68
+    ],
+    "to": "darkHome",
+    "move": "fade"
+   },
+   {
+    "label": "Log out",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "logout",
+    "move": "sheet"
+   }
+  ]
+ },
+ "passwordNew": {
+  "src": "/work/yoyo/b-password-new.webp",
+  "alt": "Change your password.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     66
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "security",
+    "move": "back"
+   },
+   {
+    "label": "Save password",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "security",
+    "move": "back"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Current password",
+    "text": [
+     30,
+     133.5,
+     94.5,
+     19
+    ],
+    "clear": [
+     30,
+     133.5,
+     76.2,
+     19
+    ],
+    "field": [
+     16,
+     119,
+     343,
+     48
+    ],
+    "r": 8,
+    "bg": "rgb(252, 252, 253)",
+    "chars": 10,
+    "src": "/work/yoyo/b-password-new-ink-0.webp"
+   },
+   {
+    "label": "New password",
+    "text": [
+     30,
+     222.5,
+     112.8,
+     19
+    ],
+    "clear": [
+     30,
+     222.5,
+     135.5,
+     19
+    ],
+    "field": [
+     16,
+     208,
+     343,
+     48
+    ],
+    "r": 8,
+    "bg": "rgb(252, 252, 253)",
+    "chars": 12,
+    "src": "/work/yoyo/b-password-new-ink-1.webp"
+   },
+   {
+    "label": "Confirm password",
+    "text": [
+     30,
+     311.5,
+     112.8,
+     19
+    ],
+    "clear": [
+     30,
+     311.5,
+     84.1,
+     19
+    ],
+    "field": [
+     16,
+     297,
+     343,
+     48
+    ],
+    "r": 8,
+    "bg": "rgb(252, 252, 253)",
+    "chars": 12,
+    "src": "/work/yoyo/b-password-new-ink-2.webp"
+   }
+  ]
+ },
+ "logout": {
+  "src": "/work/yoyo/b-logout.webp",
+  "alt": "Log out?",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     285
+    ],
+    "size": [
+     375,
+     570
+    ],
+    "to": "security",
+    "move": "drop"
+   },
+   {
+    "label": "Log out",
+    "at": [
+     187.5,
+     705
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "welcome",
+    "move": "out"
+   },
+   {
+    "label": "Stay",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "security",
+    "move": "drop"
+   }
+  ],
+  "sheet": {
+   "top": 570,
+   "over": "security"
+  }
+ },
+ "nextOfKin": {
+  "src": "/work/yoyo/b-next-of-kin.webp",
+  "alt": "Next of kin: Laura.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     66
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "profile",
+    "move": "back"
+   },
+   {
+    "label": "Save",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "profile",
+    "move": "back"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Full name",
+    "text": [
+     30,
+     133.5,
+     82.6,
+     19
+    ],
+    "clear": [
+     30,
+     133.5,
+     75.1,
+     19
+    ],
+    "field": [
+     16,
+     119,
+     343,
+     48
+    ],
+    "r": 8,
+    "bg": "rgb(252, 252, 253)",
+    "chars": 11,
+    "src": "/work/yoyo/b-next-of-kin-ink-0.webp"
+   },
+   {
+    "label": "Email",
+    "text": [
+     30,
+     311.5,
+     132.9,
+     19
+    ],
+    "clear": [
+     30,
+     311.5,
+     73.1,
+     19
+    ],
+    "field": [
+     16,
+     297,
+     343,
+     48
+    ],
+    "r": 8,
+    "bg": "rgb(252, 252, 253)",
+    "chars": 17,
+    "src": "/work/yoyo/b-next-of-kin-ink-1.webp"
+   }
+  ]
+ },
+ "profileSaved": {
+  "src": "/work/yoyo/b-profile-saved.webp",
+  "alt": "Profile saved.",
+  "spots": [
+   {
+    "label": "Back to profile",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "profile",
+    "move": "back"
+   }
+  ]
+ },
+ "goalEmpty": {
+  "src": "/work/yoyo/b-goal-empty.webp",
+  "alt": "Accommodation goal: nothing saved yet.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     66
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "goals",
+    "move": "out"
+   },
+   {
+    "label": "Set this goal",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "goalNew",
+    "move": "push"
+   }
+  ]
+ },
+ "goalEdit": {
+  "src": "/work/yoyo/b-goal-edit.webp",
+  "alt": "Edit the vacation goal: target, day and pause.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     66
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "vacation",
+    "move": "back"
+   },
+   {
+    "label": "Save every",
+    "at": [
+     187.5,
+     232
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "goalDayPicked",
+    "move": "sheet"
+   },
+   {
+    "label": "Save changes",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "vacation",
+    "move": "back"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Target amount",
+    "text": [
+     30,
+     133.5,
+     54.6,
+     19
+    ],
+    "clear": [
+     30,
+     133.5,
+     19.8,
+     19
+    ],
+    "field": [
+     16,
+     119,
+     343,
+     48
+    ],
+    "r": 8,
+    "bg": "rgb(252, 252, 253)",
+    "chars": 7,
+    "src": "/work/yoyo/b-goal-edit-ink-0.webp"
+   },
+   {
+    "label": "Amount each time",
+    "text": [
+     30,
+     311.5,
+     32.8,
+     19
+    ],
+    "clear": [
+     30,
+     311.5,
+     19.8,
+     19
+    ],
+    "field": [
+     16,
+     297,
+     343,
+     48
+    ],
+    "r": 8,
+    "bg": "rgb(252, 252, 253)",
+    "chars": 4,
+    "src": "/work/yoyo/b-goal-edit-ink-1.webp"
+   }
+  ]
+ },
+ "goalDaily": {
+  "src": "/work/yoyo/b-goal-daily.webp",
+  "alt": "A new goal, saving daily.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     66
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "goalNew",
+    "move": "back"
+   },
+   {
+    "label": "Weekly",
+    "at": [
+     187.5,
+     240.5
+    ],
+    "size": [
+     106.3,
+     37
+    ],
+    "to": "goalDay",
+    "move": "sheet"
+   },
+   {
+    "label": "Monthly",
+    "at": [
+     305.8,
+     240.5
+    ],
+    "size": [
+     106.3,
+     37
+    ],
+    "to": "goalStart",
+    "move": "sheet"
+   },
+   {
+    "label": "Start Date",
+    "at": [
+     187.5,
+     334
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "goalStart",
+    "move": "sheet"
+   },
+   {
+    "label": "End Date",
+    "at": [
+     187.5,
+     423
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "goalEnd",
+    "move": "sheet"
+   },
+   {
+    "label": "Continue",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "goalSummary",
+    "move": "push"
+   }
+  ]
+ },
+ "goalEnd": {
+  "src": "/work/yoyo/b-goal-end.webp",
+  "alt": "Pick an end date on a wheel.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     235
+    ],
+    "size": [
+     375,
+     470
+    ],
+    "to": "goalWeekly",
+    "move": "drop"
+   },
+   {
+    "label": "Cancel",
+    "at": [
+     41.8,
+     769
+    ],
+    "size": [
+     51.5,
+     32
+    ],
+    "to": "goalWeekly",
+    "move": "drop"
+   },
+   {
+    "label": "Confirm",
+    "at": [
+     329.3,
+     769
+    ],
+    "size": [
+     59.4,
+     32
+    ],
+    "to": "goalFilled",
+    "move": "fade"
+   }
+  ],
+  "sheet": {
+   "top": 470,
+   "over": "goalWeekly"
+  }
+ },
+ "withdraw": {
+  "src": "/work/yoyo/b-withdraw.webp",
+  "alt": "Withdraw from the vacation goal.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     66
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "vacation",
+    "move": "back"
+   },
+   {
+    "label": "Where to",
+    "at": [
+     187.5,
+     265
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "payMethod",
+    "move": "sheet"
+   },
+   {
+    "label": "Withdraw $200",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "withdrawDone",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Amount",
+    "text": [
+     30,
+     166.5,
+     36.3,
+     19
+    ],
+    "clear": [
+     30,
+     166.5,
+     19.8,
+     19
+    ],
+    "field": [
+     16,
+     152,
+     343,
+     48
+    ],
+    "r": 8,
+    "bg": "rgb(252, 252, 253)",
+    "chars": 4,
+    "src": "/work/yoyo/b-withdraw-ink-0.webp"
+   }
+  ]
+ },
+ "withdrawDone": {
+  "src": "/work/yoyo/b-withdraw-done.webp",
+  "alt": "Withdrawal on its way.",
+  "spots": [
+   {
+    "label": "Back to Vacation",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "vacation",
+    "move": "out"
+   }
+  ]
+ },
+ "saveMoney": {
+  "src": "/work/yoyo/b-save-money.webp",
+  "alt": "Save more to the vacation goal.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     66
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "vacation",
+    "move": "back"
+   },
+   {
+    "label": "Where from",
+    "at": [
+     187.5,
+     286
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "payMethod",
+    "move": "sheet"
+   },
+   {
+    "label": "Save $250",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "saveDone",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Amount",
+    "text": [
+     30,
+     133.5,
+     35.9,
+     19
+    ],
+    "clear": [
+     30,
+     133.5,
+     19.8,
+     19
+    ],
+    "field": [
+     16,
+     119,
+     343,
+     48
+    ],
+    "r": 8,
+    "bg": "rgb(252, 252, 253)",
+    "chars": 4,
+    "src": "/work/yoyo/b-save-money-ink-0.webp"
+   }
+  ]
+ },
+ "saveDone": {
+  "src": "/work/yoyo/b-save-done.webp",
+  "alt": "$250 saved to Vacation.",
+  "spots": [
+   {
+    "label": "Back to Vacation",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "vacation",
+    "move": "out"
+   }
+  ]
+ },
+ "payMethod": {
+  "src": "/work/yoyo/b-pay-method.webp",
+  "alt": "Choose a payment method.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     230
+    ],
+    "size": [
+     375,
+     460
+    ],
+    "to": "goalSummary",
+    "move": "drop"
+   },
+   {
+    "label": "Savings wallet",
+    "at": [
+     187.5,
+     556
+    ],
+    "size": [
+     343,
+     64
+    ],
+    "to": "goalSummary",
+    "move": "drop"
+   },
+   {
+    "label": "Credit Card",
+    "at": [
+     187.5,
+     620
+    ],
+    "size": [
+     343,
+     64
+    ],
+    "to": "goalSummary",
+    "move": "drop"
+   },
+   {
+    "label": "USSD",
+    "at": [
+     187.5,
+     684
+    ],
+    "size": [
+     343,
+     64
+    ],
+    "to": "goalSummary",
+    "move": "drop"
+   },
+   {
+    "label": "Done",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "goalSummary",
+    "move": "drop"
+   }
+  ],
+  "sheet": {
+   "top": 460,
+   "over": "goalSummary"
+  }
+ },
+ "vacationHistory": {
+  "src": "/work/yoyo/b-vacation-history.webp",
+  "alt": "Vacation: every saving and withdrawal.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     66
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "vacation",
+    "move": "back"
+   },
+   {
+    "label": "Back to Vacation",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "vacation",
+    "move": "back"
+   }
+  ]
+ },
+ "stocks": {
+  "src": "/work/yoyo/b-stocks.webp",
+  "alt": "All stock activity.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     66
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "learn",
+    "move": "back"
+   },
+   {
+    "label": "NVDA",
+    "at": [
+     187.5,
+     175.9
+    ],
+    "size": [
+     343,
+     63.8
+    ],
+    "to": "stock",
+    "move": "push"
+   },
+   {
+    "label": "MSFT",
+    "at": [
+     187.5,
+     239.7
+    ],
+    "size": [
+     343,
+     63.8
+    ],
+    "to": "stock",
+    "move": "push"
+   },
+   {
+    "label": "AAPL",
+    "at": [
+     187.5,
+     303.5
+    ],
+    "size": [
+     343,
+     63.8
+    ],
+    "to": "stock",
+    "move": "push"
+   },
+   {
+    "label": "AMZN",
+    "at": [
+     187.5,
+     367.3
+    ],
+    "size": [
+     343,
+     63.8
+    ],
+    "to": "stock",
+    "move": "push"
+   },
+   {
+    "label": "GOOG",
+    "at": [
+     187.5,
+     431.1
+    ],
+    "size": [
+     343,
+     63.8
+    ],
+    "to": "stock",
+    "move": "push"
+   },
+   {
+    "label": "Overview",
+    "at": [
+     45,
+     757
+    ],
+    "size": [
+     66,
+     62
+    ],
+    "to": "home",
+    "move": "fade"
+   },
+   {
+    "label": "Goals",
+    "at": [
+     122,
+     757
+    ],
+    "size": [
+     66,
+     62
+    ],
+    "to": "goals",
+    "move": "fade"
+   },
+   {
+    "label": "Budget",
+    "at": [
+     194,
+     757
+    ],
+    "size": [
+     66,
+     62
+    ],
+    "to": "plans",
+    "move": "fade"
+   },
+   {
+    "label": "More",
+    "at": [
+     341,
+     757
+    ],
+    "size": [
+     66,
+     62
+    ],
+    "to": "more",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Search stocks",
+    "text": [
+     59,
+     104.5,
+     39.9,
+     19
+    ],
+    "clear": [
+     59,
+     104.5,
+     94.1,
+     19
+    ],
+    "field": [
+     16,
+     94,
+     343,
+     40
+    ],
+    "r": 8,
+    "bg": "rgb(242, 244, 247)",
+    "chars": 5,
+    "src": "/work/yoyo/b-stocks-ink-0.webp"
+   }
+  ]
+ },
+ "sectors": {
+  "src": "/work/yoyo/b-sectors.webp",
+  "alt": "Choose a sector.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     210
+    ],
+    "size": [
+     375,
+     420
+    ],
+    "to": "learn",
+    "move": "drop"
+   },
+   {
+    "label": "All sectors",
+    "at": [
+     187.5,
+     506
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "learn",
+    "move": "drop"
+   },
+   {
+    "label": "Technology",
+    "at": [
+     187.5,
+     550
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "learn",
+    "move": "drop"
+   },
+   {
+    "label": "Finance",
+    "at": [
+     187.5,
+     594
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "learn",
+    "move": "drop"
+   },
+   {
+    "label": "Healthcare",
+    "at": [
+     187.5,
+     638
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "learn",
+    "move": "drop"
+   },
+   {
+    "label": "Real Estate",
+    "at": [
+     187.5,
+     682
+    ],
+    "size": [
+     343,
+     44
+    ],
+    "to": "learn",
+    "move": "drop"
+   }
+  ],
+  "sheet": {
+   "top": 420,
+   "over": "learn"
+  }
+ },
+ "news": {
+  "src": "/work/yoyo/b-news.webp",
+  "alt": "Recent market news.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     66
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "learn",
+    "move": "back"
+   },
+   {
+    "label": "Cathie Wood loads up another $2m in Tesla",
+    "at": [
+     187.5,
+     199.5
+    ],
+    "size": [
+     343,
+     211
+    ],
+    "to": "article",
+    "move": "push"
+   },
+   {
+    "label": "NVIDIA stock: why its AI lead is sustainable",
+    "at": [
+     187.5,
+     424.5
+    ],
+    "size": [
+     343,
+     211
+    ],
+    "to": "article",
+    "move": "push"
+   },
+   {
+    "label": "Overview",
+    "at": [
+     45,
+     757
+    ],
+    "size": [
+     66,
+     62
+    ],
+    "to": "home",
+    "move": "fade"
+   },
+   {
+    "label": "Goals",
+    "at": [
+     122,
+     757
+    ],
+    "size": [
+     66,
+     62
+    ],
+    "to": "goals",
+    "move": "fade"
+   },
+   {
+    "label": "Budget",
+    "at": [
+     194,
+     757
+    ],
+    "size": [
+     66,
+     62
+    ],
+    "to": "plans",
+    "move": "fade"
+   },
+   {
+    "label": "More",
+    "at": [
+     341,
+     757
+    ],
+    "size": [
+     66,
+     62
+    ],
+    "to": "more",
+    "move": "fade"
+   }
+  ]
+ },
+ "article": {
+  "src": "/work/yoyo/b-article.webp",
+  "alt": "A market news article.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     66
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "news",
+    "move": "back"
+   },
+   {
+    "label": "Share",
+    "at": [
+     344,
+     66
+    ],
+    "size": [
+     38,
+     38
+    ],
+    "to": "articleShared",
+    "move": "sheet"
+   },
+   {
+    "label": "Ask AI about this",
+    "at": [
+     187.5,
+     468
+    ],
+    "size": [
+     343,
+     48
+    ],
+    "to": "ai",
+    "move": "in"
+   },
+   {
+    "label": "Overview",
+    "at": [
+     45,
+     757
+    ],
+    "size": [
+     66,
+     62
+    ],
+    "to": "home",
+    "move": "fade"
+   },
+   {
+    "label": "Goals",
+    "at": [
+     122,
+     757
+    ],
+    "size": [
+     66,
+     62
+    ],
+    "to": "goals",
+    "move": "fade"
+   },
+   {
+    "label": "Budget",
+    "at": [
+     194,
+     757
+    ],
+    "size": [
+     66,
+     62
+    ],
+    "to": "plans",
+    "move": "fade"
+   },
+   {
+    "label": "More",
+    "at": [
+     341,
+     757
+    ],
+    "size": [
+     66,
+     62
+    ],
+    "to": "more",
+    "move": "fade"
+   }
+  ]
+ },
+ "articleShared": {
+  "src": "/work/yoyo/b-article-shared.webp",
+  "alt": "Article link copied.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     310
+    ],
+    "size": [
+     375,
+     620
+    ],
+    "to": "article",
+    "move": "drop"
+   },
+   {
+    "label": "Done",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "article",
+    "move": "drop"
+   }
+  ],
+  "sheet": {
+   "top": 620,
+   "over": "article"
+  }
+ },
+ "stockShared": {
+  "src": "/work/yoyo/b-stock-shared.webp",
+  "alt": "Stock link copied.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     310
+    ],
+    "size": [
+     375,
+     620
+    ],
+    "to": "stock",
+    "move": "drop"
+   },
+   {
+    "label": "Done",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "stock",
+    "move": "drop"
+   }
+  ],
+  "sheet": {
+   "top": 620,
+   "over": "stock"
+  }
+ },
+ "aiAnswer": {
+  "src": "/work/yoyo/b-ai-answer.webp",
+  "alt": "AI chat: Apple's price, with a link to its details.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     71
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "learn",
+    "move": "out"
+   },
+   {
+    "label": "Chat history",
+    "at": [
+     345,
+     71
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "aiHistory",
+    "move": "sheet"
+   },
+   {
+    "label": "AAPL",
+    "at": [
+     187.5,
+     275.3
+    ],
+    "size": [
+     341,
+     66.8
+    ],
+    "to": "stock",
+    "move": "push"
+   },
+   {
+    "label": "Who is the top performer?",
+    "at": [
+     110.1,
+     341.7
+    ],
+    "size": [
+     188.2,
+     36
+    ],
+    "to": "aiTop",
+    "move": "fade"
+   },
+   {
+    "label": "Is it a good time to buy?",
+    "at": [
+     102.4,
+     385.7
+    ],
+    "size": [
+     172.8,
+     36
+    ],
+    "to": "aiAdvice",
+    "move": "fade"
+   },
+   {
+    "label": "Send",
+    "at": [
+     337,
+     746
+    ],
+    "size": [
+     44,
+     44
+    ],
+    "to": "aiTop",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Message",
+    "text": [
+     29,
+     736.5,
+     169.7,
+     19
+    ],
+    "clear": [
+     29,
+     736.5,
+     101.5,
+     19
+    ],
+    "field": [
+     30,
+     724,
+     269,
+     44
+    ],
+    "r": 8,
+    "bg": "rgb(240, 242, 245)",
+    "chars": 25,
+    "src": "/work/yoyo/b-ai-answer-ink-0.webp"
+   }
+  ]
+ },
+ "aiTop": {
+  "src": "/work/yoyo/b-ai-top.webp",
+  "alt": "AI chat: the day's top performers.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     71
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "learn",
+    "move": "out"
+   },
+   {
+    "label": "Chat history",
+    "at": [
+     345,
+     71
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "aiHistory",
+    "move": "sheet"
+   },
+   {
+    "label": "NVDA",
+    "at": [
+     187.5,
+     295.6
+    ],
+    "size": [
+     341,
+     66.8
+    ],
+    "to": "stock",
+    "move": "push"
+   },
+   {
+    "label": "AAPL",
+    "at": [
+     187.5,
+     362.9
+    ],
+    "size": [
+     341,
+     67.8
+    ],
+    "to": "stock",
+    "move": "push"
+   },
+   {
+    "label": "See all stocks",
+    "at": [
+     72.5,
+     429.8
+    ],
+    "size": [
+     113,
+     36
+    ],
+    "to": "stocks",
+    "move": "fade"
+   },
+   {
+    "label": "Start over",
+    "at": [
+     182.1,
+     429.8
+    ],
+    "size": [
+     90.3,
+     36
+    ],
+    "to": "ai",
+    "move": "fade"
+   },
+   {
+    "label": "Send",
+    "at": [
+     337,
+     746
+    ],
+    "size": [
+     44,
+     44
+    ],
+    "to": "ai",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Message",
+    "text": [
+     29,
+     736.5,
+     69.2,
+     19
+    ],
+    "clear": [
+     29,
+     736.5,
+     101.5,
+     19
+    ],
+    "field": [
+     30,
+     724,
+     269,
+     44
+    ],
+    "r": 8,
+    "bg": "rgb(240, 242, 245)",
+    "chars": 9,
+    "src": "/work/yoyo/b-ai-top-ink-0.webp"
+   }
+  ]
+ },
+ "aiAdvice": {
+  "src": "/work/yoyo/b-ai-advice.webp",
+  "alt": "AI chat: it explains what it can't tell you.",
+  "spots": [
+   {
+    "label": "Back",
+    "at": [
+     28,
+     71
+    ],
+    "size": [
+     36,
+     32
+    ],
+    "to": "learn",
+    "move": "out"
+   },
+   {
+    "label": "Chat history",
+    "at": [
+     345,
+     71
+    ],
+    "size": [
+     36,
+     36
+    ],
+    "to": "aiHistory",
+    "move": "sheet"
+   },
+   {
+    "label": "What experts say",
+    "at": [
+     83.9,
+     299.5
+    ],
+    "size": [
+     135.8,
+     36
+    ],
+    "to": "stock",
+    "move": "fade"
+   },
+   {
+    "label": "My budget",
+    "at": [
+     207.3,
+     299.5
+    ],
+    "size": [
+     94.9,
+     36
+    ],
+    "to": "plans",
+    "move": "fade"
+   },
+   {
+    "label": "Send",
+    "at": [
+     337,
+     746
+    ],
+    "size": [
+     44,
+     44
+    ],
+    "to": "aiAnswer",
+    "move": "fade"
+   }
+  ],
+  "fields": [
+   {
+    "label": "Message",
+    "text": [
+     29,
+     736.5,
+     133.1,
+     19
+    ],
+    "clear": [
+     29,
+     736.5,
+     101.5,
+     19
+    ],
+    "field": [
+     30,
+     724,
+     269,
+     44
+    ],
+    "r": 8,
+    "bg": "rgb(240, 242, 245)",
+    "chars": 17,
+    "src": "/work/yoyo/b-ai-advice-ink-0.webp"
+   }
+  ]
+ },
+ "aiHistory": {
+  "src": "/work/yoyo/b-ai-history.webp",
+  "alt": "Earlier AI chats.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     240
+    ],
+    "size": [
+     375,
+     480
+    ],
+    "to": "ai",
+    "move": "drop"
+   },
+   {
+    "label": "Apple’s stock price",
+    "at": [
+     187.5,
+     576
+    ],
+    "size": [
+     343,
+     64
+    ],
+    "to": "aiAnswer",
+    "move": "fade"
+   },
+   {
+    "label": "Top performers",
+    "at": [
+     187.5,
+     640
+    ],
+    "size": [
+     343,
+     64
+    ],
+    "to": "aiTop",
+    "move": "fade"
+   },
+   {
+    "label": "Is it a good time to buy?",
+    "at": [
+     187.5,
+     704
+    ],
+    "size": [
+     343,
+     64
+    ],
+    "to": "aiAdvice",
+    "move": "fade"
+   }
+  ],
+  "sheet": {
+   "top": 480,
+   "over": "ai"
+  }
+ },
+ "aiInfo": {
+  "src": "/work/yoyo/b-ai-info.webp",
+  "alt": "What the AI can get wrong.",
+  "spots": [
+   {
+    "label": "Close the sheet",
+    "at": [
+     187.5,
+     260
+    ],
+    "size": [
+     375,
+     520
+    ],
+    "to": "ai",
+    "move": "drop"
+   },
+   {
+    "label": "Got it",
+    "at": [
+     187.5,
+     759
+    ],
+    "size": [
+     343,
+     42
+    ],
+    "to": "ai",
+    "move": "drop"
+   }
+  ],
+  "sheet": {
+   "top": 520,
+   "over": "ai"
+  }
+ }
+}

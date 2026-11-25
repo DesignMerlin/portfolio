@@ -105,7 +105,7 @@ await step("fundpath prototype: find a campaign, read its report, give", async (
     await proto.getByRole("button", { name, exact: true }).click();
     await page.waitForTimeout(750);
   };
-  for (const name of ["Next", "Log in", "Open Jane's kidney transplant bills", "Transparency report"]) await tap(name);
+  for (const name of ["Next", "Log in", "Password, type into it", "Sign in", "Open Jane's kidney transplant bills", "Transparency report"]) await tap(name);
   await shot("07-fundpath-report");
   for (const name of ["Back", "Share", "Close share", "Donate now"]) await tap(name);
   await shot("08-fundpath-amount");
@@ -123,7 +123,7 @@ await step("room8 prototype: onboarding to roommate and 3D tour", async () => {
     await proto.getByRole("button", { name, exact: true }).click();
     await page.waitForTimeout(700);
   };
-  for (const name of ["Skip", "Continue", "Continue", "Continue", "Explore", "Open Steph Campbell", "Back", "Home", "Open Sunlit Studio", "Start the 3D tour"]) await tap(name);
+  for (const name of ["Skip", "Sign in", "Settings", "Edit profile", "Back", "Back", "Notifications", "Back", "Explore", "Open Steph Campbell", "Back", "Home", "Open Sunlit Studio", "Start the 3D tour"]) await tap(name);
   await page.waitForTimeout(2200);
   await tap("Walk");
   await shot("09-room8-tour");
@@ -138,12 +138,12 @@ await step("case tracker prototype: type a receipt number, get the case, book an
     await proto.getByRole("button", { name, exact: true }).click();
     await page.waitForTimeout(750);
   };
-  for (const name of ["Get started", "Continue", "Continue", "Receipt number, type into it"]) await tap(name);
+  for (const name of ["Get started", "Newcomer", "Continue", "Pick interests", "Continue", "Receipt number, type into it"]) await tap(name);
   await page.waitForTimeout(900);
   await shot("09b-tracker-typed");
   await tap("Finish");
   await page.waitForTimeout(3200);
-  for (const name of ["Consultants", "View Maria Alvarez", "Confirm and pay $120", "Card number, type into it", "Pay $120", "Back to home"]) await tap(name);
+  for (const name of ["Ask AI", "What does “biometrics” mean?", "See my case", "Back", "Consultants", "View Maria Alvarez", "See packages and book", "Book", "Select event type", "Initial Strategy Session", "Pick a date", "Confirm and pay $120", "Card number, type into it", "Pay $120", "View my appointments", "Join meeting", "End call"]) await tap(name);
 });
 
 await step("yoyo prototype: pick goals, build a budget, log a transaction, save for a goal", async () => {
@@ -157,9 +157,20 @@ await step("yoyo prototype: pick goals, build a budget, log a transaction, save 
     await proto.getByRole("button", { name, exact: true }).click();
     await page.waitForTimeout(750);
   };
-  for (const name of ["Sign up", "Password, type into it", "Continue", "Skip", "Make a budget", "Continue", "Go to dashboard", "Budget", "Create a budget", "Create a budget", "Budget name, type into it", "Add income", "Amount, type into it", "Confirm", "Continue", "Housing", "Confirm", "Continue"]) await tap(name);
+  for (const name of ["Sign up", "Get started", "Continue", "Password, type into it", "Continue", "Skip", "Make a budget", "Continue", "Go to dashboard", "Budget", "Create a budget", "Create a budget", "Budget name, type into it", "Add income", "Amount, type into it", "Confirm", "Continue", "Housing", "Confirm", "Continue"]) await tap(name);
   await shot("09c-yoyo-summary");
-  for (const name of ["Continue", "Go to home", "Overview", "Transaction history", "Add a transaction", "Amount, type into it", "Expenses", "Save", "Back", "Goals", "Create a goal", "Create a goal", "Weekly", "Tuesdays", "Confirm", "Confirm", "Continue", "Create goal", "View savings"]) await tap(name);
+  for (const name of ["Continue", "Go to home", "Overview", "Transaction history", "Add a transaction", "Amount, type into it", "Expenses", "Save", "Back", "Goals", "Create a goal", "Create a goal", "Weekly", "Tuesdays", "Confirm", "Confirm", "Confirm", "Continue", "Create goal", "View savings", "Save", "Save $250", "Back to Vacation"]) await tap(name);
+});
+
+await step("project page: no TL;DR or facts, and only real projects under More work", async () => {
+  for (const slug of ["room8", "yoyo", "iexcelo", "heightgpt"]) {
+    await page.goto(base + "/work/" + slug, { waitUntil: "networkidle" });
+    if (await page.getByText("TL;DR").count()) throw new Error(slug + " still has a TL;DR");
+    if (await page.locator("#overview dt").count()) throw new Error(slug + " still lists its facts");
+    const more = page.getByRole("navigation", { name: "More work" });
+    if (await more.getByText("Placeholder").count()) throw new Error(slug + " shows a placeholder under More work");
+    if ((await more.getByRole("link").count()) < 4) throw new Error(slug + " shows too few projects");
+  }
 });
 
 await step("nav: reads over any card, splits between two, works by mouse and keyboard", async () => {

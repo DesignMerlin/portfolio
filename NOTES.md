@@ -354,3 +354,13 @@ Samuel asked for the whole site in one go ("non-negotiable build"), so the usual
 - **Case Tracker+ film** now shows the onboarding: three promises swiped, then status and interests picked. Everything after it is written on the old clock and moved along by `ONBOARD`.
 - **Yoyo Figma file edited at Samuel's request** (text and values only): income $5,000; vacation goal 50% (text, gauge and both progress bars); Accommodation; Lifestyle; California; Microsoft -0.72%; "Wadah" to Yoyo on the AI screen and the dark onboarding; "healthy finances". Screens re-exported.
 - Home: six cards.
+
+## 2026-11-25: complete prototypes, simpler project pages
+
+- **Project pages:** no TL;DR, and no time, role, platform or company (Samuel's call; CLAUDE.md's TL;DR rule no longer applies on the page). "More work" shows every other project that has visuals; placeholders are left out.
+- **Prototypes cover the whole app:** 412 screens (Room8 88, FundPath 86, Case Tracker+ 126, Yoyo 112) and over 1,700 tap targets. 76 more screens came from Figma; 209 are built.
+- **Built screens** (`scripts/screens`): HTML from each app's own fonts, colours, headers, rows, fields and sheets, with photos, avatars, status bars and tab bars cut from the real screens. `node scripts/screens/build.mjs [app]` renders them at 3x to `public/work/<app>/b-*.webp` and writes tap targets and typed fields to `content/built/<app>.json`. Don't edit those by hand.
+- **`node scripts/flows.mjs`** fails if a screen can't be reached, can't be left, points nowhere, or has two targets with the same name. Run it after changing a flow.
+- Email addresses on FundPath, Yoyo and the attorney's profile, and FundPath's phone number, are replaced with placeholders. Case Tracker's community and group screens are exported at 1.8x (the section is too wide for 3x).
+- Copy on built screens is sample copy for Samuel to check. Bank names are "Sample Bank".
+
