@@ -81,7 +81,7 @@ function measure(w: number, h: number, aspect: number) {
     phone,
     feature: Math.round(phone ? Math.min(w * 0.58, 280) : Math.min(G.cards.featureWidth, w * 0.3, h * 0.5 * aspect)),
     orbit: Math.round(w * G.cards.size * (phone ? 2 : 1)),
-    centerY: -h * (phone ? 0.14 : 0.06),
+    centerY: -h * (phone ? 0.08 : 0.06),
   };
 }
 

@@ -7,6 +7,8 @@
  * never compete. So films go through this conductor, which lets the most visible one play (two side by
  * side on wide screens, where a row holds two cards), and the rest hold their poster frame until scrolled to.
  */
+import { onScrollHold, scrollHeld } from "@/components/ui/scroll-hold";
+
 type Entry = { el: HTMLElement; ratio: number; wants: boolean; on: boolean; set: (on: boolean) => void };
 
 const entries = new Set<Entry>();
@@ -22,11 +24,13 @@ function pick() {
     const r = e.el.getBoundingClientRect();
     return Math.abs(r.top + r.height / 2 - mid);
   };
+  // A phone mid-scroll: no film plays, so there's nothing to measure
   const ranked = [...entries]
-    .filter((e) => e.wants && e.ratio > 0)
+    .filter((e) => e.wants && e.ratio > 0 && !scrollHeld())
     .map((e) => ({ e, d: off(e) }))
     // Most of it on screen first; between equally visible ones, the one nearest the middle
     .sort((a, b) => b.e.ratio - a.e.ratio || a.d - b.d);
+  // A phone mid-scroll: everything holds its frame until the page is at rest (scroll-hold.ts)
   const chosen = new Set(ranked.slice(0, limit()).map((x) => x.e));
   for (const e of entries) {
     const on = chosen.has(e);
@@ -42,6 +46,7 @@ const queue = () => {
 };
 
 let listening = false;
+let unhold = () => {};
 function listen(on: boolean) {
   if (on === listening) return;
   listening = on;
@@ -49,9 +54,11 @@ function listen(on: boolean) {
   if (on) {
     addEventListener("scroll", queue, { passive: true });
     addEventListener("resize", queue);
+    unhold = onScrollHold(queue);
   } else {
     removeEventListener("scroll", queue);
     removeEventListener("resize", queue);
+    unhold();
   }
 }
 

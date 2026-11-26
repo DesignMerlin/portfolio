@@ -221,8 +221,9 @@ export function StickerCard({
       </div>
       {/* Name, year and what kind of work, shown while the card is hovered or focused (always on touch).
           The sticker's own buttons and links carry the name for keyboards and screen readers. */}
-      <div aria-hidden="true" className="sticker-caption mt-3 flex items-baseline justify-between gap-4 text-small">
-        <span className="min-w-0 truncate">
+      {/* Name and year stay whole; on a narrow card the tags wrap under them rather than cutting the year off */}
+      <div aria-hidden="true" className="sticker-caption mt-3 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-0.5 text-small">
+        <span className="whitespace-nowrap">
           <span className="font-medium text-ink">{work.title}</span>
           {work.year ? <span className="ml-2 text-ink-3">© {work.year}</span> : null}
         </span>

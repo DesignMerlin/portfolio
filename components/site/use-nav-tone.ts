@@ -67,31 +67,49 @@ function pictureTone(img: HTMLImageElement): Tone | null {
   return tone;
 }
 
+/** Whole subtrees the scan never walks into: a film or a live screen speaks for itself, and is made of hundreds of moving parts */
+const SEALED = "[data-nav-tone], .live-root, .live, .film";
+
 /** Everything on the page that could change what's behind the nav */
 function surfaces() {
   const found: { el: Element; tone: () => Tone | null }[] = [];
-  document.querySelectorAll<HTMLElement>("#main *, footer, footer *").forEach((el) => {
-    if (el.namespaceURI !== "http://www.w3.org/1999/xhtml") return;
+  const big = (el: HTMLElement) => el.offsetWidth >= 120 && el.offsetHeight >= 60;
+  const picture = (el: HTMLImageElement) => big(el) && found.push({ el, tone: () => pictureTone(el) });
+  const visit = (el: HTMLElement) => {
     if (el.dataset.navTone) {
       found.push({ el, tone: () => el.dataset.navTone as Tone });
-      return;
+      return NodeFilter.FILTER_REJECT;
     }
-    // Films speak for themselves, and a moving part of a screen is still that screen
-    if (el.closest("[data-nav-tone], .live-root")) return;
-    if (el.offsetWidth < 120 || el.offsetHeight < 60) return;
-    if (el instanceof HTMLImageElement) {
-      found.push({ el, tone: () => pictureTone(el) });
-      return;
-    }
+    if (el.matches(SEALED)) return NodeFilter.FILTER_REJECT;
     // Inside a sticker card only the picture counts: the rest is paper folds and shadows
-    if (el.closest(".sticker")) return;
+    if (el.classList.contains("sticker")) {
+      // ...or the film in it, which says how bright it is
+      el.querySelectorAll<HTMLElement>("[data-nav-tone]").forEach((t) => found.push({ el: t, tone: () => t.dataset.navTone as Tone }));
+      el.querySelectorAll("img").forEach((img) => !img.closest("[data-nav-tone]") && picture(img));
+      return NodeFilter.FILTER_REJECT;
+    }
+    if (el instanceof HTMLImageElement) {
+      picture(el);
+      return NodeFilter.FILTER_REJECT;
+    }
+    if (!big(el)) return NodeFilter.FILTER_SKIP;
     const s = getComputedStyle(el);
     const solid = s.backgroundColor !== "rgba(0, 0, 0, 0)" ? colour(s.backgroundColor) : null;
     if (solid && solid[3] > 0.85) {
       const tone = toneOf(lum(solid[0], solid[1], solid[2]));
       found.push({ el, tone: () => tone });
     }
-  });
+    return NodeFilter.FILTER_SKIP;
+  };
+  for (const root of [document.getElementById("main"), document.querySelector("footer")]) {
+    if (!root) continue;
+    const walk = document.createTreeWalker(root, NodeFilter.SHOW_ELEMENT, {
+      // Only HTML: an SVG's insides never count
+      acceptNode: (n) => (n instanceof HTMLElement ? visit(n) : NodeFilter.FILTER_REJECT),
+    });
+    if (root.tagName === "FOOTER") visit(root as HTMLElement);
+    while (walk.nextNode());
+  }
   return found;
 }
 
@@ -145,6 +163,8 @@ export function useNavTone(header: React.RefObject<HTMLElement | null>, pill: Re
     let list: ReturnType<typeof surfaces> = [];
     let io: IntersectionObserver | null = null;
     let frame = 0;
+    // The clip paths last drawn: unchanged ones aren't written again, so a scroll that changes nothing costs nothing
+    const drawn: Record<Tone, string | null> = { dark: null, light: null };
 
     const draw = () => {
       frame = 0;
@@ -163,6 +183,8 @@ export function useNavTone(header: React.RefObject<HTMLElement | null>, pill: Re
       const paths = cut(r, boxes, page);
       (["dark", "light"] as const).forEach((k) => {
         const p = paths[k];
+        if (p === drawn[k]) return;
+        drawn[k] = p;
         const s = skins[k];
         // The dark glass is for dark places: light words on it
         s.style.visibility = p ? "visible" : "hidden";
@@ -195,7 +217,10 @@ export function useNavTone(header: React.RefObject<HTMLElement | null>, pill: Re
     };
     watch();
     // Films and pictures arrive later, and pages change
-    const mo = new MutationObserver(rewatch);
+    // Changes inside a film or a live screen (its parts mounting) don't move anything the nav reads
+    const mo = new MutationObserver((records) => {
+      if (records.some((m) => !(m.target instanceof Element) || !m.target.closest(SEALED))) rewatch();
+    });
     const main = document.getElementById("main");
     if (main) mo.observe(main, { childList: true, subtree: true });
     const theme = new MutationObserver(rewatch);

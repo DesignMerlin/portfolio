@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { filmSrc, play, type Frame } from "@/components/case-study/film/kit";
 import { useReducedMotion } from "@/components/ui/use-reduced-motion";
+import { onScrollHold, scrollHeld } from "@/components/ui/scroll-hold";
 
 /**
  * Screens that move: a logo arriving, an hourglass turning, a tick landing, a
@@ -198,20 +199,26 @@ export function LiveOverlay({ scene, rate = 1 }: { scene: LiveScene; rate?: numb
     });
     anims.current = all;
     if (reduce) return () => all.forEach((a) => a.cancel());
+    let seen = false;
+    let held = scrollHeld();
+    // Plays while it's on screen, unless a phone is mid-scroll (scroll-hold.ts): then it holds its frame
+    const run = () => all.forEach((a) => (seen && !held ? a.play() : a.pause()));
     const io = new IntersectionObserver(
       ([e]) => {
         if (!e) return;
-        all.forEach((a) => {
-          if (e.isIntersecting) {
-            if (!scene.loop) a.currentTime = 0;
-            a.play();
-          } else a.pause();
-        });
+        if (e.isIntersecting && !seen && !scene.loop) all.forEach((a) => (a.currentTime = 0));
+        seen = e.isIntersecting;
+        run();
       },
       { threshold: 0.35 },
     );
     io.observe(el);
+    const unhold = onScrollHold((h) => {
+      held = h;
+      if (seen) run();
+    });
     return () => {
+      unhold();
       io.disconnect();
       all.forEach((a) => a.cancel());
       anims.current = [];

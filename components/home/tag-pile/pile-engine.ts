@@ -18,7 +18,9 @@ type Options = {
  * The tag pile's physics, kept out of React: a matter-js world with walls,
  * one rounded rigid body per tag, a fixed-step loop that writes transforms
  * straight to the tag elements, grab/throw via a spring constraint, cursor
- * push, squash on hard landings and pop on click.
+ * push, squash on hard landings and pop on click. The loop sleeps once every tag
+ * is at rest (or the pile is off screen), so a still pile costs nothing: anything
+ * that moves a tag wakes it.
  */
 export class PileEngine {
   private M: Matter;
@@ -65,7 +67,7 @@ export class PileEngine {
     this.drop();
 
     M.Events.on(this.engine, "collisionStart", this.onCollide);
-    this.raf = requestAnimationFrame(this.loop);
+    this.wake();
 
     // Pause off screen; replay on revisit
     this.io = new IntersectionObserver(([entry]) => {
@@ -73,7 +75,10 @@ export class PileEngine {
       const was = this.visible;
       this.visible = entry.isIntersecting;
       if (!was && this.visible && this.seen && this.opts.getSettings().replayOnRevisit) this.drop();
-      if (this.visible) this.seen = true;
+      if (this.visible) {
+        this.seen = true;
+        this.wake();
+      }
     });
     this.io.observe(area);
     this.ro = new ResizeObserver(() => {
@@ -85,6 +90,7 @@ export class PileEngine {
         return;
       }
       this.keepInside();
+      this.wake();
     });
     this.ro.observe(area);
 
@@ -112,6 +118,7 @@ export class PileEngine {
       b.restitution = s.bounce;
       b.friction = s.friction;
       this.M.Sleeping.set(b, false);
+      this.wake();
     }
   }
 
@@ -119,6 +126,20 @@ export class PileEngine {
 
   private lastT = 0;
   private acc = 0;
+
+  /** Start the loop if it's asleep */
+  private wake = () => {
+    if (this.raf) return;
+    this.lastT = 0;
+    this.raf = requestAnimationFrame(this.loop);
+  };
+
+  /** Something is still moving, being held or waiting to fall */
+  private busy() {
+    if (this.drag || this.pending > 0) return true;
+    const world = this.engine.world.bodies;
+    return this.bodies.some((b) => !b.isSleeping && world.includes(b));
+  }
 
   /** Fixed-step physics on real time: a slow frame runs extra steps (capped), so the world never runs in slow motion */
   private loop = (t: number) => {
@@ -137,7 +158,8 @@ export class PileEngine {
     } else {
       this.acc = 0;
     }
-    this.raf = requestAnimationFrame(this.loop);
+    // Off screen, hidden or settled: sleep until something wakes it
+    this.raf = this.visible && this.opts.isActive() && this.busy() ? requestAnimationFrame(this.loop) : 0;
   };
 
   private size() {
@@ -198,6 +220,7 @@ export class PileEngine {
       const y = Math.min(H - 20, b.position.y);
       if (x !== b.position.x || y !== b.position.y) this.M.Body.setPosition(b, { x, y });
       this.M.Sleeping.set(b, false);
+      this.wake();
     }
   }
 
@@ -226,6 +249,7 @@ export class PileEngine {
       M.Body.setVelocity(b, { x: (Math.random() - 0.5) * 3, y: 0 });
       M.Body.setAngularVelocity(b, (Math.random() - 0.5) * 0.08);
       M.Sleeping.set(b, false);
+      this.wake();
     };
 
     this.els.forEach((el) => el && (el.style.opacity = "0"));
@@ -356,6 +380,7 @@ export class PileEngine {
       if (dist > PUSH_RADIUS) continue;
       const k = (1 - dist / PUSH_RADIUS) * 0.0009 * b.mass;
       this.M.Sleeping.set(b, false);
+      this.wake();
       this.M.Body.applyForce(b, b.position, { x: mx * k, y: my * k });
     }
   };
@@ -377,6 +402,7 @@ export class PileEngine {
     });
     this.M.Composite.add(this.engine.world, constraint);
     this.M.Sleeping.set(b, false);
+      this.wake();
     const now = performance.now();
     this.drag = { index: i, constraint, moved: 0, startT: now, vx: 0, vy: 0, lx: x, ly: y, lt: now };
     this.els[i]?.setAttribute("data-dragging", "true");
@@ -412,6 +438,7 @@ export class PileEngine {
     ];
     if (!b || !v) return false;
     this.M.Sleeping.set(b, false);
+      this.wake();
     this.M.Body.setVelocity(b, v);
     this.M.Body.setAngularVelocity(b, (Math.random() - 0.5) * 0.2);
     return true;
