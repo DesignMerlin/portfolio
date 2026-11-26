@@ -12,6 +12,7 @@ const films = {
   yoyo: dynamic(() => import("@/components/case-study/yoyo/film")),
   revivalStream: dynamic(() => import("@/components/case-study/revival-stream/film")),
   iexcelo: dynamic(() => import("@/components/case-study/iexcelo/film")),
+  voxdeed: dynamic(() => import("@/components/case-study/voxdeed/film")),
   caseTracker: dynamic(() => import("@/components/case-study/case-tracker/film")),
 };
 
@@ -121,7 +122,7 @@ export function DeviceMockup({
 
   const playing = visible && allowed && !covered && !paused;
   const Film = "film" in mockup ? films[mockup.film] : null;
-  const what = "film" in mockup ? (mockup.film === "revivalStream" ? "a laptop and an iPhone, as a short film" : mockup.film === "iexcelo" ? "a browser and an iPhone, as a short film" : "iPhones, as a short film") : "phones" in mockup ? "three phones" : "a laptop and a phone";
+  const what = "film" in mockup ? (mockup.film === "revivalStream" ? "a laptop and an iPhone, as a short film" : mockup.film === "iexcelo" || mockup.film === "voxdeed" ? "a browser and an iPhone, as a short film" : "iPhones, as a short film") : "phones" in mockup ? "three phones" : "a laptop and a phone";
 
   return (
     <div
