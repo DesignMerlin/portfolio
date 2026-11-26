@@ -2474,11 +2474,6 @@ html[data-motion="reduce"] .device-trio:nth-child(4) {
 .whole-page:focus-visible .whole-pan {
   animation-play-state: paused;
 }
-/* A phone mid-scroll: the loops hold their place until the page is at rest (scroll-hold.ts) */
-html[data-scroll-held] .whole-pan,
-html[data-scroll-held] .marquee-track {
-  animation-play-state: paused;
-}
 /* Touch has no hover to read a long website down: the page inside the window scrolls as the window
    passes through the screen, tied to the page's own scroll (off the main thread). Tap still opens it */
 @media (hover: none) {

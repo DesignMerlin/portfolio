@@ -20,7 +20,7 @@ const films = {
   caseTracker: dynamic(() => import("@/components/case-study/case-tracker/film")),
 };
 
-/** Each film, recorded (scripts/gallery-videos.mjs --phone): public/work/films/<name>.webm and .jpg */
+/** Each film, recorded (scripts/gallery-videos.mjs --phone): public/work/films/<name>.mp4 (H.264) and .jpg */
 const recorded: Record<keyof typeof films, string> = {
   room8: "room8",
   fundpath: "fundpath",
@@ -49,7 +49,7 @@ const useTouch = () =>
   );
 
 /**
- * A film as its recording. Only the poster loads until its turn comes (preload none), then it plays; paused,
+ * A film as its recording. Only the poster loads until it's on screen (preload none), then it plays; paused,
  * it holds its frame, and slow motion is the video's playback rate. Reduced motion: the poster, still.
  */
 function FilmVideo({ name, playing, rate }: { name: string; playing: boolean; rate: number }) {
@@ -58,9 +58,11 @@ function FilmVideo({ name, playing, rate }: { name: string; playing: boolean; ra
   useEffect(() => {
     const v = video.current;
     if (!v) return;
-    // Data Saver or a slow connection: the poster stays, and the film isn't downloaded at all
-    const net = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }).connection;
-    const lean = !!net && (net.saveData === true || /(^|-)(2g|3g)$/.test(net.effectiveType ?? ""));
+    // Data Saver, which someone turns on on purpose: the poster stays, and the film isn't downloaded
+    const lean = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData === true;
+    // iOS only autoplays a video it can see is muted
+    v.muted = true;
+    v.defaultMuted = true;
     if (playing && !reduce && !lean) v.play().catch(() => {});
     else v.pause();
   }, [playing, reduce]);
@@ -73,7 +75,7 @@ function FilmVideo({ name, playing, rate }: { name: string; playing: boolean; ra
   return (
     <video
       ref={video}
-      src={`/work/films/${name}.webm`}
+      src={`/work/films/${name}.mp4`}
       poster={`/work/films/${name}.jpg`}
       muted
       loop
@@ -192,6 +194,9 @@ export function DeviceMockup({
 
   const playing = visible && allowed && !covered && !paused;
   const touch = useTouch();
+  // A recording is cheap to draw (the phone's video hardware does it), so on touch every film on screen
+  // plays, with no waiting for a turn: only live films go one at a time
+  const runs = touch ? visible && !covered && !paused : playing;
   const Film = "film" in mockup ? films[mockup.film] : null;
   const what = "film" in mockup ? (mockup.film === "revivalStream" ? "a laptop and an iPhone, as a short film" : mockup.film === "iexcelo" || mockup.film === "voxdeed" || mockup.film === "fysi" ? "a browser and an iPhone, as a short film" : "iPhones, as a short film") : "phones" in mockup ? "three phones" : "a laptop and a phone";
 
@@ -215,7 +220,7 @@ export function DeviceMockup({
       <div aria-hidden="true" className="device-wash absolute inset-0" />
 
       {"film" in mockup && touch ? (
-        <FilmVideo name={recorded[mockup.film]} playing={playing} rate={rate} />
+        <FilmVideo name={recorded[mockup.film]} playing={runs} rate={rate} />
       ) : Film ? near ? <Film playing={playing} rate={rate} /> : null : "phones" in mockup ? (
         mockup.phones.map((src, i) => (
           <div

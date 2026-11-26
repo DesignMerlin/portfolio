@@ -2,15 +2,12 @@
 
 import { AnimatePresence, MotionConfig, motion } from "motion/react";
 import { setMotionReduced, useReducedMotion } from "@/components/ui/use-reduced-motion";
-import { useEffect, useState } from "react";
-import { onScrollHold } from "@/components/ui/scroll-hold";
+import { useState } from "react";
 import { tween } from "@/lib/motion";
 
 /** Every Motion animation on the site follows the same switch as the CSS and the films */
 export function MotionPrefs({ children }: { children: React.ReactNode }) {
   const reduce = useReducedMotion();
-  // On touch screens, CSS loops hold while the page scrolls (scroll-hold.ts marks the page)
-  useEffect(() => onScrollHold(() => {}), []);
   return <MotionConfig reducedMotion={reduce ? "always" : "never"}>{children}</MotionConfig>;
 }
 
