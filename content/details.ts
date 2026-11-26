@@ -3,6 +3,7 @@ import { caseTracker } from "@/content/case-tracker";
 import { fundpath } from "@/content/fundpath";
 import { iexcelo } from "@/content/iexcelo";
 import { revival } from "@/content/revival-stream";
+import { powerroute } from "@/content/powerroute";
 import { room8 } from "@/content/room8";
 import { voxdeed } from "@/content/voxdeed";
 import { yoyo } from "@/content/yoyo";
@@ -66,6 +67,7 @@ const y = yoyo;
 const r = revival;
 const ix = iexcelo;
 const vx = voxdeed;
+const pr = powerroute;
 
 export const details: Record<string, ProjectDetail> = {
   room8: {
@@ -550,14 +552,55 @@ export const details: Record<string, ProjectDetail> = {
     figure: { value: "10%", label: "higher user satisfaction" },
     keyScreens: null,
   },
+  // From Samuel's own case study page in Figma (EV CHARGING LOCATOR APP, CASE STUDY page) and the screens
   powerroute: {
-    headline: "An EV charging locator app",
-    tags: ["Mobility", "Mobile"],
+    headline: "Find a charger, book it, and watch it fill",
+    tags: ["Mobility", "EV", "Mobile"],
     kind: "mobile",
-    challenge: null,
-    approach: null,
+    role: "Product designer",
+    platform: "iOS and Android",
+    company: "PowerRoute",
+    tldr: [
+      "PowerRoute helps electric vehicle drivers find a charging station, book a slot and pay, in one app.",
+      "I designed it end to end: user flow, low-fidelity wireframes, style guide, high-fidelity screens and an interactive prototype.",
+      "The aim was a seamless journey from finding a station to booking, paying and charging.",
+    ],
+    // TODO: Samuel to confirm this copy and add the year
+    challenge:
+      "Finding somewhere to charge an electric car means guessing: which stations are near, which are free, whether they take your plug, and what it will cost. Then the booking and payment usually happen somewhere else. PowerRoute had to answer those questions up front and keep the whole journey, from finding a station to paying and charging, in one place.",
+    approach:
+      "I mapped the user flow in FigJam first, then worked through low-fidelity wireframes to a style guide and high-fidelity screens, and prototyped the main flows to test them. Four goals shaped it: easy discovery by location or preference, live availability and pricing on every station (green for free, red for in use), booking and payment in as few steps as possible, and a profile that remembers your vehicle and plug.",
     outcome: null,
-    keyScreens: null,
+    keyScreens: [
+      {
+        title: "First impression",
+        body: "A simple mark, then three photographs of charging as it really looks: a solar canopy, a plug going in, a car topping up at the kerb. They replaced the original illustrations, so the promise feels real from the first swipe.",
+        panels: [{ tone: "soft", screens: [pr.splash, pr.onboarding1, pr.onboarding2, pr.onboarding3] }],
+      },
+      {
+        title: "What's near, and is it free?",
+        body: "Home leads with recently viewed stations and a list nearby. On the map and the stations list, green means available and red means in use, with distance, time, rating and plugs on every station.",
+        panels: [{ tone: "deep", screens: [pr.home, pr.map, pr.stations] }],
+      },
+      {
+        title: "Pick a station",
+        body: "Tap a pin and the station opens as a card on the map: rating, distance, plug types, View or Book. The full page adds photos, directions, opening hours, cost and recent check-ins.",
+        panels: [{ tone: "soft", screens: [pr.stationMap, pr.station, pr.addVehicle] }],
+      },
+      {
+        title: "Book and pay in a few taps",
+        body: "Choose a date, an arrival time and how long to charge, then pay by card, PayPal or bank transfer. A review shows everything before you confirm, and the booking is done.",
+        panels: [{ tone: "deep", screens: [pr.booking, pr.payment, pr.review, pr.booked] }],
+      },
+      {
+        title: "Watch it charge",
+        body: "The battery fills bar by bar with a percentage, time, energy and charge level, then confirms what was charged. Bookings, the wallet and the account keep the history in one place.",
+        panels: [
+          { tone: "soft", screens: [pr.charging, pr.charged] },
+          { tone: "deep", screens: [pr.bookings, pr.wallet, pr.account] },
+        ],
+      },
+    ],
   },
   quitbet: {
     headline: "A gambling addiction recovery app",

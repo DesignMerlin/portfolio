@@ -13,6 +13,7 @@ const films = {
   revivalStream: dynamic(() => import("@/components/case-study/revival-stream/film")),
   iexcelo: dynamic(() => import("@/components/case-study/iexcelo/film")),
   voxdeed: dynamic(() => import("@/components/case-study/voxdeed/film")),
+  powerroute: dynamic(() => import("@/components/case-study/powerroute/film")),
   caseTracker: dynamic(() => import("@/components/case-study/case-tracker/film")),
 };
 
