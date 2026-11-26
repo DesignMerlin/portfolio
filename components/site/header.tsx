@@ -8,6 +8,7 @@ import { ThemeIcon, ThemeToggle } from "@/components/ui/theme-toggle";
 import { MenuIcon } from "@/components/ui/icons";
 import { MobileMenu } from "@/components/site/mobile-menu";
 import { useNavTone } from "@/components/site/use-nav-tone";
+import { useReducedMotion } from "@/components/ui/use-reduced-motion";
 import { nav, OPEN_COMMAND_MENU } from "@/lib/site";
 
 export function openCommandMenu(via: "pointer" | "keyboard") {
@@ -75,6 +76,7 @@ export function Header({ email }: { email: string }) {
   // Load the animated wand the first time the nav appears, not with the page
   const [wand, setWand] = useState(false);
   if (shown && !wand) setWand(true);
+  const still = useReducedMotion();
 
   // Which control is hovered or focused, for both skins to show
   const [hot, setHot] = useState<string | null>(null);
@@ -104,7 +106,7 @@ export function Header({ email }: { email: string }) {
         </span>
         DesignMerlin
         <picture className="nav-wand size-5 shrink-0 transition-transform duration-[var(--dur-base)] ease-[var(--ease-enter)]">
-          {wand ? <source srcSet="/brand/magic-wand.webp" type="image/webp" media="(prefers-reduced-motion: no-preference)" /> : null}
+          {wand && !still ? <source srcSet="/brand/magic-wand.webp" type="image/webp" /> : null}
           <img src="/brand/magic-wand.svg" alt="" width={20} height={20} className="size-5" />
         </picture>
       </span>
@@ -156,7 +158,7 @@ export function Header({ email }: { email: string }) {
                 key={item.href}
                 href={item.href}
                 aria-current={item.match(pathname) ? "page" : undefined}
-                transitionTypes={item.href.startsWith("/#") && home ? undefined : ["nav-forward"]}
+                transitionTypes={home && (item.href === "/" || item.href.startsWith("/#")) ? undefined : item.href === "/" ? ["nav-back"] : ["nav-forward"]}
                 className={ITEM}
                 {...track(item.href)}
               >

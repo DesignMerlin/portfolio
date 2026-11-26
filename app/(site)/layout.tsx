@@ -1,5 +1,6 @@
 import { Header } from "@/components/site/header";
 import { Footer } from "@/components/site/footer";
+import { MotionToggle } from "@/components/site/motion-toggle";
 import { getProfile } from "@/lib/content";
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
@@ -9,6 +10,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
       <Header email={profile.email} />
       <main id="main">{children}</main>
       <Footer profile={profile} />
+      <MotionToggle />
     </>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { FILM_PHONE } from "@/components/case-study/film/kit";
 import { Fragment, useMemo } from "react";
 import { LiveParts, liveTracks } from "@/components/case-study/live/kit";
 import { bokeh, K, SH, SW, tap, type FilmPhone, type Frame, type Storyboard } from "@/components/case-study/film/kit";
@@ -66,7 +67,7 @@ function Phone({ phone }: { phone: FilmPhone }) {
       <div className="film-screen">
         {phone.screens.map((s) => (
           <Fragment key={s.id}>
-            <Image data-track={`screen-${s.id}`} src={s.src} alt="" width={SW} height={SH} sizes="700px" loading="eager" draggable={false} />
+            <Image data-track={`screen-${s.id}`} src={s.src} alt="" width={SW} height={SH} sizes={FILM_PHONE} loading="eager" draggable={false} />
             {s.live ? (
               <span data-track={`screen-${s.id}`} style={{ width: SW, height: SH }}>
                 <LiveParts id={`live-${s.id}`} scene={s.live.scene} />

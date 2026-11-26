@@ -49,10 +49,13 @@ await step("drag a sticker corner halfway", async () => {
 });
 
 await step("read case study from the revealed sticker", async () => {
-  await page.locator("#work .sticker").nth(1).getByRole("link", { name: /^Read case study/ }).click();
-  await page.waitForURL("**/work/fundpath");
+  // Whichever project is second on the home page
+  const link = page.locator("#work .sticker").nth(1).getByRole("link", { name: /^Read case study/ });
+  const href = await link.getAttribute("href");
+  await link.click();
+  await page.waitForURL("**" + href);
   await page.waitForTimeout(800);
-  await shot("03-fundpath-case");
+  await shot("03-second-case");
 });
 
 await step("View button appears on hover and opens the project", async () => {
@@ -115,7 +118,7 @@ await step("nav: reads over any card, splits between two, works by mouse and key
   const skins = await page.evaluate(() => ["dark", "light"].map((k) => { const s = document.querySelector('[data-skin="' + k + '"]').style; return s.visibility + " " + s.clipPath.slice(0, 5); }));
   if (skins.some((s) => s !== "visible path(")) throw new Error("nav did not split: " + skins.join(" | "));
   await shot("10-nav-split");
-  await page.locator("header").getByRole("link", { name: "About" }).hover();
+  await page.locator("header").getByRole("link", { name: "About Me" }).hover();
   if ((await page.locator("[data-skin] [data-hot]").count()) !== 2) throw new Error("hover not drawn on both skins");
   await page.locator("header").getByRole("link", { name: "Projects" }).focus();
   await page.keyboard.press("Tab");
@@ -161,18 +164,73 @@ await step("journey arrow keys + IA tree", async () => {
   await shot("10-journey-step");
 });
 
-await step("projects filter + lightbox", async () => {
+await step("projects gallery: arrow key, a card to the centre, lightbox open and close", async () => {
   await page.goto(base + "/projects", { waitUntil: "networkidle" });
-  await page.getByRole("button", { name: /^Mobile/ }).click();
-  await page.waitForTimeout(700);
-  await shot("11-shots-mobile-filter");
-  await page.getByRole("button", { name: "Open FundPath campaign flows" }).click();
-  await page.waitForTimeout(700);
-  await shot("12-lightbox");
+  await page.waitForFunction(() => document.documentElement.dataset.intro !== "play", null, { timeout: 15000 });
+  await page.locator(".gallery-stage").scrollIntoViewIfNeeded();
+  await page.waitForTimeout(2500);
+  const centre = () => page.locator(".gallery-feature button").getAttribute("aria-label");
+  const first = await centre();
+  await page.locator(".gallery-feature button").focus();
   await page.keyboard.press("ArrowRight");
   await page.waitForTimeout(600);
+  if ((await centre()) === first) throw new Error("The arrow key didn't change the centre");
+  // A real click on a floating card that nothing covers
+  const target = await page.evaluate(() => {
+    for (const li of document.querySelectorAll(".gallery-card")) {
+      const b = li.querySelector("button");
+      if (!b) continue;
+      const r = li.getBoundingClientRect();
+      const x = r.left + r.width / 2, y = r.top + r.height / 2;
+      if (document.elementFromPoint(x, y)?.closest("button") === b) return [x, y, b.getAttribute("aria-label").replace("Bring ", "").replace(" to the centre", "")];
+    }
+    return null;
+  });
+  if (!target) throw new Error("No floating card could be clicked");
+  await page.mouse.click(target[0], target[1]);
+  await page.waitForTimeout(800);
+  if ((await centre()) !== `Open ${target[2]}`) throw new Error(`Clicked ${target[2]}, centre is ${await centre()}`);
+  await shot("11-gallery");
+  await page.locator(".gallery-feature button").click({ force: true });
+  await page.waitForTimeout(800);
+  if (!(await page.evaluate(() => document.querySelector("dialog.gallery-lightbox")?.open))) throw new Error("Lightbox didn't open");
+  await shot("11b-lightbox");
   await page.keyboard.press("Escape");
+  await page.waitForFunction(() => !document.querySelector("dialog.gallery-lightbox"), null, { timeout: 3000 });
+});
+
+await step("projects list: chips narrow the grid and bring it back", async () => {
+  await page.goto(base + "/projects", { waitUntil: "networkidle" });
+  await page.getByRole("button", { name: "List" }).click();
   await page.waitForTimeout(600);
+  const cards = page.locator("main ul > li");
+  const all = await cards.count();
+  await page.getByRole("button", { name: /^Web/ }).click();
+  await page.waitForTimeout(900);
+  await shot("11-projects-web");
+  const web = await cards.count();
+  if (!(web > 0 && web < all)) throw new Error(`Web filter showed ${web} of ${all}`);
+  if (await page.locator("#screens-title").count()) throw new Error("Screens section is still there");
+  await page.getByRole("button", { name: /^All/ }).click();
+  await page.waitForTimeout(900);
+  if ((await cards.count()) !== all) throw new Error("All didn't bring every project back");
+});
+
+await step("stop motion: the button stops loops, is remembered, and plays again", async () => {
+  await page.goto(base + "/about", { waitUntil: "networkidle" });
+  const btn = page.getByRole("button", { name: "Stop motion" });
+  const state = () => page.evaluate(() => [document.documentElement.dataset.motion ?? "", getComputedStyle(document.querySelector(".marquee-track")).animationName]);
+  await btn.click();
+  await page.waitForTimeout(400);
+  let [attr, anim] = await state();
+  if (attr !== "reduce" || anim !== "none") throw new Error(`after stop: ${attr} ${anim}`);
+  await page.reload({ waitUntil: "networkidle" });
+  [attr] = await state();
+  if (attr !== "reduce") throw new Error("not remembered");
+  await btn.click();
+  await page.waitForTimeout(400);
+  [attr, anim] = await state();
+  if (attr !== "" || anim === "none") throw new Error(`after play: ${attr} ${anim}`);
 });
 
 await step("theme toggle to light", async () => {

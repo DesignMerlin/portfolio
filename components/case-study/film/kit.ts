@@ -8,6 +8,25 @@ import type { LiveScene } from "@/components/case-study/live/kit";
 /** Films are laid out at this size and scaled to fit their card */
 export const STAGE_W = 1184;
 export const STAGE_H = 1032;
+
+/*
+  How wide the films' screenshots are asked for, as `sizes`. A film's stage is scaled down to fit its card
+  (to about 0.5 on the home page, 0.86 on a project page), and the camera zooms in up to about 2×. These
+  ask for about that, never more: at 2× pixel density a phone screen gets ~960px and a desktop page ~1920px.
+  Asking for more (they used to fetch 3840px) made a single page of cards hold ~500 megapixels of
+  decoded images, far past what the browser keeps, so it re-decoded them every frame and the motion hung.
+*/
+export const FILM_PHONE = "480px";
+export const FILM_DESKTOP = "960px";
+
+/**
+ * A full-size screenshot used inside a film (slices and overlays in live scenes), fetched through the
+ * image optimiser at most `w` wide. Positions are in points, so a smaller copy draws identically.
+ */
+export function filmSrc(src: string, w = 1920) {
+  if (!/\.(webp|png|jpe?g|avif)$/i.test(src) || src.startsWith("data:")) return src;
+  return `/_next/image?url=${encodeURIComponent(src)}&w=${w}&q=75`;
+}
 /** App screens are 375×812 points; a film phone's screen is this wide */
 export const SW = 324;
 export const SH = 702;

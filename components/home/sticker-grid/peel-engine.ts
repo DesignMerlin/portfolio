@@ -114,10 +114,14 @@ export class PeelEngine {
     return 2 * Math.hypot(this.w, this.h) + 40;
   }
 
-  /** The resting curl, fluttering in the breeze */
+  /**
+   * The resting curl. It flutters in the breeze only while the pointer is over the card: redrawing the fold
+   * re-clips the whole card (and the film playing in it) every frame, so six cards fluttering at rest made
+   * the page hang. At rest the curl is drawn once and nothing runs.
+   */
   private restPoint(): V {
     const s = this.hooks.getSettings();
-    const still = this.hooks.isReduced() || s.wind === 0;
+    const still = this.hooks.isReduced() || s.wind === 0 || !this.hovered;
     const t = this.clock * s.windSpeed;
     const gust = still ? 0 : s.wind * (0.6 * Math.sin(t * 1.3) + 0.4 * Math.sin(t * 2.9 + 1.7));
     const sway = still ? 0 : s.wind * Math.sin(t * 0.9 + 0.4);
@@ -241,7 +245,7 @@ export class PeelEngine {
 
     const t = this.target();
     const settled = Math.hypot(this.d.x - t.x, this.d.y - t.y) < 0.3 && Math.hypot(this.v.x, this.v.y) < 2;
-    const breezy = !this.open && !reduce && this.hooks.getSettings().wind > 0;
+    const breezy = !this.open && !reduce && this.hovered && this.hooks.getSettings().wind > 0;
     if (this.visible && !document.hidden && (this.pointer || !settled || breezy)) this.raf = requestAnimationFrame(this.tick);
   };
 

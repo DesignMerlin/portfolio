@@ -1,6 +1,7 @@
 import type { PlaceholderKind } from "@/components/ui/placeholder-shot";
 import { caseTracker } from "@/content/case-tracker";
 import { fundpath } from "@/content/fundpath";
+import { iexcelo } from "@/content/iexcelo";
 import { revival } from "@/content/revival-stream";
 import { room8 } from "@/content/room8";
 import { yoyo } from "@/content/yoyo";
@@ -27,9 +28,13 @@ export type KeyScreenGroup = {
     screens: Screen[];
     /** Shown in an iPhone and a laptop, for work that runs on both */
     devices?: boolean;
+    /** Desktop screens in a browser window instead of a laptop (websites); long pages scroll on hover */
+    browser?: boolean;
   }[];
   /** An interactive piece shown instead of still screens */
   live?: "room8-tour";
+  /** A whole web page, shown as three slowly moving columns */
+  whole?: Screen;
 };
 
 export type ProjectDetail = {
@@ -48,6 +53,8 @@ export type ProjectDetail = {
   platform?: string;
   company?: string;
   tldr?: [string, string, string];
+  /** The live product, for a Visit site link */
+  site?: string;
   figure?: { value: string; label: string };
 };
 
@@ -56,6 +63,7 @@ const f = fundpath;
 const c = caseTracker;
 const y = yoyo;
 const r = revival;
+const ix = iexcelo;
 
 export const details: Record<string, ProjectDetail> = {
   room8: {
@@ -380,6 +388,7 @@ export const details: Record<string, ProjectDetail> = {
     time: "Nov 2025 to Feb 2026",
     platform: "Web",
     company: "iExcelo",
+    site: "https://iexcelo.com",
     tldr: [
       "A WASSCE revision platform for a Nigerian edtech product.",
       "I designed the landing page and the core platform for students, sponsors and affiliates.",
@@ -391,7 +400,58 @@ export const details: Record<string, ProjectDetail> = {
       "I designed the landing page and the core platform: the student dashboard, revision workflows and progress tracking, with a separate journey for each of the three audiences.",
     outcome: "The dashboard, revision workflows and progress tracking reduced time-to-task by 30%.",
     figure: { value: "30%", label: "faster time-to-task for students" },
-    keyScreens: null,
+    // TODO: Samuel to confirm this copy. Written from the designs (Figma iExcelo Ed-Tech Web App) and the facts above
+    keyScreens: [
+      {
+        title: "One promise up front",
+        body: "Revise smarter, practise harder, excel in every exam. Real students sit beside the promise, and the dashboard rises underneath it, so the first screen already shows what using it looks like.",
+        panels: [{ tone: "soft", devices: true, browser: true, screens: [ix.hero, ix.mHome] }],
+      },
+      {
+        title: "Whole page",
+        body: "The homepage, top to bottom: benefits, the exams covered, three ways in, what students say, questions answered, and a call to start.",
+        panels: [],
+        whole: ix.home,
+      },
+      {
+        title: "Three ways in",
+        body: "Practise with past questions, sponsor a student through Giveback, or earn by sharing as an affiliate. Each door gets its own illustration and its own page.",
+        panels: [{ tone: "deep", devices: true, browser: true, screens: [ix.features] }],
+      },
+      {
+        title: "For students",
+        body: "Exam Revision explains the product in the language of revision: everything in one place, a pathway from first question to exam day.",
+        panels: [
+          { tone: "soft", devices: true, browser: true, screens: [ix.revision, ix.mRevision] },
+          { tone: "deep", devices: true, browser: true, screens: [ix.about, ix.mAbout] },
+        ],
+      },
+      {
+        title: "For sponsors and affiliates",
+        body: "Giveback asks people to fund someone else's revision and shows where the money goes. The affiliate page is about earning, with the commission stated plainly.",
+        panels: [
+          { tone: "soft", devices: true, browser: true, screens: [ix.giveback, ix.mGiveback] },
+          { tone: "deep", devices: true, browser: true, screens: [ix.affiliate, ix.mAffiliate] },
+        ],
+      },
+      {
+        title: "Questions and contact",
+        body: "FAQs are grouped by audience, so a parent, a sponsor and a student each find their answer quickly. Contact keeps it to three ways to reach a person.",
+        panels: [
+          { tone: "soft", devices: true, browser: true, screens: [ix.faq, ix.mFaq] },
+          { tone: "deep", devices: true, browser: true, screens: [ix.contact, ix.mContact] },
+        ],
+      },
+      {
+        title: "The student dashboard",
+        body: "Welcome, then one clear next step: test your knowledge. Exams, subjects and questions solved sit underneath, with scores by subject and every exam a click away.",
+        panels: [
+          { tone: "deep", devices: true, browser: true, screens: [ix.dash] },
+          { tone: "soft", devices: true, browser: true, screens: [ix.exam, ix.question] },
+          { tone: "deep", devices: true, browser: true, screens: [ix.submitted] },
+        ],
+      },
+    ],
   },
   simplexity: {
     headline: "LinkedIn research without the manual work",

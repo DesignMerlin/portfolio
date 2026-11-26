@@ -29,7 +29,10 @@ export function KeyScreens({
 }) {
   // Every screen once, in the order it first appears
   const all: Screen[] = [];
-  for (const g of groups ?? []) for (const p of g.panels) for (const s of p.screens) if (!all.includes(s)) all.push(s);
+  for (const g of groups ?? []) {
+    if (g.whole && !all.includes(g.whole)) all.push(g.whole);
+    for (const p of g.panels) for (const s of p.screens) if (!all.includes(s)) all.push(s);
+  }
   const [open, setOpen] = useState<number | null>(null);
   const close = useCallback(() => setOpen(null), []);
   const tinted = { "--tint": tint } as React.CSSProperties;
@@ -62,13 +65,15 @@ export function KeyScreens({
           </div>
           {g.live === "room8-tour" ? (
             <TourModes />
+          ) : g.whole ? (
+            <WholePage screen={g.whole} onOpen={() => setOpen(all.indexOf(g.whole!))} />
           ) : (
             <div className={`grid gap-3 sm:gap-4 ${g.panels.length > 1 && !g.panels.some((p) => p.devices) ? "grid-cols-2" : ""}`}>
               {g.panels.map((panel, i) =>
                 panel.devices ? (
                   <div key={i} data-tone={panel.tone} className="device-panel overflow-hidden rounded-[var(--radius-l)]">
                     {panel.screens.map((screen) => (
-                      <FramedScreen key={screen.src} screen={screen} onOpen={() => setOpen(all.indexOf(screen))} />
+                      <FramedScreen key={screen.src} screen={screen} browser={panel.browser} onOpen={() => setOpen(all.indexOf(screen))} />
                     ))}
                   </div>
                 ) : (
@@ -102,11 +107,59 @@ export function KeyScreens({
   );
 }
 
-/** A desktop screen in a laptop, or a mobile one in an iPhone. Longer pages show their top; opening one shows all of it */
-function FramedScreen({ screen, onOpen }: { screen: Screen; onOpen: () => void }) {
+/** The window a browser shows, in points: a long page shows this much, and scrolls through the rest on hover */
+const WINDOW = 1000;
+
+/**
+ * A whole web page as three columns side by side, each a third of the page, panning slowly through it (two
+ * down, one up). Hovering or focusing pauses them; opening it shows the page to scroll through. Reduced
+ * motion: still.
+ */
+function WholePage({ screen, onOpen }: { screen: Screen; onOpen: () => void }) {
+  const { w = 1440, h = 4000 } = screen;
+  const third = h / 3;
+  return (
+    <button type="button" onClick={onOpen} aria-label={`Open the whole page. ${screen.alt}`} className="whole-page" style={{ "--ratio": `${w} / ${Math.round(third * 0.62)}` } as React.CSSProperties}>
+      {[0, 1, 2].map((i) => (
+        <span key={i} className="whole-col" data-dir={i === 1 ? "up" : "down"}>
+          <span className="whole-pan" style={{ "--from": `${(-(i * third) / h) * 100}%`, "--to": `${(-(i * third + third * 0.38) / h) * 100}%` } as React.CSSProperties}>
+            <Image src={screen.src} alt="" width={w} height={h} sizes="(min-width: 1024px) 330px, 30vw" draggable={false} className="block h-auto w-full max-w-none" />
+          </span>
+        </span>
+      ))}
+    </button>
+  );
+}
+
+/** A desktop screen in a laptop (or a browser, for websites), or a mobile one in an iPhone. Opening one shows all of it */
+function FramedScreen({ screen, onOpen, browser = false }: { screen: Screen; onOpen: () => void; browser?: boolean }) {
   const { w = 375, h = 812 } = screen;
   const laptop = w > 600;
   const scene = liveScene(screen.src);
+  if (laptop && browser) {
+    const view = Math.min(h, WINDOW);
+    return (
+      <button
+        type="button"
+        onClick={onOpen}
+        aria-label={`Open screen. ${screen.alt}`}
+        className="frame-browser"
+        style={{ "--ratio": `${w} / ${view}`, "--travel": `${(((h - view) / h) * -100).toFixed(2)}%`, "--time": `${Math.max(2, (h - view) / 260).toFixed(1)}s` } as React.CSSProperties}
+      >
+        <span className="frame-browser-bar" aria-hidden="true">
+          <i />
+          <i />
+          <i />
+        </span>
+        <span className="frame-screen">
+          <span className="frame-page">
+            <Image src={screen.src} alt="" width={w} height={h} sizes="(min-width: 1024px) 720px, 92vw" draggable={false} className="block h-auto w-full max-w-none" />
+            {scene ? <LiveOverlay scene={scene} /> : null}
+          </span>
+        </span>
+      </button>
+    );
+  }
   return (
     <button type="button" onClick={onOpen} aria-label={`Open screen. ${screen.alt}`} className={laptop ? "frame-laptop" : "frame-phone"}>
       <span className="frame-body">
@@ -139,7 +192,7 @@ function ScreenViewer({
   const { w = 375, h = 812 } = screen ?? {};
   const desktop = w > 600;
   // A long phone page is shown at reading size and scrolls
-  const long = !desktop && h / w > 2.4;
+  const long = desktop ? h / w > 0.9 : h / w > 2.4;
 
   useEffect(() => {
     const d = dialog.current;
@@ -176,7 +229,7 @@ function ScreenViewer({
     >
       {screen ? (
         <>
-          <div key={screen.src} className={long ? "screen-viewer-long" : "contents"} tabIndex={long ? 0 : undefined} role={long ? "group" : undefined} aria-label={long ? "The whole page. Scroll to see more" : undefined}>
+          <div key={screen.src} className={long ? `screen-viewer-long ${desktop ? "screen-viewer-long-desktop" : ""}` : "contents"} tabIndex={long ? 0 : undefined} role={long ? "group" : undefined} aria-label={long ? "The whole page. Scroll to see more" : undefined}>
             <Image
               src={screen.src}
               alt={screen.alt}

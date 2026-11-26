@@ -1,5 +1,6 @@
 import { DRIFT, ENTER, SHEET, type Frame } from "@/components/case-study/film/kit";
 import type { LiveScene, Part, PtBox, Sprite } from "@/components/case-study/live/kit";
+import { iexceloScenes } from "@/components/case-study/live/iexcelo";
 import { revivalScenes } from "@/components/case-study/live/revival";
 import { caseTracker } from "@/content/case-tracker";
 import { fundpath } from "@/content/fundpath";
@@ -781,6 +782,7 @@ const scenes: Record<string, LiveScene> = {
   [yoyo.vacation.src]: yoyoVacation,
   [yoyo.stock.src]: yoyoStock,
   ...revivalScenes,
+  ...iexceloScenes,
 };
 
 /** What moves on this screen, if anything does */

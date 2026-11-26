@@ -379,7 +379,7 @@ Samuel asked for the whole site in one go ("non-negotiable build"), so the usual
 - **Key screens** can be shown in devices (`devices: true` on a panel): a CSS laptop for desktop, an iPhone for mobile. Opening a long mobile page shows it at reading size and scrolls.
 - **Changed from the file:** Samuel's email and the Google account hint are placeholders, and the now-playing bar is drawn above the sidebar (in the file the sidebar covers its title).
 - Headless: 55 to 57fps. Nav contrast at least 5.9:1 down the page, both themes.
-- **Samuel to confirm:** client, year (2024 is from the footer), role, results, and the copy. (Confirmed: the screens can be public.)
+- **Confirmed by Samuel:** Revival Stream, 2024, product designer, and the screens can be public. Still to confirm: results, and the copy.
 - **No repeated pictures** (Samuel's request, non-negotiable; exports only, the Figma file isn't changed). Across every page the film shows (both homes, channels, ministers, minstrels, testimonies, desktop and mobile) there are 105 pictures and each is on one page only. The exceptions are a channel or person being followed (Soaking Worship into its player, a minister from home into his, the playing channel's thumbnail in the bar) and the account's own avatar.
   - Desktop and mobile lists show different people and channels. New portraits and scenes are from Unsplash (or the file's Dump page first), with made-up names so no real person's name is on a stock photo.
   - Mobile home has its own banner. Two commenters in the mobile chat, with their own avatars.
@@ -387,3 +387,54 @@ Samuel asked for the whole site in one go ("non-negotiable build"), so the usual
   - Key screens pair a laptop with a phone on a different page. The like is shown on Mercy Chinwo's page.
   - Images live in `public/work/revival`. When a picture changes, rename the file or folder: next/image copies are cached in browsers for hours under the old name.
 - **Figma file edited at Samuel's request (2026-11-25):** the same pictures and names are now in REVIVAL STREAM's frames: desktop and mobile Home (and their playing copies), Channels (and its playing copy), Ministers, Minstrels and Testimonies. 94 picture fills and 74 labels changed; each fill keeps its crop mode and each label its own font. Pictures from Unsplash were uploaded into the file; the rest were already in it (Dump page). Nothing else in the file was changed: the now-playing bar still sits under the sidebar there, and the emails are still the originals.
+
+## 2026-11-26: iExcelo, the first website case study
+
+- **Source:** Figma iExcelo Ed-Tech Web App: the landing page and six other pages (desktop and mobile), and the student dashboard (dashboard, exam mode, a question, submitted). Sponsors, affiliate and super-admin dashboards aren't shown yet.
+- **References** (inspiration only): abdullahihabiba.com's website covers are 9–13s recordings of one browser on a soft background, sections sliding, a phone joining; her Haelsoft page adds a "whole page" in three columns. Ours is coded motion, not video, and the columns move.
+- **Film** (`components/case-study/iexcelo/film.tsx`, 36s): a browser with a pointer that clicks through it (Samuel swapped the first version's red marking pen and its circles and ticks for a plain arrow). The logo builds from its vectors and flies into the browser; the hero assembles; the dashboard rises with its chart drawing and pie turning; the three feature cards build from their own vectors; a phone joins; six more pages arrive like the next sheet of a paper, with the address typed; then the dashboard, an answer picked, the success seal (the file's Lottie) and the score.
+- **Feature cards and hero** are taken apart from Figma SVG exports into a plate plus moving pieces (`card-*`, `hx-*`), shared by the film and the project page (`components/case-study/live/iexcelo.tsx`).
+- **Websites on project pages:** `browser: true` panels show desktop screens in a browser window; long pages scroll on hover or focus. A group with `whole` shows the whole page as three slowly moving columns that pause on hover and open to scroll. The viewer shows long desktop pages at reading width.
+- **Visit site** button on project pages with a `site` (iExcelo: iexcelo.com).
+- iExcelo's tint is now its brand blue. Home card order (Samuel's): Room8, Revival Stream, iExcelo, Case Tracker+, FundPath, Yoyo.
+- **Samuel to confirm:** the key-screen copy.
+
+## 2026-11-26: projects chips, names back on the home cards
+- Projects page: the Screens gallery is gone. Its chips (All, Mobile, Web, Dashboards; Brand appears only once a project has that kind) now sit under the heading and filter the projects themselves, by `detail.kind`. `components/case-study/project-filter.tsx`: snappy-spring pill, gentle-spring reflow, fade out on exit, count announced, instant under reduced motion. `components/shots/` and `content/shots.ts` are no longer used; kept in case the screens come back.
+- Home "Selected work samples": each sticker has its project name and headline under it again. The line is a pointer-only link (aria-hidden, tabIndex -1) because the sticker already names the project for keyboards and screen readers.
+- Later the same day: the name-and-headline line under the home cards became a hover caption, "Name © year" on the left and the project's tags joined with " + " on the right. It rises in on hover or focus within the card and stays visible on touch. Room8 and FundPath have no confirmed year, so theirs shows the name only. Nav: Home, Projects (also active on /work pages), About Me, Contact, theme toggle.
+
+## 2026-11-26: Stop motion button
+- A 44px glass button fixed bottom left on every page (`components/site/motion-toggle.tsx`). Pause bars while things move, a play triangle once still; the label ("Stop motion" / "Play motion") slides out on hover or focus. aria-pressed, and the change is announced only after a press.
+- One switch for everything: `<html data-motion="reduce">`. The boot script sets it before first paint from the saved choice (localStorage `motion`: reduce | full), else the OS setting. Every former `@media (prefers-reduced-motion: reduce)` block in globals.css is now scoped to that attribute (converted by script; the keyframe overrides became `fade-in-only` / `mobile-menu-fade`). `useReducedMotion()` reads the attribute, so films, live scenes, the peel breeze and Motion components (through `MotionPrefs` / MotionConfig) all follow it live. A saved choice wins over the OS, both ways. No-JS visitors keep a media-query fallback in the noscript style.
+- New reduced-motion CSS goes under `html[data-motion="reduce"]`, not the media query.
+- Home hero: the pile buttons moved to left 84px so they sit beside the button, not under it.
+
+## 2026-11-26: Projects page as a spatial gallery
+- Reference: a GIF of a CMS spatial gallery. Kept the calm, nearly empty stage, a large centre image with a name under it and cards floating in depth around it. Not taken: its serif type, cream page, "Study 06" captions.
+- /projects defaults to Gallery, with a Gallery / List switch (List is the filtered grid; the choice is remembered per device).
+- Settings for Samuel only, in `content/gallery.ts`: layout (field, solar, atom, cloud), entrance (spiral, depth, curtain), orbit speed, direction, spacing, depth, float, card size, radius, shadow, blur, type, lightbox look, and per-project entries (size, aspect, focus, title, caption, link, image or video, hidden). In development only, `?layout=atom&entrance=curtain` previews another layout without editing the file.
+- Build (`components/gallery/`): `layouts.ts` is the maths (where card k sits, entrance paths). `spatial-gallery.tsx`: one animation-frame loop sets transform/opacity on every card; each card is on a critically damped spring (settles like spring.gentle), so drags and changes interrupt cleanly. Drag turns the arrangement with momentum. The loop stops off screen and in hidden tabs, and the arrival waits for the intro curtain.
+- Later the same day, at Samuel's request: no stage box (the gallery spans the window on the plain page), no ‹ › buttons, counter or "Drag to turn" hint (drag and arrow keys stay), and every floating card plays its film.
+- Performance: live coded films in every card ran at 1–5 fps (each film is ~100 Web Animations; 12 at once is ~1,200). So the floating cards play recordings instead: `public/work/gallery/<slug>.webm` (VP8, 320×279, 20 fps, ~0.6–1 MB each) with a .jpg poster, made by `scripts/gallery-videos.mjs`, which steps each film frame by frame on its own clock and encodes with Playwright's ffmpeg. Re-run it when a film changes. Videos load only once the gallery arrives, pause off screen, behind the lightbox and with motion stopped. The centre card plays the live film. Depth is projected in 2D (scale and position from a 1500px perspective, z-index by depth) rather than a CSS 3D scene, which was much costlier to draw. Browsers without WebM show the poster.
+- Two layers: the floating cards, and the centre project in front (nothing can cover it). A picked card's position is measured and the centre flies in from it (FLIP, deliberate, emphasized).
+- Lightbox: native dialog; the art grows from the centre card and shrinks back into it on close; focus starts on Close and returns to the card. Reduced motion: no arrival, turning or floating; changes and the lightbox crossfade.
+
+## 2026-11-26: Speed pass (motion that never hangs)
+Measured with Chromium on this laptop's Intel UHD graphics (D3D11), median of three 2.5s runs after a 6s settle (`bench2.mjs` in the session scratchpad: it measures rAF fps and the worst frame).
+
+| Page | Before | After |
+|---|---|---|
+| Home work cards | 3–5 fps, 600ms stalls | 46–55 fps |
+| Projects gallery (all films live) | 1–5 fps | 57–59 fps |
+| Projects list | 5–11 fps | 41–57 fps |
+| Hero, About, project pages | 50–60 | 55–60 (unchanged) |
+
+What was wrong, and the fix:
+- **Image decode thrash.** One page of cards held ~500 megapixels of screenshots (films fetched them up to 3840px wide; iExcelo's home page alone was 2160×8978), far past the browser's decoded-image cache, so it re-decoded them every frame. Films now ask for what they draw (`FILM_PHONE` / `FILM_DESKTOP` in `film/kit.ts`: ~960px phone screens, ~1920px desktop pages at 2× density), and raw screenshots used in live scenes go through the image optimiser at ≤1920 (`filmSrc`). ~500 → ~220 MP.
+- **Too many films at once.** `components/ui/film-conductor.ts`: every DeviceMockup asks before playing; only the most visible plays (two on screens ≥1024px, where a row holds two cards), the rest hold their poster frame. Also enforces the "two loud things never compete" rule. When a film gets its turn, its images are decoded ahead (`img.decode()`), so new screens mid-film don't stall.
+- **Sticker breeze.** Each resting sticker redrew its fold every frame: a new clip-path on the card face (which holds the film), a new gradient, and a full-card drop-shadow filter. Six of them was most of the home page's cost. The curl is now drawn once at rest; it flutters only while hovered.
+- **Hidden duplicates.** Each sticker kept a second, paused copy of its film under it for the peel. Now built only once someone reaches for the card (pointer enter/down or focus).
+- **Backdrop blur.** The sticker frost and View button blur only while visible.
+- **Gallery videos.** Decoding a video per orbit card dropped the gallery to 30 fps once two moved at once; one holds 60. `orbit.playing` in content/gallery.ts (default one, wide and phone): the card nearest the front plays as it swings round, the rest show a frame. Videos load only when first played (preload none). Far-card blur is now one level and only on the farthest cards.
+Not yet done: a real mid-range Android check, and a Lighthouse run.

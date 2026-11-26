@@ -9,7 +9,7 @@ import { RandomTwo } from "@/components/case-study/random-two";
 import { ProjectArt } from "@/components/case-study/project-art";
 import { ReadingChrome, SectionNav } from "@/components/case-study/reading-chrome";
 import { PageTransition } from "@/components/site/page-transition";
-import { ArrowLeft, ArrowRight, ChevronDown } from "@/components/ui/icons";
+import { ArrowLeft, ArrowRight, ArrowUpRight, ChevronDown } from "@/components/ui/icons";
 import { RollingNumber } from "@/components/ui/rolling-number";
 import { pickSections } from "@/lib/content";
 import { getProjects } from "@/lib/projects";
@@ -122,13 +122,27 @@ export default async function ProjectPage({ params }: Props) {
               {detail.headline}
             </h1>
             <p className="mt-4 max-w-[60ch] text-lead text-ink-2">{project.summary}</p>
-            <ul aria-label="Topics" className="mt-4 flex flex-wrap gap-1.5">
+            <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-3">
+            <ul aria-label="Topics" className="flex flex-wrap gap-1.5">
               {detail.tags.map((t) => (
                 <li key={t} className="rounded-full border border-line px-3 py-1 text-small text-ink-2">
                   {t}
                 </li>
               ))}
             </ul>
+            {detail.site ? (
+              <a
+                href={detail.site}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="pressable group inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2 text-small font-medium text-paper hover:opacity-90"
+              >
+                Visit site
+                <span className="sr-only"> ({new URL(detail.site).hostname}, opens in a new tab)</span>
+                <ArrowUpRight className="transition-transform duration-[var(--dur-quick)] ease-[var(--ease-enter)] group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </a>
+            ) : null}
+            </div>
 
             <div className="mt-8 aspect-[1184/1032] overflow-hidden rounded-[var(--radius-l)] bg-sunken sm:aspect-[1184/860]">
               <ViewTransition name={`cover-${project.slug}`} share="morph" default="none">

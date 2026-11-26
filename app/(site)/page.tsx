@@ -13,6 +13,7 @@ import { heroIntro, heroPhoto, skills, workExperience } from "@/content/about";
 import { ServicesSection } from "@/components/home/services-section";
 import { ArcDial } from "@/components/home/arc-dial/arc-dial";
 import { testimonials } from "@/content/testimonials";
+import { details } from "@/content/details";
 
 // Confirmed numbers only (content/profile.md). Unattributed ones stay out until Samuel confirms them.
 const impact = [
@@ -21,6 +22,13 @@ const impact = [
   { value: "30%", label: "faster time-to-task for iExcelo students" },
   { value: "$1M", label: "pre-seed raised by Immigify while I led design" },
 ];
+
+/** The order of the six cards (anything not listed keeps its place after these) */
+const HOME_ORDER = ["room8", "revival-stream", "iexcelo", "immigify-case-tracker", "fundpath", "yoyo"];
+const rank = (slug: string) => {
+  const i = HOME_ORDER.indexOf(slug);
+  return i === -1 ? HOME_ORDER.length : i;
+};
 
 export default async function HomePage() {
   const [profile, work] = await Promise.all([getProfile(), getAllWork()]);
@@ -31,6 +39,8 @@ export default async function HomePage() {
     ...featured.map((m) => ({
       id: m.slug,
       title: m.title,
+      year: m.year || undefined,
+      label: details[m.slug]?.tags.join(" + "),
       cover: m.cover,
       tint: m.tint,
       placeholder: "web" as const,
@@ -41,6 +51,8 @@ export default async function HomePage() {
     ...archive.map((a) => ({
       id: a.slug,
       title: a.title,
+      year: a.year,
+      label: details[a.slug]?.tags.join(" + "),
       cover: null,
       tint: a.tint,
       placeholder: a.kind,
@@ -49,7 +61,7 @@ export default async function HomePage() {
       morphName: `cover-${a.slug}`,
     })),
   ]
-    .sort((a, b) => Number(!(a.mockup || a.cover)) - Number(!(b.mockup || b.cover)))
+    .sort((a, b) => Number(!(a.mockup || a.cover)) - Number(!(b.mockup || b.cover)) || rank(a.id) - rank(b.id))
     .slice(0, 6);
 
   return (

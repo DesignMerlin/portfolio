@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
 import { Intro } from "@/components/site/intro";
 import { CommandMenu } from "@/components/site/command-menu";
+import { MotionPrefs } from "@/components/site/motion-toggle";
 import { getAllWork, getProfile } from "@/lib/content";
 import { siteUrl } from "@/lib/site";
 import "./globals.css";
@@ -46,8 +47,9 @@ export const viewport: Viewport = {
   Runs before first paint:
   1. Theme: the visitor's saved choice, else dark (the site's home look). No flash of the wrong theme.
   2. Intro: plays on every full page load (client-side navigation never remounts it).
+  3. Motion: data-motion="reduce" from the site's motion toggle if used, else the OS setting.
 */
-const bootScript = `(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t='dark'}d.dataset.theme=t}catch(e){d.dataset.theme='dark'}d.dataset.intro='play'})()`;
+const bootScript = `(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t='dark'}d.dataset.theme=t}catch(e){d.dataset.theme='dark'}d.dataset.intro='play';var m=null;try{m=localStorage.getItem('motion')}catch(e){}if(m==='reduce'||(m!=='full'&&matchMedia('(prefers-reduced-motion: reduce)').matches)){d.dataset.motion='reduce'}})()`;
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const [profile, work] = await Promise.all([getProfile(), getAllWork()]);
@@ -57,7 +59,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <head>
         <script dangerouslySetInnerHTML={{ __html: bootScript }} />
         <noscript>
-          <style>{`.intro{display:none!important}`}</style>
+          <style>{`.intro{display:none!important}@media (prefers-reduced-motion: reduce){*,::before,::after{animation:none!important;transition:none!important}}`}</style>
         </noscript>
       </head>
       <body className="min-h-svh antialiased">
@@ -67,12 +69,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         >
           Skip to content
         </a>
-        <Intro name={profile.name} />
-        {children}
-        <CommandMenu
-          email={profile.email}
-          work={work.map((w) => ({ slug: w.meta.slug, title: w.meta.title, summary: w.meta.summary }))}
-        />
+        <MotionPrefs>
+          <Intro name={profile.name} />
+          {children}
+          <CommandMenu
+            email={profile.email}
+            work={work.map((w) => ({ slug: w.meta.slug, title: w.meta.title, summary: w.meta.summary }))}
+          />
+        </MotionPrefs>
       </body>
     </html>
   );

@@ -13,6 +13,9 @@ const noop = () => () => {};
 export type StickerWork = {
   id: string;
   title: string;
+  /** Shown under the card with the title on hover: the year, and what kind of work it was */
+  year?: string;
+  label?: string;
   cover: string | null;
   tint: string;
   placeholder: PlaceholderKind;
@@ -28,8 +31,8 @@ export type StickerWork = {
  * - Drag the corner (or anywhere on the sticker) to peel it; let go past
  *   about 40% of the way, or throw it, and it peels off. Otherwise it
  *   springs back. Click or tap toggles. Every motion is interruptible.
- * - At rest the corner curls up and flutters in a light breeze; hovering
- *   lifts it a little further, as a hint.
+ * - At rest the corner curls up, still. Hovering lifts it a little further
+ *   and sets it fluttering in a light breeze, as a hint.
  * - Hovering (or focusing it) brings up a liquid glass View button, which
  *   goes straight to the project. Touch has no hover: tap peels the sticker,
  *   and the link underneath goes to the same page.
@@ -52,6 +55,10 @@ export function StickerCard({
 }) {
   const reduce = useReducedMotion();
   const [open, setOpen] = useState(false);
+  // The copy under the sticker (what a peel reveals) is only built once someone reaches for the card:
+  // six cards each holding a second, hidden film was half the page's drawing cost
+  const [armed, setArmed] = useState(false);
+  const arm = () => setArmed(true);
   // The shared-element name is only given after hydration, so it never sits on two elements at once
   const mounted = useSyncExternalStore(noop, () => true, () => false);
   const root = useRef<HTMLDivElement>(null);
@@ -135,6 +142,9 @@ export function StickerCard({
         ref={root}
         className="sticker relative aspect-[1184/1032] touch-pan-y select-none"
         onPointerMove={lean}
+        onPointerEnter={arm}
+        onPointerDown={arm}
+        onFocus={arm}
         onKeyDown={(e) => {
           if (e.key === "Escape" && open) {
             e.stopPropagation();
@@ -146,7 +156,7 @@ export function StickerCard({
           {/* What the sticker was hiding */}
           <div className="absolute inset-0" inert={!open}>
             <ViewTransition name={mounted && open ? work.morphName : undefined} share="morph" default="none">
-              <div className="absolute inset-0">{art(!open)}</div>
+              <div className="absolute inset-0">{armed || open ? art(!open) : null}</div>
             </ViewTransition>
             {mode === "image-text" ? (
               <div className="sticker-frost absolute inset-0 grid place-items-center">
@@ -209,7 +219,15 @@ export function StickerCard({
           </div>
         </div>
       </div>
-
+      {/* Name, year and what kind of work, shown while the card is hovered or focused (always on touch).
+          The sticker's own buttons and links carry the name for keyboards and screen readers. */}
+      <div aria-hidden="true" className="sticker-caption mt-3 flex items-baseline justify-between gap-4 text-small">
+        <span className="min-w-0 truncate">
+          <span className="font-medium text-ink">{work.title}</span>
+          {work.year ? <span className="ml-2 text-ink-3">© {work.year}</span> : null}
+        </span>
+        {work.label ? <span className="shrink-0 text-ink-3">{work.label}</span> : null}
+      </div>
     </li>
   );
 }

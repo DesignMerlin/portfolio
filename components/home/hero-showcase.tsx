@@ -95,9 +95,9 @@ function DesktopHero({ first, last, photo, intro }: Props) {
         <motion.div className="pointer-events-none absolute inset-0 z-20" style={{ opacity: pileOpacity, visibility: pileActive ? "visible" : "hidden" }}>
           <TagPile tags={pileTags} settings={pile.settings} dropKey={pile.dropKey} active={pileActive} className="inset-0" />
         </motion.div>
-        {/* Pile buttons float bottom left, and go as soon as the hero starts moving on from the pile */}
+        {/* Pile buttons float bottom left, clear of the Stop motion button, and go as soon as the hero starts moving on from the pile */}
         <motion.div
-          className="absolute bottom-6 left-6 z-30"
+          className="absolute bottom-6 left-[84px] z-30"
           style={{ opacity: controlsOpacity, visibility: controlsShown ? "visible" : "hidden" }}
         >
           <PileControls {...pile} placement="above" />
