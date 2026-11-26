@@ -1,6 +1,7 @@
 import type { PlaceholderKind } from "@/components/ui/placeholder-shot";
 import { caseTracker } from "@/content/case-tracker";
 import { fundpath } from "@/content/fundpath";
+import { fysi } from "@/content/fysi";
 import { iexcelo } from "@/content/iexcelo";
 import { revival } from "@/content/revival-stream";
 import { lagproperties } from "@/content/lagproperties";
@@ -70,6 +71,7 @@ const ix = iexcelo;
 const vx = voxdeed;
 const pr = powerroute;
 const lp = lagproperties;
+const fy = fysi;
 
 export const details: Record<string, ProjectDetail> = {
   room8: {
@@ -456,6 +458,67 @@ export const details: Record<string, ProjectDetail> = {
           { tone: "soft", devices: true, browser: true, screens: [ix.exam, ix.question] },
           { tone: "deep", devices: true, browser: true, screens: [ix.submitted] },
         ],
+      },
+    ],
+  },
+  // From Samuel's own case study frames in Figma (Fysi, Hi-fi Wireframe page: About, Problem Statement, Design Process,
+  // Project Timeline, Target Audience, User Research, Competitive Analysis) and the designs
+  fysi: {
+    headline: "A green marketplace that both sides can trust",
+    tags: ["E-commerce", "Sustainability", "Web"],
+    kind: "web",
+    role: "Product designer",
+    time: "6 weeks",
+    platform: "Web and mobile web",
+    company: "Fysi",
+    tldr: [
+      "Fysi is an online marketplace that connects eco-conscious shoppers with vendors of certified sustainable products.",
+      "I designed it end to end over six weeks with design thinking: research, personas, flows, information architecture, wireframes, hi-fi and prototype.",
+      "The design covers the whole marketplace: the shop and checkout, customer accounts, vendor onboarding and dashboard, and the admin.",
+    ],
+    // TODO: Samuel to confirm the copy, the year and the vendor count (the file says 16 vendors in one frame and 18 in another)
+    challenge:
+      "Shoppers who care about sustainability struggle to find one place with a real range of eco-friendly products, and don't trust that what's sold as green really is. Vendors of sustainable products have the opposite problem: they can't reach the people who'd value what they make. Fysi had to earn trust from both sides at once.",
+    approach:
+      "I followed the d.school design thinking process over six weeks: understand, define, ideate, design, test. A survey on Microsoft Forms (63 customers, and vendors with their own set of questions) and a comparison with Konga, Jiji, Jumia and Payporte shaped the priorities: eco-certification on every listing, visibility and marketing support for vendors, and logistics that don't eat a small seller's margin. From there, personas, an empathy map, the user journey, flows, card sorting and information architecture, then wireframes, hi-fi screens and a prototype.",
+    outcome: null,
+    keyScreens: [
+      {
+        title: "Shop green, without the guesswork",
+        body: "Eco-products made for you, up front, then flash sales, categories, best sellers and new arrivals. Every product carries its eco-friendly label, so trust is on the shelf, not in the small print.",
+        panels: [{ tone: "soft", devices: true, browser: true, screens: [fy.home, fy.mHome] }],
+      },
+      {
+        title: "Whole page",
+        body: "The homepage, top to bottom.",
+        panels: [],
+        whole: fy.home,
+      },
+      {
+        title: "From the aisle to the door",
+        body: "Filter a category by delivery, brand and price, add to cart, then check out with door delivery or a pick-up store chosen by region and city, which keeps shipping costs down.",
+        panels: [
+          { tone: "soft", devices: true, browser: true, screens: [fy.clothing] },
+          { tone: "deep", devices: true, browser: true, screens: [fy.cart, fy.checkout, fy.pickup] },
+        ],
+      },
+      {
+        title: "Your account",
+        body: "Profile and address, every order with its status, and a wallet with its history, each with what you viewed recently underneath.",
+        panels: [{ tone: "soft", devices: true, browser: true, screens: [fy.account, fy.orders, fy.wallet] }],
+      },
+      {
+        title: "For vendors",
+        body: "Setting up shop is a few short steps, on the web or a phone, ending at a dashboard: revenue, clients, visits and orders, sales progress, best sellers. Products and orders each get their own page.",
+        panels: [
+          { tone: "deep", devices: true, browser: true, screens: [fy.signup, fy.vendorStart, fy.vendorDone, fy.mVendor] },
+          { tone: "soft", devices: true, browser: true, screens: [fy.vendorOverview, fy.vendorProducts, fy.vendorOrders] },
+        ],
+      },
+      {
+        title: "For the marketplace",
+        body: "The super admin sees the whole marketplace: overall sales, a report by category, best sellers, and every customer and vendor.",
+        panels: [{ tone: "deep", devices: true, browser: true, screens: [fy.adminOverview, fy.adminAnalytics, fy.adminCustomers] }],
       },
     ],
   },
