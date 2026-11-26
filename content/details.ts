@@ -3,6 +3,7 @@ import { caseTracker } from "@/content/case-tracker";
 import { fundpath } from "@/content/fundpath";
 import { iexcelo } from "@/content/iexcelo";
 import { revival } from "@/content/revival-stream";
+import { lagproperties } from "@/content/lagproperties";
 import { powerroute } from "@/content/powerroute";
 import { room8 } from "@/content/room8";
 import { voxdeed } from "@/content/voxdeed";
@@ -68,6 +69,7 @@ const r = revival;
 const ix = iexcelo;
 const vx = voxdeed;
 const pr = powerroute;
+const lp = lagproperties;
 
 export const details: Record<string, ProjectDetail> = {
   room8: {
@@ -533,8 +535,8 @@ export const details: Record<string, ProjectDetail> = {
     keyScreens: null,
   },
   lagproperties: {
-    headline: "A mobile real estate app, shaped by testing",
-    tags: ["Real estate", "Mobile"],
+    headline: "Renting in Lagos, for tenants and landlords",
+    tags: ["Real estate", "Escrow", "Mobile"],
     kind: "mobile",
     role: "UI/UX designer, contract",
     time: "2024",
@@ -545,12 +547,43 @@ export const details: Record<string, ProjectDetail> = {
       "I took it from flows and wireframes to high-fidelity screens and prototypes.",
       "Changes from usability testing lifted satisfaction scores by 10%.",
     ],
-    challenge: null,
+    // TODO: Samuel to confirm the challenge and the key screen copy (written from the designs, Figma AHRP)
+    challenge:
+      "Renting in Lagos runs on agents, phone calls and trust: you pay before you're sure, and the landlord isn't sure you'll pay at all. The app had to serve both sides, tenants looking for a home and landlords or agents filling one, and make the money and the paperwork feel safe for each.",
     approach:
-      "End-to-end UI/UX: flows, wireframes, high-fidelity screens and interactive prototypes, with research and usability testing along the way. Specs and assets were delivered on schedule.",
+      "End-to-end UI/UX: flows, wireframes, high-fidelity screens and interactive prototypes, with research and usability testing along the way. Two flows from one start, rent or list. Tenants explore, book an inspection in person or by video, pay into escrow and sign the agreement in the app; landlords see escrow, rent received and overdue, accept or decline inspections and keep track of every tenant. Specs and assets were delivered on schedule.",
     outcome: "Research and usability testing improved user satisfaction scores by 10%. I've learned that testing early is cheaper than being confident.",
     figure: { value: "10%", label: "higher user satisfaction" },
-    keyScreens: null,
+    keyScreens: [
+      {
+        title: "First impression",
+        body: "Orange, the colour of Lagos at dusk, and two photographs of the city's homes: find your perfect home, and renting made simple. Then one quick sign-up for both sides.",
+        panels: [{ tone: "soft", screens: [lp.splash, lp.onboarding1, lp.onboarding2, lp.signUp] }],
+      },
+      {
+        title: "Two ways in",
+        body: "The first choice decides the app you get: rent an apartment, or list your apartment. Tenants land on Explore, with search by city or address and the yearly rent on every listing.",
+        panels: [{ tone: "deep", screens: [lp.home, lp.explore, lp.property] }],
+      },
+      {
+        title: "See it before you pay",
+        body: "Every flat has its gallery and its reviews from past tenants. An inspection can be in person or by video, booked for a date and time that suits.",
+        panels: [{ tone: "soft", screens: [lp.gallery, lp.reviews, lp.schedule, lp.time] }],
+      },
+      {
+        title: "Money and paperwork in one place",
+        body: "Payment goes into escrow, with a receipt and a summary of what it covers. The agent is a message away, and the rental agreement is read and signed in the app.",
+        panels: [{ tone: "deep", screens: [lp.paid, lp.bookings, lp.chat, lp.agreement, lp.signing] }],
+      },
+      {
+        title: "For landlords and agents",
+        body: "A dashboard of what matters: escrow balance, rent received and overdue, tenants with invoices due, inspections coming up. Requests are accepted or declined in one tap, and every tenant and property is a tap away.",
+        panels: [
+          { tone: "soft", screens: [lp.landlordDashboard, lp.landlordInspection, lp.landlordAccepted] },
+          { tone: "deep", screens: [lp.landlordListing, lp.landlordProperties, lp.landlordTenant] },
+        ],
+      },
+    ],
   },
   // From Samuel's own case study page in Figma (EV CHARGING LOCATOR APP, CASE STUDY page) and the screens
   powerroute: {
