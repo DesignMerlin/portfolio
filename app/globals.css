@@ -637,7 +637,8 @@ html[data-motion="reduce"] .collapse-grid {
    writing stays on the ruled lines at any width. Light paper in the light
    theme, dark paper in the dark theme, from the same variables. */
 .notebook-page {
-  --lh: 10.6cqw;
+  /* Fewer, wider lines: the writing on them is big */
+  --lh: 12cqw;
   --margin: 12cqw;
   --nb-paper: #fbfaf6;
   --nb-ink: #1f2126;
@@ -646,10 +647,12 @@ html[data-motion="reduce"] .collapse-grid {
   --nb-margin: rgb(222 82 82 / 0.5);
   --nb-hl: 80%;
   --nb-edge: transparent;
-  --nb-tick: #1f9d57;
   aspect-ratio: var(--rc-ratio);
   overflow: hidden;
-  padding: var(--lh) 6cqw 0 calc(var(--margin) + 4cqw);
+  /* The skill at the top; what it means at the bottom, its last line on the tenth rule of every page */
+  display: flex;
+  flex-direction: column;
+  padding: var(--lh) 6cqw calc(100cqw / var(--rc-ratio) - 10 * var(--lh)) calc(var(--margin) + 4cqw);
   color: var(--nb-ink);
   background-color: var(--nb-paper);
   background-image:
@@ -672,64 +675,34 @@ html[data-motion="reduce"] .collapse-grid {
   --nb-margin: rgb(255 120 120 / 0.42);
   --nb-hl: 42%;
   --nb-edge: rgb(255 255 255 / 0.08);
-  --nb-tick: #3ccf7e;
 }
+/* The skill, big and tight over two ruled lines, as if written with a thick marker */
 .notebook-title {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 10cqw;
+  font-size: 14cqw;
   line-height: var(--lh);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
 }
 .notebook-title span {
   /* Highlighter stroke across the lower half of the words; fainter on dark paper so the words stay readable */
   --hl-c: color-mix(in oklab, var(--hl) var(--nb-hl), transparent);
-  background: linear-gradient(transparent 50%, var(--hl-c) 50%, var(--hl-c) 92%, transparent 92%);
+  background: linear-gradient(transparent 52%, var(--hl-c) 52%, var(--hl-c) 90%, transparent 90%);
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
-  padding-inline: 0.12em;
-  margin-inline: -0.12em;
+  padding-inline: 0.1em;
+  margin-inline: -0.1em;
 }
+/* What it means: down at the foot of the page, on the ruled lines, in a size you can read from across the room */
 .notebook-line {
-  font-size: 6.6cqw;
+  margin-top: auto;
+  font-size: 9.6cqw;
   line-height: var(--lh);
   font-weight: 500;
-  letter-spacing: -0.015em;
-  margin-bottom: var(--lh);
-}
-.notebook-list {
-  font-size: 6cqw;
-  line-height: var(--lh);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
   color: var(--nb-ink-2);
-}
-.notebook-list li {
-  position: relative;
-  padding-left: 9cqw;
-}
-/* Ticked box: green square, white check */
-.notebook-list li::before,
-.notebook-list li::after {
-  content: "";
-  position: absolute;
-}
-.notebook-list li::before {
-  left: 0;
-  top: calc(var(--lh) / 2 - 2.6cqw);
-  width: 5.2cqw;
-  height: 5.2cqw;
-  border-radius: 1.2cqw;
-  background: var(--nb-tick);
-  transform: rotate(-4deg);
-}
-.notebook-list li::after {
-  left: 1.75cqw;
-  top: calc(var(--lh) / 2 - 1.75cqw);
-  width: 1.6cqw;
-  height: 2.9cqw;
-  border: solid #fff;
-  border-width: 0 0.6cqw 0.6cqw 0;
-  transform: rotate(40deg);
+  text-wrap: pretty;
 }
 
 /* ------------------------------------------------------------------
@@ -875,8 +848,9 @@ main:has(.gallery-stage) {
   cursor: grab;
 }
 @media (max-width: 639px) {
+  /* Just room for the orbit, the centre card and its title: a taller stage left a screen of empty page */
   .gallery-stage {
-    height: clamp(500px, 72svh, 640px);
+    height: clamp(440px, 56svh, 520px);
   }
 }
 .gallery-stage[data-dragging] {
@@ -1135,6 +1109,18 @@ html[data-motion="reduce"] .job:hover .job-arrow {
   box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.6);
 }
 
+/* A case study's reading line (reading-chrome.tsx), tied to the page's scroll and run off the main thread */
+.read-progress {
+  scale: 0 1;
+  animation: read-progress linear both;
+  animation-timeline: scroll(root block);
+}
+@keyframes read-progress {
+  to {
+    scale: 1 1;
+  }
+}
+
 /* How far round a pie chart has drawn itself (components/case-study/live/charts.tsx) */
 @property --sweep {
   syntax: "<angle>";
@@ -1370,12 +1356,18 @@ html[data-motion="reduce"] .job:hover .job-arrow {
   transition: opacity var(--dur-base) var(--ease-enter);
   pointer-events: none;
 }
-.glass:not([data-inert]):hover {
-  transform: translateY(-3px) scale(1.04);
+@media (hover: hover) {
+  .glass:not([data-inert]):hover {
+    transform: translateY(-3px) scale(1.04);
+  }
 }
-.glass:not([data-inert]):hover::after,
 .glass:focus-visible::after {
   opacity: 0.8;
+}
+@media (hover: hover) {
+  .glass:not([data-inert]):hover::after {
+    opacity: 0.8;
+  }
 }
 .glass:not([data-inert]):active {
   transform: translateY(0) scale(0.97);
@@ -1414,8 +1406,10 @@ html[data-motion="reduce"] .job:hover .job-arrow {
   z-index: 1;
   transition: transform var(--dur-base) var(--ease-enter);
 }
-.glass:not([data-inert]):hover .glass-icon {
-  transform: translateY(-2px) scale(1.08);
+@media (hover: hover) {
+  .glass:not([data-inert]):hover .glass-icon {
+    transform: translateY(-2px) scale(1.08);
+  }
 }
 /* The name, rising from below the circle */
 .glass-tip {
@@ -1440,10 +1434,15 @@ html[data-motion="reduce"] .job:hover .job-arrow {
     translate var(--dur-base) var(--ease-enter),
     opacity var(--dur-quick) var(--ease-enter);
 }
-.glass:hover .glass-tip,
 .glass:focus-visible .glass-tip {
   translate: -50% 0;
   opacity: 1;
+}
+@media (hover: hover) {
+  .glass:hover .glass-tip {
+    translate: -50% 0;
+    opacity: 1;
+  }
 }
 /* Email pill: "Email me" lifts away and the address rises from below */
 .glass-swap {
@@ -1466,15 +1465,25 @@ html[data-motion="reduce"] .job:hover .job-arrow {
   opacity: 0;
   font-weight: 500;
 }
-.glass:hover .glass-swap-a,
 .glass:focus-visible .glass-swap-a {
   transform: translateY(-100%);
   opacity: 0;
 }
-.glass:hover .glass-swap-b,
+@media (hover: hover) {
+  .glass:hover .glass-swap-a {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
 .glass:focus-visible .glass-swap-b {
   transform: translateY(0);
   opacity: 1;
+}
+@media (hover: hover) {
+  .glass:hover .glass-swap-b {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 /* Reduced motion: the OS setting or the site's toggle */
 html[data-motion="reduce"] .glass,
@@ -2465,6 +2474,32 @@ html[data-motion="reduce"] .device-trio:nth-child(4) {
 .whole-page:focus-visible .whole-pan {
   animation-play-state: paused;
 }
+/* A phone mid-scroll: the loops hold their place until the page is at rest (scroll-hold.ts) */
+html[data-scroll-held] .whole-pan,
+html[data-scroll-held] .marquee-track {
+  animation-play-state: paused;
+}
+/* Touch has no hover to read a long website down: the page inside the window scrolls as the window
+   passes through the screen, tied to the page's own scroll (off the main thread). Tap still opens it */
+@media (hover: none) {
+  @supports (animation-timeline: view()) {
+    /* The panel is the timeline: the window inside it clips, so it can't see the page scroll itself */
+    .device-panel {
+      view-timeline: --panel block;
+    }
+    .frame-page {
+      transition: none;
+      animation: frame-read linear both;
+      animation-timeline: --panel;
+      animation-range: cover 25% cover 75%;
+    }
+  }
+}
+@keyframes frame-read {
+  to {
+    transform: translateY(var(--travel));
+  }
+}
 @keyframes whole-down {
   from { translate: 0 var(--from); }
   to { translate: 0 var(--to); }
@@ -3412,4 +3447,69 @@ canvas:focus-visible + .doodle-cursor {
   border-radius: var(--radius-m);
   box-shadow: var(--shadow-float);
   pointer-events: none;
+}
+html[data-motion="reduce"] .frame-page {
+  animation: none;
+}
+
+/* The home page's scroll sentence (scroll-sentence.tsx), run by the browser off the scroll itself. The inset
+   makes the timeline run from the sentence's top at 80% down the screen to its bottom at 55%, and each word
+   lights over its own stretch of it (--a to --b); a skill's selection box and label arrive in its last part */
+.sentence {
+  view-timeline: --sentence block;
+  view-timeline-inset: 55% 20%;
+}
+.sentence-word,
+.sentence-box,
+.sentence-label {
+  animation-timeline: --sentence;
+  animation-fill-mode: both;
+  animation-timing-function: linear;
+  animation-duration: auto;
+}
+.sentence-word {
+  animation-name: sentence-lit;
+  animation-range: cover var(--a) cover var(--b);
+}
+.sentence-box,
+.sentence-label {
+  animation-range: cover var(--box) cover var(--b);
+}
+.sentence-box {
+  animation-name: sentence-box;
+}
+.sentence-label {
+  animation-name: sentence-label;
+}
+@keyframes sentence-lit {
+  from {
+    opacity: 0.18;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes sentence-box {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes sentence-label {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Reduced motion: the finished, fully annotated sentence */
+html[data-motion="reduce"] :is(.sentence-word, .sentence-box, .sentence-label) {
+  animation: none;
 }

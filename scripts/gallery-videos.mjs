@@ -5,6 +5,10 @@
 //
 // Re-run after a film changes. Start the site (pnpm build && pnpm start), then
 //   node scripts/gallery-videos.mjs [http://localhost:3000] [slug ...]
+//
+// --phone records the films phones play instead of building them live (device-mockup.tsx): sharper and
+// smoother (640 wide, 24fps), in public/work/films/<slug>.webm with a .jpg poster. A phone draws a video
+// in hardware; a live film is hundreds of animations, which is what made phones hang.
 // Frames are stepped one by one on the film's own clock, so the video is smooth however slow the machine.
 // Encoding uses the ffmpeg that comes with Playwright (VP8 WebM).
 import fs from "node:fs";
@@ -13,11 +17,15 @@ import path from "node:path";
 import { spawn } from "node:child_process";
 import { chromium } from "@playwright/test";
 
-const [base = "http://localhost:3000", ...only] = process.argv.slice(2);
-const out = "public/work/gallery";
-const W = 320; // twice the size a floating card is drawn at on a desktop
+const args = process.argv.slice(2);
+const phone = args.includes("--phone");
+const [base = "http://localhost:3000", ...only] = args.filter((a) => a !== "--phone");
+const out = phone ? "public/work/films" : "public/work/gallery";
+// Gallery: twice the size a floating card is drawn at on a desktop. Phone: a card is ~370 points wide
+const W = phone ? 640 : 320;
 const H = Math.round((W * 1032) / 1184);
-const FPS = 20;
+const FPS = phone ? 24 : 20;
+const RATE = phone ? "520k" : "220k";
 
 function ffmpegPath() {
   const root = process.env.PLAYWRIGHT_BROWSERS_PATH || path.join(os.homedir(), process.platform === "win32" ? "AppData/Local/ms-playwright" : process.platform === "darwin" ? "Library/Caches/ms-playwright" : ".cache/ms-playwright");
@@ -74,7 +82,7 @@ for (const slug of slugs) {
   });
   const frames = Math.round((length / 1000) * FPS);
   const file = `${out}/${slug}.webm`;
-  const enc = spawn(ffmpeg, ["-y", "-f", "image2pipe", "-c:v", "mjpeg", "-r", String(FPS), "-i", "pipe:0", "-c:v", "libvpx", "-b:v", "220k", "-crf", "16", "-qmin", "4", "-qmax", "42", "-deadline", "good", "-cpu-used", "1", "-auto-alt-ref", "0", "-an", file], { stdio: ["pipe", "ignore", "pipe"] });
+  const enc = spawn(ffmpeg, ["-y", "-f", "image2pipe", "-c:v", "mjpeg", "-r", String(FPS), "-i", "pipe:0", "-c:v", "libvpx", "-b:v", RATE, "-crf", "16", "-qmin", "4", "-qmax", "42", "-deadline", "good", "-cpu-used", "1", "-auto-alt-ref", "0", "-an", file], { stdio: ["pipe", "ignore", "pipe"] });
   let errText = "";
   enc.stderr.on("data", (d) => (errText += d));
   const done = new Promise((res, rej) => enc.on("close", (code) => (code === 0 ? res() : rej(new Error(errText.slice(-600))))));

@@ -2,8 +2,9 @@
 
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { conduct } from "@/components/ui/film-conductor";
+import { useReducedMotion } from "@/components/ui/use-reduced-motion";
 
 // 3D films are their own chunk, fetched only where one is shown
 const films = {
@@ -18,6 +19,72 @@ const films = {
   fysi: dynamic(() => import("@/components/case-study/fysi/film")),
   caseTracker: dynamic(() => import("@/components/case-study/case-tracker/film")),
 };
+
+/** Each film, recorded (scripts/gallery-videos.mjs --phone): public/work/films/<name>.webm and .jpg */
+const recorded: Record<keyof typeof films, string> = {
+  room8: "room8",
+  fundpath: "fundpath",
+  yoyo: "yoyo",
+  revivalStream: "revival-stream",
+  iexcelo: "iexcelo",
+  voxdeed: "voxdeed",
+  powerroute: "powerroute",
+  lagproperties: "lagproperties",
+  fysi: "fysi",
+  caseTracker: "immigify-case-tracker",
+};
+
+/** Touch screens get the recorded film: a phone draws a video in hardware, while a live film is hundreds of animations */
+const coarse = "(pointer: coarse)";
+const onCoarse = (cb: () => void) => {
+  const m = matchMedia(coarse);
+  m.addEventListener("change", cb);
+  return () => m.removeEventListener("change", cb);
+};
+const useTouch = () =>
+  useSyncExternalStore(
+    onCoarse,
+    () => matchMedia(coarse).matches,
+    () => false,
+  );
+
+/**
+ * A film as its recording. Only the poster loads until its turn comes (preload none), then it plays; paused,
+ * it holds its frame, and slow motion is the video's playback rate. Reduced motion: the poster, still.
+ */
+function FilmVideo({ name, playing, rate }: { name: string; playing: boolean; rate: number }) {
+  const video = useRef<HTMLVideoElement>(null);
+  const reduce = useReducedMotion();
+  useEffect(() => {
+    const v = video.current;
+    if (!v) return;
+    // Data Saver or a slow connection: the poster stays, and the film isn't downloaded at all
+    const net = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }).connection;
+    const lean = !!net && (net.saveData === true || /(^|-)(2g|3g)$/.test(net.effectiveType ?? ""));
+    if (playing && !reduce && !lean) v.play().catch(() => {});
+    else v.pause();
+  }, [playing, reduce]);
+  useEffect(() => {
+    const v = video.current;
+    if (!v) return;
+    v.defaultPlaybackRate = rate;
+    v.playbackRate = rate;
+  }, [rate]);
+  return (
+    <video
+      ref={video}
+      src={`/work/films/${name}.webm`}
+      poster={`/work/films/${name}.jpg`}
+      muted
+      loop
+      playsInline
+      preload="none"
+      disablePictureInPicture
+      aria-hidden="true"
+      className="film-video absolute inset-0 h-full w-full object-cover"
+    />
+  );
+}
 
 /** Whether a "#rrggbb" wash is dark enough for light text */
 const dark = (hex: string) => {
@@ -124,6 +191,7 @@ export function DeviceMockup({
   }, [allowed]);
 
   const playing = visible && allowed && !covered && !paused;
+  const touch = useTouch();
   const Film = "film" in mockup ? films[mockup.film] : null;
   const what = "film" in mockup ? (mockup.film === "revivalStream" ? "a laptop and an iPhone, as a short film" : mockup.film === "iexcelo" || mockup.film === "voxdeed" || mockup.film === "fysi" ? "a browser and an iPhone, as a short film" : "iPhones, as a short film") : "phones" in mockup ? "three phones" : "a laptop and a phone";
 
@@ -146,7 +214,9 @@ export function DeviceMockup({
     >
       <div aria-hidden="true" className="device-wash absolute inset-0" />
 
-      {Film ? near ? <Film playing={playing} rate={rate} /> : null : "phones" in mockup ? (
+      {"film" in mockup && touch ? (
+        <FilmVideo name={recorded[mockup.film]} playing={playing} rate={rate} />
+      ) : Film ? near ? <Film playing={playing} rate={rate} /> : null : "phones" in mockup ? (
         mockup.phones.map((src, i) => (
           <div
             key={src}

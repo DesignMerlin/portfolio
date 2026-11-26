@@ -2,8 +2,10 @@ import type { Skill } from "@/content/about";
 
 /**
  * A page torn out of a spiral notebook: perforated top edge, ruled lines,
- * a red margin. Everything is sized in container units, so the writing
- * stays on the lines at any card width. The paper is the same in both
+ * a red margin, and just two things written on it, big: the skill, over two
+ * lines with a highlighter through it, and one line on what it means.
+ * Everything is sized in container units, so the writing stays on the lines
+ * at any card width. The paper is the same in both
  * themes; it's an object hanging in the room, not part of the UI chrome.
  */
 export function NotebookCard({ svc, tint, radius, shadow }: { svc: Skill; tint: string; radius: number; shadow: boolean }) {
@@ -22,11 +24,6 @@ export function NotebookCard({ svc, tint, radius, shadow }: { svc: Skill; tint: 
           <span style={{ "--hl": tint } as React.CSSProperties}>{svc.name}</span>
         </h3>
         <p className="notebook-line">{svc.line}</p>
-        <ul className="notebook-list">
-          {svc.tools.slice(0, 3).map((t) => (
-            <li key={t}>{t}</li>
-          ))}
-        </ul>
       </article>
     </div>
   );

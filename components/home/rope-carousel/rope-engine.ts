@@ -1,4 +1,5 @@
 import type { RopeCarouselSettings } from "@/components/home/rope-carousel/settings";
+import { onScrollHold } from "@/components/ui/scroll-hold";
 
 // Pendulum tuning (same model as the old hanging cards: θ'' = -ω²θ - 2ζωθ' + k·a)
 const PERIOD = 1.2; // seconds per full swing
@@ -58,6 +59,9 @@ export class RopeEngine {
   private last = 0;
   private ro: ResizeObserver;
   private io: IntersectionObserver;
+  /** A phone mid-scroll: the line holds still and carries on when the page is at rest (scroll-hold.ts) */
+  private held = false;
+  private unhold: () => void;
 
   constructor(
     private stage: HTMLElement,
@@ -71,6 +75,10 @@ export class RopeEngine {
       if (this.visible) this.start();
     });
     this.io.observe(stage);
+    this.unhold = onScrollHold((h) => {
+      this.held = h;
+      if (!h) this.start();
+    });
 
     stage.addEventListener("pointerdown", this.onDown);
     stage.addEventListener("pointermove", this.onMove);
@@ -117,6 +125,7 @@ export class RopeEngine {
   }
 
   destroy() {
+    this.unhold();
     cancelAnimationFrame(this.raf);
     this.ro.disconnect();
     this.io.disconnect();
@@ -170,7 +179,7 @@ export class RopeEngine {
   // Loop ----------------------------------------------------------------------
 
   private start() {
-    if (this.raf || !this.visible || document.hidden) return;
+    if (this.raf || this.held || !this.visible || document.hidden) return;
     this.last = performance.now();
     this.raf = requestAnimationFrame(this.tick);
   }
@@ -180,7 +189,7 @@ export class RopeEngine {
     const dt = Math.min(now - this.last, 40) / 1000;
     this.last = now;
     if (dt > 0) this.render(dt);
-    if (this.visible && !document.hidden && !this.isAtRest()) this.raf = requestAnimationFrame(this.tick);
+    if (this.visible && !this.held && !document.hidden && !this.isAtRest()) this.raf = requestAnimationFrame(this.tick);
   };
 
   /** Nothing will change until input arrives: let the loop sleep */

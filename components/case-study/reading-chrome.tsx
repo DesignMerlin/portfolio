@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion, useScroll, useSpring } from "motion/react";
 import { useReducedMotion } from "@/components/ui/use-reduced-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { ChevronDown, CloseIcon } from "@/components/ui/icons";
 import { spring, tween } from "@/lib/motion";
 import type { WorkSection } from "@/lib/content";
@@ -34,21 +34,33 @@ function useActiveSection(sections: WorkSection[]) {
  *   contents (the same surface grows, so you never lose your place).
  */
 export function ReadingChrome({ sections }: { sections: WorkSection[] }) {
-  const { scrollYProgress } = useScroll();
-  const reduce = useReducedMotion();
-  const progress = useSpring(scrollYProgress, { stiffness: 260, damping: 40, restDelta: 0.001 });
   const active = useActiveSection(sections);
+  // Where the browser can tie an animation to the scroll itself, the line is pure CSS and costs the page
+  // nothing per frame (it runs off the main thread); elsewhere Motion draws it
+  const native = useSyncExternalStore(
+    noop,
+    () => CSS.supports("animation-timeline: scroll()"),
+    () => false,
+  );
 
   return (
     <>
-      <motion.div
-        aria-hidden="true"
-        className="fixed inset-x-0 top-[var(--header-h)] z-40 h-[2px] origin-left bg-accent"
-        style={{ scaleX: reduce ? scrollYProgress : progress }}
-      />
+      {native ? <span aria-hidden="true" className={`${LINE} read-progress`} /> : <SprungLine />}
       <MobileContents sections={sections} active={active} />
     </>
   );
+}
+
+const noop = () => () => {};
+
+/** Along the very top edge: lower down, it cut through the floating nav */
+const LINE = "fixed inset-x-0 top-0 z-[60] h-[2px] origin-left bg-accent";
+
+function SprungLine() {
+  const { scrollYProgress } = useScroll();
+  const reduce = useReducedMotion();
+  const progress = useSpring(scrollYProgress, { stiffness: 260, damping: 40, restDelta: 0.001 });
+  return <motion.div aria-hidden="true" className={LINE} style={{ scaleX: reduce ? scrollYProgress : progress }} />;
 }
 
 export function SectionNav({ sections }: { sections: WorkSection[] }) {
