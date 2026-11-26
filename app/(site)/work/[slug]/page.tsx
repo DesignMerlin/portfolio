@@ -58,14 +58,6 @@ function Row({ id, title, children }: { id: string; title: string; children: Rea
   );
 }
 
-function Soon() {
-  return (
-    <p className="flex flex-wrap items-center gap-3 text-ink-2">
-      <span className="rounded-full border border-dashed border-line-strong px-3 py-1 text-micro">Placeholder</span>
-      This part of the write-up is on its way.
-    </p>
-  );
-}
 
 export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
@@ -74,6 +66,14 @@ export default async function ProjectPage({ params }: Props) {
   const project = projects[index];
   if (!project) notFound();
   const { detail, entry } = project;
+  // Only the sections there's something confirmed to say in
+  const has: Record<string, boolean> = {
+    challenge: !!detail.challenge,
+    "how-i-worked": !!detail.approach,
+    outcome: !!detail.outcome || project.outcomes.length > 0,
+    "key-screens": !!detail.keyScreens?.length,
+  };
+  const tabs = TABS.filter((t) => has[t.id] ?? true);
   // Every other project there's something to see of. Two are shown, at random
   const more = projects.map((_, n) => projects[(index + 1 + n) % projects.length]!).filter((x) => x.slug !== slug && (x.mockup || x.cover));
 
@@ -94,7 +94,7 @@ export default async function ProjectPage({ params }: Props) {
 
   return (
     <PageTransition>
-      <ReadingChrome sections={TABS} />
+      <ReadingChrome sections={tabs} />
       <article className="mx-auto grid max-w-[1320px] gap-x-16 px-4 pt-8 sm:px-8 lg:grid-cols-[180px_minmax(0,1fr)] lg:pt-12">
         <aside>
           <div className="lg:sticky lg:top-28">
@@ -103,7 +103,7 @@ export default async function ProjectPage({ params }: Props) {
               All work
             </Link>
             <div className="mt-8 hidden lg:block">
-              <SectionNav sections={TABS} />
+              <SectionNav sections={tabs} />
             </div>
           </div>
         </aside>
@@ -154,12 +154,16 @@ export default async function ProjectPage({ params }: Props) {
           </section>
 
           <div className="mt-10 lg:mt-14">
-            <Row id="challenge" title="The challenge">
-              {detail.challenge ? <p className="text-lead text-ink">{detail.challenge}</p> : <Soon />}
-            </Row>
-            <Row id="how-i-worked" title="How I worked">
-              {detail.approach ? <p className="text-lead text-ink">{detail.approach}</p> : <Soon />}
-            </Row>
+            {detail.challenge ? (
+              <Row id="challenge" title="The challenge">
+                <p className="text-lead text-ink">{detail.challenge}</p>
+              </Row>
+            ) : null}
+            {detail.approach ? (
+              <Row id="how-i-worked" title="How I worked">
+                <p className="text-lead text-ink">{detail.approach}</p>
+              </Row>
+            ) : null}
             {fullProcess ? (
               <details className="full-process -mt-6 mb-10 lg:-mt-8 lg:mb-14">
                 <summary className="pressable inline-flex cursor-pointer items-center gap-2 rounded-full border border-line-strong px-4 py-2.5 text-small font-medium hover:border-ink-3 md:ml-[232px]">
@@ -169,8 +173,9 @@ export default async function ProjectPage({ params }: Props) {
                 <div className="pt-12">{fullProcess}</div>
               </details>
             ) : null}
+            {has.outcome ? (
             <Row id="outcome" title="Outcome">
-              {detail.outcome ? <p className="text-lead text-ink">{detail.outcome}</p> : <Soon />}
+              {detail.outcome ? <p className="text-lead text-ink">{detail.outcome}</p> : null}
               {project.outcomes.length ? (
                 <dl className="mt-8 grid gap-x-8 gap-y-6 sm:grid-cols-3">
                   {project.outcomes.map((o) => (
@@ -185,6 +190,7 @@ export default async function ProjectPage({ params }: Props) {
                 </dl>
               ) : null}
             </Row>
+            ) : null}
             <section id="key-screens" data-section aria-labelledby="key-screens-title" className="border-t border-line pt-10 lg:pt-14">
               <h2 id="key-screens-title" className="mb-8 font-display text-h2 font-semibold">
                 Key screens

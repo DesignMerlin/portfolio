@@ -67,7 +67,7 @@ export default async function ProjectsPage() {
         <div className="grid gap-6 lg:grid-cols-12">
           <h1 className="text-h1 font-semibold lg:col-span-6">Projects</h1>
           <p className="max-w-[46ch] self-end text-ink-2 lg:col-span-5 lg:col-start-8">
-            Case studies first, then shipped work whose write-up is on its way. Every one opens to its own page.
+            Apps, websites and dashboards, each with its screens, a short film and the thinking behind it. Every one opens to its own page.
           </p>
         </div>
         <ProjectsViews

@@ -3,7 +3,8 @@ import { Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
 import { Intro } from "@/components/site/intro";
 import { CommandMenu } from "@/components/site/command-menu";
 import { MotionPrefs } from "@/components/site/motion-toggle";
-import { getAllWork, getProfile } from "@/lib/content";
+import { getProfile } from "@/lib/content";
+import { getProjects } from "@/lib/projects";
 import { siteUrl } from "@/lib/site";
 import "./globals.css";
 
@@ -52,7 +53,7 @@ export const viewport: Viewport = {
 const bootScript = `(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t='dark'}d.dataset.theme=t}catch(e){d.dataset.theme='dark'}d.dataset.intro='play';var m=null;try{m=localStorage.getItem('motion')}catch(e){}if(m==='reduce'||(m!=='full'&&matchMedia('(prefers-reduced-motion: reduce)').matches)){d.dataset.motion='reduce'}})()`;
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const [profile, work] = await Promise.all([getProfile(), getAllWork()]);
+  const [profile, projects] = await Promise.all([getProfile(), getProjects()]);
 
   return (
     <html lang="en" suppressHydrationWarning className={`${bricolage.variable} ${jetbrains.variable}`}>
@@ -74,7 +75,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           {children}
           <CommandMenu
             email={profile.email}
-            work={work.map((w) => ({ slug: w.meta.slug, title: w.meta.title, summary: w.meta.summary }))}
+            work={projects.map((p) => ({ slug: p.slug, title: p.title, summary: p.summary }))}
           />
         </MotionPrefs>
       </body>

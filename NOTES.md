@@ -460,3 +460,9 @@ Not yet done: a real mid-range Android check, and a Lighthouse run.
 - Screens: 20 from Figma Fysi (Hi-fi Wireframe page) at 1× (1440 wide; the browser frames never draw them wider), in `public/work/fysi/` (1.8 MB): the shop and checkout, customer account, vendor onboarding and dashboard, super admin, and two phone screens. The frame called "Add to Cart" is the cart and one "Vendors" frame is analytics; they're named for what they show. The mobile homepage frame is 2981 points tall but the page ends at about 1650.
 - Film (`components/case-study/fysi/film.tsx`, 32s): the iExcelo browser-and-phone rig on a soft green wash (`.ix.fy`), pages arriving as sheets and modals fading over the page. Shopper: homepage, Shop Now, clothing, a product, the cart, checkout, a pick-up store (phone alongside); vendor: sign up, set up, congratulations, the dashboard, products; then the admin's analytics.
 - Case study from Samuel's own case study frames in the file (About, Problem Statement, Design Process, Timeline, Target Audience, User Research, Competitive Analysis). TODO for Samuel: confirm the copy and the year, and the vendor count (16 in one frame, 18 in another, so the page doesn't give one). The Key Findings percentages aren't used: which number belongs to which label isn't clear from the file.
+
+## 2026-11-26: No placeholders on the site
+- Projects without real screens (Immigify, HeightGPT, Simplexity, QuitBet: stand-in art and placeholder key screens) are left out by `getProjects()` until their exports arrive; their facts stay in About and the work history. Their content and details entries are kept.
+- Project pages show only the sections with confirmed content (and only their tabs); the "Placeholder, on its way" chip is gone.
+- Home: "What people say" shows only real testimonials, so it's hidden while all eight are stand-ins.
+- The unused Screens gallery (`components/shots`, `content/shots.ts`), all placeholder frames, is deleted.

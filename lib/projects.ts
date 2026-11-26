@@ -19,10 +19,13 @@ export type Project = {
   entry: WorkEntry | null;
 };
 
-/** Every project, case studies first */
+/**
+ * Every project with real screens to show (a film or a cover), case studies first. Projects still waiting on
+ * their exports (they'd only have stand-in art and placeholder key screens) are left out until they arrive.
+ */
 export async function getProjects(): Promise<Project[]> {
   const work = await getAllWork();
-  return [
+  const all: Project[] = [
     ...work.map(({ meta, ...rest }) => ({
       slug: meta.slug,
       title: meta.title,
@@ -53,4 +56,5 @@ export async function getProjects(): Promise<Project[]> {
       };
     }),
   ];
+  return all.filter((p) => p.mockup || p.cover);
 }
