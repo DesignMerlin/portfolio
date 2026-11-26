@@ -1,2 +1,4 @@
 allowBuilds:
   unrs-resolver: true
+  # Downloads its ffmpeg (with H.264) for scripts/gallery-videos.mjs; dev only, nothing ships to the site
+  ffmpeg-static: true
