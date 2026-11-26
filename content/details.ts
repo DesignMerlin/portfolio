@@ -4,6 +4,7 @@ import { fundpath } from "@/content/fundpath";
 import { iexcelo } from "@/content/iexcelo";
 import { revival } from "@/content/revival-stream";
 import { room8 } from "@/content/room8";
+import { voxdeed } from "@/content/voxdeed";
 import { yoyo } from "@/content/yoyo";
 
 /**
@@ -64,6 +65,7 @@ const c = caseTracker;
 const y = yoyo;
 const r = revival;
 const ix = iexcelo;
+const vx = voxdeed;
 
 export const details: Record<string, ProjectDetail> = {
   room8: {
@@ -449,6 +451,66 @@ export const details: Record<string, ProjectDetail> = {
           { tone: "deep", devices: true, browser: true, screens: [ix.dash] },
           { tone: "soft", devices: true, browser: true, screens: [ix.exam, ix.question] },
           { tone: "deep", devices: true, browser: true, screens: [ix.submitted] },
+        ],
+      },
+    ],
+  },
+  voxdeed: {
+    headline: "A voice note in, a signed contract out",
+    tags: ["AI", "Legal tech", "Web"],
+    kind: "web",
+    role: "Co-founder, design",
+    // TODO: Samuel to confirm the dates (the page's footer says 2026; the company is pre-launch)
+    time: "2026",
+    platform: "Web",
+    company: "Voxdeed",
+    tldr: [
+      "Voxdeed is an AI legal tech product I'm co-founding, pre-launch.",
+      "It turns a verbal business agreement (a WhatsApp voice note, a call, a conversation) into a drafted contract both sides sign.",
+      "I designed the landing page: brand, story and pricing, on desktop and mobile.",
+    ],
+    // TODO: Samuel to confirm this copy. Written from the landing page in Figma (Voxdeed Inc., Website page)
+    challenge:
+      "A lot of business is agreed out loud: a call, a voice note, a handshake. Contracts feel slow, expensive and formal by comparison. The page had to make a legal product feel as easy as sending a voice note, and still feel serious enough to trust with a deal.",
+    approach:
+      "Instead of describing the product, the hero shows it: a voice note goes in, the AI works through its steps, and a contract comes back ready to sign, inside one window. Then three steps with no lawyers in them, four plain promises, prices in naira with a free trial, and answers to the questions people ask before trusting a contract to software. Dark, with one red, and a serif italic for the turn in each headline.",
+    outcome: null,
+    keyScreens: [
+      {
+        title: "Show the trick first",
+        body: "The future of agreements is automated, and underneath it the proof: a voice note in, the AI transcribing, extracting terms and drafting, and a supply agreement back, ready to sign. The badge says how long it takes.",
+        panels: [{ tone: "deep", devices: true, browser: true, screens: [vx.hero, vx.mHome] }],
+      },
+      {
+        title: "Whole page",
+        body: "The landing page, top to bottom: the promise, how it works, what you get, questions, pricing, contact, and a last call to protect your next deal.",
+        panels: [],
+        whole: vx.home,
+      },
+      {
+        title: "Three steps, no lawyers",
+        body: "Record or send, the AI processes, both sides sign and it's kept in a vault. Each step has one image: a microphone, a chip, a shield with everything that ends up inside it.",
+        panels: [{ tone: "deep", devices: true, browser: true, screens: [vx.steps] }],
+      },
+      {
+        title: "Four promises",
+        body: "Voice note to signed contract, drafted in about a minute, for a fraction of a lawyer, with proof if there's ever a dispute. The cards round it show the same things as they'd appear in the product.",
+        panels: [{ tone: "deep", devices: true, browser: true, screens: [vx.features] }],
+      },
+      {
+        title: "Before anyone trusts it",
+        body: "The questions people ask first (do I need an app, what can it write, how safe is it, what if the AI gets a term wrong) are answered on the page. Pricing is in naira, starts free, and says who each plan is for.",
+        panels: [
+          { tone: "deep", devices: true, browser: true, screens: [vx.faq] },
+          { tone: "deep", devices: true, browser: true, screens: [vx.pricing] },
+        ],
+      },
+      {
+        title: "A way to reach a person",
+        body: "Contact is an email to copy and a short form. The last call repeats the promise, and the footer says plainly that Voxdeed doesn't give legal advice.",
+        panels: [
+          { tone: "deep", devices: true, browser: true, screens: [vx.contact] },
+          { tone: "deep", devices: true, browser: true, screens: [vx.cta] },
         ],
       },
     ],
