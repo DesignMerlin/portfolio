@@ -7,6 +7,7 @@ import { DRIFT, ENTER, SHEET, type Frame } from "@/components/case-study/film/ki
 import { useFilm, type FilmProps, type FilmScript } from "@/components/case-study/film/use-film";
 import { LiveParts, liveTracks, type LiveScene } from "@/components/case-study/live/kit";
 import { FY_LOGO } from "@/components/case-study/fysi/logo";
+import { fysiAnalytics, fysiVendorOverview } from "@/components/case-study/live/charts";
 import { fysi, type FysiScreen } from "@/content/fysi";
 
 /* ------------------------------------------------------------------ */
@@ -170,9 +171,9 @@ const LAYERS: Layer[] = [
   { id: "signup", screen: "signup", frames: sheet(SIGNUP, VENDOR + 0.72) },
   { id: "vendor", screen: "vendorStart", frames: sheet(VENDOR, DONE + 0.72) },
   { id: "done", screen: "vendorDone", frames: over(DONE, DASH + 0.72), live: [SEAL, DONE + 0.3] },
-  { id: "dash", screen: "vendorOverview", frames: sheet(DASH, PRODUCTS + 0.72) },
+  { id: "dash", screen: "vendorOverview", frames: sheet(DASH, PRODUCTS + 0.72), live: [fysiVendorOverview, DASH + 0.45] },
   { id: "products", screen: "vendorProducts", frames: sheet(PRODUCTS, ADMIN + 0.72), scroll: scroll(LPT, [PRODUCTS + 0.9, PRODUCTS + 1.8, 250]) },
-  { id: "admin", screen: "adminAnalytics", frames: sheet(ADMIN, END + 1) },
+  { id: "admin", screen: "adminAnalytics", frames: sheet(ADMIN, END + 1), live: [fysiAnalytics, ADMIN + 0.45] },
 ];
 const PHONE_LAYERS: Layer[] = [
   { id: "m-home", screen: "mHome", frames: show(0, SIGNUP - 0.2), scroll: scroll(PT, [CART - 0.2, CART + 1.2, 520], [CHECKOUT + 0.4, CHECKOUT + 1.6, 1000], [PICKUP + 0.6, PICKUP + 1.8, 0]) },

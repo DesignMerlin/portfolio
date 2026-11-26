@@ -140,6 +140,16 @@ const accepted = (src: string, size?: [number, number]): LiveScene => ({ length:
 /** In the film's phone, which shows the screen's first 812 points */
 export const lagAccepted = accepted(lagTop("landlordAccepted"));
 
+/** Listing an apartment, step 2 of 3: the second bar of the stepper fills, left to right */
+const stepTwo = (src: string, size?: [number, number]): LiveScene => ({
+  length: 1.2,
+  size,
+  parts: [
+    { id: "step-ground", box: [99, 110.5, 72, 8.5], bg: "#e7e7e7", r: 4 },
+    { id: "step", box: [99.5, 111, 71, 7.5], slice: src, sliceSize: size, r: 4, frames: wipe(0.3, 0.7) },
+  ],
+});
+
 // On the project page ---------------------------------------------------------------------
 
 export const phoneScenes: Record<string, LiveScene> = {
@@ -150,4 +160,5 @@ export const phoneScenes: Record<string, LiveScene> = {
   [lp.splash.src]: lagSplash,
   [lp.paid.src]: lagPaid,
   [lp.landlordAccepted.src]: accepted(lp.landlordAccepted.src, [375, 1017]),
+  [lp.landlordListing.src]: stepTwo(lp.landlordListing.src, [375, 1470]),
 };

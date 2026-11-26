@@ -1135,6 +1135,13 @@ html[data-motion="reduce"] .job:hover .job-arrow {
   box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.6);
 }
 
+/* How far round a pie chart has drawn itself (components/case-study/live/charts.tsx) */
+@property --sweep {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 360deg;
+}
+
 /* Arc dial testimonials. Geometry (--R, --S, --arrow-*) is measured and set by arc-dial.tsx. */
 @property --t-accent {
   syntax: "<color>";
@@ -2971,6 +2978,10 @@ html[data-motion="reduce"] .frame-page {
 }
 .screen-card:active {
   transform: scale(0.985);
+}
+/* Each card is exactly its screen: stretched to its row, a button centres the screen and its live parts drift off it */
+.screen-panel > .screen-card {
+  align-self: start;
 }
 /* Work that runs on both: each screen in its device, sized in container units */
 .device-panel {
