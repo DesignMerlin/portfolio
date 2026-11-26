@@ -5,6 +5,8 @@ import { FILM_DESKTOP, FILM_PHONE } from "@/components/case-study/film/kit";
 import { PT, SCREEN_H, SCREEN_W, show } from "@/components/case-study/film/device";
 import { DRIFT, ENTER, SHEET, type Frame } from "@/components/case-study/film/kit";
 import { useFilm, type FilmProps, type FilmScript } from "@/components/case-study/film/use-film";
+import { LiveParts, liveTracks, type LiveScene } from "@/components/case-study/live/kit";
+import { FY_LOGO } from "@/components/case-study/fysi/logo";
 import { fysi, type FysiScreen } from "@/content/fysi";
 
 /* ------------------------------------------------------------------ */
@@ -16,13 +18,14 @@ import { fysi, type FysiScreen } from "@/content/fysi";
 /* ------------------------------------------------------------------ */
 
 const PUNCH = "cubic-bezier(0.32, 0.72, 0, 1)";
+const SPRING = "cubic-bezier(0.34, 1.56, 0.64, 1)";
 const SHEET_IN = "cubic-bezier(0.22, 0.8, 0.24, 1)";
 const EASE_SCROLL = "cubic-bezier(0.45, 0, 0.2, 1)";
 
 /** One loop, in seconds */
 const T = 32;
 /** When each part starts */
-const HOME = 1.2;
+const HOME = 2.2;
 const CLOTHING = 6.2;
 const CART = 8.8;
 const CHECKOUT = 11.0;
@@ -51,10 +54,10 @@ const onPage = (x: number, y: number, scroll: number, at = ALONE): [number, numb
 const CAMERA: Frame[] = [
   [0, cam(1)],
   // The hero, close
-  [HOME + 1.2, cam(1), DRIFT],
-  [HOME + 2.2, cam(1.16, ...onPage(500, 460, 0)), PUNCH],
-  [HOME + 3.2, cam(1.16, ...onPage(500, 460, 0)), DRIFT],
-  [HOME + 4.0, cam(1), DRIFT],
+  [HOME + 0.4, cam(1), DRIFT],
+  [HOME + 1.2, cam(1.16, ...onPage(500, 460, 0)), PUNCH],
+  [HOME + 2.1, cam(1.16, ...onPage(500, 460, 0)), DRIFT],
+  [HOME + 2.6, cam(1), DRIFT],
   // The cart's checkout button
   [CART + 0.8, cam(1), DRIFT],
   [CART + 1.6, cam(1.14, ...onPage(1100, 420, 0)), PUNCH],
@@ -81,8 +84,8 @@ const CAMERA: Frame[] = [
 const at = (x: number, y = 0, s = 1): Keyframe => ({ transform: `translate3d(${x}px, ${y}px, 0px) scale(${s})` });
 const BROWSER: Frame[] = [
   [0, at(0, 760, 0.94)],
-  [0.2, at(0, 760, 0.94), PUNCH],
-  [1.1, at(0, 0, 1)],
+  [1.1, at(0, 760, 0.94), PUNCH],
+  [2.0, at(0, 0, 1)],
   [CART - 1.6, at(0), SHEET],
   [CART - 0.9, at(SHIFT)],
   [SIGNUP - 0.5, at(SHIFT), SHEET],
@@ -102,7 +105,7 @@ const PHONE: Frame[] = [
 
 // The pages -----
 
-type Layer = { id: string; screen: FysiScreen; frames: Frame[]; scroll?: Frame[] };
+type Layer = { id: string; screen: FysiScreen; frames: Frame[]; scroll?: Frame[]; live?: [LiveScene, number] };
 const scroll = (pt: number, ...stops: [from: number, to: number, y: number][]): Frame[] => {
   const out: Frame[] = [[0, { transform: "translateY(0px)" }]];
   let y = 0;
@@ -127,15 +130,46 @@ const over = (t: number, until = Infinity): Frame[] => [
   ...(until < Infinity ? ([[until, { opacity: 1 }], [until + 0.01, { opacity: 0 }]] as Frame[]) : []),
 ];
 
+/** Congratulations: the seal stamps in, spinning, with a ring leaving it */
+const SEAL: LiveScene = {
+  length: 1.6,
+  size: [1440, 1024],
+  parts: [
+    { id: "seal-ground", box: [614, 325, 211, 205], bg: "#fff" },
+    {
+      id: "seal-ring",
+      box: [634, 343, 171, 171],
+      r: "50%",
+      border: "calc(3 * var(--pt)) solid #00c853",
+      frames: [
+        [0, { transform: "scale(0.9)", opacity: 0 }],
+        [0.35, { transform: "scale(0.9)", opacity: 0 }],
+        [0.37, { opacity: 0.6 }, ENTER],
+        [1.3, { transform: "scale(1.7)", opacity: 0 }],
+      ],
+    },
+    {
+      id: "seal",
+      box: [621, 330, 197, 197],
+      slice: fysi.vendorDone.src,
+      frames: [
+        [0, { transform: "rotate(-150deg) scale(0)" }],
+        [0.01, { transform: "rotate(-150deg) scale(0)" }, SPRING],
+        [0.7, { transform: "rotate(0deg) scale(1)" }],
+      ],
+    },
+  ],
+};
+
 const LAYERS: Layer[] = [
-  { id: "home", screen: "home", frames: show(1.1, CLOTHING + 0.72), scroll: scroll(LPT, [HOME + 3.6, HOME + 4.6, 1500]) },
+  { id: "home", screen: "home", frames: show(2.0, CLOTHING + 0.72), scroll: scroll(LPT, [HOME + 2.6, HOME + 3.5, 1500]) },
   { id: "clothing", screen: "clothing", frames: sheet(CLOTHING, CART + 0.72), scroll: scroll(LPT, [CLOTHING + 0.9, CLOTHING + 2.0, 700]) },
   { id: "cart", screen: "cart", frames: sheet(CART, CHECKOUT + 0.72) },
   { id: "checkout", screen: "checkout", frames: sheet(CHECKOUT, SIGNUP + 0.72) },
   { id: "pickup", screen: "pickup", frames: over(PICKUP, SIGNUP + 0.72) },
   { id: "signup", screen: "signup", frames: sheet(SIGNUP, VENDOR + 0.72) },
   { id: "vendor", screen: "vendorStart", frames: sheet(VENDOR, DONE + 0.72) },
-  { id: "done", screen: "vendorDone", frames: over(DONE, DASH + 0.72) },
+  { id: "done", screen: "vendorDone", frames: over(DONE, DASH + 0.72), live: [SEAL, DONE + 0.3] },
   { id: "dash", screen: "vendorOverview", frames: sheet(DASH, PRODUCTS + 0.72) },
   { id: "products", screen: "vendorProducts", frames: sheet(PRODUCTS, ADMIN + 0.72), scroll: scroll(LPT, [PRODUCTS + 0.9, PRODUCTS + 1.8, 250]) },
   { id: "admin", screen: "adminAnalytics", frames: sheet(ADMIN, END + 1) },
@@ -146,7 +180,7 @@ const PHONE_LAYERS: Layer[] = [
 
 /** The address bar: each page's address, typed */
 const URLS: [string, number][] = [
-  ["fysi.com", 0.9],
+  ["fysi.com", 1.8],
   ["fysi.com/clothing", CLOTHING - 0.35],
   ["fysi.com/cart", CART - 0.35],
   ["fysi.com/checkout", CHECKOUT - 0.35],
@@ -168,7 +202,7 @@ const typed = (text: string, t: number, until: number): Frame[] => [
 type Stroke = [t: number, x: number, y: number, press?: boolean];
 const POINTER: Stroke[] = [
   [HOME + 1.0, 900, 640],
-  [HOME + 2.6, 197, 461, true], // Shop Now
+  [HOME + 2.3, 197, 461, true], // Shop Now
   [CLOTHING + 2.4, 330, 560],
   [CART - 0.3, 330, 560, true], // a product
   [CART + 1.4, 1186, 456, true], // Checkout
@@ -192,11 +226,57 @@ POINTER.forEach(([t, x, y], i) => {
 });
 const PRESSES = POINTER.filter((p) => p[3]);
 
+// The mark at the start: the bag drops in, the name writes itself, and it flies into the header -----
+
+const LOGO_W = 460;
+const LOGO_H = (LOGO_W * FY_LOGO.h) / FY_LOGO.w;
+const LAND = onPage(116 + FY_LOGO.w / 2, 75 + FY_LOGO.h / 2, 0);
+
+/** Each scroll of the phone's shop, as a fingertip dragging up (or back down) the glass */
+const SWIPES: [from: number, to: number, up: boolean][] = [
+  [CART - 0.2, CART + 1.2, true],
+  [CHECKOUT + 0.4, CHECKOUT + 1.6, true],
+  [PICKUP + 0.6, PICKUP + 1.8, false],
+];
+const swipe = ([from, to, up]: [number, number, boolean]): Frame[] => {
+  const p = (y: number) => ({ transform: `translate3d(0px, ${(y * PT).toFixed(1)}px, 0px)` });
+  const [a, b] = up ? [640, 300] : [300, 640];
+  return [
+    [0, { ...p(a), opacity: 0 }],
+    [from - 0.2, { ...p(a), opacity: 0 }, ENTER],
+    [from, { ...p(a), opacity: 1 }, EASE_SCROLL],
+    [to - 0.2, { ...p(b), opacity: 1 }, ENTER],
+    [to, { ...p(b), opacity: 0 }],
+  ];
+};
+
 const tracks: FilmScript["tracks"] = {
   camera: CAMERA,
   browser: BROWSER,
   phone: PHONE,
   pointer: POINTER_TRACK,
+  logo: [
+    [0, { transform: "translate3d(0px, 0px, 0px) scale(1)", opacity: 1 }],
+    [1.2, { transform: "translate3d(0px, 0px, 0px) scale(1)" }, PUNCH],
+    [2.0, { transform: `translate3d(${(LAND[0] - 592).toFixed(1)}px, ${(LAND[1] - 516).toFixed(1)}px, 0px) scale(${((FY_LOGO.w * LPT) / LOGO_W).toFixed(4)})`, opacity: 1 }],
+    [2.1, { opacity: 1 }],
+    [2.15, { opacity: 0 }],
+  ],
+  // The bag drops into place and settles, then the name writes itself out beside it
+  "logo-mark": [
+    [0, { transform: "translateY(-120%) rotate(-12deg) scaleY(1)", opacity: 0 }],
+    [0.1, { transform: "translateY(-120%) rotate(-12deg) scaleY(1)", opacity: 0 }, "cubic-bezier(0.5, 0, 0.9, 0.5)"],
+    [0.15, { opacity: 1 }],
+    [0.45, { transform: "translateY(0%) rotate(0deg) scaleY(1)" }],
+    [0.55, { transform: "translateY(0%) rotate(0deg) scaleY(0.86)" }, "cubic-bezier(0.2, 0.6, 0.4, 1)"],
+    [0.75, { transform: "translateY(-8%) rotate(0deg) scaleY(1.04)" }],
+    [0.9, { transform: "translateY(0%) rotate(0deg) scaleY(1)" }],
+  ],
+  "logo-letters": [
+    [0, { clipPath: "inset(0 100% 0 0)", transform: "translateX(-6%)" }],
+    [0.55, { clipPath: "inset(0 100% 0 0)", transform: "translateX(-6%)" }, "cubic-bezier(0.6, 0, 0.2, 1)"],
+    [1.1, { clipPath: "inset(0 0% 0 0)", transform: "translateX(0%)" }],
+  ],
   "pointer-show": [
     [0, { opacity: 0 }],
     [HOME + 0.6, { opacity: 0 }, ENTER],
@@ -223,7 +303,9 @@ const addLayers = (layers: Layer[], prefix: string) =>
   layers.forEach((l) => {
     tracks[`${prefix}layer-${l.id}`] = l.frames;
     if (l.scroll) tracks[`${prefix}scroll-${l.id}`] = l.scroll;
+    if (l.live) Object.assign(tracks, liveTracks(`${prefix}live-${l.id}`, l.live[0], l.live[1]));
   });
+SWIPES.forEach((s, i) => (tracks[`swipe-${i}`] = swipe(s)));
 addLayers(LAYERS, "d-");
 addLayers(PHONE_LAYERS, "m-");
 // Moves written close together can overlap by a hair: keep every track in time order
@@ -244,7 +326,16 @@ const script: FilmScript = {
 function Page({ l, pt, w, prefix }: { l: Layer; pt: number; w: number; prefix: string }) {
   const s = fysi[l.screen];
   const h = s.h * pt;
-  const img = <Image src={s.src} alt="" width={w} height={Math.round(h)} sizes={prefix === "m-" ? FILM_PHONE : FILM_DESKTOP} loading="eager" draggable={false} style={{ width: w, height: h }} />;
+  const img = (
+    <>
+      <Image src={s.src} alt="" width={w} height={Math.round(h)} sizes={prefix === "m-" ? FILM_PHONE : FILM_DESKTOP} loading="eager" draggable={false} style={{ width: w, height: h }} />
+      {l.live ? (
+        <span className="ix-live" style={{ width: w, height: h }}>
+          <LiveParts id={`${prefix}live-${l.id}`} scene={l.live[0]} />
+        </span>
+      ) : null}
+    </>
+  );
   return (
     <div data-track={`${prefix}layer-${l.id}`} className="ix-layer" style={{ width: w }}>
       {l.scroll ? (
@@ -321,10 +412,20 @@ export default function FysiFilm(props: FilmProps) {
                 {PHONE_LAYERS.map((l) => (
                   <Page key={l.id} l={l} pt={PT} w={SCREEN_W} prefix="m-" />
                 ))}
+                {SWIPES.map((_, i) => (
+                  <span key={i} data-track={`swipe-${i}`} className="fp-touch" style={{ left: 190 * PT, top: 0 }} />
+                ))}
                 <span className="fp-island" />
               </div>
             </div>
           </div>
+        </div>
+
+        <div data-track="logo" className="ix-logo" style={{ width: LOGO_W, height: LOGO_H, marginLeft: -LOGO_W / 2, marginTop: -LOGO_H / 2 }}>
+          <svg viewBox={`0 0 ${FY_LOGO.w} ${FY_LOGO.h}`} width={LOGO_W} height={LOGO_H}>
+            <g data-track="logo-letters" dangerouslySetInnerHTML={{ __html: FY_LOGO.letters }} />
+            <g data-track="logo-mark" style={{ transformBox: "fill-box", transformOrigin: "50% 100%" }} dangerouslySetInnerHTML={{ __html: FY_LOGO.mark }} />
+          </svg>
         </div>
       </div>
     </div>

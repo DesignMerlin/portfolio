@@ -48,7 +48,7 @@ export function Film({ board, ...props }: FilmProps & { board: Storyboard }) {
       {/* Faded as a whole: an animated opacity on a phone would flatten its 3D */}
       <div ref={stage} data-track="fade" className="film-stage" style={{ perspective: PERSPECTIVE, visibility: "hidden" }}>
         <div data-track="shadow" className="film-shadow" />
-        <Phone phone={board.phone} />
+        <Phone phone={board.phone} finger={board.finger} />
         <span data-track="bokeh-1" className="film-bokeh" style={{ width: 220, height: 220, left: 40, top: 700 }} />
         <span data-track="bokeh-2" className="film-bokeh" style={{ width: 140, height: 140, left: 960, top: 120 }} />
         <span data-track="bokeh-3" className="film-bokeh" style={{ width: 90, height: 90, left: 180, top: 160 }} />
@@ -57,7 +57,7 @@ export function Film({ board, ...props }: FilmProps & { board: Storyboard }) {
   );
 }
 
-function Phone({ phone }: { phone: FilmPhone }) {
+function Phone({ phone, finger }: { phone: FilmPhone; finger?: boolean }) {
   return (
     <div data-track="phone" className="film-phone">
       {Array.from({ length: SLABS }, (_, i) => (
@@ -76,7 +76,7 @@ function Phone({ phone }: { phone: FilmPhone }) {
           </Fragment>
         ))}
         {phone.taps.map((t, i) => (
-          <span key={i} data-track={`tap-${i}`} className="film-tap" style={{ left: t.x * K, top: t.y * K }} />
+          <span key={i} data-track={`tap-${i}`} className={finger ? "film-tap film-finger" : "film-tap"} style={{ left: t.x * K, top: t.y * K }} />
         ))}
         <span data-track="glare" className="film-glare" />
       </div>

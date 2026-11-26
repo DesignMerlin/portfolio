@@ -1948,6 +1948,16 @@ html[data-motion="reduce"] .device-trio:nth-child(4) {
   background: rgb(20 24 26 / 0.22);
   box-shadow: 0 0 0 2px rgb(255 255 255 / 0.75);
 }
+/* A fingertip, for films told by touch: bigger, ringed, with a shadow, like a finger on glass */
+.film-tap.film-finger {
+  width: 64px;
+  height: 64px;
+  margin: -32px 0 0 -32px;
+  background: radial-gradient(circle, rgb(20 22 32 / 0.34) 0 38%, rgb(20 22 32 / 0.16) 39% 100%);
+  box-shadow:
+    0 0 0 3px rgb(255 255 255 / 0.9),
+    0 6px 18px rgb(20 22 32 / 0.28);
+}
 .film-glare {
   width: 180%;
   height: 160%;

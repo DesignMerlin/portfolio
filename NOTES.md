@@ -466,3 +466,8 @@ Not yet done: a real mid-range Android check, and a Lighthouse run.
 - Project pages show only the sections with confirmed content (and only their tabs); the "Placeholder, on its way" chip is gone.
 - Home: "What people say" shows only real testimonials, so it's hidden while all eight are stand-ins.
 - The unused Screens gallery (`components/shots`, `content/shots.ts`), all placeholder frames, is deleted.
+
+## 2026-11-26: Logos, touches and success marks for PowerRoute, LAGProperties and Fysi
+- Phone live scenes (`components/case-study/live/phones.tsx`), each made of the screen's own pixels over a patch of its background, used in the films and on the key screens: PowerRoute's car drives in and its name writes on, the battery fills bar by bar (`steps(4)`), the booking tick stamps in with a ring, the charged battery lands and fills from the bottom; LAGProperties' tower rises out of the orange and its name writes on, Payment successful plays the file's own done animation (the sprite), the appointment tick stamps in.
+- The one-phone rig takes `finger: true`: taps become a fingertip (`.film-tap.film-finger`) instead of the pointer ripple. PowerRoute and LAGProperties use it.
+- Fysi: the bag drops in and settles, the name writes out beside it, then it flies into the header as the browser rises (the opening moved 1s later to make room). The Congratulations seal spins in with a ring (box measured from the screen: 626,335, 187 square). The phone's three scrolls are a fingertip dragging the glass.
