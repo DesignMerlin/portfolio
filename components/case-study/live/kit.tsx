@@ -49,6 +49,8 @@ export type Part = {
   parts?: Part[];
   /** Anything else. `track(name)` marks an element animated by `inner[name]` */
   node?: (track: (name: string) => { "data-track": string }) => React.ReactNode;
+  /** Any other style on the part's box (a mask, say) */
+  style?: React.CSSProperties;
   inner?: Record<string, Frame[]>;
 };
 
@@ -142,6 +144,7 @@ function PartView({ id, part: p, from, size }: { id: string; part: Part; from: [
         borderRadius: typeof p.r === "number" ? pt(p.r) : p.r,
         overflow: p.clip === true || p.slice || p.sprite ? "hidden" : undefined,
         clipPath: typeof p.clip === "string" ? p.clip : undefined,
+        ...p.style,
       }}
     >
       {p.slice ? (

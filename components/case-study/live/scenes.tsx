@@ -3,6 +3,7 @@ import type { LiveScene, Part, PtBox, Sprite } from "@/components/case-study/liv
 import { iexceloScenes } from "@/components/case-study/live/iexcelo";
 import { voxdeedScenes } from "@/components/case-study/live/voxdeed";
 import { phoneScenes } from "@/components/case-study/live/phones";
+import { chartScenes } from "@/components/case-study/live/charts";
 import { revivalScenes } from "@/components/case-study/live/revival";
 import { caseTracker } from "@/content/case-tracker";
 import { fundpath } from "@/content/fundpath";
@@ -787,6 +788,7 @@ const scenes: Record<string, LiveScene> = {
   ...iexceloScenes,
   ...voxdeedScenes,
   ...phoneScenes,
+  ...chartScenes,
 };
 
 /** What moves on this screen, if anything does */

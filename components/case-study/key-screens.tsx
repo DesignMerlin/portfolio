@@ -91,7 +91,15 @@ export function KeyScreens({
                       aria-label={`Open screen. ${screen.alt}`}
                       className="screen-card relative block w-full max-w-[300px] cursor-zoom-in overflow-hidden"
                     >
-                      <Image src={screen.src} alt="" width={948} height={2100} sizes="(min-width: 1024px) 300px, 45vw" draggable={false} className="block h-auto w-full" />
+                      <Image
+                        src={screen.src}
+                        alt=""
+                        width={948}
+                        height={Math.round((948 * (screen.h ?? 812)) / (screen.w ?? 375))}
+                        sizes="(min-width: 1024px) 300px, 45vw"
+                        draggable={false}
+                        className="block h-auto w-full"
+                      />
                       {liveScene(screen.src) ? <LiveOverlay scene={liveScene(screen.src)!} /> : null}
                     </button>
                   ))}
