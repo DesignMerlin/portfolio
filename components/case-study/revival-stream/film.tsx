@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { FILM_DESKTOP, FILM_PHONE } from "@/components/case-study/film/kit";
 import { at, on, pushIn, PT, ScreenUI, SCREEN_H, SCREEN_W, show, Touches, uiTracks, type Box, type Press, type Touch, type Typing } from "@/components/case-study/film/device";
 import { DRIFT, ENTER, SHEET, STAGE_W, type Frame } from "@/components/case-study/film/kit";
 import { useFilm, type FilmProps, type FilmScript } from "@/components/case-study/film/use-film";
@@ -880,7 +881,7 @@ const script: FilmScript = {
 function Page({ l, pt, w }: { l: Layer; pt: number; w: number }) {
   const s = revival[l.screen];
   const h = s.h * pt;
-  const img = (key: string) => <Image key={key} src={s.src} alt="" width={w} height={h} sizes={w === SCREEN_W ? "1080px" : "1920px"} loading="eager" draggable={false} style={{ width: w, height: h }} />;
+  const img = (key: string) => <Image key={key} src={s.src} alt="" width={w} height={h} sizes={w === SCREEN_W ? FILM_PHONE : FILM_DESKTOP} loading="eager" draggable={false} style={{ width: w, height: h }} />;
   const body = (
     <>
       {img("page")}

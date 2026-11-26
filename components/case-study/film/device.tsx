@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { FILM_PHONE } from "@/components/case-study/film/kit";
 import { ENTER, SHEET, tap, type Frame } from "@/components/case-study/film/kit";
 
 /**
@@ -159,7 +160,7 @@ export function Touches({ id, touches }: { id: string; touches: Touch[] }) {
 }
 
 export function Still({ src, h = SCREEN_H }: { src: string; h?: number }) {
-  return <Image src={src} alt="" width={SCREEN_W} height={h} sizes="1080px" loading="eager" draggable={false} style={{ height: h }} />;
+  return <Image src={src} alt="" width={SCREEN_W} height={h} sizes={FILM_PHONE} loading="eager" draggable={false} style={{ height: h }} />;
 }
 
 /** The phone itself: body, walls, lit rim, bezel, then whatever is on its screen */

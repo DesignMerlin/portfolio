@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { INTRO_DONE } from "@/lib/site";
+import { motionReduced } from "@/components/ui/use-reduced-motion";
 
 /** One colour per letter, cycled. Saturated enough to read on both the light and dark paper */
 const COLORS = ["#e4572e", "#7c4ddb", "#3b6cf6", "#0ea5a4", "#22a35a", "#d63d8f"];
@@ -77,7 +78,7 @@ export function Intro({ name }: { name: string }) {
     // Returning visitors: CSS already hides the overlay before first paint
     if (html.dataset.intro === "skip") return;
 
-    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduce = motionReduced();
     const el = root.current!;
     html.style.overflow = "hidden";
 

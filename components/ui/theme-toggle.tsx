@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import { useReducedMotion } from "@/components/ui/use-reduced-motion";
+import { motionReduced, useReducedMotion } from "@/components/ui/use-reduced-motion";
 import { useSyncExternalStore } from "react";
 import { MoonIcon, SunIcon } from "@/components/ui/icons";
 import { tween } from "@/lib/motion";
@@ -27,7 +27,7 @@ export function setTheme(next: Theme) {
     } catch {}
     listeners.forEach((l) => l());
   };
-  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reduce = motionReduced();
   if (!document.startViewTransition || reduce) return apply();
   // The view transition does the crossfade; per-element colour transitions would double it.
   html.classList.add("theme-swap");

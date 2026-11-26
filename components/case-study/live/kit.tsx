@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { play, type Frame } from "@/components/case-study/film/kit";
+import { filmSrc, play, type Frame } from "@/components/case-study/film/kit";
 import { useReducedMotion } from "@/components/ui/use-reduced-motion";
 
 /**
@@ -146,11 +146,11 @@ function PartView({ id, part: p, from, size }: { id: string; part: Part; from: [
     >
       {p.slice ? (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={p.slice} alt="" draggable={false} style={{ left: pt(-sx), top: pt(-sy), width: pt(sw), height: pt(sh) }} />
+        <img src={filmSrc(p.slice)} alt="" draggable={false} style={{ left: pt(-sx), top: pt(-sy), width: pt(sw), height: pt(sh) }} />
       ) : null}
       {p.img ? (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={p.img} alt="" draggable={false} style={{ left: 0, top: 0, width: "100%", height: "100%" }} />
+        <img src={filmSrc(p.img)} alt="" draggable={false} style={{ left: 0, top: 0, width: "100%", height: "100%" }} />
       ) : null}
       {p.sprite ? (
         // eslint-disable-next-line @next/next/no-img-element

@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { conduct } from "@/components/ui/film-conductor";
 
 // 3D films are their own chunk, fetched only where one is shown
 const films = {
@@ -10,6 +11,7 @@ const films = {
   fundpath: dynamic(() => import("@/components/case-study/fundpath/film")),
   yoyo: dynamic(() => import("@/components/case-study/yoyo/film")),
   revivalStream: dynamic(() => import("@/components/case-study/revival-stream/film")),
+  iexcelo: dynamic(() => import("@/components/case-study/iexcelo/film")),
   caseTracker: dynamic(() => import("@/components/case-study/case-tracker/film")),
 };
 
@@ -97,9 +99,29 @@ export function DeviceMockup({
     };
   }, []);
 
-  const playing = visible && !covered && !paused;
+  // Several films at once is too much to draw: the conductor lets the one being looked at play
+  const [allowed, setAllowed] = useState(false);
+  const turn = useRef<ReturnType<typeof conduct> | null>(null);
+  useEffect(() => {
+    const t = conduct(root.current!, setAllowed);
+    turn.current = t;
+    return () => t.leave();
+  }, []);
+  useEffect(() => {
+    turn.current?.want(!covered && !paused);
+  }, [covered, paused]);
+  // Its turn has come: decode every picture in the film ahead of time, off the main thread, so a screen
+  // appearing mid-film doesn't stall a frame while it is decoded
+  useEffect(() => {
+    if (!allowed) return;
+    root.current?.querySelectorAll("img").forEach((img) => {
+      if (img.complete) img.decode().catch(() => {});
+    });
+  }, [allowed]);
+
+  const playing = visible && allowed && !covered && !paused;
   const Film = "film" in mockup ? films[mockup.film] : null;
-  const what = "film" in mockup ? (mockup.film === "revivalStream" ? "a laptop and an iPhone, as a short film" : "iPhones, as a short film") : "phones" in mockup ? "three phones" : "a laptop and a phone";
+  const what = "film" in mockup ? (mockup.film === "revivalStream" ? "a laptop and an iPhone, as a short film" : mockup.film === "iexcelo" ? "a browser and an iPhone, as a short film" : "iPhones, as a short film") : "phones" in mockup ? "three phones" : "a laptop and a phone";
 
   return (
     <div

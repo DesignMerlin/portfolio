@@ -251,16 +251,15 @@
       transition: clip-path var(--dur-scene) var(--ease-emphasized);
     }
   }
-  @media (prefers-reduced-motion: reduce) {
-    .footer-name-fill {
-      clip-path: none;
-      opacity: 0;
-      transition: opacity var(--dur-base) ease;
-    }
-    .group\/name:hover .footer-name-fill {
-      clip-path: none;
-      opacity: 1;
-    }
+  /* Reduced motion: the OS setting or the site's toggle */
+  html[data-motion="reduce"] .footer-name-fill {
+    clip-path: none;
+    opacity: 0;
+    transition: opacity var(--dur-base) ease;
+  }
+  html[data-motion="reduce"] .group\/name:hover .footer-name-fill {
+    clip-path: none;
+    opacity: 1;
   }
 
   /* Footer marquee: two identical halves; moving by exactly one half loops seamlessly.
@@ -280,10 +279,9 @@
       transform: translateX(-50%);
     }
   }
-  @media (prefers-reduced-motion: reduce) {
-    .marquee-track {
-      animation: none;
-    }
+  /* Reduced motion: the OS setting or the site's toggle */
+  html[data-motion="reduce"] .marquee-track {
+    animation: none;
   }
 
   /* One side of a flipping card. Safari still needs the prefixed property. */
@@ -345,15 +343,14 @@
     background-position: -120% 0;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .agent-shimmer {
-    animation: none;
-    color: var(--ink);
-    background: none;
-  }
-  .ia-row {
-    transition: none;
-  }
+/* Reduced motion: the OS setting or the site's toggle */
+html[data-motion="reduce"] .agent-shimmer {
+  animation: none;
+  color: var(--ink);
+  background: none;
+}
+html[data-motion="reduce"] .ia-row {
+  transition: none;
 }
 
 /* ------------------------------------------------------------------
@@ -403,11 +400,10 @@
     }
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .cmd-menu[open][data-via] {
-    transition: opacity 150ms ease;
-    transform: none;
-  }
+/* Reduced motion: the OS setting or the site's toggle */
+html[data-motion="reduce"] .cmd-menu[open][data-via] {
+  transition: opacity 150ms ease;
+  transform: none;
 }
 
 /* ------------------------------------------------------------------
@@ -428,11 +424,10 @@ html[data-intro="skip"] .intro {
 .intro-letter {
   transform: translateY(-110vh);
 }
-@media (prefers-reduced-motion: reduce) {
-  .intro-letter {
-    transform: none;
-    opacity: 0;
-  }
+/* Reduced motion: the OS setting or the site's toggle */
+html[data-motion="reduce"] .intro-letter {
+  transform: none;
+  opacity: 0;
 }
 
 /* Hero entrance, released when the curtain lifts (data-intro: play → done) */
@@ -471,22 +466,21 @@ html[data-intro="play"] .hero-photo {
   transform: translateY(24px) scale(0.94);
   opacity: 0;
 }
-@media (prefers-reduced-motion: reduce) {
-  html[data-intro="play"] .hero-word,
-  html[data-intro="play"] .hero-photo {
-    transform: none;
-  }
-  .hero-photo {
-    transition: opacity var(--dur-base) ease;
-    transition-delay: 0ms;
-  }
-  .hero-word {
-    transition: opacity var(--dur-base) ease;
-    transition-delay: 0ms;
-  }
-  .hero-fade {
-    transition-delay: 0ms;
-  }
+/* Reduced motion: the OS setting or the site's toggle */
+html[data-motion="reduce"][data-intro="play"] .hero-word,
+html[data-motion="reduce"][data-intro="play"] .hero-photo {
+  transform: none;
+}
+html[data-motion="reduce"] .hero-photo {
+  transition: opacity var(--dur-base) ease;
+  transition-delay: 0ms;
+}
+html[data-motion="reduce"] .hero-word {
+  transition: opacity var(--dur-base) ease;
+  transition-delay: 0ms;
+}
+html[data-motion="reduce"] .hero-fade {
+  transition-delay: 0ms;
 }
 
 /* ------------------------------------------------------------------
@@ -584,25 +578,23 @@ html.theme-swap * {
   animation-timing-function: ease;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  /* Keep crossfades, drop spatial movement */
-  ::view-transition-group(*) {
-    animation-duration: 0s !important;
-  }
-  ::view-transition-old(.nav-forward),
-  ::view-transition-old(.nav-back) {
-    animation: 150ms ease both vt-fade reverse;
-  }
-  ::view-transition-new(.nav-forward),
-  ::view-transition-new(.nav-back) {
-    animation: 200ms ease both vt-fade;
-  }
-  .pressable:active:not(:disabled) {
-    transform: none;
-  }
-  .collapse-grid {
-    transition: none;
-  }
+/* Reduced motion: the OS setting or the site's toggle */
+html[data-motion="reduce"]::view-transition-group(*) {
+  animation-duration: 0s !important;
+}
+html[data-motion="reduce"]::view-transition-old(.nav-forward),
+html[data-motion="reduce"]::view-transition-old(.nav-back) {
+  animation: 150ms ease both vt-fade reverse;
+}
+html[data-motion="reduce"]::view-transition-new(.nav-forward),
+html[data-motion="reduce"]::view-transition-new(.nav-back) {
+  animation: 200ms ease both vt-fade;
+}
+html[data-motion="reduce"] .pressable:active:not(:disabled) {
+  transform: none;
+}
+html[data-motion="reduce"] .collapse-grid {
+  transition: none;
 }
 
 /* Tag pile: the layer never catches the pointer; tags do while the pile is active */
@@ -778,6 +770,11 @@ html.theme-swap * {
   backdrop-filter: blur(22px) saturate(140%);
   background: linear-gradient(180deg, rgb(10 11 14 / 0.25), rgb(10 11 14 / 0.62) 55%, rgb(10 11 14 / 0.8));
 }
+/* Blurring a whole card is costly, and redone whenever what is under it moves: only while it can be seen */
+[inert] > .sticker-frost {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
 /* View: liquid glass, smoked so the label reads over any cover, in either theme. It swells out of the
    card on hover and leans towards the pointer. --lean-* (-1 to 1) and --light-* come from sticker-card. */
 .glass.sticker-view {
@@ -794,8 +791,10 @@ html.theme-swap * {
   padding: 8px 14px;
   line-height: 1.25;
   color: #fff;
-  -webkit-backdrop-filter: blur(12px) saturate(190%) brightness(0.5);
-  backdrop-filter: blur(12px) saturate(190%) brightness(0.5);
+  /* The glass blur is switched on only while the button shows (hover or focus): unseen, it would still cost a
+     full redraw on every frame of the film playing under it */
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
   opacity: 0;
   scale: 0.8;
   translate: calc(var(--lean-x, 0) * 10px) calc(var(--lean-y, 0) * 10px);
@@ -806,6 +805,8 @@ html.theme-swap * {
     transform var(--dur-deliberate) cubic-bezier(0.34, 1.45, 0.64, 1);
 }
 .glass.sticker-view:focus-visible {
+  -webkit-backdrop-filter: blur(12px) saturate(190%) brightness(0.5);
+  backdrop-filter: blur(12px) saturate(190%) brightness(0.5);
   opacity: 1;
   scale: 1;
   pointer-events: auto;
@@ -813,19 +814,275 @@ html.theme-swap * {
 }
 @media (hover: hover) {
   .sticker:hover:not([data-dragging]) :not([inert]) > .sticker-view {
+    -webkit-backdrop-filter: blur(12px) saturate(190%) brightness(0.5);
+    backdrop-filter: blur(12px) saturate(190%) brightness(0.5);
     opacity: 1;
     scale: 1;
     pointer-events: auto;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .glass.sticker-view,
-  .glass.sticker-view:hover {
-    scale: 1;
-    translate: none;
-    transform: none;
-    transition: opacity var(--dur-quick) ease;
+/* Reduced motion: the OS setting or the site's toggle */
+html[data-motion="reduce"] .glass.sticker-view,
+html[data-motion="reduce"] .glass.sticker-view:hover {
+  scale: 1;
+  translate: none;
+  transform: none;
+  transition: opacity var(--dur-quick) ease;
+}
+
+/* Name, year and kind under each home card: rises into place while the card is hovered or has focus.
+   Touch has no hover, so there it simply stays. */
+@media (hover: hover) {
+  .sticker-caption {
+    opacity: 0;
+    translate: 0 -4px;
+    transition:
+      opacity var(--dur-quick) var(--ease-exit),
+      translate var(--dur-base) var(--ease-exit);
   }
+  li:hover > .sticker-caption,
+  li:focus-within > .sticker-caption {
+    opacity: 1;
+    translate: 0 0;
+    transition:
+      opacity var(--dur-base) var(--ease-enter),
+      translate var(--dur-base) var(--ease-enter);
+  }
+}
+/* Reduced motion: the OS setting or the site's toggle */
+html[data-motion="reduce"] .sticker-caption {
+  translate: none !important;
+}
+
+/* ------------------------------------------------------------------
+   Spatial gallery (components/gallery/spatial-gallery.tsx). Positions come from its animation loop;
+   these rules only set up the stage and the look. Settings: content/gallery.ts
+   ------------------------------------------------------------------ */
+/* The stage spans the window; the scrollbar would otherwise add a sliver of sideways scroll */
+main:has(.gallery-stage) {
+  overflow-x: clip;
+}
+/* No box: the cards float on the page itself, edge to edge, so they can drift to the sides of the screen */
+.gallery-stage {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  height: clamp(540px, 80svh, 860px);
+  overflow: hidden;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
+}
+@media (max-width: 639px) {
+  .gallery-stage {
+    height: clamp(500px, 72svh, 640px);
+  }
+}
+.gallery-stage[data-dragging] {
+  cursor: grabbing;
+}
+.gallery-stage[data-dragging] .gallery-card-button {
+  cursor: grabbing;
+}
+/* Its own stacking layer, so the cards' depth order stays behind the centre card */
+.gallery-world {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.gallery-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  will-change: transform, opacity;
+}
+.gallery-card-button {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--card-radius);
+  background: var(--sunken);
+  box-shadow: var(--card-shadow);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.gallery-card-button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+/* The centre's name stays legible when a card drifts behind it: a soft halo in the stage colour */
+.gallery-caption {
+  z-index: 2;
+  text-shadow:
+    0 0 10px var(--paper),
+    0 0 22px var(--paper);
+}
+/* Floating cards are small: a lighter shadow, cheaper to draw dozens of times */
+.gallery-card-small {
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.1), 0 10px 22px -12px rgb(0 0 0 / 0.4);
+}
+/* The centre project: a flat layer in front of the 3D scene, bobbing gently */
+.gallery-feature {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+}
+.gallery-float {
+  animation: gallery-float 5.5s ease-in-out infinite alternate;
+}
+.gallery-float[data-still] {
+  animation: none;
+}
+html[data-motion="reduce"] .gallery-float {
+  animation: none;
+}
+@keyframes gallery-float {
+  from { transform: translateY(calc(var(--float, 6px) * -1)); }
+  to { transform: translateY(var(--float, 6px)); }
+}
+.gallery-card-art {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.gallery-lightbox {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  overflow: hidden;
+}
+.gallery-lightbox::backdrop {
+  background: var(--lb-backdrop, rgb(8 10 12 / 0.82));
+  -webkit-backdrop-filter: blur(var(--lb-blur, 14px));
+  backdrop-filter: blur(var(--lb-blur, 14px));
+  animation: lb-fade var(--dur-base) var(--ease-enter);
+}
+.gallery-lightbox-out::backdrop {
+  animation: lb-fade var(--dur-base) var(--ease-exit) reverse forwards;
+}
+@keyframes lb-fade {
+  from { opacity: 0; }
+}
+.gallery-lightbox-body {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 64px 16px 24px;
+}
+.gallery-lightbox-art {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--lb-radius, 20px);
+  background: var(--sunken);
+  box-shadow: 0 40px 90px -30px rgb(0 0 0 / 0.7);
+  transform-origin: top left;
+}
+.gallery-lightbox-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 20px;
+  padding: 16px 20px;
+  border-radius: var(--lb-radius, 20px);
+  background: var(--lb-panel, var(--surface));
+}
+.gallery-lightbox-close {
+  position: fixed;
+  top: max(16px, env(safe-area-inset-top));
+  right: 16px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  color: #fff;
+  background: rgb(255 255 255 / 0.12);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+.gallery-lightbox-close:hover {
+  background: rgb(255 255 255 / 0.2);
+}
+.gallery-lightbox-close:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+/* Stop motion: a glass button fixed bottom left (components/site/motion-toggle.tsx) */
+.motion-fab {
+  position: fixed;
+  left: max(16px, env(safe-area-inset-left));
+  bottom: max(16px, env(safe-area-inset-bottom));
+  z-index: 40;
+}
+.motion-fab-button {
+  width: 44px;
+  height: 44px;
+  /* Holds still against busy covers, in either theme */
+  --glass-tint: color-mix(in oklab, var(--paper) 62%, transparent);
+}
+@media (min-width: 640px) {
+  .motion-fab {
+    left: max(24px, env(safe-area-inset-left));
+    bottom: max(24px, env(safe-area-inset-bottom));
+  }
+}
+.motion-fab-button[aria-pressed="true"] {
+  color: var(--accent);
+}
+/* The name, sliding out to the right */
+.motion-fab-tip {
+  position: absolute;
+  left: calc(100% + 10px);
+  top: 50%;
+  translate: -6px -50%;
+  padding: 4px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+  font-size: var(--text-micro);
+  color: var(--ink-2);
+  background: var(--glass-tint);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
+  backdrop-filter: blur(10px) saturate(180%);
+  box-shadow:
+    inset 0 1px 0 var(--glass-rim-hi),
+    0 0 0 1px var(--glass-edge);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    translate var(--dur-base) var(--ease-enter),
+    opacity var(--dur-quick) var(--ease-enter);
+}
+@media (hover: hover) {
+  .motion-fab-button:hover .motion-fab-tip {
+    translate: 0 -50%;
+    opacity: 1;
+  }
+}
+.motion-fab-button:focus-visible .motion-fab-tip {
+  translate: 0 -50%;
+  opacity: 1;
+}
+html[data-motion="reduce"] .motion-fab-tip {
+  translate: 0 -50%;
+  transition: opacity var(--dur-quick) ease;
 }
 
 /* Work experience rows */
@@ -865,10 +1122,9 @@ html.theme-swap * {
     transform: translate(2px, -2px);
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .job:hover .job-arrow {
-    transform: none;
-  }
+/* Reduced motion: the OS setting or the site's toggle */
+html[data-motion="reduce"] .job:hover .job-arrow {
+  transform: none;
 }
 
 /* The flap's shadow falls on the card under it */
@@ -1213,22 +1469,21 @@ html.theme-swap * {
   transform: translateY(0);
   opacity: 1;
 }
-@media (prefers-reduced-motion: reduce) {
-  .glass,
-  .glass-icon,
-  .glass-swap > span,
-  .glass-tip {
-    transition-property: opacity;
-  }
-  .glass-swap-a,
-  .glass-swap-b,
-  .glass:hover .glass-swap-a,
-  .glass:hover .glass-swap-b {
-    transform: none;
-  }
-  .glass-tip {
-    translate: -50% 0;
-  }
+/* Reduced motion: the OS setting or the site's toggle */
+html[data-motion="reduce"] .glass,
+html[data-motion="reduce"] .glass-icon,
+html[data-motion="reduce"] .glass-swap > span,
+html[data-motion="reduce"] .glass-tip {
+  transition-property: opacity;
+}
+html[data-motion="reduce"] .glass-swap-a,
+html[data-motion="reduce"] .glass-swap-b,
+html[data-motion="reduce"] .glass:hover .glass-swap-a,
+html[data-motion="reduce"] .glass:hover .glass-swap-b {
+  transform: none;
+}
+html[data-motion="reduce"] .glass-tip {
+  translate: -50% 0;
 }
 
 /* Site nav: hidden over the home hero, drops in once you scroll (header.tsx sets data-shown) */
@@ -1328,11 +1583,10 @@ html.theme-swap * {
     visibility: hidden !important;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .site-header-pill {
-    translate: none;
-    transition: opacity var(--dur-base) ease;
-  }
+/* Reduced motion: the OS setting or the site's toggle */
+html[data-motion="reduce"] .site-header-pill {
+  translate: none;
+  transition: opacity var(--dur-base) ease;
 }
 /* Nav avatar: a quick wobble, tilting left then right, when the wordmark is hovered */
 @keyframes nav-avatar-wobble {
@@ -1346,11 +1600,10 @@ html.theme-swap * {
 .nav-part[data-focus] .nav-avatar {
   animation: nav-avatar-wobble 600ms var(--ease-standard);
 }
-@media (prefers-reduced-motion: reduce) {
-  .group:hover .nav-avatar,
-  .group:focus-visible .nav-avatar {
-    animation: none;
-  }
+/* Reduced motion: the OS setting or the site's toggle */
+html[data-motion="reduce"] .group:hover .nav-avatar,
+html[data-motion="reduce"] .group:focus-visible .nav-avatar {
+  animation: none;
 }
 /* Home: the header floats over the hero instead of reserving a strip, so the hero (and its dot grid)
    starts at the very top of the page */
@@ -1423,10 +1676,9 @@ html.theme-swap * {
 @keyframes mobile-menu-fade {
   from { opacity: 0; }
 }
-@media (prefers-reduced-motion: reduce) {
-  @keyframes mobile-menu-in {
-    from { opacity: 0; }
-  }
+/* Reduced motion: the OS setting or the site's toggle. Fade only (mobile-menu-fade is opacity alone) */
+html[data-motion="reduce"] .mobile-menu[open] {
+  animation-name: mobile-menu-fade;
 }
 
 /* ------------------------------------------------------------------
@@ -1565,13 +1817,12 @@ html.theme-swap * {
   48%, 62% { translate: 0 -22.5%; }
   100% { translate: 0 0; }
 }
-@media (prefers-reduced-motion: reduce) {
-  .device-mockup .device-laptop,
-  .device-mockup .device-phone,
-  .device-mockup .device-scroll {
-    animation: none !important;
-    opacity: 1 !important;
-  }
+/* Reduced motion: the OS setting or the site's toggle */
+html[data-motion="reduce"] .device-mockup .device-laptop,
+html[data-motion="reduce"] .device-mockup .device-phone,
+html[data-motion="reduce"] .device-mockup .device-scroll {
+  animation: none !important;
+  opacity: 1 !important;
 }
 
 /* Phone trio: three phones take turns at the front. One 12s loop, each phone 4s apart, so they
@@ -1610,10 +1861,18 @@ html.theme-swap * {
   91.67% { z-index: 4; }
   100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); z-index: 4; filter: none; }
 }
-@media (prefers-reduced-motion: reduce) {
-  .device-trio:nth-child(2) { transform: translate(-50%, -50%); z-index: 3; }
-  .device-trio:nth-child(3) { transform: translate(calc(-50% + 30cqw), calc(-50% + 3cqh)) scale(0.8) rotate(9deg); z-index: 2; }
-  .device-trio:nth-child(4) { transform: translate(calc(-50% - 30cqw), calc(-50% + 3cqh)) scale(0.8) rotate(-9deg); z-index: 1; }
+/* Reduced motion: the OS setting or the site's toggle */
+html[data-motion="reduce"] .device-trio:nth-child(2) {
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}
+html[data-motion="reduce"] .device-trio:nth-child(3) {
+  transform: translate(calc(-50% + 30cqw), calc(-50% + 3cqh)) scale(0.8) rotate(9deg);
+  z-index: 2;
+}
+html[data-motion="reduce"] .device-trio:nth-child(4) {
+  transform: translate(calc(-50% - 30cqw), calc(-50% + 3cqh)) scale(0.8) rotate(-9deg);
+  z-index: 1;
 }
 
 /* ------------------------------------------------------------------
@@ -2098,6 +2357,298 @@ html.theme-swap * {
 .yo-bit {
   margin: -8px 0 0 -8px;
 }
+/* Websites: a browser window whose long pages scroll on hover, and a whole page in three moving columns */
+.frame-browser {
+  position: relative;
+  display: block;
+  flex: none;
+  width: 66cqw;
+  overflow: hidden;
+  border-radius: 1.3cqw;
+  background: #fff;
+  box-shadow:
+    0 0 0 1px rgb(20 20 40 / 0.08),
+    0 2.4cqw 4.4cqw -1.8cqw rgb(20 20 60 / 0.35);
+  cursor: zoom-in;
+  outline-offset: 6px;
+}
+.frame-browser-bar {
+  display: flex;
+  gap: 0.6cqw;
+  align-items: center;
+  height: 2.6cqw;
+  padding: 0 1.1cqw;
+  background: #f1f2f6;
+  border-bottom: 1px solid rgb(20 20 40 / 0.07);
+}
+.frame-browser-bar i {
+  width: 0.75cqw;
+  height: 0.75cqw;
+  border-radius: 50%;
+  background: #ff5f57;
+}
+.frame-browser-bar i:nth-child(2) {
+  background: #febc2e;
+}
+.frame-browser-bar i:nth-child(3) {
+  background: #28c840;
+}
+.frame-browser .frame-screen {
+  position: relative;
+  display: block;
+  aspect-ratio: var(--ratio);
+  overflow: hidden;
+  background: #fff;
+}
+.frame-page {
+  position: relative;
+  display: block;
+  transition: transform var(--time) cubic-bezier(0.45, 0, 0.35, 1);
+}
+.frame-browser:hover .frame-page,
+.frame-browser:focus-visible .frame-page {
+  transform: translateY(var(--travel));
+}
+.device-panel:has(.frame-browser) > .frame-browser:only-child {
+  width: 80cqw;
+}
+.whole-page {
+  container-type: inline-size;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 3cqw;
+  width: 100%;
+  padding: 5cqw;
+  border-radius: var(--radius-l);
+  background: color-mix(in oklab, var(--tint) 16%, #fff);
+  cursor: zoom-in;
+  outline-offset: 4px;
+}
+.whole-col {
+  position: relative;
+  display: block;
+  aspect-ratio: var(--ratio);
+  overflow: hidden;
+  border-radius: 1.2cqw;
+  background: #fff;
+  box-shadow: 0 1.6cqw 3.6cqw -1.6cqw rgb(20 20 60 / 0.35);
+}
+.whole-pan {
+  position: absolute;
+  inset: 0 0 auto;
+  display: block;
+  translate: 0 var(--from);
+  animation: whole-down 26s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+}
+.whole-col[data-dir="up"] .whole-pan {
+  translate: 0 var(--to);
+  animation-name: whole-up;
+}
+.whole-page:hover .whole-pan,
+.whole-page:focus-visible .whole-pan {
+  animation-play-state: paused;
+}
+@keyframes whole-down {
+  from { translate: 0 var(--from); }
+  to { translate: 0 var(--to); }
+}
+@keyframes whole-up {
+  from { translate: 0 var(--to); }
+  to { translate: 0 var(--from); }
+}
+/* Reduced motion: the OS setting or the site's toggle */
+html[data-motion="reduce"] .whole-pan {
+  animation: none;
+}
+html[data-motion="reduce"] .frame-page {
+  transition: none;
+}
+.screen-viewer-long.screen-viewer-long-desktop {
+  width: min(1100px, 100%);
+  border-radius: 12px;
+}
+@container (max-width: 520px) {
+  .device-panel > .frame-browser:has(+ .frame-phone) {
+    width: 78cqw;
+  }
+}
+
+/* iExcelo film (components/case-study/iexcelo/film.tsx): a browser, a phone and a pointer on the product's wash */
+.ix {
+  background: linear-gradient(160deg, #fde4f2, #eadcff 45%, #d7e8ff);
+}
+.ix-stage > * {
+  position: absolute;
+}
+.ix-wash {
+  left: -300px;
+  top: -300px;
+  width: 1784px;
+  height: 1632px;
+  background:
+    radial-gradient(40% 36% at 22% 26%, rgb(255 168 214 / 0.75), transparent 70%),
+    radial-gradient(44% 40% at 80% 72%, rgb(140 186 255 / 0.7), transparent 70%),
+    radial-gradient(30% 30% at 70% 18%, rgb(196 170 255 / 0.6), transparent 70%);
+}
+.ix-grid {
+  inset: 0;
+  background-image:
+    linear-gradient(rgb(90 70 160 / 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(90 70 160 / 0.07) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask: radial-gradient(70% 60% at 50% 50%, #000, transparent);
+}
+.ix-camera {
+  inset: 0;
+}
+.ix-camera > * {
+  position: absolute;
+}
+.ix-browser {
+  overflow: visible;
+}
+.ix-browser > .ix-bar,
+.ix-browser > .ix-screen {
+  position: relative;
+}
+.ix-bar {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 16px 16px 0 0;
+  background: rgb(250 250 253 / 0.96);
+  box-shadow: inset 0 -1px 0 rgb(30 20 70 / 0.08);
+}
+.ix-dots {
+  display: flex;
+  gap: 7px;
+}
+.ix-dots i {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #ff5f57;
+}
+.ix-dots i:nth-child(2) {
+  background: #febc2e;
+}
+.ix-dots i:nth-child(3) {
+  background: #28c840;
+}
+.ix-url {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: 360px;
+  height: 26px;
+  margin: 0 auto;
+  padding: 0 12px;
+  border-radius: 8px;
+  background: #eceef5;
+  color: #5b5f73;
+  font: 500 13px/1 var(--font-sans), sans-serif;
+  transform: translateX(-30px);
+}
+.ix-url-text {
+  position: relative;
+  flex: 1;
+  height: 16px;
+}
+.ix-url-text span {
+  position: absolute;
+  inset: 0;
+  white-space: nowrap;
+  line-height: 16px;
+}
+.ix-screen {
+  overflow: hidden;
+  border-radius: 0 0 16px 16px;
+  background: #fff;
+  box-shadow: 0 50px 90px -34px rgb(60 30 120 / 0.45);
+}
+.ix-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 -18px 40px -20px rgb(40 20 90 / 0.3);
+}
+.ix-layer img {
+  max-width: none;
+}
+.ix-scroll {
+  position: absolute;
+  inset: 0;
+}
+.ix-layer > img,
+.ix-scroll > img,
+.ix-live {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.ix-pen-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.ix-pen {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.ix-pointer {
+  position: absolute;
+  left: -3px;
+  top: -3px;
+  filter: drop-shadow(0 2px 4px rgb(0 0 0 / 0.4));
+}
+.ix-press {
+  position: absolute;
+  width: 46px;
+  height: 46px;
+  margin: -23px 0 0 -23px;
+  border-radius: 50%;
+  background: rgb(0 127 255 / 0.18);
+  box-shadow: inset 0 0 0 2px rgb(0 127 255 / 0.6);
+}
+.ix-at {
+  width: 0;
+  height: 0;
+}
+.ix-at > * {
+  position: absolute;
+}
+.ix .yo-frame {
+  background: linear-gradient(150deg, #f6f7fb, #d5d9e4 18%, #a7adbd 42%, #cfd3de 62%, #9aa1b2 84%, #eef0f5);
+  box-shadow:
+    inset 0 0 0 2px rgb(255 255 255 / 0.6),
+    0 50px 90px -30px rgb(60 30 120 / 0.5);
+}
+.ix .fp-screen {
+  background: #fff;
+  transform: none;
+}
+.ix .fp-bezel {
+  width: 686px;
+  height: 1442px;
+  margin: -721px 0 0 -343px;
+  border-radius: 99px;
+  background: #050507;
+  transform: none;
+}
+.ix-logo {
+  left: 50%;
+  top: 50%;
+}
+.ix-logo svg {
+  display: block;
+  overflow: visible;
+}
+
 /* Revival Stream film (components/case-study/revival-stream/film.tsx): the front of a radio */
 .rs {
   --film-shade: 90 26 4;
@@ -2552,9 +3103,17 @@ html.theme-swap * {
 @keyframes full-process-in {
   from { opacity: 0; transform: translateY(8px); }
 }
-@media (prefers-reduced-motion: reduce) {
-  @keyframes screen-in { from { opacity: 0; } }
-  @keyframes full-process-in { from { opacity: 0; } }
+/* Reduced motion: the OS setting or the site's toggle. Fade only */
+html[data-motion="reduce"] .screen-viewer-img,
+html[data-motion="reduce"] .screen-viewer-long,
+html[data-motion="reduce"] .full-process[open] > div {
+  animation-name: fade-in-only;
+}
+html[data-motion="reduce"] .screen-viewer-long .screen-viewer-img {
+  animation: none;
+}
+@keyframes fade-in-only {
+  from { opacity: 0; }
 }
 
 /* A phone holding a 375×812 screen: thin dark body around the screen's own corners */
@@ -2635,11 +3194,10 @@ html.theme-swap * {
 @keyframes flow-blink {
   50% { opacity: 0; }
 }
-@media (prefers-reduced-motion: reduce) {
-  .flow-touch {
-    animation: none;
-    opacity: 0;
-  }
+/* Reduced motion: the OS setting or the site's toggle */
+html[data-motion="reduce"] .flow-touch {
+  animation: none;
+  opacity: 0;
 }
 .flow-spot:focus-visible {
   outline: 3px solid #4b7bff;
