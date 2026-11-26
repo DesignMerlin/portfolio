@@ -14,6 +14,7 @@ const films = {
   iexcelo: dynamic(() => import("@/components/case-study/iexcelo/film")),
   voxdeed: dynamic(() => import("@/components/case-study/voxdeed/film")),
   powerroute: dynamic(() => import("@/components/case-study/powerroute/film")),
+  lagproperties: dynamic(() => import("@/components/case-study/lagproperties/film")),
   caseTracker: dynamic(() => import("@/components/case-study/case-tracker/film")),
 };
 

@@ -450,3 +450,8 @@ Not yet done: a real mid-range Android check, and a Lighthouse run.
 - Screens: 19 at 2× in `public/work/powerroute/` (~1 MB), cropped from one export of the section (2× with an 80px pad, found by matching two screens).
 - Film (`components/case-study/powerroute/film.tsx`, 26s): the shared one-phone `Film` (Room8's rig). Splash, the three photo screens, home (recents and station rows lift off), map, a station's card, the booking calendar, payment, review, booked, the car and battery on charge, charged, the wallet card, and through the screen.
 - Case study from Samuel's own case study page in the file: user flow in FigJam, low-fi, style guide (Montserrat, #5ACD56), hi-fi, prototype; four goals. TODO: the year and Samuel's sign-off on the copy. The page also has his email and handles, which aren't repeated.
+
+## 2026-11-26: LAGProperties
+- Screens: 22 from Figma AHRP (Design page), tenant and landlord/agent flows, at 2× in `public/work/lagproperties/` (1.9 MB). Long screens also have a `-top` copy (the first 812 points) for the film's phone (`lagTop`).
+- Film (`components/case-study/lagproperties/film.tsx`, 28s), the shared one-phone rig: the orange splash, onboarding, sign up, rent or list (the two choices lift off), explore (two listings lift off), a flat, scheduling an inspection (mode and date lift off), the time, paid, the agent's chat (the house card and three messages lift off), the agreement, signing; then the landlord dashboard (escrow and rent received lift off), an inspection request, accepted.
+- Case study keeps the confirmed facts (2024 contract, UI/UX, testing lifted satisfaction 10%) and adds the challenge and five key screen groups written from the designs. TODO: Samuel to confirm that copy.
