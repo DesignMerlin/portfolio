@@ -62,7 +62,10 @@ export default async function HomePage() {
     })),
   ]
     .sort((a, b) => Number(!(a.mockup || a.cover)) - Number(!(b.mockup || b.cover)) || rank(a.id) - rank(b.id))
+    // Only projects with something real to show
+    .filter((s) => s.mockup || s.cover)
     .slice(0, 6);
+  const quotes = testimonials.filter((t) => !t.placeholder);
 
   return (
     <PageTransition>
@@ -115,6 +118,8 @@ export default async function HomePage() {
         </dl>
       </section>
 
+      {/* Real testimonials only: the section waits until there are some */}
+      {quotes.length ? (
       <section aria-labelledby="testimonials-title" className="mt-32 overflow-hidden lg:mt-44">
         <div className="mx-auto max-w-[1320px] px-4 sm:px-8">
           <h2 id="testimonials-title" className="text-center font-display text-[clamp(2.25rem,5vw,56px)] leading-[1.05] font-semibold text-balance">
@@ -124,10 +129,11 @@ export default async function HomePage() {
             A few thoughts from people who have experienced the value of working together.
           </p>
           <div className="mt-10">
-            <ArcDial items={testimonials} />
+            <ArcDial items={quotes} />
           </div>
         </div>
       </section>
+      ) : null}
     </PageTransition>
   );
 }

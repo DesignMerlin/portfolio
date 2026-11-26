@@ -84,7 +84,7 @@ await step("command menu opens with Ctrl+K and filters", async () => {
 });
 
 await step("project page: no TL;DR, facts or prototype, and two other projects at random", async () => {
-  for (const slug of ["room8", "fundpath", "immigify-case-tracker", "yoyo", "immigify", "iexcelo"]) {
+  for (const slug of ["room8", "fundpath", "immigify-case-tracker", "yoyo", "iexcelo", "voxdeed"]) {
     const seen = new Set();
     for (let i = 0; i < 6; i++) {
       await page.goto(base + "/work/" + slug, { waitUntil: "load" });
