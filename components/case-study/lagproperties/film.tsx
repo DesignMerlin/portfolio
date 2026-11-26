@@ -3,6 +3,8 @@
 import { Film } from "@/components/case-study/film/film";
 import { at, CAMERA, DIVE, DRIFT, ENTER, lift, pose, push, SHEET, still, zoomIn, type Frame, type Piece, type Storyboard } from "@/components/case-study/film/kit";
 import type { FilmProps } from "@/components/case-study/film/use-film";
+import type { LiveScene } from "@/components/case-study/live/kit";
+import { lagAccepted, lagPaid, lagSplash } from "@/components/case-study/live/phones";
 import { lagTop, type LagScreen } from "@/content/lagproperties";
 
 /** One loop, in seconds */
@@ -52,6 +54,13 @@ const FADE: Frame[] = [
   [T, { opacity: 0 }],
 ];
 
+/** What moves on a screen, and when it starts */
+const LIVE: Partial<Record<LagScreen, { scene: LiveScene; t: number }>> = {
+  splash: { scene: lagSplash, t: 0.3 },
+  paid: { scene: lagPaid, t: 15.5 },
+  landlordAccepted: { scene: lagAccepted, t: 25.9 },
+};
+
 const screens = (
   [
     { name: "splash", frames: still },
@@ -71,7 +80,7 @@ const screens = (
     { name: "landlordInspection", frames: zoomIn(24.8, 1.08) },
     { name: "landlordAccepted", frames: zoomIn(25.8, 1.08) },
   ] as { name: LagScreen; frames: Frame[] }[]
-).map(({ name, frames }) => ({ id: name, src: lagTop(name), frames }));
+).map(({ name, frames }) => ({ id: name, src: lagTop(name), frames, live: LIVE[name] }));
 
 // In screen points: the buttons' real places
 const TAPS = [
@@ -139,6 +148,7 @@ const board: Storyboard = {
   fade: FADE,
   shadow: SHADOW,
   shade: "90 34 8",
+  finger: true,
   phone: {
     track: CAMERA_TRACK,
     screens,

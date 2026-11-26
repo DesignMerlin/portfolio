@@ -2,6 +2,7 @@ import { DRIFT, ENTER, SHEET, type Frame } from "@/components/case-study/film/ki
 import type { LiveScene, Part, PtBox, Sprite } from "@/components/case-study/live/kit";
 import { iexceloScenes } from "@/components/case-study/live/iexcelo";
 import { voxdeedScenes } from "@/components/case-study/live/voxdeed";
+import { phoneScenes } from "@/components/case-study/live/phones";
 import { revivalScenes } from "@/components/case-study/live/revival";
 import { caseTracker } from "@/content/case-tracker";
 import { fundpath } from "@/content/fundpath";
@@ -785,6 +786,7 @@ const scenes: Record<string, LiveScene> = {
   ...revivalScenes,
   ...iexceloScenes,
   ...voxdeedScenes,
+  ...phoneScenes,
 };
 
 /** What moves on this screen, if anything does */

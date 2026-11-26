@@ -51,6 +51,8 @@ export type Storyboard = {
   phone: FilmPhone;
   /** Colour of the shadows, as rgb numbers: "6 46 22" */
   shade: string;
+  /** Show touches as a fingertip (a larger, ringed press) rather than a small tap mark */
+  finger?: boolean;
 };
 
 // The site's curves (styles/tokens.css), plus one long in-out for camera moves

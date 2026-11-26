@@ -3,6 +3,8 @@
 import { Film } from "@/components/case-study/film/film";
 import { at, CAMERA, DIVE, DRIFT, ENTER, lift, pose, push, SHEET, still, zoomIn, type Frame, type Piece, type Storyboard } from "@/components/case-study/film/kit";
 import type { FilmProps } from "@/components/case-study/film/use-film";
+import type { LiveScene } from "@/components/case-study/live/kit";
+import { powerrouteBooked, powerrouteCharged, powerrouteCharging, powerrouteSplash } from "@/components/case-study/live/phones";
 import { powerroute, type PowerRouteScreen } from "@/content/powerroute";
 
 /** One loop, in seconds */
@@ -51,6 +53,14 @@ const FADE: Frame[] = [
   [T, { opacity: 0 }],
 ];
 
+/** What moves on a screen, and when it starts */
+const LIVE: Partial<Record<PowerRouteScreen, { scene: LiveScene; t: number }>> = {
+  splash: { scene: powerrouteSplash, t: 0.3 },
+  booked: { scene: powerrouteBooked, t: 17.3 },
+  charging: { scene: powerrouteCharging, t: 19.0 },
+  charged: { scene: powerrouteCharged, t: 22.1 },
+};
+
 const screens = (
   [
     { name: "splash", frames: still },
@@ -68,7 +78,7 @@ const screens = (
     { name: "charged", frames: zoomIn(22.0, 1.1) },
     { name: "wallet", frames: push(23.2) },
   ] as { name: PowerRouteScreen; frames: Frame[] }[]
-).map(({ name, frames }) => ({ id: name, src: powerroute[name].src, frames }));
+).map(({ name, frames }) => ({ id: name, src: powerroute[name].src, frames, live: LIVE[name] }));
 
 // In screen points: the buttons' real places
 const TAPS = [
@@ -136,6 +146,7 @@ const board: Storyboard = {
   fade: FADE,
   shadow: SHADOW,
   shade: "12 60 20",
+  finger: true,
   phone: {
     track: CAMERA_TRACK,
     screens,
