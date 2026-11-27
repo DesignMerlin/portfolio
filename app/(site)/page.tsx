@@ -65,7 +65,10 @@ export default async function HomePage() {
     // Only projects with something real to show
     .filter((s) => s.mockup || s.cover)
     .slice(0, 6);
-  const quotes = testimonials.filter((t) => !t.placeholder);
+  // Only quotes the person has approved go live. In development the drafts show too, marked, so they can be
+  // seen in place while they wait for a yes (content/testimonials.ts)
+  const drafts = process.env.NODE_ENV === "development";
+  const quotes = testimonials.filter((t) => !t.placeholder || drafts);
 
   return (
     <PageTransition>
@@ -125,7 +128,7 @@ export default async function HomePage() {
         </dl>
       </section>
 
-      {/* Real testimonials only: the section waits until there are some */}
+      {/* Approved testimonials only: the section waits until there are some */}
       {quotes.length ? (
       <section aria-labelledby="testimonials-title" className="mt-32 overflow-hidden lg:mt-44">
         <div className="mx-auto max-w-[1320px] px-4 sm:px-8">
@@ -135,6 +138,11 @@ export default async function HomePage() {
           <p className="mx-auto mt-3 max-w-[44ch] text-center text-[20px] leading-[1.5] text-balance text-ink-2">
             A few thoughts from people who have experienced the value of working together.
           </p>
+          {drafts && quotes.some((t) => t.placeholder) ? (
+            <p className="mx-auto mt-6 w-fit rounded-[var(--radius-m)] border border-dashed border-danger/50 px-4 py-2 text-small text-danger">
+              Drafts awaiting each person&apos;s approval (italic). Only visible in development.
+            </p>
+          ) : null}
           <div className="mt-10">
             <ArcDial items={quotes} />
           </div>

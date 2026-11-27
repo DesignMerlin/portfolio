@@ -499,3 +499,8 @@ Measured on a 390×844 touch viewport with the CPU slowed 4× (a mid-range Andro
 - "View all projects" is a button, centred under the six cards (it was a link beside the heading).
 - Phones: no "Drop again" / "Play with the pile" buttons; the pile still falls and can be thrown. Desktop keeps them.
 - Projects gallery: no caption under the centre card. Tapping any card, floating or centre, opens it as a page in a modal (after a reference Samuel shared): the card grows from where it was to the middle, with the name and its one line centred under it and View project; the gallery shows blurred through the page behind; it shrinks back into the same card on close. Arrow keys still turn the orbit. The orbit spreads wider (spacing 1.15, taller rings); on phones the rings reach up and down the stage so the cards fill the screen rather than crowding the centre's sides.
+
+## 2026-11-27: Testimonials, from real people, awaiting approval
+- Samuel named five people and supplied their photos: Emma Seyi (co-founder and CEO) and Deji Adesola (co-founder and CTO) at Immigify, Benjamin Chen and Gabriele Muratori (co-founders) at Boulevard Legacy, and Iranlowo JM at iExcelo. Face crops in `public/testimonials/`; the eight stand-in Unsplash portraits are gone.
+- He asked for the testimonials to be generated. They're drafted from his documented work with each person, for that person to approve: none has been said by them, so each stays hidden on the live site (`placeholder: true`) and the section stays off until at least one is approved. In development the drafts show in place, italic, with a dashed note. The send-for-approval message is in profile.md.
+- TODO for Samuel: Iranlowo's role; confirm which rooftop photo is Benjamin and which is Gabriele.
