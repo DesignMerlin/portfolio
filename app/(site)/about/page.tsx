@@ -19,6 +19,7 @@ import {
 } from "@/content/about";
 import { getProfile } from "@/lib/content";
 import { getProjects } from "@/lib/projects";
+import { wallStored } from "@/lib/wall";
 
 // The drawing wall is its own chunk, fetched only on this page
 const DoodleWall = dynamic(() => import("@/components/about/doodle-wall").then((m) => m.DoodleWall));
@@ -130,12 +131,14 @@ export default async function AboutPage() {
           </ul>
         </section>
 
-        {/* A wall to draw on before you go, kept in this browser (the playground page has the fuller kit) */}
+        {/* The shared doodle wall (lib/wall.ts; kept in each browser until a store is set up) */}
         <section aria-labelledby="doodle-title" className="mt-24 lg:mt-32">
           <div className="mb-6 flex flex-wrap items-end justify-between gap-x-10 gap-y-3">
             <SectionHeading id="doodle-title">Leave a doodle</SectionHeading>
             <p className="max-w-[46ch] text-ink-2">
-              Somewhere to draw before you go. Nothing you draw leaves your browser, and it will still be here when you come back.
+              {wallStored
+                ? "One wall that everyone who visits draws on. Pick a pen or a brush, find a space, and add yours."
+                : "Somewhere to draw before you go. Pick a pen or a brush, and it will still be here when you come back."}
             </p>
           </div>
           <DoodleWall />
