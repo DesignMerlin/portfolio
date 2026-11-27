@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import { AiProcessCard } from "@/components/about/ai-process-card";
+import dynamic from "next/dynamic";
 import { DomainHeadline, type Domain } from "@/components/about/domain-headline";
 import { ExperienceList } from "@/components/about/experience-list";
-import { SkillsSwitcher } from "@/components/about/skills-switcher";
 import { PixelPortrait } from "@/components/home/pixel-portrait";
 import { PageTransition } from "@/components/site/page-transition";
 import { CopyEmail } from "@/components/ui/copy-email";
@@ -11,21 +10,18 @@ import { RollingNumber } from "@/components/ui/rolling-number";
 import { SectionHeading } from "@/components/ui/section-heading";
 import {
   achievements,
-  aiProcess,
   bio,
-  certifications,
   cvNumbers,
-  cvSkills,
   education,
   experience,
   headline,
   heroPhoto,
-  principles,
-  skills,
-  tools,
 } from "@/content/about";
 import { getProfile } from "@/lib/content";
 import { getProjects } from "@/lib/projects";
+
+// The drawing wall is its own chunk, fetched only on this page
+const DoodleWall = dynamic(() => import("@/components/about/doodle-wall").then((m) => m.DoodleWall));
 
 export const metadata: Metadata = {
   title: "About",
@@ -103,38 +99,6 @@ export default async function AboutPage() {
           <ExperienceList roles={experience} />
         </section>
 
-        <section aria-labelledby="skills-title" className="mt-24 lg:mt-32">
-          <div className="mb-6">
-            <SectionHeading id="skills-title">What I do</SectionHeading>
-          </div>
-          <SkillsSwitcher skills={skills} />
-          <ul aria-label="Skills" className="mt-8 flex flex-wrap gap-2">
-            {cvSkills.map((s) => (
-              <li key={s} className="rounded-full border border-line px-3 py-1 text-small text-ink-2">
-                {s}
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <section aria-labelledby="principles-title" className="mt-24 grid gap-x-12 gap-y-6 lg:mt-32 lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <SectionHeading id="principles-title">How I work</SectionHeading>
-          </div>
-          <ol className="space-y-6 lg:col-span-7 lg:col-start-6">
-            {principles.map((p) => (
-              <li key={p.title} className="border-t border-line pt-5">
-                <p className="text-lead font-medium">{p.title}</p>
-                <p className="mt-1 text-ink-2">{p.body}</p>
-              </li>
-            ))}
-          </ol>
-        </section>
-
-        <section aria-label="How I use AI" className="mt-20">
-          <AiProcessCard steps={aiProcess} />
-        </section>
-
         <section aria-labelledby="education-title" className="mt-24 grid gap-x-12 gap-y-6 lg:mt-32 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <SectionHeading id="education-title">Education</SectionHeading>
@@ -166,25 +130,15 @@ export default async function AboutPage() {
           </ul>
         </section>
 
-        <section className="mt-20 grid gap-10 border-t border-line pt-10 sm:grid-cols-2">
-          <div>
-            <SectionHeading id="certs-title">Certifications</SectionHeading>
-            <ul className="mt-4 space-y-2 text-ink-2">
-              {certifications.map((c) => (
-                <li key={c}>{c}</li>
-              ))}
-            </ul>
+        {/* A wall to draw on before you go, kept in this browser (the playground page has the fuller kit) */}
+        <section aria-labelledby="doodle-title" className="mt-24 lg:mt-32">
+          <div className="mb-6 flex flex-wrap items-end justify-between gap-x-10 gap-y-3">
+            <SectionHeading id="doodle-title">Leave a doodle</SectionHeading>
+            <p className="max-w-[46ch] text-ink-2">
+              Somewhere to draw before you go. Nothing you draw leaves your browser, and it will still be here when you come back.
+            </p>
           </div>
-          <div>
-            <SectionHeading id="tools-title">Tools</SectionHeading>
-            <ul className="mt-4 flex flex-wrap gap-2">
-              {tools.map((t) => (
-                <li key={t} className="rounded-full border border-line px-3 py-1 text-small text-ink-2">
-                  {t}
-                </li>
-              ))}
-            </ul>
-          </div>
+          <DoodleWall />
         </section>
       </div>
     </PageTransition>
