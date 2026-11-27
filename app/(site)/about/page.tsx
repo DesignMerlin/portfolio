@@ -57,7 +57,7 @@ export default async function AboutPage() {
               <PixelPortrait stylized={heroPhoto.stylized} real={heroPhoto} alt={heroPhoto.alt} priority />
             </div>
             <figcaption className="mt-3 text-small text-ink-2">
-              <LocalTime withRelative />
+              <LocalTime />
             </figcaption>
           </figure>
         </section>

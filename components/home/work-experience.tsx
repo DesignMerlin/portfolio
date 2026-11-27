@@ -11,7 +11,7 @@ import type { Job } from "@/content/about";
 export function WorkExperience({ jobs }: { jobs: Job[] }) {
   return (
     <section aria-labelledby="experience-title" className="mx-auto mt-28 max-w-[1320px] px-4 sm:px-8 lg:mt-36">
-      <SectionHeading id="experience-title" count={jobs.length}>
+      <SectionHeading id="experience-title">
         Work experience
       </SectionHeading>
       <ul className="mt-5">

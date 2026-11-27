@@ -492,3 +492,10 @@ Measured on a 390×844 touch viewport with the CPU slowed 4× (a mid-range Andro
 
 ## 2026-11-26: Rope carousel notebook pages
 - The ticked list is gone. Each page has two things written on it, big: the skill, over two ruled lines with the highlighter (14cqw, tight), and its one line (9.6cqw) at the foot of the page, ending on the tenth rule of every card. The ruling is wider (12cqw) to match the bigger writing. The header-then-details split was inspired by a reference Samuel shared; the notebook paper stays.
+
+## 2026-11-27: Name, home details, gallery as pages
+- The nav reads "Psalmuhel" (was DesignMerlin; the X handle is unchanged). Local time shows just the time, without "same time as you".
+- Work experience: no count after the heading; LAGProperties has its logo, the tower mark from the app's splash on its orange (`public/brand/lagproperties.webp`).
+- "View all projects" is a button, centred under the six cards (it was a link beside the heading).
+- Phones: no "Drop again" / "Play with the pile" buttons; the pile still falls and can be thrown. Desktop keeps them.
+- Projects gallery: no caption under the centre card. Tapping any card, floating or centre, opens it as a page in a modal (after a reference Samuel shared): the card grows from where it was to the middle, with the name and its one line centred under it and View project; the gallery shows blurred through the page behind; it shrinks back into the same card on close. Arrow keys still turn the orbit. The orbit spreads wider (spacing 1.15, taller rings); on phones the rings reach up and down the stage so the cards fill the screen rather than crowding the centre's sides.

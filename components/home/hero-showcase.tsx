@@ -211,7 +211,7 @@ function MobileHero({ first, last, photo, intro }: Props) {
 
         <div className="hero-fade mt-6 space-y-3">
           <p className="text-small text-ink-2">
-            <LocalTime withRelative />
+            <LocalTime />
           </p>
         </div>
         <div className="mt-8 space-y-5">
@@ -225,8 +225,6 @@ function MobileHero({ first, last, photo, intro }: Props) {
       {/* Phones: the pile falls from the very top of the hero, past the name and portrait, and
           settles on its own floor at the bottom. The layer ignores the pointer; only the tags take it */}
       <div className="relative">
-        {/* Left, stacked; the panel opens upward over the intro, since the hero clips anything below its floor */}
-        <PileControls {...pile} stacked placement="above" className="relative z-30 mx-4 w-fit sm:mx-8" />
         {/* Floor just tall enough for the settled pile, so it sits about 96px under the intro. The pile
             gets taller as the screen narrows (same tags, less width), hence the vw term */}
         <div aria-hidden="true" className="mt-3 h-[max(280px,calc(580px-57vw))]" />

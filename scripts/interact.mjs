@@ -164,7 +164,7 @@ await step("journey arrow keys + IA tree", async () => {
   await shot("10-journey-step");
 });
 
-await step("projects gallery: arrow key, a card to the centre, lightbox open and close", async () => {
+await step("projects gallery: arrow key turns it, any card opens as a page with its name and line", async () => {
   await page.goto(base + "/projects", { waitUntil: "networkidle" });
   await page.waitForFunction(() => document.documentElement.dataset.intro !== "play", null, { timeout: 15000 });
   await page.locator(".gallery-stage").scrollIntoViewIfNeeded();
@@ -175,26 +175,34 @@ await step("projects gallery: arrow key, a card to the centre, lightbox open and
   await page.keyboard.press("ArrowRight");
   await page.waitForTimeout(600);
   if ((await centre()) === first) throw new Error("The arrow key didn't change the centre");
-  // A real click on a floating card that nothing covers
+  if (await page.locator(".gallery-caption").count()) throw new Error("The gallery still shows a caption");
+  // A real click on a floating card that nothing covers opens that project
   const target = await page.evaluate(() => {
     for (const li of document.querySelectorAll(".gallery-card")) {
       const b = li.querySelector("button");
       if (!b) continue;
       const r = li.getBoundingClientRect();
       const x = r.left + r.width / 2, y = r.top + r.height / 2;
-      if (document.elementFromPoint(x, y)?.closest("button") === b) return [x, y, b.getAttribute("aria-label").replace("Bring ", "").replace(" to the centre", "")];
+      if (document.elementFromPoint(x, y)?.closest("button") === b) return [x, y, b.getAttribute("aria-label").replace("Open ", "")];
     }
     return null;
   });
   if (!target) throw new Error("No floating card could be clicked");
   await page.mouse.click(target[0], target[1]);
-  await page.waitForTimeout(800);
-  if ((await centre()) !== `Open ${target[2]}`) throw new Error(`Clicked ${target[2]}, centre is ${await centre()}`);
-  await shot("11-gallery");
+  await page.waitForTimeout(900);
+  const open = () => page.evaluate(() => document.querySelector("dialog.gallery-lightbox")?.open);
+  if (!(await open())) throw new Error("A floating card didn't open");
+  const name = await page.locator("dialog.gallery-lightbox .gallery-lightbox-info p").first().textContent();
+  if (name !== target[2]) throw new Error(`Clicked ${target[2]}, opened ${name}`);
+  if (!(await page.locator("dialog.gallery-lightbox .gallery-lightbox-info p").nth(1).textContent())?.trim()) throw new Error("No one-liner under the name");
+  await shot("11b-lightbox");
+  await page.keyboard.press("Escape");
+  await page.waitForFunction(() => !document.querySelector("dialog.gallery-lightbox"), null, { timeout: 3000 });
+  // The centre card opens too
   await page.locator(".gallery-feature button").click({ force: true });
   await page.waitForTimeout(800);
-  if (!(await page.evaluate(() => document.querySelector("dialog.gallery-lightbox")?.open))) throw new Error("Lightbox didn't open");
-  await shot("11b-lightbox");
+  if (!(await open())) throw new Error("The centre card didn't open");
+  await shot("11-gallery");
   await page.keyboard.press("Escape");
   await page.waitForFunction(() => !document.querySelector("dialog.gallery-lightbox"), null, { timeout: 3000 });
 });
