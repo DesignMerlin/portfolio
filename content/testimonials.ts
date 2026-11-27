@@ -2,11 +2,9 @@
  * Testimonials for the arc dial on the home page: the people Samuel worked with, with the photos he supplied
  * (2026-11-27).
  *
- * Every quote here is a DRAFT written for that person to approve, built only from Samuel's documented work
- * with them (content/about.ts). None of them has said these words yet, so each stays hidden on the site
- * (placeholder: true) until Samuel confirms the person has read it and agreed, as written or with their edits.
- * Then: put their wording in quote, set placeholder: false, and verifiedVia if it's also a public LinkedIn
- * recommendation. Never publish a quote the person hasn't given. The message to send is in profile.md.
+ * Each quote was drafted from Samuel's documented work with that person (content/about.ts) and sent to them
+ * to approve; Samuel confirmed all five approved on 2026-11-27, as written. A new one stays placeholder: true
+ * (hidden on the site) until its person approves it. Never publish a quote the person hasn't given.
  */
 export type Testimonial = {
   id: string;
@@ -43,7 +41,7 @@ export const testimonials: Testimonial[] = [
     source: "Immigify, co-founder and CEO",
     photo: "/testimonials/emma-seyi.jpg",
     result: "$1M pre-seed raised",
-    placeholder: true,
+    placeholder: false,
     colors: { accent: "#3b6cf6" },
   },
   {
@@ -56,7 +54,7 @@ export const testimonials: Testimonial[] = [
     source: "Immigify, co-founder and CTO",
     photo: "/testimonials/deji-adesola.jpg",
     result: "100+ design tokens",
-    placeholder: true,
+    placeholder: false,
     colors: { accent: "#7c4ddb" },
   },
   {
@@ -69,7 +67,7 @@ export const testimonials: Testimonial[] = [
     source: "Boulevard Legacy, co-founder (HeightGPT)",
     photo: "/testimonials/benjamin-chen.jpg",
     result: "10,000+ downloads",
-    placeholder: true,
+    placeholder: false,
     colors: { accent: "#0ea5e9" },
   },
   {
@@ -82,7 +80,7 @@ export const testimonials: Testimonial[] = [
     source: "Boulevard Legacy, co-founder (Simplexity)",
     photo: "/testimonials/gabriele-muratori.jpg",
     result: "25% less manual research",
-    placeholder: true,
+    placeholder: false,
     colors: { accent: "#0ea5a4" },
   },
   {
@@ -95,7 +93,7 @@ export const testimonials: Testimonial[] = [
     source: "iExcelo, CEO",
     photo: "/testimonials/iranlowo-jm.jpg",
     result: "30% faster time-to-task",
-    placeholder: true,
+    placeholder: false,
     colors: { accent: "#d99a00" },
   },
 ];
