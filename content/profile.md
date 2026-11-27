@@ -208,7 +208,8 @@ Archive (shorter write-ups or "case study soon"):
 # Testimonials
 
 <!--
-DRAFTS FOR APPROVAL (2026-11-27). Samuel named the five people below and supplied their photos. Each quote
+APPROVED (2026-11-27): Samuel confirmed all five approved their quotes as written; they are live.
+Originally drafts for approval. Samuel named the five people below and supplied their photos. Each quote
 in content/testimonials.ts was drafted from Samuel's documented work with them (the roles above) for that
 person to approve or rewrite. None has been said by them yet, so all are hidden on the live site
 (placeholder: true) and the Ask agent must ignore them until approved. When one comes back: put their
