@@ -219,9 +219,7 @@ wording in the quote, set placeholder: false, and add verifiedVia if it's also o
 - Deji Adesola, co-founder and CTO, Immigify: the design system (100+ tokens, components, accessibility), specs and prototypes for handoff, AI agent interfaces with the engineers. Result shown: 100+ design tokens.
 - Benjamin Chen, co-founder, Boulevard Legacy: HeightGPT from research to App Store and Google Play, past 10,000 downloads. Result shown: 10,000+ downloads.
 - Gabriele Muratori, co-founder, Boulevard Legacy: Simplexity end to end, manual research cut by about a quarter. Result shown: 25% less manual research.
-- Iranlowo JM, iExcelo (role to confirm): landing page and platform for students, sponsors and affiliates; 30% faster time-to-task. Result shown: 30% faster time-to-task.
-
-Photo pairing to confirm with Samuel: the two rooftop photos were taken as Benjamin Chen then Gabriele Muratori, in the order he listed the names.
+- Iranlowo JM, CEO, iExcelo: landing page and platform for students, sponsors and affiliates; 30% faster time-to-task. Result shown: 30% faster time-to-task.
 
 Message to send each person (copy and edit):
 "Hi <name>, I'm launching my new portfolio and drafted a short line about our work on <project>, below. Would you be happy for me to use it with your name, role and photo? Change anything you like, or write your own; I'll only publish what you approve.
