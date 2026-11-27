@@ -503,4 +503,4 @@ Measured on a 390×844 touch viewport with the CPU slowed 4× (a mid-range Andro
 ## 2026-11-27: Testimonials, from real people, awaiting approval
 - Samuel named five people and supplied their photos: Emma Seyi (co-founder and CEO) and Deji Adesola (co-founder and CTO) at Immigify, Benjamin Chen and Gabriele Muratori (co-founders) at Boulevard Legacy, and Iranlowo JM at iExcelo. Face crops in `public/testimonials/`; the eight stand-in Unsplash portraits are gone.
 - He asked for the testimonials to be generated. They're drafted from his documented work with each person, for that person to approve: none has been said by them, so each stays hidden on the live site (`placeholder: true`) and the section stays off until at least one is approved. In development the drafts show in place, italic, with a dashed note. The send-for-approval message is in profile.md.
-- TODO for Samuel: Iranlowo's role; confirm which rooftop photo is Benjamin and which is Gabriele.
+- Samuel confirmed: Iranlowo JM is iExcelo's CEO, and which rooftop photo is Benjamin Chen and which is Gabriele Muratori (swapped from the first pairing).

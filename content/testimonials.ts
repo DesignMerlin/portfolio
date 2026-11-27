@@ -90,10 +90,9 @@ export const testimonials: Testimonial[] = [
     quote:
       "Samuel designed our landing page and the platform behind it for three very different people: students, sponsors and affiliates. The student dashboard and revision flows cut the time it takes a student to start revising by 30%.",
     name: "Iranlowo JM",
-    // TODO: Samuel to confirm Iranlowo's role at iExcelo
-    role: "iExcelo",
+    role: "CEO",
     company: "iExcelo",
-    source: "iExcelo",
+    source: "iExcelo, CEO",
     photo: "/testimonials/iranlowo-jm.jpg",
     result: "30% faster time-to-task",
     placeholder: true,
