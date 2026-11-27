@@ -1,12 +1,12 @@
 /**
- * Testimonials for the arc dial on the home page.
+ * Testimonials for the arc dial on the home page: the people Samuel worked with, with the photos he supplied
+ * (2026-11-27).
  *
- * PLACEHOLDERS until Samuel receives real quotes (see the Testimonials block
- * in profile.md for who to ask and the message to send). Never publish a
- * quote, photo or rating that wasn't actually given. When one arrives:
- * set quote, name, role, photo (put it in /public/testimonials/),
- * verifiedVia if it can be checked publicly, and
- * placeholder: false. Results are confirmed numbers from profile.md only.
+ * Every quote here is a DRAFT written for that person to approve, built only from Samuel's documented work
+ * with them (content/about.ts). None of them has said these words yet, so each stays hidden on the site
+ * (placeholder: true) until Samuel confirms the person has read it and agreed, as written or with their edits.
+ * Then: put their wording in quote, set placeholder: false, and verifiedVia if it's also a public LinkedIn
+ * recommendation. Never publish a quote the person hasn't given. The message to send is in profile.md.
  */
 export type Testimonial = {
   id: string;
@@ -17,21 +17,16 @@ export type Testimonial = {
   company: string;
   /** Who this slot is for */
   source: string;
-  /**
-   * e.g. "/testimonials/ada.jpg". The current photos are stand-in Unsplash portraits
-   * (Unsplash licence), 400px face crops, until the real people send theirs. Source IDs:
-   * founder 1531123897727-8f129e1688ce, engineer 1507003211169-0a1dd7228f2d,
-   * heightgpt 1531384441138-2736e62e0919,
-   * iexcelo 1494790108377-be9c29b29330, lagproperties 1500648767791-00dcc994a43e,
-   * simplexity 1534528741775-53994a69daeb,
-   * collaborator 1472099645785-5658abf4ff4e, community 1438761681033-6461ffad8d80
-   * (images.unsplash.com/photo-<id>)
-   */
+  /** A square face crop in /public/testimonials/, from the photo the person (or Samuel) supplied */
   photo: string | null;
   /** A confirmed result for the project they're talking about */
   result?: string;
   /** Where it can be checked, e.g. "LinkedIn recommendation" */
   verifiedVia?: string;
+  /**
+   * True until the person has read the quote and said yes (edited or not). Hidden on the site until then.
+   * The quotes below were drafted for them to approve, from Samuel's documented work with each.
+   */
   placeholder: boolean;
   /** Per-story colours. Mixed with the theme, so one value works in light and dark */
   colors: { accent: string; glow?: string; text?: string };
@@ -39,104 +34,69 @@ export type Testimonial = {
 
 export const testimonials: Testimonial[] = [
   {
-    id: "immigify-founder",
+    id: "emma-seyi",
     quote:
-      "Placeholder. Two or three sentences from Immigify's founder on what it was like having Samuel as the founding designer: owning the product end to end, building the design system from zero, and how that helped a small team move fast while the company raised its round.",
-    name: null,
-    role: "Founder or CEO",
+      "As our founding product designer, Samuel owned the product end to end, on web and mobile. He took immigration casework that was genuinely complicated and turned it into screens our consultants could move through quickly, and he did it while we were raising our pre-seed round.",
+    name: "Emma Seyi",
+    role: "Co-founder and CEO",
     company: "Immigify",
-    source: "Immigify founder",
-    photo: "/testimonials/immigify-founder.jpg",
+    source: "Immigify, co-founder and CEO",
+    photo: "/testimonials/emma-seyi.jpg",
     result: "$1M pre-seed raised",
     placeholder: true,
     colors: { accent: "#3b6cf6" },
   },
   {
-    id: "immigify-engineer",
+    id: "deji-adesola",
     quote:
-      "Placeholder. An engineer on design handoff, specs, and building the AI agent interfaces together.",
-    name: null,
-    role: "Engineer or engineering lead",
+      "Samuel built our design system from nothing: more than a hundred tokens, reusable components and accessibility standards, all documented. His annotated specs and Figma prototypes made handoff easy, and he worked through the AI agent interfaces side by side with our engineers.",
+    name: "Deji Adesola",
+    role: "Co-founder and CTO",
     company: "Immigify",
-    source: "Immigify engineer",
-    photo: "/testimonials/immigify-engineer.jpg",
+    source: "Immigify, co-founder and CTO",
+    photo: "/testimonials/deji-adesola.jpg",
     result: "100+ design tokens",
     placeholder: true,
     colors: { accent: "#7c4ddb" },
   },
   {
-    id: "heightgpt-client",
+    id: "benjamin-chen",
     quote:
-      "Placeholder. Boulevard Legacy on HeightGPT: taking an AI mobile app from research to App Store and Google Play launch, and what happened in the first week.",
-    name: null,
-    role: "Client",
+      "Samuel led the UX and UI for HeightGPT from research all the way to launch on the App Store and Google Play, and the app went past 10,000 downloads. He kept the AI features simple to use, and his screens were ready to build.",
+    name: "Benjamin Chen",
+    role: "Co-founder",
     company: "Boulevard Legacy",
-    source: "HeightGPT client",
-    photo: "/testimonials/heightgpt-client.jpg",
-    result: "10,000 downloads in week one",
+    source: "Boulevard Legacy, co-founder (HeightGPT)",
+    photo: "/testimonials/benjamin-chen.jpg",
+    result: "10,000+ downloads",
     placeholder: true,
     colors: { accent: "#0ea5e9" },
   },
   {
-    id: "iexcelo-owner",
+    id: "gabriele-muratori",
     quote:
-      "Placeholder. iExcelo's product owner on designing one platform for three very different people, students, sponsors and affiliates, and getting students to what they came for faster. Anything specific about a hard trade-off is better than praise.",
-    name: null,
-    role: "Founder or product owner",
-    company: "iExcelo",
-    source: "iExcelo product owner",
-    photo: "/testimonials/iexcelo-owner.jpg",
-    result: "30% faster time-to-task",
-    placeholder: true,
-    colors: { accent: "#d99a00" },
-  },
-  {
-    id: "lagproperties-lead",
-    quote: "Placeholder. LAGProperties' project lead on the research, and delivering the mobile app on schedule.",
-    name: null,
-    role: "Project lead",
-    company: "LAGProperties",
-    source: "LAGProperties project lead",
-    photo: "/testimonials/lagproperties-lead.jpg",
-    result: "10% higher satisfaction",
-    placeholder: true,
-    colors: { accent: "#e4572e" },
-  },
-  {
-    id: "simplexity-client",
-    quote:
-      "Placeholder. Boulevard Legacy on Simplexity: turning LinkedIn data extraction into a web app researchers could actually work in.",
-    name: null,
-    role: "Client",
+      "On Simplexity, Samuel designed the whole web app end to end, turning hours of manual LinkedIn research into a few clear steps. It cut the manual research effort by about a quarter.",
+    name: "Gabriele Muratori",
+    role: "Co-founder",
     company: "Boulevard Legacy",
-    source: "Simplexity client",
-    photo: "/testimonials/simplexity-client.jpg",
+    source: "Boulevard Legacy, co-founder (Simplexity)",
+    photo: "/testimonials/gabriele-muratori.jpg",
     result: "25% less manual research",
     placeholder: true,
     colors: { accent: "#0ea5a4" },
   },
   {
-    id: "collaborator",
+    id: "iranlowo-jm",
     quote:
-      "Placeholder. A developer or PM from PowerRoute, QuitBet or FundPath on collaborating day to day: how Samuel handled feedback, scope changes and a hard problem.",
-    name: null,
-    role: "Collaborator",
-    company: "To confirm",
-    source: "A day-to-day collaborator",
-    photo: "/testimonials/collaborator.jpg",
+      "Samuel designed our landing page and the platform behind it for three very different people: students, sponsors and affiliates. The student dashboard and revision flows cut the time it takes a student to start revising by 30%.",
+    name: "Iranlowo JM",
+    // TODO: Samuel to confirm Iranlowo's role at iExcelo
+    role: "iExcelo",
+    company: "iExcelo",
+    source: "iExcelo",
+    photo: "/testimonials/iranlowo-jm.jpg",
+    result: "30% faster time-to-task",
     placeholder: true,
-    colors: { accent: "#22a35a" },
-  },
-  {
-    id: "community",
-    quote:
-      "Placeholder. Someone from the design community Samuel has mentored or reviewed work for, on what they took away from it.",
-    name: null,
-    role: "Designer",
-    company: "To confirm",
-    source: "Design community",
-    photo: "/testimonials/community.jpg",
-    placeholder: true,
-    colors: { accent: "#d63d8f" },
+    colors: { accent: "#d99a00" },
   },
 ];

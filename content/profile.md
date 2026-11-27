@@ -208,81 +208,25 @@ Archive (shorter write-ups or "case study soon"):
 # Testimonials
 
 <!--
-PLACEHOLDERS ONLY. Replace each with a real quote from the person named in
-"source", with their permission, before launch. The site must not ship with
-placeholder quotes, and the Ask agent must ignore any entry where
-placeholder: true.
-Display format: Arjun-style chat thread.
+DRAFTS FOR APPROVAL (2026-11-27). Samuel named the five people below and supplied their photos. Each quote
+in content/testimonials.ts was drafted from Samuel's documented work with them (the roles above) for that
+person to approve or rewrite. None has been said by them yet, so all are hidden on the live site
+(placeholder: true) and the Ask agent must ignore them until approved. When one comes back: put their
+wording in the quote, set placeholder: false, and add verifiedVia if it's also on LinkedIn.
 -->
 
-- quote: "[Placeholder — 2–3 sentences on working with Samuel as Immigify's founding designer: owning the product end to end and building the design system.]"
-  name: "[Name]"
-  role: "[Founder / CEO]"
-  company: Immigify
-  source: Immigify founder or CEO
-  photo: "[photo]"
-  placeholder: true
+- Emma Seyi, co-founder and CEO, Immigify: founding product designer, end-to-end ownership, complex casework made quick, during the pre-seed raise. Result shown: $1M pre-seed raised.
+- Deji Adesola, co-founder and CTO, Immigify: the design system (100+ tokens, components, accessibility), specs and prototypes for handoff, AI agent interfaces with the engineers. Result shown: 100+ design tokens.
+- Benjamin Chen, co-founder, Boulevard Legacy: HeightGPT from research to App Store and Google Play, past 10,000 downloads. Result shown: 10,000+ downloads.
+- Gabriele Muratori, co-founder, Boulevard Legacy: Simplexity end to end, manual research cut by about a quarter. Result shown: 25% less manual research.
+- Iranlowo JM, iExcelo (role to confirm): landing page and platform for students, sponsors and affiliates; 30% faster time-to-task. Result shown: 30% faster time-to-task.
 
-- quote: "[Placeholder — 2–3 sentences from an engineer on design handoff, specs, and collaborating on the AI agent interfaces.]"
-  name: "[Name]"
-  role: "[Engineer / Engineering Lead]"
-  company: Immigify
-  source: Immigify engineer
-  photo: "[photo]"
-  placeholder: true
+Photo pairing to confirm with Samuel: the two rooftop photos were taken as Benjamin Chen then Gabriele Muratori, in the order he listed the names.
 
-- quote: "[Placeholder — 2–3 sentences on HeightGPT or Simplexity: research to launch, and the result.]"
-  name: "[Name]"
-  role: "[Client role]"
-  company: Boulevard Legacy
-  source: Boulevard Legacy client
-  photo: "[photo]"
-  placeholder: true
+Message to send each person (copy and edit):
+"Hi <name>, I'm launching my new portfolio and drafted a short line about our work on <project>, below. Would you be happy for me to use it with your name, role and photo? Change anything you like, or write your own; I'll only publish what you approve.
 
-- quote: "[Placeholder — 2–3 sentences on designing iExcelo's platform for students, sponsors and affiliates.]"
-  name: "[Name]"
-  role: "[Founder / Product Owner]"
-  company: iExcelo
-  source: iExcelo product owner
-  photo: "[photo]"
-  placeholder: true
-
-- quote: "[Placeholder — 2–3 sentences on the LAGProperties app, research and delivery on schedule.]"
-  name: "[Name]"
-  role: "[Project Lead]"
-  company: LAGProperties
-  source: LAGProperties project lead
-  photo: "[photo]"
-  placeholder: true
-
-- quote: "[Placeholder — 2–3 sentences from Boulevard Legacy on Simplexity, the LinkedIn data extraction web app.]"
-  name: "[Name]"
-  role: "[Client role]"
-  company: Boulevard Legacy
-  source: Simplexity client
-  photo: "[photo]"
-  placeholder: true
-
-- quote: "[Placeholder — 2–3 sentences from a day-to-day collaborator (PowerRoute, QuitBet or FundPath) on feedback, scope changes and a hard problem.]"
-  name: "[Name]"
-  role: "[Developer / PM]"
-  company: "[To confirm]"
-  source: Day-to-day collaborator
-  photo: "[photo]"
-  placeholder: true
-
-- quote: "[Placeholder — 2–3 sentences from someone in the design community Samuel mentored or reviewed work for.]"
-  name: "[Name]"
-  role: "[Designer]"
-  company: "[To confirm]"
-  source: Design community
-  photo: "[photo]"
-  placeholder: true
-
-The home page arc dial reads from content/testimonials.ts (8 slots, same people). Update both when a quote arrives.
-
-Message to send them (copy and edit):
-"Hi <name>, I'm launching my new portfolio and would love 2–3 honest sentences about what it was like working with me on <project>. Anything specific (how I handled a hard problem, collaboration, the result) is perfect. Okay to use your name, role and photo?"
+<draft quote>"
 
 ---
 
