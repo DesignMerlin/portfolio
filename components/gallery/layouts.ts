@@ -33,11 +33,14 @@ export function place(layout: GalleryLayout, k: number, m: number, a: number, s:
       const count = ring ? Math.floor(m / 2) : Math.ceil(m / 2);
       const i = Math.floor(k / 2);
       const t = a * (ring ? 0.72 : 1) + (TAU * i) / Math.max(count, 1) + ring * 0.45;
-      const rad = r * (ring ? 1 : 0.66);
+      const rad = r * (ring ? 1 : 0.62);
+      // Seen from a little above: the far side of each ring rises behind the centre, the near side dips below
+      // it. On a tall stage (a phone) the rings reach up and down it, so the cards spread over the whole screen
+      // rather than crowding the centre's sides
+      const ry = h > w ? h * (ring ? 0.38 : 0.26) : rad * (ring ? 0.44 : 0.36);
       return {
         x: Math.cos(t) * rad,
-        // Seen from a little above: the far side of each ring rises behind the centre, the near side dips below it
-        y: Math.sin(t) * rad * (ring ? 0.36 : 0.3) + (ring ? h * 0.04 : -h * 0.03),
+        y: Math.sin(t) * ry + (ring ? h * 0.03 : -h * 0.03),
         z: Math.sin(t) * d * (ring ? 1 : 0.7) - d * 0.45,
       };
     }

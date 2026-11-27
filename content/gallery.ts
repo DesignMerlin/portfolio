@@ -20,7 +20,7 @@ export type GalleryEntry = {
   /** Which part of an image stays in view when it's cropped, as CSS object-position ("50% 20%", "top") */
   focus?: string;
   title?: string;
-  /** The line under the title in the centre */
+  /** The one line under the name when the project is opened */
   caption?: string;
   /** Where "View project" goes. Defaults to the project page; set null for no link */
   href?: string | null;
@@ -41,7 +41,7 @@ export const gallery = {
     /** 1 clockwise (seen from above), -1 anticlockwise */
     direction: 1 as 1 | -1,
     /** How far the cards spread from the centre (1 is the default) */
-    spacing: 1,
+    spacing: 1.15,
     /** How deep the scene goes (1 is the default) */
     depth: 1,
     /** How far each card bobs up and down while floating, in px. 0 turns floating off */
@@ -65,19 +65,11 @@ export const gallery = {
     blur: 3,
   },
 
-  type: {
-    titleFont: "var(--font-display)",
-    titleSize: "clamp(1.5rem, 2.6vw, 2.25rem)",
-    titleColor: "var(--ink)",
-    captionColor: "var(--ink-3)",
-  },
-
   lightbox: {
-    backdrop: "rgb(8 10 12 / 0.82)",
-    blur: 14,
-    radius: 20,
-    /** The panel holding the title and link */
-    panel: "var(--surface)",
+    /** The page the project opens on: the site's own paper, the gallery showing faintly through */
+    backdrop: "color-mix(in oklab, var(--paper) 86%, transparent)",
+    blur: 18,
+    radius: 14,
   },
 
   entries: {

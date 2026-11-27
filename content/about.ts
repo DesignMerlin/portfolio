@@ -104,7 +104,7 @@ export const workExperience: Job[] = [
   { company: "Immigify Inc.", role: "Founding Product Designer", years: "2025 — 2026", href: "https://immigify.com/", logo: "/brand/immigify.webp" },
   { company: "iExcelo", role: "UI/UX Designer", years: "2025 — 2026", href: "https://iexcelo.com/", logo: "/brand/iexcelo.webp" },
   { company: "Boulevard Legacy", role: "UI/UX Designer", years: "2024 — 2025" },
-  { company: "LAGProperties", role: "UI/UX Designer", years: "2024" },
+  { company: "LAGProperties", role: "UI/UX Designer", years: "2024", logo: "/brand/lagproperties.webp" },
 ];
 
 export type Skill = { name: string; line: string; detail: string; tools: string[] };

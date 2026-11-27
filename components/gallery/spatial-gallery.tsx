@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { AnimatePresence, motion } from "motion/react";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { enter, place, type Point, type Space } from "@/components/gallery/layouts";
 import { DeviceMockup, type Mockup } from "@/components/ui/device-mockup";
@@ -10,7 +9,7 @@ import { ArrowUpRight, CloseIcon } from "@/components/ui/icons";
 import { PlaceholderShot, type PlaceholderKind } from "@/components/ui/placeholder-shot";
 import { useReducedMotion } from "@/components/ui/use-reduced-motion";
 import { gallery as G, type GalleryEntrance, type GalleryLayout, type GalleryMedia } from "@/content/gallery";
-import { duration, ease, spring, stagger, tween } from "@/lib/motion";
+import { duration, ease, spring, stagger } from "@/lib/motion";
 
 export type GalleryItem = {
   id: string;
@@ -79,9 +78,9 @@ function measure(w: number, h: number, aspect: number) {
   const phone = w < 640;
   return {
     phone,
-    feature: Math.round(phone ? Math.min(w * 0.58, 280) : Math.min(G.cards.featureWidth, w * 0.3, h * 0.5 * aspect)),
+    feature: Math.round(phone ? Math.min(w * 0.5, 240) : Math.min(G.cards.featureWidth, w * 0.28, h * 0.46 * aspect)),
     orbit: Math.round(w * G.cards.size * (phone ? 2 : 1)),
-    centerY: -h * (phone ? 0.08 : 0.06),
+    centerY: 0,
   };
 }
 
@@ -92,9 +91,11 @@ function measure(w: number, h: number, aspect: number) {
  * - Idle: the arrangement turns slowly and every card bobs a little. Far cards are smaller, fainter and soft.
  * - Drag (or swipe) turns it; let go and it carries on, slowing to the idle pace. Grab it again to stop it.
  * - Hover or focus a card: it lifts and sharpens and the turning slows, so it's easy to hit.
- * - Click a card, or press the arrow keys: it flies from where it was into the centre, and the old centre
- *   drifts out to take its place. Every card is on a spring, so a change can be interrupted at any point.
- * - Click the centre: the lightbox grows out of it, plays the film and links to the project.
+ * - Tap or click any card, floating or in the centre: it opens as a page of its own, in a modal. The card
+ *   grows from where it was into the middle of the screen with the project's name and its one line under
+ *   it, and shrinks back into the same card on close.
+ * - Arrow keys: the next card flies into the centre and the old centre drifts out to take its place. Every
+ *   card is on a spring, so a change can be interrupted at any point.
  * Reduced motion (OS or the site's Stop motion button): no arrival, no turning or floating; changes crossfade.
  *
  * Built in two layers: the floating cards, each playing its film, with depth projected in 2D (cheap to draw);
@@ -106,7 +107,8 @@ export function SpatialGallery({ items, start = 0 }: { items: GalleryItem[]; sta
   const n = items.length;
   const [center, setCenter] = useState(start);
   const [said, setSaid] = useState("");
-  const [box, setBox] = useState<{ from: DOMRect } | null>(null);
+  // The open project: which card, and where it was on screen when it was opened
+  const [box, setBox] = useState<{ index: number; from: DOMRect } | null>(null);
   // The floating cards' videos start with the arrival and stop while the gallery is off screen
   const [rolling, setRolling] = useState(false);
   const [onScreen, setOnScreen] = useState(false);
@@ -402,8 +404,6 @@ export function SpatialGallery({ items, start = 0 }: { items: GalleryItem[]; sta
   );
   const step = (d: number) => select((live.current.center + d + n) % n);
 
-  const capTop = size.h / 2 + M.centerY + featureH / 2 + 18;
-
   return (
     <>
       <section
@@ -439,12 +439,12 @@ export function SpatialGallery({ items, start = 0 }: { items: GalleryItem[]; sta
                 <li key={it.id} ref={(el) => void (cards.current[i] = el)} className="gallery-card" style={cardBox(M.orbit * it.size, it.aspect)}>
                   <button
                     type="button"
-                    aria-label={`Bring ${it.title} to the centre`}
+                    aria-label={`Open ${it.title}`}
                     onPointerEnter={() => (live.current.hover = i)}
                     onPointerLeave={() => live.current.hover === i && (live.current.hover = -1)}
                     onFocus={() => (live.current.hover = i)}
                     onBlur={() => live.current.hover === i && (live.current.hover = -1)}
-                    onClick={() => select(i)}
+                    onClick={(e) => setBox({ index: i, from: e.currentTarget.getBoundingClientRect() })}
                     className="gallery-card-button gallery-card-small"
                   >
                     <span className="gallery-card-art">
@@ -468,7 +468,7 @@ export function SpatialGallery({ items, start = 0 }: { items: GalleryItem[]; sta
               ref={featureButton}
               type="button"
               aria-label={`Open ${item.title}`}
-              onClick={(e) => setBox({ from: e.currentTarget.getBoundingClientRect() })}
+              onClick={(e) => setBox({ index: center, from: e.currentTarget.getBoundingClientRect() })}
               className="gallery-card-button"
             >
               <span className="gallery-card-art">
@@ -478,33 +478,21 @@ export function SpatialGallery({ items, start = 0 }: { items: GalleryItem[]; sta
           </div>
         </div>
 
-        {/* The centre project's name, under it */}
-        <div className="gallery-caption pointer-events-none absolute inset-x-4 text-center" style={{ top: capTop }}>
-          <AnimatePresence mode="popLayout" initial={false}>
-            <motion.div
-              key={item.id}
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -4, transition: tween("quick", "exit") }}
-              transition={tween("base")}
-            >
-              <p className="leading-tight font-semibold tracking-[-0.02em]" style={{ fontFamily: G.type.titleFont, fontSize: G.type.titleSize, color: G.type.titleColor }}>
-                {item.title}
-                {item.year ? <span className="ml-2 align-middle text-small font-normal tracking-normal" style={{ color: G.type.captionColor }}>© {item.year}</span> : null}
-              </p>
-              <p className="mx-auto mt-1 max-w-[40ch] text-small" style={{ color: G.type.captionColor }}>
-                {item.caption}
-              </p>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-
         <p className="sr-only" aria-live="polite">
           {said}
         </p>
       </section>
 
-      {box ? <Lightbox item={item} from={box.from} reduce={reduce} onClose={() => setBox(null)} centerEl={() => featureButton.current} /> : null}
+      {box ? (
+        <Lightbox
+          item={items[box.index]!}
+          from={box.from}
+          reduce={reduce}
+          onClose={() => setBox(null)}
+          // Back into the card it came from, wherever that card has floated to since
+          centerEl={() => (box.index === live.current.center ? featureButton.current : (cards.current[box.index]?.querySelector("button") ?? null))}
+        />
+      ) : null}
     </>
   );
 }
@@ -519,17 +507,19 @@ const cardBox = (w: number, aspect: number): React.CSSProperties => ({
 });
 
 /**
- * The centre card, opened up: it grows from the card into the middle of the screen (and shrinks back
- * into it on close), with the title, a line about it and the way through to the project.
- * Escape, the close button or a click on the backdrop closes it; focus goes back to the card.
+ * A project, opened up as a page of its own over the gallery: the card grows from where it was into the
+ * middle of the screen (and shrinks back into it on close), with the project's name and its one line
+ * centred under it, and the way through to the project. The gallery stays just visible behind, softly
+ * blurred, so it's clear where you are. Escape, the close button or a click on the page around it closes
+ * it; focus goes back to the card.
  */
 function Lightbox({ item, from, reduce, onClose, centerEl }: { item: GalleryItem; from: DOMRect; reduce: boolean; onClose: () => void; centerEl: () => HTMLElement | null }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const art = useRef<HTMLDivElement>(null);
   const info = useRef<HTMLDivElement>(null);
   const closing = useRef(false);
-  // Big as the screen allows, leaving room for the panel under it
-  const lbWidth = `min(92vw, calc((100svh - 260px) * ${item.aspect}), 1040px)`;
+  // Big as the screen allows, leaving room for the name, its line and the link under it
+  const lbWidth = `min(86vw, calc((100svh - 300px) * ${item.aspect}), 860px)`;
 
   const flip = (rect: DOMRect, to: DOMRect) => {
     const s = rect.width / to.width;
@@ -586,7 +576,7 @@ function Lightbox({ item, from, reduce, onClose, centerEl }: { item: GalleryItem
       ref={dialog}
       aria-label={item.title}
       className="gallery-lightbox"
-      style={{ "--lb-backdrop": G.lightbox.backdrop, "--lb-blur": `${G.lightbox.blur}px`, "--lb-radius": `${G.lightbox.radius}px`, "--lb-panel": G.lightbox.panel } as React.CSSProperties}
+      style={{ "--lb-backdrop": G.lightbox.backdrop, "--lb-blur": `${G.lightbox.blur}px`, "--lb-radius": `${G.lightbox.radius}px` } as React.CSSProperties}
       onCancel={(e) => {
         e.preventDefault();
         close();
@@ -599,16 +589,15 @@ function Lightbox({ item, from, reduce, onClose, centerEl }: { item: GalleryItem
         <div ref={art} className="gallery-lightbox-art" style={{ aspectRatio: item.aspect, width: lbWidth }}>
           <Art item={item} live sizes="1040px" />
         </div>
-        <div ref={info} className="gallery-lightbox-info" style={{ width: lbWidth }}>
-          <div className="min-w-0">
-            <p className="font-display text-h3 leading-tight font-semibold">
-              {item.title}
-              {item.year ? <span className="ml-2 align-middle text-small font-normal text-ink-3">© {item.year}</span> : null}
-            </p>
-            <p className="mt-1 max-w-[60ch] text-small text-ink-2">{item.summary}</p>
-          </div>
+        <div ref={info} className="gallery-lightbox-info" style={{ maxWidth: lbWidth }}>
+          <p className="font-display text-[clamp(1.75rem,3.2vw,2.5rem)] leading-[1.05] font-semibold tracking-[-0.03em]">{item.title}</p>
+          <p className="mt-2 max-w-[44ch] text-ink-2">{item.caption}</p>
           {item.href ? (
-            <Link href={item.href} transitionTypes={["nav-forward"]} className="pressable inline-flex shrink-0 items-center gap-1.5 rounded-full bg-ink px-4 py-2.5 text-small font-medium text-paper hover:opacity-90">
+            <Link
+              href={item.href}
+              transitionTypes={["nav-forward"]}
+              className="pressable mt-5 inline-flex items-center gap-1.5 rounded-full bg-ink px-5 py-2.5 text-small font-medium text-paper hover:opacity-90"
+            >
               View project
               <ArrowUpRight />
             </Link>

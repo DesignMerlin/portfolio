@@ -848,9 +848,9 @@ main:has(.gallery-stage) {
   cursor: grab;
 }
 @media (max-width: 639px) {
-  /* Just room for the orbit, the centre card and its title: a taller stage left a screen of empty page */
+  /* Tall enough for the rings to spread above and below the centre card */
   .gallery-stage {
-    height: clamp(440px, 56svh, 520px);
+    height: clamp(520px, 72svh, 660px);
   }
 }
 .gallery-stage[data-dragging] {
@@ -887,12 +887,6 @@ main:has(.gallery-stage) {
   outline-offset: 4px;
 }
 /* The centre's name stays legible when a card drifts behind it: a soft halo in the stage colour */
-.gallery-caption {
-  z-index: 2;
-  text-shadow:
-    0 0 10px var(--paper),
-    0 0 22px var(--paper);
-}
 /* Floating cards are small: a lighter shadow, cheaper to draw dozens of times */
 .gallery-card-small {
   box-shadow: 0 1px 2px rgb(0 0 0 / 0.1), 0 10px 22px -12px rgb(0 0 0 / 0.4);
@@ -964,18 +958,16 @@ html[data-motion="reduce"] .gallery-float {
   overflow: hidden;
   border-radius: var(--lb-radius, 20px);
   background: var(--sunken);
-  box-shadow: 0 40px 90px -30px rgb(0 0 0 / 0.7);
+  box-shadow: 0 30px 70px -30px rgb(0 0 0 / 0.45);
   transform-origin: top left;
 }
+/* The name and its one line, centred under the picture, then the way through */
 .gallery-lightbox-info {
   display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 12px 20px;
-  padding: 16px 20px;
-  border-radius: var(--lb-radius, 20px);
-  background: var(--lb-panel, var(--surface));
+  flex-direction: column;
+  align-items: center;
+  padding-top: 12px;
+  text-align: center;
 }
 .gallery-lightbox-close {
   position: fixed;
@@ -986,16 +978,18 @@ html[data-motion="reduce"] .gallery-float {
   width: 44px;
   height: 44px;
   border-radius: 999px;
-  color: #fff;
-  background: rgb(255 255 255 / 0.12);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  color: var(--ink);
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  transition: background-color var(--dur-quick) var(--ease-enter);
 }
-.gallery-lightbox-close:hover {
-  background: rgb(255 255 255 / 0.2);
+@media (hover: hover) {
+  .gallery-lightbox-close:hover {
+    background: var(--sunken);
+  }
 }
 .gallery-lightbox-close:focus-visible {
-  outline: 2px solid #fff;
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 

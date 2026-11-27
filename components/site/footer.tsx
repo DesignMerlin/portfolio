@@ -12,7 +12,7 @@ export function Footer({ profile }: { profile: Profile }) {
       <SayHello email={profile.email} x={profile.x} instagram={profile.instagram} behance={profile.behance} linkedin={profile.linkedin} />
 
       <div className="mx-auto flex max-w-[1320px] flex-wrap items-center justify-between gap-4 px-4 sm:px-8">
-        <LocalTime withRelative />
+        <LocalTime />
         <FooterShortcut />
       </div>
 

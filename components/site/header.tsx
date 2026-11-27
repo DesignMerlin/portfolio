@@ -104,7 +104,7 @@ export function Header({ email }: { email: string }) {
         <span className="nav-avatar relative mr-1 size-8 shrink-0 overflow-hidden rounded-full ring-1 ring-line">
           <Image src="/me/avatar.jpg" alt="" fill sizes="32px" className="object-cover" priority />
         </span>
-        DesignMerlin
+        Psalmuhel
         <picture className="nav-wand size-5 shrink-0 transition-transform duration-[var(--dur-base)] ease-[var(--ease-enter)]">
           {wand && !still ? <source srcSet="/brand/magic-wand.webp" type="image/webp" /> : null}
           <img src="/brand/magic-wand.svg" alt="" width={20} height={20} className="size-5" />
@@ -148,7 +148,7 @@ export function Header({ email }: { email: string }) {
         <div className={`nav-real ${ROW}`}>
           <Link href="/" transitionTypes={home ? undefined : ["nav-back"]} className={BRAND} {...track("home")}>
             <span className="mr-1 size-8 shrink-0" />
-            DesignMerlin
+            Psalmuhel
             <span className="size-5 shrink-0" />
           </Link>
           <Divider />

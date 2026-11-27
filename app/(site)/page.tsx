@@ -78,19 +78,26 @@ export default async function HomePage() {
       <ServicesSection services={skills} />
 
       <section id="work" aria-labelledby="work-title" className="mx-auto max-w-[1320px] px-4 pt-14 sm:px-8 lg:pt-20">
-        <div className="mb-8 flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
+        <div className="mb-8">
           <SectionHeading id="work-title" sub="A carefully picked showcase of projects that highlight my commitment to this design industry.">
             Selected work samples
           </SectionHeading>
-          <Link href="/projects" transitionTypes={["nav-forward"]} className="text-small text-ink-2 underline-offset-4 hover:text-ink hover:underline">
-            View all projects
-          </Link>
         </div>
         <ul className="grid gap-6 sm:grid-cols-2 lg:gap-8">
           {stickers.map((w, i) => (
             <StickerCard key={w.id} work={w} priority={i < 2} />
           ))}
         </ul>
+        {/* After the six, where the reader has just finished looking: the way on to the rest */}
+        <div className="mt-12 flex justify-center lg:mt-16">
+          <Link
+            href="/projects"
+            transitionTypes={["nav-forward"]}
+            className="pressable inline-flex items-center rounded-full border border-line-strong px-6 py-3 text-small font-medium text-ink transition-colors duration-[var(--dur-quick)] hover:border-ink-3 hover:bg-sunken"
+          >
+            View all projects
+          </Link>
+        </div>
       </section>
 
       <WorkExperience jobs={workExperience} />
