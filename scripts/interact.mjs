@@ -247,9 +247,9 @@ await step("theme toggle to light", async () => {
   await page.waitForTimeout(600);
   if ((await page.evaluate(() => document.documentElement.dataset.theme)) !== "light") throw new Error("Theme didn't switch to light");
   // The About page ends on the doodle wall: it should be drawn on light paper now
-  await page.locator("canvas.doodle-wall-paper").scrollIntoViewIfNeeded();
+  await page.locator("canvas.wall-paper").scrollIntoViewIfNeeded();
   await page.waitForTimeout(800);
-  const paper = await page.locator("canvas.doodle-wall-paper").evaluate((c) => Array.from(c.getContext("2d").getImageData(4, 4, 1, 1).data.slice(0, 3)));
+  const paper = await page.locator("canvas.wall-paper").evaluate((c) => Array.from(c.getContext("2d").getImageData(4, 4, 1, 1).data.slice(0, 3)));
   if (paper.some((v) => v < 200)) throw new Error("The doodle wall is still dark in the light theme: " + paper.join(","));
   await shot("13-about-light");
   await page.goto(base + "/", { waitUntil: "networkidle" });

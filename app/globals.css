@@ -3503,25 +3503,32 @@ html[data-motion="reduce"] :is(.sentence-word, .sentence-box, .sentence-label) {
   animation: none;
 }
 
-/* About page doodle wall (components/about/doodle-wall.tsx): a paper wall with the zoom readout floating
-   over its corner. Paper is an object on the page: light in the light theme, dark in the dark one */
-.doodle-wall-paper {
+/* About page doodle wall (components/about/doodle-wall.tsx): graph paper, with the tools on a rail
+   floating in its top-left corner, zoom top right and your actions bottom right. Light paper in the light
+   theme, dark in the dark one */
+.wall-frame {
+  position: relative;
+}
+.wall-paper {
   display: block;
   width: 100%;
-  height: clamp(340px, 58svh, 560px);
+  height: clamp(380px, 62svh, 600px);
   border-radius: var(--radius-l);
   touch-action: none;
   cursor: crosshair;
   outline-offset: 4px;
   box-shadow: inset 0 0 0 1px var(--line);
 }
-.doodle-wall-paper[data-looking] {
+.wall-paper[data-tool="hand"] {
   cursor: grab;
 }
-.doodle-wall-paper[data-looking]:active {
+.wall-paper[data-tool="hand"]:active {
   cursor: grabbing;
 }
-.doodle-wall-cross {
+.wall-paper[data-tool="eraser"] {
+  cursor: cell;
+}
+.wall-cross {
   position: absolute;
   left: -9px;
   top: -9px;
@@ -3532,62 +3539,156 @@ html[data-motion="reduce"] :is(.sentence-word, .sentence-box, .sentence-label) {
   opacity: 0;
   pointer-events: none;
 }
-.doodle-wall-zoom {
+/* The floating pieces share one material: the paper, frosted */
+.wall-rail,
+.wall-zoom,
+.wall-actions {
   position: absolute;
-  right: 12px;
-  bottom: 12px;
   display: flex;
   align-items: center;
+  padding: 5px;
+  border-radius: 14px;
+  background: color-mix(in oklab, var(--paper) 84%, transparent);
+  box-shadow: 0 0 0 1px var(--line), 0 10px 24px -14px rgb(0 0 0 / 0.45);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+.wall-rail {
+  top: 12px;
+  left: 12px;
+  flex-direction: column;
+  gap: 6px;
+}
+.wall-rail-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 2px;
-  padding: 4px;
-  border-radius: 12px;
-  background: color-mix(in oklab, var(--paper) 86%, transparent);
-  box-shadow: 0 0 0 1px var(--line), 0 8px 20px -10px rgb(0 0 0 / 0.4);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  font-size: var(--text-small);
-  color: var(--ink-2);
 }
-.doodle-wall-zoom > button {
-  min-width: 32px;
-  height: 32px;
-  padding: 0 8px;
-  border-radius: 8px;
-  color: var(--ink-2);
+.wall-rail-rule {
+  width: 22px;
+  height: 1px;
+  background: var(--line);
 }
-.doodle-wall-zoom > button:disabled {
-  opacity: 0.35;
+.wall-tool {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  color: var(--ink-2);
+  transition:
+    background-color var(--dur-quick) var(--ease-enter),
+    transform var(--dur-quick) var(--ease-enter);
+}
+.wall-tool[aria-checked="true"] {
+  background: var(--sunken);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+}
+.wall-tool:active {
+  transform: scale(0.94);
 }
 @media (hover: hover) {
-  .doodle-wall-zoom > button:not(:disabled):hover {
-    color: var(--ink);
+  .wall-tool:hover {
     background: var(--sunken);
   }
 }
-.doodle-wall-zoom > span.tabular {
-  min-width: 44px;
-  text-align: center;
-}
-.doodle-wall-zoom-rule {
-  width: 1px;
-  height: 18px;
-  margin: 0 4px;
-  background: var(--line);
-}
-/* An ink: a filled circle; the chosen one gets a ring the page colour, then one in its own colour */
-.doodle-wall-ink {
-  width: 28px;
-  height: 28px;
+.wall-ink {
+  width: 22px;
+  height: 22px;
+  margin: 3px;
   border-radius: 50%;
   background: var(--ink);
   transition: box-shadow var(--dur-quick) var(--ease-enter);
 }
-.doodle-wall-ink[aria-checked="true"] {
-  box-shadow: 0 0 0 3px var(--paper), 0 0 0 5px var(--ink);
+.wall-ink[aria-checked="true"] {
+  box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px var(--ink);
 }
-@media (pointer: coarse) {
-  .doodle-wall-ink {
-    width: 34px;
-    height: 34px;
+.wall-zoom {
+  top: 12px;
+  right: 12px;
+  flex-direction: column;
+  gap: 2px;
+  font-size: var(--text-micro);
+  color: var(--ink-2);
+}
+.wall-zoom > button {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 32px;
+  border-radius: 9px;
+  color: var(--ink-2);
+}
+.wall-zoom > button:disabled {
+  opacity: 0.35;
+}
+.wall-zoom > span {
+  padding: 2px 0;
+}
+.wall-actions {
+  right: 12px;
+  bottom: 12px;
+  gap: 4px;
+}
+.wall-action {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 9px;
+  font-size: var(--text-small);
+  color: var(--ink-2);
+}
+.wall-action-icon {
+  width: 36px;
+  justify-content: center;
+  padding: 0;
+}
+.wall-action:disabled,
+.wall-add:disabled {
+  opacity: 0.4;
+}
+.wall-add {
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 9px;
+  font-size: var(--text-small);
+  font-weight: 500;
+  color: var(--paper);
+  background: var(--ink);
+  transition: opacity var(--dur-quick) var(--ease-enter), transform var(--dur-quick) var(--ease-enter);
+}
+.wall-add:not(:disabled):active {
+  transform: scale(0.97);
+}
+@media (hover: hover) {
+  .wall-zoom > button:not(:disabled):hover,
+  .wall-action:not(:disabled):hover {
+    color: var(--ink);
+    background: var(--sunken);
   }
 }
+/* Phones: the rail becomes two short rows (tools, then inks), so the wall keeps its width for drawing */
+@media (max-width: 639px) {
+  .wall-rail {
+    align-items: flex-start;
+    gap: 4px;
+  }
+  .wall-rail-group {
+    flex-direction: row;
+  }
+  .wall-rail-rule {
+    width: 100%;
+  }
+  .wall-tool {
+    width: 40px;
+    height: 40px;
+  }
+  .wall-ink {
+    width: 26px;
+    height: 26px;
+    margin: 4px 5px;
+  }
+}
+
